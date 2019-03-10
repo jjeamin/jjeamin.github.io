@@ -1,0 +1,154 @@
+---
+layout: post
+title:  "Neural Compute Stick 2"
+summary: "인텔의 뉴럴 컴퓨트 스틱 2 설정 in raspberry pi"
+date:   2019-03-08 13:00 -0400
+categories: pi
+---
+본문서는 [이곳](https://software.intel.com/en-us/articles/OpenVINO-Install-RaspberryPI)을 읽어보면서 정리한 문서입니다.
+
+# Dependency
+- raspbian
+- Intel Neural Compute Stick
+- OpenVino [설치](https://download.01.org/openvinotoolkit/2018_R5/packages/l_openvino_toolkit_ie_p_2018.5.445.tgz)
+
+# OpenVino vs NCSDK2
+
+
+
+![sdk](https://github.com/jjeamin/jjeamin.github.io/raw/master/_posts/post_img/intel/sdk.JPG)
+
+
+
+저는 OpenVino Toolkit을 사용합니다.
+
+### OpenVino
+- 신경망을 훈련시키는 도구(tensorflow,caffe etc.)를 제공하지 않는다.
+- opencv 제공
+
+
+# 원리
+
+**학습**
+
+1. 컴퓨터 : 모델학습
+2. 컴퓨터 : 모델 최적화
+
+**변환**
+
+3. 컴퓨터 : IR = .bin .xml
+
+**추론**
+
+4. NS2 : inference engine
+
+**서비스**
+
+5. PI : user application
+
+
+# 설치
+1. OpenVino 압축파일을 설치한 후
+2. 경로이동
+
+```
+$ cd ~/Downloads/
+```
+
+3. 압축풀기
+
+```
+$ tar -xf l_openvino_toolkit_ie_p_<version>.tgz
+```
+
+4. 설치경로를 절대경로로 스크립트 수정
+
+```
+$ sed -i "s|<INSTALLDIR>|$(pwd)/inference_engine_vpu_arm|" inference_engine_vpu_arm/bin/setupvars.sh
+```
+
+# 환경변수 설정(영구)
+
+./bashrc 열기
+
+```
+$ vi ~/.bashrc
+```
+
+파일 마지막 줄에 추가
+
+```
+$ source ~/Downloads/inference_engine_vpu_arm/bin/setupvars.sh
+```
+
+# USB 규칙 설정
+
+현재 사용자를 users 그룹에 추가
+
+```
+$ sudo usermod -a -G users "$(whoami)"
+```
+
+규칙추가
+
+```
+$ sh inference_engine_vpu_arm/install_dependencies/install_NCS_udev_rules.sh
+```
+
+# 샘플
+샘플 소스 코드가있는 폴더로 이동하십시오.
+
+```
+$ cd inference_engine_vpu_arm/deployment_tools/inference_engine/samples
+```
+
+디렉토리 생성
+
+```
+$ mkdir build && cd build
+```
+
+object detection 예제 빌드
+
+```
+$ cmake .. -DCMAKE_BUILD_TYPE=Release -DCMAKE_CXX_FLAGS="-march=armv7-a"
+
+$ make -j2 object_detection_sample_ssd
+```
+
+cmake가 없을 경우
+
+```
+$ sudo apt-get install cmake
+```
+
+사전 훈련 된 얼굴 인식 모델을 다운로드
+
+- .bin 파일
+
+```
+$ wget --no-check-certificate https://download.01.org/openvinotoolkit/2018_R4/open_model_zoo/face-detection-adas-0001/FP16/face-detection-adas-0001.bin
+```
+
+- .xml 파일
+
+```
+$ wget --no-check-certificate https://download.01.org/openvinotoolkit/2018_R4/open_model_zoo/face-detection-adas-0001/FP16/face-detection-adas-0001.xml
+```
+
+샘플을 실행
+
+```
+$ ./armv7l/Release/object_detection_sample_ssd -m face-detection-adas-0001.xml -d MYRIAD -i <path_to_image>
+```
+
+# 결과
+
+
+
+![text](https://github.com/jjeamin/jjeamin.github.io/raw/master/_posts/post_img/intel/result2.JPG)
+
+
+
+
+![picture](https://github.com/jjeamin/jjeamin.github.io/raw/master/_posts/post_img/intel/result.JPG)
