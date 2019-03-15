@@ -66,6 +66,8 @@ write_graph 함수
 - 두번째 인자 : 저장 경로
 - 세번째 인자 : 저장 파일 이름
 
+매번 저장
+
 # tensorboard
 
 ```python
@@ -96,3 +98,5 @@ tensorboard --logdir=./logs/
 ```
 
 파일이 저장된 경로를 적고 실행시 나오는 URL에 저장하면 된다.
+
+수시로 계속 저장된다.
