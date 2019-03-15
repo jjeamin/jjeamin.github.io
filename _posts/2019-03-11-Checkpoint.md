@@ -8,7 +8,7 @@ categories: tensorflow
 
 # 저장할것
 - checkpoint
-- graph
+- graph[pd,pdtxt]
 - tensorboard
 
 # Checkpoint
@@ -100,3 +100,19 @@ tensorboard --logdir=./logs/
 파일이 저장된 경로를 적고 실행시 나오는 URL에 저장하면 된다.
 
 수시로 계속 저장된다.
+
+# pd파일 저장하기
+
+```python
+from tensorflow.python.framework import graph_io
+
+frozen = tf.graph_util.convert_variables_to_constants(sess, sess.graph_def, ["output_node_name"])
+graph_io.write_graph(frozen, './', 'graph.pb', as_text=False)
+```
+
+- output node name을 아는 것이 중요하다.
+  + tensorboard에서 찾아보기
+  + [이 곳]([https://developer.arm.com/technologies/machine-learning-on-arm/developer-material/how-to-guides/optimizing-neural-networks-for-mobile-and-embedded-devices-with-tensorflow/determine-the-names-of-input-and-output-nodes](https://developer.arm.com/technologies/machine-learning-on-arm/developer-material/how-to-guides/optimizing-neural-networks-for-mobile-and-embedded-devices-with-tensorflow/determine-the-names-of-input-and-output-nodes)) 참조
+
+# 참조
+[https://developer.arm.com/technologies/machine-learning-on-arm/developer-material/how-to-guides/optimizing-neural-networks-for-mobile-and-embedded-devices-with-tensorflow/determine-the-names-of-input-and-output-nodes](https://developer.arm.com/technologies/machine-learning-on-arm/developer-material/how-to-guides/optimizing-neural-networks-for-mobile-and-embedded-devices-with-tensorflow/determine-the-names-of-input-and-output-nodes)
