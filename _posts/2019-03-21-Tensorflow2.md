@@ -12,10 +12,26 @@ categories: tensorflow
 
 # 설치
 ```
-pip install tensorflow==2.0.0-alpha0
+conda create -n alpha python=3.5
+
+pip install -q tensorflow==2.0.0-alpha0
 ```
 
-# 바뀐거 실감하기
+# 바뀐부분
+
+- session을 경량화 했다.
+
+```python
+# TensorFlow 1.x
+outputs = session.run(f(placeholder), feed_dict={placeholder: input})
+
+# TensorFlow 2.0
+outputs = f(input)
+```
+
+- model을 keras에 중점을 맞추었다.
+
+# 바뀐거 맛만 보기
 
 - TensorFlow 1.x [Before]
 
@@ -60,3 +76,143 @@ out_b = forward([0,1])
 regularizer = tf.keras.regularizers.l2(0.02)
 reg_loss = regularizer(W)
 ```
+
+# 간단한 ML
+
+- 이미지 픽셀 범위 확인
+
+```
+plt.figure()
+plt.imshow(train_images[0])
+plt.colorbar()
+plt.grid(False)
+plt.show()
+```
+
+- 이미지 전처리
+
+```
+train_images = train_images / 255.0
+
+test_images = test_images / 255.0
+```
+
+# Classification(분류)
+```python
+from __future__ import absolute_import, division, print_function, unicode_literals
+
+import numpy as np
+import matplotlib.pyplot as plt
+import tensorflow as tf
+from tensorflow import keras
+
+print(tf.__version__)
+
+def plot_image(i, predictions_array, true_label, img):
+    predictions_array, true_label, img = predictions_array[i], true_label[i], img[i]
+    plt.grid(False)
+    plt.xticks([])
+    plt.yticks([])
+
+    plt.imshow(img, cmap=plt.cm.binary)
+
+    predicted_label = np.argmax(predictions_array)
+    if predicted_label == true_label:
+        color = 'blue'
+    else:
+        color = 'red'
+
+    plt.xlabel("{} {:2.0f}% ({})".format(class_names[predicted_label],
+                                         100 * np.max(predictions_array),
+                                         class_names[true_label]),
+               color=color)
+
+
+def plot_value_array(i, predictions_array, true_label):
+    predictions_array, true_label = predictions_array[i], true_label[i]
+    plt.grid(False)
+    plt.xticks([])
+    plt.yticks([])
+    thisplot = plt.bar(range(10), predictions_array, color="#777777")
+    plt.ylim([0, 1])
+    predicted_label = np.argmax(predictions_array)
+
+    thisplot[predicted_label].set_color('red')
+    thisplot[true_label].set_color('blue')
+
+# Dataset
+fashion_mnist = keras.datasets.fashion_mnist.load_data()
+
+# fashion Dataset
+(train_images, train_labels), (test_images,test_labels) = fashion_mnist
+
+# Class
+class_names = ['T-shirt/top', 'Trouser', 'Pullover', 'Dress', 'Coat',
+               'Sandal', 'Shirt', 'Sneaker', 'Bag', 'Ankle boot']
+
+# Shape, Label
+print("Train Shape : " ,train_images.shape)
+print("Train Label : " ,len(train_labels))
+
+print("Test Shape : " ,test_images.shape)
+print("Test Label : " ,len(test_labels))
+
+# Preprossing
+train_images = train_images / 255.0
+
+test_images = test_images / 255.0
+
+# model
+model = keras.Sequential([
+    keras.layers.Flatten(input_shape=(28, 28)),
+    keras.layers.Dense(128, activation='relu'),
+    keras.layers.Dense(10, activation='softmax')
+])
+
+# compile
+model.compile(optimizer='adam',
+              loss='sparse_categorical_crossentropy',
+              metrics=['accuracy'])
+
+# train
+model.fit(train_images, train_labels, epochs=5)
+
+# accuracy
+test_loss, test_acc = model.evaluate(test_images, test_labels)
+
+print('\n테스트 정확도:', test_acc)
+
+# predictions
+predictions = model.predict(test_images)
+
+i = 11
+
+print('prediction[Argmax] : ', np.argmax(predictions[i]))
+print('ground-truth : ',test_labels[i])
+
+# batch make
+img = (np.expand_dims(test_images[i],0))
+
+print(img.shape)
+
+# batch prediction
+predictions_single = model.predict(img)
+
+plt.subplot(1,2,1)
+plt.grid(False)
+plt.imshow(img[0], cmap=plt.cm.binary)
+plt.subplot(1,2,2)
+plot_value_array(0, predictions_single, test_labels)
+_ = plt.xticks(range(10), class_names, rotation=45)
+plt.show()
+
+print('prediction[Argmax] : ', np.argmax(predictions_single[0]))
+print('ground-truth : ',test_labels[i])
+```
+
+# 결과
+
+
+
+
+![result](https://github.com/jjeamin/jjeamin.github.io/raw/master/_posts/post_img/tensorflow/class.PNG)
