@@ -17,13 +17,13 @@ tags: index
 
 
 # Reinforcement
-- [1](https://jjeamin.github.io/reinforcement/2019/02/15/reinforcement1/)
-- [2](https://jjeamin.github.io/reinforcement/2019/02/26/reinforcement2/)
-- [3](https://jjeamin.github.io/reinforcement/2019/02/26/reinforcement3/)
-- [4](https://jjeamin.github.io/reinforcement/2019/03/01/reinforcement4/)
-- [5](https://jjeamin.github.io/reinforcement/2019/03/01/reinforcement5/)
-- [6](https://jjeamin.github.io/reinforcement/2019/03/02/reinforcement6/)
-- [DQN](https://jjeamin.github.io/reinforcement/2019/03/02/DQN1/)
+- [모두의 딥러닝 1](https://jjeamin.github.io/reinforcement/2019/02/15/reinforcement1/)
+- [모두의 딥러닝 2](https://jjeamin.github.io/reinforcement/2019/02/26/reinforcement2/)
+- [모두의 딥러닝 3](https://jjeamin.github.io/reinforcement/2019/02/26/reinforcement3/)
+- [모두의 딥러닝 4](https://jjeamin.github.io/reinforcement/2019/03/01/reinforcement4/)
+- [모두의 딥러닝 5](https://jjeamin.github.io/reinforcement/2019/03/01/reinforcement5/)
+- [모두의 딥러닝 6](https://jjeamin.github.io/reinforcement/2019/03/02/reinforcement6/)
+- [모두의 딥러닝 DQN](https://jjeamin.github.io/reinforcement/2019/03/02/DQN1/)
 
 # paper review
 - [MCNN](https://jjeamin.github.io/people/counting/2019/03/08/MCNN/)/[code](https://github.com/jjeamin/crowd_counting_MCNN)
