@@ -1,10 +1,10 @@
 # Site settings
 title:       JM LOG
-email:       woalsdl500@example.com
+email:       woalsdl500@naver.com
 author:      JM
 description: "MY GIT LOG"
 baseurl:     ""
-url:         "https://jjeamin.github.io/"
+url:         "https://jjeamin.github.io"
 date_format: "%b %-d, %Y"
 header_pages:
  - about.md
