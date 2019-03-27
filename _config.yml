@@ -11,7 +11,7 @@ header_pages:
  - contact.html
 
 # Google services
-google_verification:
+google_verification: google-site-verification=nNSjRytHMTiVA2zVKT0vcEwGtKxM5H9X8DPAf3yFLs0
 # Use either direct GA implementation or set up GTM account
 # - using both will skew your data (leave blank to not use at all)
 google_analytics: UA-136921229-1
