@@ -2,8 +2,55 @@
 layout: post
 title:  "YOLO People counting"
 summary: "YOLO를 이용해 people counting"
-date:   2019-03-23 13:00 -0400
+date:   2019-03-28 13:00 -0400
 categories: yolo
 ---
 
-# 추가 예정
+# YOLO
+`You Only Look Once: Unified, Real-Time Object Detection`
+
+- [YOLO](https://jjeamin.github.io/yolo/2019/03/23/yolo/) <- 논문 번역
+
+
+# YOLO People Counting
+YOLO를 이용하여 `people counting`을 해보려고 합니다. 일단 `people counting`하기 전에 yolo를 이용해 car를 counting하는 소스 부터 찾아서 분석해 보겠습니다.
+
+# YOLO Traffic Counter
+
+- [깃허브](https://github.com/jjeamin/python-traffic-counter-with-yolo-and-sort)
+
+이미 학습되어있는 YOLO를 이용하고 opencv를 이용해서 차량을 검출하고 counting 해주는 소스입니다.
+
+## dependency
+- python 3.7
+
+## requirement
+- opencv
+- numba
+- sklearn
+- filterpy
+- imutils
+
+```
+pip install opencv-python
+pip install opencv-contrib-python
+pip install imutils numba filterpy sklearn
+```
+
+## 실행
+
+- weight 파일을 yolo-coco 폴더에 넣는다.
+
+- git 가져오기
+
+```
+git clone https://github.com/guillelopez/python-traffic-counter-with-yolo-and-sort.git
+```
+
+- 실행
+
+```
+python main.py --input input/highway.mp4 --output output/highway.avi --yolo yolo-coco
+```
+
+시간이 조금 걸린다. output 폴더를 보면 프레임이 전부 사진으로 저장되고 영상이 하나 나오는데 영상을 보면 잘 counting 하는 것을 볼 수 있다. 뒤에 부분에 큰 트럭이 화면밖으로 나가면서 counting을 못했지만 살짝 수정하면 가능할 것 같다.
