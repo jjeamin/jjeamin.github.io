@@ -53,4 +53,4 @@ git clone https://github.com/guillelopez/python-traffic-counter-with-yolo-and-so
 python main.py --input input/highway.mp4 --output output/highway.avi --yolo yolo-coco
 ```
 
-시간이 조금 걸린다. output 폴더를 보면 프레임이 전부 사진으로 저장되고 영상이 하나 나오는데 영상을 보면 잘 counting 하는 것을 볼 수 있다. 뒤에 부분에 큰 트럭이 화면밖으로 나가면서 counting을 못했지만 살짝 수정하면 가능할 것 같다.
+시간이 조금 걸린다. output 폴더를 보면 프레임이 전부 사진으로 저장되고 영상이 하나 나오는데 영상을 보면 잘 counting 하는 것을 볼 수 있다. 뒤에 부분에 큰 트럭이 화면밖으로 나가면서 counting을 못했지만 살짝 수정하면 가능할 것 같습니다.
