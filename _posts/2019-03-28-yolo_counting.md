@@ -56,3 +56,17 @@ python main.py --input input/highway.mp4 --output output/highway.avi --yolo yolo
 시간이 조금 걸린다. output 폴더를 보면 프레임이 전부 사진으로 저장되고 영상이 하나 나오는데 영상을 보면 잘 counting 하는 것을 볼 수 있다. 뒤에 부분에 큰 트럭이 화면밖으로 나가면서 counting을 못했지만 살짝 수정하면 가능할 것 같습니다.
 
 ---
+
+## 수정
+- 코드 주석 한글화
+- 이미지 저장하는것 해제
+- tqdm 추가로 변환 상태바 추가
+
+깃허브 : [HERE](https://github.com/jjeamin/python-traffic-counter-with-yolo-and-sort)
+
+## 참고해서 직접 코딩할 것
+- 중심점으로 추적선을 만들지 않고 그보다 조금더 앞에 만든다. (중간 쯤에 트럭을 검출 못함)
+- 사람만 카운팅하게 할 것
+- 동영상말고 캠으로 동작하게 할 것
+
+---
