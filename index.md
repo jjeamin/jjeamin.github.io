@@ -46,6 +46,7 @@ tags: index
 
 # Capston
 - [Django](https://jjeamin.github.io/web/2019/03/14/Django/)
+- [Django2](https://jjeamin.github.io/web/2019/03/30/Django2/)
 - [Docker](https://jjeamin.github.io/capston/2019/03/22/Docker/)
 
 # Winter School
