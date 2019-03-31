@@ -68,5 +68,5 @@ python main.py --input input/highway.mp4 --output output/highway.avi --yolo yolo
 - 중심점으로 추적선을 만들지 않고 그보다 조금더 앞에 만든다. (중간 쯤에 트럭을 검출 못함)
 - 사람만 카운팅하게 할 것
 - 동영상말고 캠으로 동작하게 할 것
-
+- 라즈베리파이에서..
 ---
