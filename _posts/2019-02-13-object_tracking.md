@@ -5,7 +5,7 @@ summary: "객체 추적"
 date:   2019-02-13 10:10 -0400
 categories: opencv
 ---
-## Dependency
+## requirement
 - OpenCV
 
 ### HSV

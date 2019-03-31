@@ -7,7 +7,7 @@ categories: Reinforcement
 ---
 
 ## Dependency
-- python
+- python 3
 - tensorflow
 - OpenAI Gym
 

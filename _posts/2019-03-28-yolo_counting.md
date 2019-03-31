@@ -21,7 +21,7 @@ YOLO를 이용하여 `people counting`을 해보려고 합니다. 일단 `people
 
 이미 학습되어있는 YOLO를 이용하고 opencv를 이용해서 차량을 검출하고 counting 해주는 소스입니다.
 
-## dependency
+## Dependency
 - python 3.7
 
 ## requirement

@@ -6,13 +6,12 @@ date:   2019-03-30 13:00 -0400
 categories: yolo,pi
 ---
 
-## 구성
-- Raspberry PI 3(라즈비안)
-- WebCam
-- NCS2
-
 ## Dependency
-- python 3
+- raspberry pi 3
+- Neural Compute Stick 2
+- WebCam
+
+## requirement
 - opencv 4.0.0
 - openvino
 

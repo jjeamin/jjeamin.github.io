@@ -6,13 +6,13 @@ date:   2019-02-07 12:00 -0400
 categories: pi
 ---
 [깃허브](https://github.com/jjeamin/raspi-humanfollow)
-## 구성
+## Dependency
 - Raspberry PI 3(라즈비안)
 - DC 모터 2개
 - L293D
 - PI camera
 
-## Dependency
+## requirement
 - python 2.7
 - opencv 4.0.0 [[<span style="color:blue">다운로드 방법</span>]](https://webnautes.tistory.com/916)
 - RPI.GPIO

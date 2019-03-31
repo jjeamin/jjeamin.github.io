@@ -10,7 +10,7 @@ categories: pi
 - Raspberry PI 3(라즈비안)
 - PI camera
 
-## Dependency
+## requirement
 - python 2.7
 - opencv 4.0.0
 - zbar
