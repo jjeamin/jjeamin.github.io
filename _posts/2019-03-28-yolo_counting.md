@@ -69,4 +69,17 @@ python main.py --input input/highway.mp4 --output output/highway.avi --yolo yolo
 - 사람만 카운팅하게 할 것
 - 동영상말고 캠으로 동작하게 할 것
 - 라즈베리파이에서..
+
 ---
+
+# 라즈베리파이
+
+```
+sudo apt install libblas-dev llvm python3-pip python3-scipy
+
+pip3 install llvmlite==0.15.0
+```
+
+```
+python3 -m pip
+```

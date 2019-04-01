@@ -21,7 +21,7 @@ categories: yolo
 9000가지 이상의 object detection을 수행할 수 있는 YOLOv2를 소개한다. PASCAL VOC와 COCO와 같은 표준 detection 작업에 대한 기술이다. 혁신적 multi-scale train 방법을 사용하면 속도와 정확도의 균형을 잘 유지 할 수 있다. 67FPS에서 YOLOv2는 76.8 mAP을 얻었고 40FPS에서는 78.6 mAP를 얻었다. 마지막으로 YOLO는 object detection과 classification에 대해서 jointly train(공동 훈련) 방법을 제안한다. 이 방법을 사용하여 YOLO는 9000 개 이상의 서로 다른 object의 class를 예측한다. 그리고 그것은 여전히 **실시간** 으로 진행된다.
 
 # 소개(introduce)
-일반적인 object detector은 빠르고,정확하고,다양한 물체를 인식할 수 있어야한다. Neural Net의 도입 이후 프레임 워크는 점점 더 빠르고 정확해졌다. 그러나 대부분의 detection 방법은 여전히 작은 object 집합에 제약을 받는다.
+일반적인 object detector은 빠르고,정확하고,다양한 물체를 인식할 수 있어야한다. Neural Net의 도입 이후 프레임 워크는 점점 더 빠르고 정확해졌다. 그러나 대부분의 detection 방법은 여전히 작은 object 집합에 제약을 받는다. 현재의 object detection 데이터 세트는 classification과 tagging 같은 다른작업을 위한 데이터 세트와 비교해 제한되어 있다. 가장 일반적인 detection 데이터 세트는 수천 수십만 개의 이미지를 포함한다. 우리는 detection이 object classification의 수준으로 확장되기를 원한다. 그러나 detection용 image labelling은 classification또는 tagging을 위한 labelling보다 expensive하다. YOLO는 이미 보유하고 있는 대량의 classification 데이터를 활용하여 현재 detection의 범위를 확장하기 위한 새로운 방법을 제안한다. 그 방법은 서로 다른 데이터 세트를 함께 결합할 수 있는 object classification의 **계층적 관점** 을 사용한다. 또한 detection 과 cl
 
 # 참조
 - ssd
