@@ -74,12 +74,30 @@ python main.py --input input/highway.mp4 --output output/highway.avi --yolo yolo
 
 # 라즈베리파이
 
+## SORT 라이브러리 설치
+
 ```
 sudo apt install libblas-dev llvm python3-pip python3-scipy
-
 pip3 install llvmlite==0.15.0
+pip3 install numba==0.30.1
 ```
 
+중간에 numba 0.30.1을 설치할 때 계속 llvmlite 0.28.0을 설치하려는 경향 때문에 오류가 계속 발생했다. 만약 이런오류가 발생한다면 [여기](https://pypi.org/project/numba/0.30.1/) 에 들어가서 받고
+
 ```
-python3 -m pip
+cd numba-0.30.1
+python setup.py build_ext --inplace
+python setup.py install
+```
+
+- 중간에 pip을 덮어서.. pip3가 망가짐 그래서 사용
+
+```
+python3 -m pip ~
+```
+
+- 남은 requirement 설치
+
+```
+python3 -m pip install sklearn tqdm imutils
 ```
