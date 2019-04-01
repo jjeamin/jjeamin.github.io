@@ -6,7 +6,7 @@ date:   2019-02-25 22:00 -0400
 categories: Reinforcement
 ---
 
-## Dependency
+## requirement
 - python 3
 - tensorflow
 - OpenAI Gym
