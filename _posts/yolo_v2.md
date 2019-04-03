@@ -40,7 +40,7 @@ YOLO는 최첨단 detection 시스템에 비해 다양한 단점을 가지고 �
 - 고해상도 classifier 네트워크는 거의 4% mAP가 증가했다.
 
 ## Convolutional With Anchor Boxes
-YOLO는 convolution 특징 추출기 위에 fully connected layer를 사용하여 bounding box를 예측한다. 직접적으로 좌표를 예측하는 대신 Faster R-CNN은 사전에 수작업한 bounding box들을 예측한다. 단지 Faster R-CNN안의 RPN(region proposal network) 모듈에서 convolution layer들을 사용함으로써 offsets과 anchor boxes에 대한 신뢰도를 예측한다. prediction layer가 convolution이기 때문에, RPN은 feature map에서 모든 위치에서 offsets을 예측한다.
+YOLO는 convolution 특징 추출기 위에 fully connected layer를 사용하여 bounding box를 예측한다. 직접적으로 좌표를 예측하는 대신 Faster R-CNN은 사전에 수작업한 bounding box들을 예측한다. 단지 Faster R-CNN안의 RPN(region proposal network) 모듈에서 convolution layer들을 사용함으로써 offsets과 anchor boxes에 대한 신뢰도를 예측한다. prediction layer가 convolution이기 때문에, RPN은 feature map에서 모든 위치에서 offsets을 예측한다. 좌표 대신 offsets을
 
 # 참조
 - ssd
