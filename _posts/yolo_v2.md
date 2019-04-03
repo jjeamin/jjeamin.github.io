@@ -26,7 +26,21 @@ categories: yolo
 - 사전 훈련된 모델 : [HERE](http://pjreddie.com/yolo9000/)
 
 # Better
-YOLO는 최첨단 detection 시스템에 비해 다양한 단점을 가지고 있다. Fast R-CNN에 비해 YOLO는 상당한 수의 위치 파악 오류를 만든다는 것을 보여준다. 그래서 classification 정확성을 유지하면서 recall(검출율) 과 localization을 개선하는데 주력한다. 더 나은 성능은 대용량의 네트워크를 교육하거나 여러 모델을 함께 모으는 방법(앙상블)을 사용할 수 있지만 YOLOv2로 빠른 것을 유지하고 더 정확한 detector를 원한다.
+YOLO는 최첨단 detection 시스템에 비해 다양한 단점을 가지고 있다. Fast R-CNN에 비해 YOLO는 상당한 수의 위치 파악 오류를 만든다는 것을 보여준다. 그래서 classification 정확성을 유지하면서 recall(검출율) 과 localization을 개선하는데 주력한다. 더 나은 성능은 대용량의 네트워크를 교육하거나 여러 모델을 함께 모으는 방법(앙상블)을 사용할 수 있지만 YOLOv2로 빠른 것을 유지하고 더 정확한 detector를 원한다. 네트워크를 확장하는 대신에, 네트워크를 단순화시키고 그 표현 쉽게 배울수 있도록 만든다.
+
+## Batch Normalization
+- 다른 형태의 정규화(regularzation)가 필요없게 하며 convergence를 크게 향상시킨다.
+- YOLO의 모든 CNN에 batch noremalization를 추가하면 mAP에서 2% 이상의 개선 효과를 얻을 수 있다.
+- 모델을 regularize하는데 도움이된다. 과적합(overfitting)없이 dropout을 제거해도 된다.
+
+## High Resolution Classiﬁer
+- 모든 최첨단 detection 방법은 ImageNet에서 pre-train된 분류자를 사용한다.
+- AlexNet부터는 256x256보다 작은 입력 이미지를 처리하고 기존 YOLO는 classifier 네트워크를 224x224로 훈련시키고 탐지를 위해 448로 해상도를 증가시킨다. 이는 네트워크가 새로운 입력 해상도(resolution)을 조절하고 object detection을 학습하려고 동시에 전환해야한다는 것을 의미한다.
+- YOLOv2는 먼저 ImageNet에서 10 epoch 동안 448x448 해상도로 classifier 네트워크를 fine-tuning 시킨다. 이것은 고해상도 입력 이미지에서 더 잘 작동하도록 filter를 조정할 네트워크 시간을 제공한다. 그리고 탐지 된 결과 네트워크를 fine-tuning 한다.
+- 고해상도 classifier 네트워크는 거의 4% mAP가 증가했다.
+
+## Convolutional With Anchor Boxes
+YOLO는 convolution 특징 추출기 위에 fully connected layer를 사용하여 bounding box를 예측한다. 직접적으로 좌표를 예측하는 대신 Faster R-CNN은 사전에 수작업한 bounding box들을 예측한다. 단지 Faster R-CNN안의 RPN(region proposal network) 모듈에서 convolution layer들을 사용함으로써 offsets과 anchor boxes에 대한 신뢰도를 예측한다. prediction layer가 convolution이기 때문에, RPN은 feature map에서 모든 위치에서 offsets을 예측한다.
 
 # 참조
 - ssd
