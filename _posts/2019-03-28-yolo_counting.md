@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "YOLO People counting"
-summary: "YOLO를 이용해 people counting"
+summary: "라즈베리파이에서 NCS2를 이용해 yolo people counting"
 date:   2019-03-28 13:00 -0400
 categories: yolo
 ---
@@ -74,7 +74,20 @@ python main.py --input input/highway.mp4 --output output/highway.avi --yolo yolo
 
 # 라즈베리파이
 
-## SORT 라이브러리 설치
+## 구성
+- raspberry pi 3 (rasbian)
+- webcam
+- NCS2
+
+## requirement
+- openvino toolkit [[설치방법](https://jjeamin.github.io/pi/2019/03/08/NCS2/)]
+- opencv
+- numba
+- sklearn
+- filterpy
+- imutils
+
+## SORT requirement 설치
 
 ```
 sudo apt install libblas-dev llvm python3-pip python3-scipy
@@ -101,3 +114,11 @@ python3 -m pip ~
 ```
 python3 -m pip install sklearn tqdm imutils
 ```
+
+##
+
+
+# 참조
+- [https://github.com/guillelopez/python-traffic-counter-with-yolo-and-sort](https://github.com/guillelopez/python-traffic-counter-with-yolo-and-sort)
+- [https://github.com/jjeamin/OpenVINO-YoloV3](https://github.com/jjeamin/OpenVINO-YoloV3)
+- [https://github.com/jjeamin/sort](https://github.com/jjeamin/sort)

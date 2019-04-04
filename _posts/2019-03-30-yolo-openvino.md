@@ -212,6 +212,8 @@ print('inference time : ',end-start)
 
 
 
+처음 추론할 때 opencv가 느리게 보이지만 계속 추론시키면 시간 차이가 그렇게 크지 않습니다.
+
 # 참조
 
 ## YOLO 모델 생성
