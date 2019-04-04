@@ -35,12 +35,49 @@ YOLO는 최첨단 detection 시스템에 비해 다양한 단점을 가지고 �
 
 ## High Resolution Classiﬁer
 - 모든 최첨단 detection 방법은 ImageNet에서 pre-train된 분류자를 사용한다.
+
 - AlexNet부터는 256x256보다 작은 입력 이미지를 처리하고 기존 YOLO는 classifier 네트워크를 224x224로 훈련시키고 탐지를 위해 448로 해상도를 증가시킨다. 이는 네트워크가 새로운 입력 해상도(resolution)을 조절하고 object detection을 학습하려고 동시에 전환해야한다는 것을 의미한다.
+
 - YOLOv2는 먼저 ImageNet에서 10 epoch 동안 448x448 해상도로 classifier 네트워크를 fine-tuning 시킨다. 이것은 고해상도 입력 이미지에서 더 잘 작동하도록 filter를 조정할 네트워크 시간을 제공한다. 그리고 탐지 된 결과 네트워크를 fine-tuning 한다.
+
 - 고해상도 classifier 네트워크는 거의 4% mAP가 증가했다.
 
 ## Convolutional With Anchor Boxes
-YOLO는 convolution 특징 추출기 위에 fully connected layer를 사용하여 bounding box를 예측한다. 직접적으로 좌표를 예측하는 대신 Faster R-CNN은 사전에 수작업한 bounding box들을 예측한다. 단지 Faster R-CNN안의 RPN(region proposal network) 모듈에서 convolution layer들을 사용함으로써 offsets과 anchor boxes에 대한 신뢰도를 예측한다. prediction layer가 convolution이기 때문에, RPN은 feature map에서 모든 위치에서 offsets을 예측한다.
+
+- YOLO는 convolution 특징 추출기 위에 fully connected layer를 사용하여 bounding box를 예측한다. 직접적으로 좌표를 예측하는 대신 Faster R-CNN은 사전에 수작업한 bounding box들을 예측한다.
+
+- Faster R-CNN안의 RPN(region proposal network) 모듈에서 convolution layer들을 사용함으로써 offsets과 anchor boxes에 대한 신뢰도를 예측한다. prediction layer가 convolution이기 때문에, RPN은 feature map에서 모든 위치에서 offsets을 예측한다. 좌표 대신 offsets을 예측하면 문제가 간단해지고 네트워크 학습을 더 쉽게 할수 있다.
+
+- fully connected layers를 YOLO에서 제거하고 bounding box를 예측하기 위해 anchor boxes를 사용한다. 먼저 output의 convolution layer를 높은 해상도로 만들기 위해 하나의 pooling layer를 제거한다.
+
+- 448x448 대신 416 입력 이미지에서 작동하기 위해 네트워크를 줄인다. -> 최종 feature map을 홀수x홀수로 만들기 위해서이다. -> 홀수 이므로 단일 center cell이 존재할 수 있다. 짝수는 center가 4개 이다. 특히 큰 object는 image의 중심을 차지 하는 경향이 있으므로 feature map의 center가 4개로 잡힌다면 object를 검출하는데 어려움이 생길수 있다.
+
+- YOLO의 convolution layer는 image를 32배만큼 downsampling하므로 416 입력 이미지를 사용해 13x13의 feature map을 얻는다.
+
+- anchor box를 사용하면서 공간 위치로부터의 class 예측 매커니즘도 분리시키고 그것이 object일 확률을 예측하며 classification 한다. 예측된 bounding box가 object일때 그것이 어떤 class인지를 예측하기 때문에 **조건부 확률** 이 된다. anchor box를 사용하면 정확성이 약간 감소하지만 천개 이상의 예측을 할 수 있다.
+
+- no anchor box = `mAP : 69.5`,`recall(검출율) : 81%``
+- anchor box = `mAP : 69.2`,`recall(검출율) : 88%`
+
+## Dimension Cluster
+YOLO에서 anchor box를 사용할 때 두 가지 문제점을 갖는다.
+
+- 첫번째, box dimension을 손수 설정 해야하는 것이다. 이전에는 직접 설정 했지만 YOLO는 k-means Clustering 알고리즘을 자동적으로 bounding box를 학습에 적용하기 위해 사용한다.
+만약 표준 k-means를 유클리드 거리(점과 점사이의 거리)에서 사용한다면, 큰 box는 작은 box보다 많은 에러가 발생한다. 그러나 box의 크기와 상관없이 좋은 IOU를 이끄는 것을 원한다. 그러므로 거리 행렬을 위에 다음 식을 사용한다.
+
+
+
+![dm](https://github.com/jjeamin/jjeamin.github.io/raw/master/_posts/post_img/yolo/dm.PNG)
+
+
+
+# 추가 용어
+
+## anchor box
+Faster R-CNN에서 언급된 용어로 Bounding box의 후보로 사용되는 상자다. 여기에서는 sliding window라는 알고리즘을 적용한다. sliding window는 이미지위에서 직접 지정한 window를 옮겨가는 알고리즘이다. window의 위치를 중심으로 **사용자가 정의한 다양한 크기의 anchor box** 들을 적용해 feature를 추출하는데 image의 크기를 조정할 필요없고,filter 크기를 변경할 필요가 없기 때문에 효율이 좋다.
+
+## IOU
+: intersection over union(합집합 over 교집합) : 실제 bounding box와 예측 bounding box가 얼마나 잘 겹쳐지는지
 
 # 참조
 - ssd
@@ -49,3 +86,6 @@ YOLO는 convolution 특징 추출기 위에 fully connected layer를 사용하�
 - yolo
   + [https://m.blog.naver.com/sogangori/220993971883](https://m.blog.naver.com/sogangori/220993971883)
   + [https://m.blog.naver.com/sogangori/221011203855](https://m.blog.naver.com/sogangori/221011203855)
+
+- Faster R-CNN
+  + [https://curt-park.github.io/2017-03-17/faster-rcnn/](https://curt-park.github.io/2017-03-17/faster-rcnn/)
