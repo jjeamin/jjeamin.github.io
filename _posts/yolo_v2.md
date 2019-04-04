@@ -60,9 +60,16 @@ YOLO는 최첨단 detection 시스템에 비해 다양한 단점을 가지고 �
 - anchor box = `mAP : 69.2`,`recall(검출율) : 88%`
 
 ## Dimension Cluster
+
+
+
+![cluster](https://github.com/jjeamin/jjeamin.github.io/raw/master/_posts/post_img/yolo/cluster.PNG)
+
+
+
 YOLO에서 anchor box를 사용할 때 두 가지 문제점을 갖는다.
 
-- 첫번째, box dimension을 손수 설정 해야하는 것이다. 이전에는 직접 설정 했지만 YOLO는 k-means Clustering 알고리즘을 자동적으로 bounding box를 학습에 적용하기 위해 사용한다.
+- 첫번째, box dimension을 손수 설정 해야하는 것이다. 이전에는 직접 설정 했지만 YOLO는 자동적으로 bounding box를 학습에 적용하기 위해 k-means Clustering 알고리즘을 사용한다.
 만약 표준 k-means를 유클리드 거리(점과 점사이의 거리)에서 사용한다면, 큰 box는 작은 box보다 많은 에러가 발생한다. 그러나 box의 크기와 상관없이 좋은 IOU를 이끄는 것을 원한다. 그러므로 거리 행렬을 위에 다음 식을 사용한다.
 
 
@@ -71,6 +78,21 @@ YOLO에서 anchor box를 사용할 때 두 가지 문제점을 갖는다.
 
 
 
+- 위에 그림을 보면 알 수 있듯이 k의 다양한 값을 위해 k-means를 작동하고 가장 가까운 IOU 평균을 표시한다. k가 커지면 recall이 좋아지지만 모델의 복잡도가 상승하는 trade-off 관계가 있기 때문에 k값으로 5를 선택했다.
+
+- **우선 순위의 anchor box를 선택하는 Clustering 전략과 직접선택하는 anchor box를 비교해보면 전자가 더 좋은 결과가 나옵니다.**
+
+## Direct location prediction
+- anchor box를 사용하면 학습 초기에 모델이 불안정해지는 문제를 해결할 수 있었는데 학습이 불안정한 원인은 box의 좌표가 랜덤하게 예측되기 때문이다. RPN에서 네트워크는 tx와 ty를 예측하고 (x,y)의 중앙 좌표는 아래 식에 의해서 계산된다.
+
+
+
+![dm](https://github.com/jjeamin/jjeamin.github.io/raw/master/_posts/post_img/yolo/dlp.PNG)
+
+
+
+- 예를 들어, tx=1이라면 box를 오른쪽으로 이동시킬 것이고 tx=-1이라면 왼쪽으로 이동할 것이다. 이 공식은 제한되지 않는다. 이 공식은 제약이 없으므로 box를 예측 한 위치에 관계 없이 모ㄷ
+
 # 추가 용어
 
 ## anchor box
@@ -78,6 +100,9 @@ Faster R-CNN에서 언급된 용어로 Bounding box의 후보로 사용되는 �
 
 ## IOU
 : intersection over union(합집합 over 교집합) : 실제 bounding box와 예측 bounding box가 얼마나 잘 겹쳐지는지
+
+## RPN
+: RPN은 feature map에서 모든 위치에서 offsets을 예측한다. 좌표 대신 offsets을 예측하면 문제가 간단해지고 네트워크 학습을 더 쉽게 할수 있다.
 
 # 참조
 - ssd
