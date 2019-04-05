@@ -4,6 +4,9 @@ title: Index
 permalink: /index/
 tags: index
 ---
+# Lab
+- [YOLO - openvino](https://jjeamin.github.io/yolo,pi/2019/03/30/yolo-openvino/)(simple)
+- [YOLO - counting](https://jjeamin.github.io/yolo/2019/03/28/yolo_counting/) - 제작중
 
 # Raspberry Pi
 - [Human Following Robot](https://jjeamin.github.io/pi/2019/02/07/human_following_robot/)
@@ -14,7 +17,6 @@ tags: index
 - [Face Identification](https://jjeamin.github.io/pi/2019/02/12/Face-Identification/)
 - [NCS2](https://jjeamin.github.io/pi/2019/03/08/NCS2/)
 - [NCS2 - IR](https://jjeamin.github.io/pi/2019/03/08/NCS2_IR/)
-
 
 # Reinforcement
 - [모두의 딥러닝 1](https://jjeamin.github.io/reinforcement/2019/02/15/reinforcement1/)
