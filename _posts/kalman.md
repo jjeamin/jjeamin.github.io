@@ -7,3 +7,5 @@ categories: pi
 ---
 
 # Kalman Filter
+
+kalman filter 는 optimal estimation algorithm이다.
