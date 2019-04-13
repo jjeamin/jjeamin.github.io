@@ -1,8 +1,8 @@
 <footer class="center">
   <div class="measure">
-    <small>
-      <a href="https://github.com/jjeamin">GitHub</a>.
-    </small>
+    {% if site.enable_adsense %}
+      {% include advertisement.html %}
+    {% endif %}
   </div>
 </footer>
 {% if site.enable_anchorjs %}<!-- AnchorJS -->
