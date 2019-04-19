@@ -13,8 +13,12 @@ categories: yolo
 ---
 
 # YOLO가 빠른 이유
-- bounding box의 위치를 찾는 것과 classification이 동시에 이루어 지기 때문에 속도가 빠르다. 반면에 R-CNN 계열의 검출 네트워크들은 영상에서 오브젝트가 있을 것 같은 후보(ROI - Region Of Interest : 관심영역) 를 먼저 뽑는다. 후보로 뽑힌 ROI(영상의 작은 부분) 들은 Classification network(분류기)에 의해 클래스 분류가 이뤄지고  그 후 bounding box 를 찾는다.
+bounding box의 위치를 찾는 것과 classification이 동시에 이루어 지기 때문에 속도가 빠르다. 반면에 R-CNN 계열의 검출 네트워크들은 영상에서 오브젝트가 있을 것 같은 후보(ROI - Region Of Interest : 관심영역) 를 먼저 뽑는다. 후보로 뽑힌 ROI(영상의 작은 부분) 들은 Classification network(분류기)에 의해 클래스 분류가 이뤄지고  그 후 bounding box 를 찾는다.
 
+---
+# 기존 YOLO의 문제점
+1. 낮은 검출율(recall)
+2. 상당한 수의 localization error
 ---
 
 # YOLO 9000
@@ -67,7 +71,7 @@ YOLO는 최첨단 detection 시스템에 비해 다양한 단점을 가지고 �
 
 - anchor box를 사용하면서 공간 위치로부터의 class 예측 매커니즘도 분리시키고 그것이 object일 확률을 예측하며 classification 한다. 예측된 bounding box가 object일때 그것이 어떤 class인지를 예측하기 때문에 **조건부 확률** 이 된다. anchor box를 사용하면 정확성이 약간 감소하지만 천개 이상의 예측을 할 수 있다.
 
-- no anchor box = `mAP : 69.5`,`recall(검출율) : 81%``
+- no anchor box = `mAP : 69.5`,`recall(검출율) : 81%`
 - anchor box = `mAP : 69.2`,`recall(검출율) : 88%`
 
 ---
@@ -108,11 +112,11 @@ YOLO에서 anchor box를 사용할 때 두 가지 문제점을 갖는다.
 
 - tx,ty는 convolution연산의 출력 값이다.
 
-- 예를 들어, tx=1이라면 box를 오른쪽으로 이동시킬 것이고 tx=-1이라면 왼쪽으로 이동할 것이다. 이 공식은 제한되지 않는다. 이 공식은 제약이 없으므로 box를 예측 한 위치에 관계 없이 anchor box의 위치가 영상 어디에도 나타날 수 있다.
+- 예를 들어, tx=1이라면 box를 오른쪽으로 이동시킬 것이고 tx=-1이라면 왼쪽으로 이동할 것이다. 이 공식은 제한되지 않는다. 이 공식은 제약이 없으므로 box를 예측 한 위치에 관계 없이 anchor box의 위치가 영상 어디에도 나타날 수 있다. -> **문제점**
 
 - offsets을 예측하는 대신에 grid cell의 위치와 상대적인 위치 좌표들을 예측한다. x,y의 위치가 grid cell 내부에만 있도록 제약을 두었기 때문에 ground truth가 0~1의 값을 갖게된다. 그리고 예측할때는 logistic activation을 사용해서 0~1의 값을 갖게한다.
 
-- 네트워크는 output인 feature map에서의 각각의 cell에서 5개의 bounding box를 예측한다. 각 bounding box에 tx,ty,tw,ty,to에 대한 5개의 좌표를 예측한다.
+- 네트워크는 output인 feature map에서의 각각의 cell에서 5개의 bounding box를 예측한다. 각 bounding box에 tx,ty,tw,th,to에 대한 5개의 좌표를 예측한다.
 
 
 
@@ -123,6 +127,7 @@ YOLO에서 anchor box를 사용할 때 두 가지 문제점을 갖는다.
 - `cx,cy` : 각 `grid cell`의 좌상단 끝에 offset
 - `pw,ph` : 우선 순위 anchor box의 width,height
 - `tx,ty` : `sigmoid` 함수를 거친다.
+- `to` : object인가?
 - `bx = sigmoid(tx) + cx`에서 `tx`가 0값을 가지면 `bx`는 중심 좌표 x
 - `by = sigmoid(ty) + cy`에서 `ty`가 0값을 가지면 `bx`는 중심 좌표 y
 
@@ -132,6 +137,14 @@ YOLO에서 anchor box를 사용할 때 두 가지 문제점을 갖는다.
 - `bh = ph*e^(th)`에서 `th`가 0값을 가지면 `bh = ph`
 
 - 위치 예측 파라미터에 sigmoid 함수, 경계박스의 중심이 grid cell 안에 있어야한다는 제약이 있기에 안정적이게 학습하고, Dimension Cluster를 사용했을때 mAP가 5% 상승한다.
+
+
+
+![dm](https://github.com/jjeamin/jjeamin.github.io/raw/master/_posts/post_img/yolo/dlp3.PNG)
+
+
+
+- `grid cell`에서 만들어낸 bounding box는 그 grid cell을 갖고 있어야한다.
 
 ---
 
@@ -143,18 +156,79 @@ YOLO에서 anchor box를 사용할 때 두 가지 문제점을 갖는다.
 
 - passthrough layer는 ResNet의 identity mapping과 유사하게 고해상도 feature와 저해상도 feature를 연결한다. 26x26x512 feature map은 13x13x2048 feature map으로 변경하고, 기존의 feature들과 연결할수 있다. -> 1% 향상
 
+
+
+![fg](https://github.com/jjeamin/jjeamin.github.io/raw/master/_posts/post_img/yolo/fg.PNG)
+
+
+
 ---
 
 ## Multi Scale Trining
 
+- 원래 YOLO는 448x448의 input을 사용한다. anchor box 추가하어 416x416으로 변경했고 모델은 convolution과 pooling 계층만을 사용하므로 layer는 조정할 수 있다. 즉, fully connected layer가 없으므로 input size가 어떤것이 들어와도 상관없다.
+
+- YOLOv2는 다양한 크기의 이미지에서 동작하길 원한다. input 이미지의 size를 고치는것 대신에 모든 네트워크의 반복을 변경했다. 다양한 해상도로 학습하기 위해 10 batch 마다 학습데이터가 32의 배수로 resize 된다(320,352 ... 608). 따라서 가장 작을 때는 320x320이고 가장 클 때는 608x608이다.
+
+- YOLO는 dimension과 지속적인 학습에 대한 네트워크의 크기를 resize한다. 이러한 체제는 네트워크가 다양한 입력 차원들에 잘 예측할 수 있도록 학습하며 같은 네트워크가 다른 해상도에서 검출을 예측할 수 있음을 보여준다.
+
+- YOLOv2에서 낮은 해상도의 경우에는 보다 약하게 작동하지만 꽤 정확한 검출을 한다. 288x288에서 그것은 90FPS 속도로 작동하고 mAP는 거의 Fast R-CNN만큼 잘 나온다.
+
+---
+
+# Faster
+YOLO는 정확한 검출을 원하면서도 빠르기를 원한다. 로보틱스 또는 자율 주행 자동차와 같은 대부분의 검출에 있어서 응용프로그램들은 속도가 느리다. 최대한의 성능을 얻기 위해서는 처음부터 빠르게 설계한다.
+
+- 대부분의 detection framework는 특징 추출기에 기반이 되는 VGG-16에 의존한다. 그러나 VGG-16은 정확하고 강력하지만 불필요하게 복잡하다.
+
+## Darknet-19
+- 새로운 분류 모델을 제안한다.
+- VGG와 유사하게 `3x3 filter` 를 사용하고 모든 pooling 단계 이후 channel 수를 2배로 한다. (global average pooling 사용)
+- Batch Normalization 사용
+- 19개의 convolution layer
+- 5개의 maxpooling
+- ImageNet에서 Top-1에서는 `72.9%` top-5에서는 `91.2%`의 정확도를 가진다.
 
 
 
+![model](https://github.com/jjeamin/jjeamin.github.io/raw/master/_posts/post_img/yolo/model.PNG)
 
 
 
+## Training for classification
+- ImageNet `1000개 class`
+- `160 epoch`
+- `stochastic gradient descent`(`learning late` = 0.1)
+- `polynomial rate decay`  : 4의 거듭제곱
+- `weight decay` : 0.00005 ,`momentum` : 0.9
+- `standard data augumentation`
+- `224x224` -> `448x448` `fine tuning`(`10epochs`)
 
 
+## Training for detection
+- 마지막 `convolution layer`를 제거하고 3x3x1024 `convolution layer`를 추가
+- 그 뒤에 `1x1 convolution layer` 추가
+- 5개 `bounding box`를 예측
+- 5개 `coordinate(좌표)` 예측
+- 각각 `20개 클래스` 예측
+- `125 filter` =  25(5x5) + 100(5x20)
+- `160 epochs`
+- `weight decay` : 0.00005 ,`momentum` : 0.9
+
+## 여기까지 YOLOv2고 뒤에 부터 YOLO9000
+---
+# Stronger
+- YOLO는 classification과 detection 데이터를 공동으로 운현할 수 있는 메커니즘을 제공한다. class label만 있는 이미지를 사용해 발견할수 있는 범주의 수를 확장한다.
+
+- classification datasets은 매우 넓은 범위의 라벨들을 가진다.(Norfolk terrier, Yorkshire terrier etc.) 그렇기에 이러한 라벨들을 병합하기 위한 일관적인 방법이 필요하다.
+
+- 대부분의 classification 방법은 최종 확률 분포를 계산하기 위해 모든 가능한 범주에서 `softmax` 레이어를 사용한다. 소프트맥스를 사용함으로써 추정한 class는 상호 배타적이다. YOLO9000은 상호 배재적임을 추정하지 않는 datasets을 조합하기 위해서 multi label model을 사용한다.
+
+## Hierachical classification
+- WordNet에서 가져온다. WordNet은 연결된 그래프로 구조가 지어진다. 언어는 복잡하기 때문에 tree는 아니다. 예를 들어 '개'는 ''
+
+
+---
 
 # 추가 용어
 
