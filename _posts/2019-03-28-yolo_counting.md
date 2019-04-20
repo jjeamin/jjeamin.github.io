@@ -103,7 +103,7 @@ python setup.py build_ext --inplace
 python setup.py install
 ```
 
-- 중간에 pip을 덮어서.. pip3가 망가짐 그래서 사용
+- 중간에 pip을 덮어서.. pip3가 망가짐 그래서 아래와 같이 사용
 
 ```
 python3 -m pip ~
