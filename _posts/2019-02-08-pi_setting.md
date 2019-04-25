@@ -6,6 +6,34 @@ date:   2019-02-08 11:10 -0400
 categories: pi
 ---
 
+## 한글설정
+
+```
+sudo raspi-config
+```
+
+1. local 설정하기
+- en-US UTF 8
+- en-GB UTF 8
+- ko-KR UTF 8
+
+2. 키보드 layout
+- Other -> 한국 -> 104/105
+
+
+3. 한글 깨짐 해결
+```
+sudo apt-get install ibus ibus-hangul fonts-unfonts-core
+```
+
+
+## 화면 캡쳐
+
+```
+$ scrot
+```
+
+
 ## 파이썬 패키지 경로
 
 ```

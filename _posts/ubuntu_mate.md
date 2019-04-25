@@ -2,9 +2,10 @@
 layout: post
 title:  "Ubuntu-mate 기본설정/사용하기"
 summary: "Raspberry pi에서 Ubuntu mate를 사용해 보자"
-date:   2019-02-07 12:00 -0400
+date:   2019-04-25 12:00 -0400
 categories: pi
 ---
+
 # 구성
 - raspberry 3 B+(ubuntu mate Bionic)
 
@@ -57,3 +58,6 @@ reboot
 - 우측 상단에 키보드 아이콘이 생성되었다. 왼쪽 마우스를 클릭한 뒤 `설정`을 누르고 `Hangul` 과 `키보드-영어(미국)`만 남긴 채로 `전역 설정`을 누르고 `입력기 전환`버튼을 누르고 `한/영`키를 누르면 `Hangul`로 전환 된다.
 
 - 이제 한글설정 완료!!
+
+
++ 추후 하고싶은거 이것저것 진행 예정
