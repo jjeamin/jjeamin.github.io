@@ -3,7 +3,7 @@ layout: post
 title:  "YOLO openvino NCS2"
 summary: "NCS2에서 YOLO실행 using Raspberry"
 date:   2019-03-30 13:00 -0400
-categories: yolo,pi
+categories: openvino
 ---
 
 ## Dependency
