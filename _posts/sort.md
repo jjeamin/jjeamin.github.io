@@ -13,10 +13,14 @@ categories: paper
 
 *논문을 읽어보고 코드 분석을 하겠습니다.*
 
+---
+
 # ABSTRACT
 `SORT`는 실시간 추적을 위해 object들을 효과적으로 연관지어주는 것이 주 목적인 multi object tracking에 대한 실용적인 방법을 탐구하는 논문이다. detector 부분을 변경하는 것만으로도 tracking을 최대 18.9%까지 향상시킬 수 있다. `Kalman Filter`와 `Hungarian algorithm`과 같은 익숙한 기술을 기초로 하는 것만으로도 최신 online tracker에 필적하는 정확성을 제공한다. 또한 tracking하는 방식이 단순하기에 그에 따른 속도향상도 매우 높다.
 
 - kalman filter 정리 -> [HERE](https://jjeamin.github.io/kalman/2019/04/23/kalman/)
+
+---
 
 # INTRODUCTION
 이 논문은 object가 각 frame에서 detection되고 bounding box로 표현되는 multiple object tracking(MOT) 문제에 대한 추적-탐지 프레임워크의 약식 구현을 제시한다.(YOLO에 적용하기 좋을 것 같다..). 다른 tracking 접근법과 달리 online tracking을 대상으로 한다. 그리고 실시간 추적을 효과적으로 하고 보행자 추적과 같은 애플리케이션의 성능 증진을 위한 효율성에 초점을 둔다. MOT문제는 video seqence의 여러 frame에서 detection을 연관시키는 것이 목적인 data association 문제로 볼수 있다. data association을 돕기 위해 tracker는 sequence의 object 및 appearance를 모델링하는 다양한 방법을 사용한다.
@@ -37,23 +41,129 @@ categories: paper
 
 - 추가적으로, 고전적이지만 매우 효율적인 두가지 방법인 `Kalman ﬁlter`,`Hungarian method`이 각각 tracking 문제의 움직임 예측과 데이터 연관요소를 처리하는데 사용된다. 이 논문에서의 접근법은 다양한 환경에서 human tracking에서만 사용하지만 다른 object에서도 가능하다.
 
+---
 
 # LITERATURE REVIEW
 전통적으로 MOT와 JPA를 사용해 해결했지만 불확실성이 높은 상태에서 어려운 결정을 지연시킨다.  그래서 객체 수가 기하급수적인 동적인 환경에서는 실시간 응용 프로그램에 비실용적이다.
 
-- 최근에 Rezatoﬁghi et al는 `integer programs`의 문제를 해결할 때 최근 발전을 이용해 JPDA의 효율적인 근사치를 통해 `combinatorial complexity` 문제를 해결하기 위한 목적으로 MOT에서 JPDA공식을 재 검토했다.
+### Rezatoﬁghi et al
+최근에 Rezatoﬁghi et al는 `integer programs`의 문제를 해결할 때 최근 발전을 이용해 JPDA의 효율적인 근사치를 통해 `combinatorial complexity` 문제를 해결하기 위한 목적으로 MOT에서 JPDA공식을 재 검토했다.
 
-- 유사하게 Kim et al은 최첨단 성능을 달성하기 위해 각 타겟에 대한 `appearance models`을 사용해 MHT그래프를 잘랐다. 그러나 이러한 방법으로는 의사결정이 지연되기 때문에 online tracking에 적합하지 않다.
+### Kim et al
+유사하게 Kim et al은 최첨단 성능을 달성하기 위해 각 타겟에 대한 `appearance models`을 사용해 MHT그래프를 잘랐다. 그러나 이러한 방법으로는 의사결정이 지연되기 때문에 online tracking에 적합하지 않다.
 
-- Geiger et al에 의한 방법은 2단계 처리에 `Hungarian algorithm`을 사용한다. 첫번째로 인접한 frame에 detection을 연결해서 기하학과 모양새가 결합되어 `tracklets`을 형성되고
+### Geiger et al
+Geiger et al에 의한 방법은 2단계 처리에 `Hungarian algorithm`을 사용한다. 첫번째로 인접한 frame에 detection을 연결해서 geometry와 appearance cues가 결합되어 `tracklets`을 형성되고 여기에서 geometry와 appearance cues가 결합되어서 유사도행렬을 형성한다. 그런 다음 `tracklets`는 서로 연결되어 `occlusion`으로 인해 궤적을 깨뜨리고 다시 geometry와 appearance cues를 사용한다.
+
+---
+
+# METHODOLOGY
+이 논문에서 제안한 방법은
+
+- detection의 주요 구성요소
+- object의 상태를 미래의 frame에게 전달
+- 현재 detection을 기존 object와 연결하고 tracking된 object 상태
+
+를 관리하면서 설명된다.
+
+## Detection
+- FrRCNN(Faster Region CNN)을 사용한다. FrRCNN은 `end-to-end framework`이며 첫번째 단계에서 feature를 추출하고 propose region에서 두번째 단계를 위해서 object를 classification하는 영역을 제안한다.   
+
+- PASCAL VOC를 학습시켰고 보행자만 detection하고 output accuracy가 50%를 초과하는 결과만 전달한다.
+
+- FrRCNN과 ACF를 비교하고 **detection quality가 tracking 성능에 중요한 역할을 한다고 깨달았다.**
+
+## Estimation Model
+- 다른 object와 카메라의 motion 과는 무관한 `linear constant velocity model`을 사용하여 각 object의 frame간의 변위에 대해 설명한다.
 
 
 
+![kalman](https://github.com/jjeamin/jjeamin.github.io/raw/master/_posts/post_img/sort/lcv.PNG)
+
+
+
+- `u` : target의 중심 가로 픽셀 위치
+- `v` : target의 중심 세로 픽셀 위치
+- `s` : target의 bounding box의 크기
+- `r` : target의 bounding box의 종횡비(가로 : 세로 비율)
+- `T` :
+
+- detection이 target과 연관이 있을 때, 검출된 bounding box는 target의 상태를 업데이트 하는데 사용되고, 여기서 속도 성분은 `Kalman Filter`를 통해 최적화한다.
+
+- detection이 target과 연관이 없을 때 그 상태는 단순히 예측된다.
+
+## Data Association
+- 기존 target을 detection하는 경우 각 target의 bounding box의 geometry 정보는 현재 frame에서 새로운 위치를 예측해 추정된다.
+
+- 그 `assignment cost matrix`은 기존 target으로 부터 모든 bounding box를 예측하고 IOU거리로 계산한다. assignment는 `Hungarian algorithm`을 사용해 해결한다. 또한 최소 IOU는 target의 겹침이 IOUmin 보다 작은 할당을 거부하는데 적용된다.
+
+- bounding box의 IOU 거리는 암묵적으로 대상을 지나가면서 발생하는 단기간의 `occlusion`을 처리한다. IOU거리는 유사한 척도의 검출을 적절하게 선호하기 때문에 `occlusion`을 잘 처리할수 있다.
+
+*궁금하다.. 나중에 코드를 통해 자세히 알아보자*
+
+## Creation and Deletion of Track Identities
+- object가 이미지를 input하거나 이미지를 떠날 때 고유한 ID를 생성하거나 제거해야한다.
+
+- tracker를 생성하기 위해서 tracking되지 않은 object의 존재를 나타내기 위해 IOUmin보다 작은 중복을 가진 모든 탐지를 고려한다.
+
+- tracker는 0으로 설정된 속도로 bounding box의 geometry을 사용해 초기화 된다. 이 시점에서는 속도가 관측되지 않으므로 공분산은 불확실성에 의해서 큰 값으로 초기화한다.
+
+- 새로운 tracker는 target이 없는데 있다고하는 오류를 방지하기 위한 충분한 증거를 축적해야 한는 시험 기간을 거친다. track은 `TLost` frame에 대해 detection되지 않으면 종료한다.
+
+###  모든 실험에서 `TLost`는 두가지 이유로 1로 설정된다.
+
+- 첫쨰, 등속 모델은 실제 동적인 예측이 좋지 않다.
+
+- 두번쨰, object 재식별이 작업의 범위를 벗어나는 frame-to-frame tracking과 관련있다. 또한 손실된 target을 초기에 삭제하면 효율이 높다.
+
+*TLost가 정확히 뭔지 몰라서 코드를 살펴보며 알아봐야할것 같다*
+
+---
+
+# 결론
+
+
+
+![kalman](https://github.com/jjeamin/jjeamin.github.io/raw/master/_posts/post_img/sort/lcv.PNG)
+
+
+
+- MOTA(↑): Multi-object tracking accuracy.
+
+- MOTP(↑): Multi-object tracking precision.
+
+- FAF(↓): number of false alarms per frame.
+
+- MT(↑): number of mostly tracked trajectories. I.e. target has the same label for at least 80% of its life span.
+
+- ML(↓): number of mostly lost trajectories. i.e. target is not tracked for at least 20% of its life span.
+
+- FP(↓): number of false detections.
+
+- FN(↓): number of missed detections.
+
+- ID sw(↓): number of times an ID switches to a different previously tracked object.
+
+- Frag(↓): number of fragmentations where a track is interrupted by miss detection.
+
+
+
+# 코드 까보기
+
+
+
+---
 
 # 용어
 - `Occam's Razor` : 절감의 법칙(어떤 현상을 설명하는 데는 가장 단순한 가설로 시작해야하고 가설을 필요 이상으로 정립하지 말라는 것)
 
 - `occlusion` : object를 추적하는 시스템을 개발하는 경우, 추적중인 object가 다른 object에 숨겨진 경우를 뜻한다.
+
+- `tracklets` : 궤도
+
+- `유사도행렬` : 유사도가 높을수록 최대한 높은 값을 가지게하고 유사도가 낮을수록 최대한 0에 가깝게 값을 만든다. **clustering**
+
+- `linear constant velocity` : 선형 등속 모델
 
 ### Hungarian algorithm
 할당문제(assignment problem)를 해결하기 위한 알고리즘이고 할당문제란 n명의 사람에게 중복없이 일을 부여하고 총 할당 비용을 최소로 하는 해를 구하는 것이라고 정의할 수 있다.
@@ -66,6 +176,8 @@ categories: paper
 3. 지워지지 않는 성분 중 최소값을 찾아 이를 지워지지 않는 성분에서 빼고 각 라인이 겹치는 성분에서는 더한다.
 
 4. 각 열과 행에 0이 하나씩 있도록 0의 성분을 찾는다.
+
+---
 
 # 참조
 - [https://github.com/abewley/sort](https://arxiv.org/abs/1602.00763)
