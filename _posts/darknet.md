@@ -33,3 +33,18 @@ categories: Darknet
 
 
 *프로젝트를 분석하는 방법을 제대로 숙지해서 살펴보자*
+
+
+
+## 코드를 문서화해주는 doxygen
+
+```
+sudo apt-get install doxygen
+sudo apt-get install doxygen-gui
+sudo apt-get install graphviz
+
+doxywizard
+
+which dot
+firefox
+```
