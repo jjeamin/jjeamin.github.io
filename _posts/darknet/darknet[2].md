@@ -122,5 +122,3 @@ int main(int argc, char **argv)
 ```
 
 수많은 예제파일을 실행시킬 수 있다. 위에서 부터 하나씩 찾아봐야 할 것 같다.
-
-# /example/derknet.c/average()
