@@ -11,8 +11,6 @@ categories: yolo
 
 - [YOLO](https://jjeamin.github.io/yolo/2019/03/23/yolo/) <- 논문 번역
 
-
-# YOLO People Counting
 YOLO를 이용하여 `people counting`을 해보려고 합니다. 일단 `people counting`하기 전에 yolo를 이용해 car를 counting하는 소스 부터 찾아서 분석해 보겠습니다.
 
 # YOLO Traffic Counter
@@ -72,7 +70,9 @@ python main.py --input input/highway.mp4 --output output/highway.avi --yolo yolo
 
 ---
 
-# 라즈베리파이
+# YOLO People Counting
+
+- [깃허브](https://github.com/jjeamin/People_counting_yolo)
 
 ## 구성
 - raspberry pi 3 (rasbian)
@@ -87,7 +87,7 @@ python main.py --input input/highway.mp4 --output output/highway.avi --yolo yolo
 - filterpy
 - imutils
 
-## SORT requirement 설치
+## SORT requirement 설치 (numba 설치가 잘 안될 때 보세요)
 
 ```
 sudo apt install libblas-dev llvm python3-pip python3-scipy
@@ -115,10 +115,58 @@ python3 -m pip ~
 python3 -m pip install sklearn tqdm imutils
 ```
 
-##
+## source
+
+### /test
+- camera test 
+- camera thread
+
+### /extension
+- ir에 필요한 json 파일
+  
+### /pd_convert
+- ir에 필요한 pd파일 변환 소스
+
+- yolov3
+  ```
+  python convert_weights_pb.py
+  --class_names coco.names
+  --data_format NHWC
+  --weights_file yolov3.weights
+  ```
+  
+- yolov3-tiny
+
+  ```
+  python convert_weights_pb.py
+  --class_names coco.names
+  --data_format NHWC
+  --weights_file yolov3-tiny.weights
+  --tiny
+  ```
+### /Deep_sort
+
+- [https://github.com/nwojke/deep_sort](https://github.com/nwojke/deep_sort)
+
+### SORT
+
+- [https://github.com/abewley/sort](https://github.com/abewley/sort)
+
+### opencv.py
+
+- YOLOv3 + NCS2 + opencv
+
+### vino.py
+
+- YOLOv3 + NCS2 + openvino
+
+### sort_vino.py
+
+- YOLOv3 + NCS2 + SORT
 
 
 # 참조
 - [https://github.com/guillelopez/python-traffic-counter-with-yolo-and-sort](https://github.com/guillelopez/python-traffic-counter-with-yolo-and-sort)
 - [https://github.com/jjeamin/OpenVINO-YoloV3](https://github.com/jjeamin/OpenVINO-YoloV3)
-- [https://github.com/jjeamin/sort](https://github.com/jjeamin/sort)
+- [https://github.com/abewley/sort](https://github.com/abewley/sort)
+- [https://github.com/nwojke/deep_sort](https://github.com/nwojke/deep_sort) 
