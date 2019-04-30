@@ -15,7 +15,7 @@ YOLO를 이용하여 `people counting`을 해보려고 합니다. 일단 `people
 
 # YOLO Traffic Counter
 
-*[깃허브](https://github.com/jjeamin/python-traffic-counter-with-yolo-and-sort)*
+*[깃허브](https://github.com/guillelopez/python-traffic-counter-with-yolo-and-sort)*
 
 이미 학습되어있는 YOLO를 이용하고 opencv를 이용해서 차량을 검출하고 counting 해주는 소스입니다.
 
@@ -60,7 +60,7 @@ python main.py --input input/highway.mp4 --output output/highway.avi --yolo yolo
 - 이미지 저장하는것 해제
 - tqdm 추가로 변환 상태바 추가
 
-깃허브 : [HERE](https://github.com/jjeamin/python-traffic-counter-with-yolo-and-sort)
+*[깃허브](https://github.com/jjeamin/python-traffic-counter-with-yolo-and-sort)*
 
 ## 참고해서 직접 코딩할 것
 - 중심점으로 추적선을 만들지 않고 그보다 조금더 앞에 만든다. (중간 쯤에 트럭을 검출 못함)
