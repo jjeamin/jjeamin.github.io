@@ -31,6 +31,7 @@ tags: index
 - [MCNN](https://jjeamin.github.io/people/counting/2019/03/08/MCNN/)/[code](https://github.com/jjeamin/crowd_counting_MCNN)
 - [YOLO](https://jjeamin.github.io/paper/2019/03/23/yolo/)
 - [YOLOv2](https://jjeamin.github.io/paper/2019/04/20/yolo_v2/)
+- [SORT](https://jjeamin.github.io/paper/2019/04/25/sort/) 
 
 # GAN - tensorflow
 - [GAN](https://github.com/jjeamin/my_gan/tree/master/gan)
