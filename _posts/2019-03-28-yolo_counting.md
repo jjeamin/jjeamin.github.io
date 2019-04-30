@@ -15,7 +15,7 @@ YOLO를 이용하여 `people counting`을 해보려고 합니다. 일단 `people
 
 # YOLO Traffic Counter
 
-- [깃허브](https://github.com/jjeamin/python-traffic-counter-with-yolo-and-sort)
+*[깃허브](https://github.com/jjeamin/python-traffic-counter-with-yolo-and-sort)*
 
 이미 학습되어있는 YOLO를 이용하고 opencv를 이용해서 차량을 검출하고 counting 해주는 소스입니다.
 
@@ -72,7 +72,7 @@ python main.py --input input/highway.mp4 --output output/highway.avi --yolo yolo
 
 # YOLO People Counting
 
-- [깃허브](https://github.com/jjeamin/People_counting_yolo)
+*[깃허브](https://github.com/jjeamin/People_counting_yolo)*
 
 ## 구성
 - raspberry pi 3 (rasbian)
