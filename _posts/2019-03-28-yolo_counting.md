@@ -9,7 +9,7 @@ categories: yolo
 # YOLO
 `You Only Look Once: Unified, Real-Time Object Detection`
 
-- [YOLO](https://jjeamin.github.io/yolo/2019/03/23/yolo/) <- 논문 번역
+- [YOLO](https://jjeamin.github.io/paper/2019/03/23/yolo/) <- 논문 번역
 
 
 # YOLO People Counting

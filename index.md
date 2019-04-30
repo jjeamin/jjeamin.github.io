@@ -5,7 +5,7 @@ permalink: /index/
 tags: index
 ---
 # Lab
-- [YOLO - openvino](https://jjeamin.github.io/yolo,pi/2019/03/30/yolo-openvino/)(simple)
+- [YOLO - openvino](https://jjeamin.github.io/openvino/2019/03/30/yolo-openvino/)(simple)
 - [YOLO - counting](https://jjeamin.github.io/yolo/2019/03/28/yolo_counting/) - 제작중
 
 # Raspberry Pi
@@ -29,8 +29,8 @@ tags: index
 
 # paper review
 - [MCNN](https://jjeamin.github.io/people/counting/2019/03/08/MCNN/)/[code](https://github.com/jjeamin/crowd_counting_MCNN)
-- [YOLO](https://jjeamin.github.io/yolo/2019/03/23/yolo/)
-- [YOLOv2](https://jjeamin.github.io/yolo/2019/04/20/yolo_v2/)
+- [YOLO](https://jjeamin.github.io/paper/2019/03/23/yolo/)
+- [YOLOv2](https://jjeamin.github.io/paper/2019/04/20/yolo_v2/)
 
 # GAN - tensorflow
 - [GAN](https://github.com/jjeamin/my_gan/tree/master/gan)
@@ -40,8 +40,8 @@ tags: index
 
 # concept
 - [Batch Norm](https://jjeamin.github.io/dnn/2019/02/11/batch_norm/)
-- [SVM](https://jjeamin.github.io/machine/learning/2019/03/07/SVM/)
-- [regression index](https://jjeamin.github.io/regression/2019/03/15/index/)
+- [SVM](https://jjeamin.github.io/dnn/2019/03/07/SVM/)
+- [regression index](https://jjeamin.github.io/dnn/2019/03/15/index/)
 - [Kalman Filter](https://jjeamin.github.io/kalman/2019/04/23/kalman/)
 
 # Tensorflow
