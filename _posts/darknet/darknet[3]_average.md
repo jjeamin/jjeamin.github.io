@@ -78,7 +78,7 @@ network *parse_network_cfg(char *filename)
     section *s = (section *)n->val;                         /// network의 정보 section
     list *options = s->options;                             /// section의 option
     if(!is_network(s)) error("First section must be [net] or [network]");
-    parse_net_options(options, net);
+    parse_net_options(options, net);                        ///
 
     params.h = net->h;
     params.w = net->w;
@@ -215,6 +215,7 @@ network *parse_network_cfg(char *filename)
     return net;
 }
 ```
+
 ## /src/parser/read_cfg
 
 ```
@@ -274,7 +275,7 @@ network 정보 -> convolution -> ... -> output 이렇게 되어 있는 cfg 파�
 // 여기서 부터 시작
 
 ```
-void parse_net_options(list *options, network *net)
+void parse_net_options(list *options, network *net)                               /// network option을 가져온다.
 {
     net->batch = option_find_int(options, "batch",1);
     net->learning_rate = option_find_float(options, "learning_rate", .001);
