@@ -15,6 +15,9 @@ categories: openvino
 - opencv 4.0.0
 - openvino
 
+---
+# YOLOv3
+
 ## YOLOv3 모델 다운로드 받기
 - [YOLOv3 weight](https://pjreddie.com/media/files/yolov3.weights)
 
@@ -77,6 +80,9 @@ python mo_tf.py
 - bin,xml 이 잘 만들어졌으면 라즈베리파이로 가져가서 실행을 시켜봅시다.
 
 ---
+
+# YOLOv1,v2
+
 ## YOLOv1,v2 모델 다운로드 받기
 
 - [YOLOv1](https://pjreddie.com/darknet/yolov1/)
@@ -120,6 +126,7 @@ python ./mo_tf.py
 ```
 
 ---
+
 이제 라즈베리파이에 올려서 실행을 시켜보도록 하자. 라즈베리파이에 올리기 위한 `.xml`,`.bin`을 라즈베리파이로 옮기고 그 후에 간단한 테스트를 진행해볼것이다.
 
 ## 단순 opencv를 이용한 테스트

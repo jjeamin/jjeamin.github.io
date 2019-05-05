@@ -87,7 +87,9 @@ python main.py --input input/highway.mp4 --output output/highway.avi --yolo yolo
 - filterpy
 - imutils
 
-## SORT requirement 설치 (numba 설치가 잘 안될 때 보세요)
+---
+
+## SORT requirement 설치 (numba 설치가 안될 때 보세요)
 
 ```
 sudo apt install libblas-dev llvm python3-pip python3-scipy
@@ -116,14 +118,15 @@ python3 -m pip install sklearn tqdm imutils
 ```
 
 ## source
+- [깃허브](https://github.com/jjeamin/People_counting_yolo)
 
 ### /test
-- camera test 
+- camera test
 - camera thread
 
 ### /extension
 - ir에 필요한 json 파일
-  
+
 ### /pd_convert
 - ir에 필요한 pd파일 변환 소스
 
@@ -134,7 +137,7 @@ python3 -m pip install sklearn tqdm imutils
   --data_format NHWC
   --weights_file yolov3.weights
   ```
-  
+
 - yolov3-tiny
 
   ```
@@ -144,6 +147,7 @@ python3 -m pip install sklearn tqdm imutils
   --weights_file yolov3-tiny.weights
   --tiny
   ```
+
 ### /Deep_sort
 
 - [https://github.com/nwojke/deep_sort](https://github.com/nwojke/deep_sort)
@@ -164,9 +168,10 @@ python3 -m pip install sklearn tqdm imutils
 
 - YOLOv3 + NCS2 + SORT
 
+*추가적으로 사람만 판별하는 추론기를 만들어야 하고 그 후에 사람을 카운팅*
 
 # 참조
 - [https://github.com/guillelopez/python-traffic-counter-with-yolo-and-sort](https://github.com/guillelopez/python-traffic-counter-with-yolo-and-sort)
 - [https://github.com/jjeamin/OpenVINO-YoloV3](https://github.com/jjeamin/OpenVINO-YoloV3)
 - [https://github.com/abewley/sort](https://github.com/abewley/sort)
-- [https://github.com/nwojke/deep_sort](https://github.com/nwojke/deep_sort) 
+- [https://github.com/nwojke/deep_sort](https://github.com/nwojke/deep_sort)

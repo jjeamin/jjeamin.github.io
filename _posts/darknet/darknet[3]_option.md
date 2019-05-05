@@ -73,6 +73,19 @@ int option_find_int(list *l, char *key, int def)
 
 - int형 option의 key를 찾는다.(없을경우 default 값을 값으로 한다.)
 
+## option_find_int_quiet
+
+```
+int option_find_int_quiet(list *l, char *key, int def)
+{
+    char *v = option_find(l, key);
+    if(v) return atoi(v);
+    return def;
+}
+```
+
+- int형 default값을 사용가능
+
 ## option_find_float
 
 ```
@@ -87,15 +100,29 @@ float option_find_float(list *l, char *key, float def)
 
 - float형 option의 key를 찾는다
 
-## option_int_quiet
+## option_find_float_quiet
 
 ```
-int option_find_int_quiet(list *l, char *key, int def)
+float option_find_float_quiet(list *l, char *key, float def)
 {
     char *v = option_find(l, key);
-    if(v) return atoi(v);
+    if(v) return atof(v);
     return def;
 }
 ```
 
-- default값을 사용가능한 함수
+- float형 def값을 사용가능
+
+## option_find_str
+
+```
+char *option_find_str(list *l, char *key, char *def)
+{
+    char *v = option_find(l, key);
+    if(v) return v;
+    if(def) fprintf(stderr, "%s: Using default '%s'\n", key, def);
+    return def;
+}
+```
+
+- string형 option의 key를 찾는다
