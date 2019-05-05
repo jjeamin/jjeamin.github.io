@@ -1,6 +1,6 @@
 # /include/darknet.h/
 
-##network 구조체
+## network 구조체
 
 ```
 typedef struct network{
@@ -96,7 +96,7 @@ typedef struct network{
 
 - `decay` : 감쇠를 의미하며 가중치가 너무클수 있기 때문에 가중치를 제한해주는 매개변수다. *개념정리*
 
-- `random` : 
+- `random` :
 
 
 

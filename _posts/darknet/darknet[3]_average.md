@@ -78,7 +78,7 @@ network *parse_network_cfg(char *filename)
     section *s = (section *)n->val;                         /// network의 정보 section
     list *options = s->options;                             /// section의 option
     if(!is_network(s)) error("First section must be [net] or [network]");
-    parse_net_options(options, net);                        ///
+    parse_net_options(options, net);                        /// network에 option을 매핑
 
     params.h = net->h;
     params.w = net->w;
@@ -89,9 +89,9 @@ network *parse_network_cfg(char *filename)
     params.net = net;
 
     size_t workspace_size = 0;
-    n = n->next;
+    n = n->next;                                             /// layer 부분 해석시작
     int count = 0;
-    free_section(s);
+    free_section(s);                                         /// section 할당 해
     fprintf(stderr, "layer     filters    size              input                output\n");
     while(n){
         params.index = count;
@@ -272,10 +272,8 @@ network 정보 -> convolution -> ... -> output 이렇게 되어 있는 cfg 파�
 
 ## /src/parser/parse_net_options
 
-// 여기서 부터 시작
-
 ```
-void parse_net_options(list *options, network *net)         /// network option을 가져온다.
+void parse_net_options(list *options, network *net)                               /// network option을 가져온다.
 {
     net->batch = option_find_int(options, "batch",1);
     net->learning_rate = option_find_float(options, "learning_rate", .001);
@@ -357,4 +355,49 @@ void parse_net_options(list *options, network *net)         /// network option�
 }
 ```
 
-- network의 정보가 담긴 section의 option을 network 구조체로 매핑한다. 
+network의 정보가 담긴 section에서 network 구조체로 매핑
+
+
+## /src/parser/get_policy
+
+```
+learning_rate_policy get_policy(char *s)
+{
+    if (strcmp(s, "random")==0) return RANDOM;
+    if (strcmp(s, "poly")==0) return POLY;
+    if (strcmp(s, "constant")==0) return CONSTANT;
+    if (strcmp(s, "step")==0) return STEP;
+    if (strcmp(s, "exp")==0) return EXP;
+    if (strcmp(s, "sigmoid")==0) return SIG;
+    if (strcmp(s, "steps")==0) return STEPS;
+    fprintf(stderr, "Couldn't find policy %s, going with constant\n", s);
+    return CONSTANT;
+}
+```
+learning rate decay policy 라고 생각하면 된다. 학습을 할 때 속도를 높이는 방법 중 하나가 시간에 따라 학습률을 천천히 줄이는 것이다. 위와 같은 여러가지 방법에서의 공식은 policy를 해석할 때 알아보기로 하고 왜 이것이 필요한지 알아보자  
+
+- 참조 : [LINK](https://www.youtube.com/watch?v=QzulmoOg2JE)
+
+학습을 할때 최적의 값에 도달해도 Noise 때문에 그 주위를 머물게 된다. 그래서 천천히 학습률을 줄이면 학습 속도를 빠르게 할 수 있다. 처음에는 큰폭으로 움직이고 점점 작은폭으로 움직이며 최적의 값에 빠르게 도달 할수 있다. 자세한 공식은 policy를 해석할 때 다루어 보자.
+
+## /src/parser/free_section
+
+```
+void free_section(section *s)
+{
+    free(s->type);
+    node *n = s->options->front;
+    while(n){
+        kvp *pair = (kvp *)n->val;
+        free(pair->key);
+        free(pair);
+        node *next = n->next;
+        free(n);
+        n = next;
+    }
+    free(s->options);
+    free(s);
+}
+```
+
+section 구조체 할당 해제. section안에 있는 type, options를 먼저 할당을 해제 해줘야하기 때문에 type을 할당 해제하고 그 뒤에 options 안에 있는 모든 값들을 할당 해제 한다. 그리고 options를 할당 해제 하고 section을 할당 해제한다.
