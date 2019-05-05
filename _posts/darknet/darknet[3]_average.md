@@ -275,7 +275,7 @@ network 정보 -> convolution -> ... -> output 이렇게 되어 있는 cfg 파�
 // 여기서 부터 시작
 
 ```
-void parse_net_options(list *options, network *net)                               /// network option을 가져온다.
+void parse_net_options(list *options, network *net)         /// network option을 가져온다.
 {
     net->batch = option_find_int(options, "batch",1);
     net->learning_rate = option_find_float(options, "learning_rate", .001);
@@ -357,4 +357,4 @@ void parse_net_options(list *options, network *net)                             
 }
 ```
 
-- network의 정보가 담긴 section에서 network 구조체로 매핑
+- network의 정보가 담긴 section의 option을 network 구조체로 매핑한다. 

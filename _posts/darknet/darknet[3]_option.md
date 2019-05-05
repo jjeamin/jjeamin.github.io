@@ -24,6 +24,8 @@ int read_option(char *s, list *options)
 
 - section에 option들을 저장합니다. convolution section에 filter size를 넣는 형태
 
+## option_insert
+
 ```
 void option_insert(list *l, char *key, char *val)
 {
@@ -36,3 +38,64 @@ void option_insert(list *l, char *key, char *val)
 ```
 
 - section list에 option node를 추가
+
+## option_find
+
+```
+char *option_find(list *l, char *key)
+{
+    node *n = l->front;
+    while(n){
+        kvp *p = (kvp *)n->val;
+        if(strcmp(p->key, key) == 0){
+            p->used = 1;
+            return p->val;
+        }
+        n = n->next;
+    }
+    return 0;
+}
+```
+
+- option에서 key를 찾는다. 예를 들어 option list에 batch를 찾는다면 key는 batch다.
+
+## option_find_int
+
+```
+int option_find_int(list *l, char *key, int def)
+{
+    char *v = option_find(l, key);
+    if(v) return atoi(v);
+    fprintf(stderr, "%s: Using default '%d'\n", key, def);
+    return def;
+}
+```
+
+- int형 option의 key를 찾는다.(없을경우 default 값을 값으로 한다.)
+
+## option_find_float
+
+```
+float option_find_float(list *l, char *key, float def)
+{
+    char *v = option_find(l, key);
+    if(v) return atof(v);
+    fprintf(stderr, "%s: Using default '%lf'\n", key, def);
+    return def;
+}
+```
+
+- float형 option의 key를 찾는다
+
+## option_int_quiet
+
+```
+int option_find_int_quiet(list *l, char *key, int def)
+{
+    char *v = option_find(l, key);
+    if(v) return atoi(v);
+    return def;
+}
+```
+
+- default값을 사용가능한 함수
