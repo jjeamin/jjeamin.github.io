@@ -123,6 +123,8 @@ TIME_ZONE = 'Asia/Seoul'
 - 웹 화면 별로 템플릿 파일이 하나씩 필요하며 웹 개발시 여러개의 html 파일을 모아두는 곳
 
  ---
+# Example(예시)
+- 자세한 내용은 적지 않았고 이렇게 만들자 라는 느낌만 적었습니다.
 
 ## Bookmark APP 구조 만들기
 
@@ -190,7 +192,7 @@ INSTALLED_APPS = [
 
 - models.py 정의하기
 
-models.py와 admin.py는 세트다
+*models.py와 admin.py는 세트다.*
 
 - admin.py에 등록하기
 
@@ -242,3 +244,5 @@ vi bookmark_list.html
 ```
 
 - html 작성
+
+## Admin에서 작성
