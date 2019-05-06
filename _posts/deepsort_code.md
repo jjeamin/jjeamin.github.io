@@ -12,19 +12,18 @@ categories: paper
 - [GitHub](https://github.com/nwojke/cosine_metric_learning)
 
 # DataSet
-MARS와 MARKET 2개가 있었지만 MARKET은 url이 폐쇄된거 같기 때문에 MARS만 보겠습니다.
+MARS와 MARKET 2개가 있었지만 MARS는 다운로드가 잘안되서.. MARKET으로만 하겠습니다.
 
 - [MARS](http://www.liangzheng.com.cn/Project/project_mars.html)
+- [MARKET](https://jingdongwang2017.github.io/Projects/ReID/Datasets/Market-1501.html)
 
-
-# 실행
-깃허브의 소스코드를 `clone`하면 간단하게 실행을 시켜볼 수 있습니다. MARS 데이터셋을 사용하기 위해서는 변환이 필요한거 같습니다.
-
+# 학습
+깃허브의 소스코드를 `clone`하면 간단하게 실행을 시켜볼 수 있다.
 
 ```
-python train_mars.py \
-    --dataset_dir=./MARS-evaluation-master \
+python train_market1501.py \
+    --dataset_dir=./Market-1501-v15.09.15/ \
     --loss_mode=cosine-softmax \
-    --log_dir=./output/mars/ \
+    --log_dir=./output/market1501/ \
     --run_id=cosine-softmax
 ```
