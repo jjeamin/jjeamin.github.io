@@ -33,9 +33,9 @@ network *parse_network_cfg(char *filename)
     while(n){
         params.index = count;
         fprintf(stderr, "%5d ", count);
-        s = (section *)n->val;                               /// 여기서부터
-        options = s->options;                                
-        layer l = {0};
+        s = (section *)n->val;                               /// section의 값
+        options = s->options;                                /// option 불러오기
+        layer l = {0};   
         LAYER_TYPE lt = string_to_layer_type(s->type);
         if(lt == CONVOLUTIONAL){
             l = parse_convolutional(options, params);
@@ -172,7 +172,7 @@ list *read_cfg(char *filename)
                 current = malloc(sizeof(section));  
                 list_insert(options, current);      /// list에 node를 연결하는 함수
                 current->options = make_list();     /// option을 담는 section list
-                current->type = line;               
+                current->type = line;               /// [] 안에 있는 문자열이 type              
                 break;                              
             case '\0':                              
             case '#':                               
@@ -339,3 +339,51 @@ void free_section(section *s)
 ```
 
 section 구조체 할당 해제. section안에 있는 type, options를 먼저 할당을 해제 해줘야하기 때문에 type을 할당 해제하고 그 뒤에 options 안에 있는 모든 값들을 할당 해제 한다. 그리고 options를 할당 해제 하고 section을 할당 해제한다.
+
+## /src/parser/string_to_layer_type
+
+```
+LAYER_TYPE string_to_layer_type(char * type)
+{
+
+    if (strcmp(type, "[shortcut]")==0) return SHORTCUT;
+    if (strcmp(type, "[crop]")==0) return CROP;
+    if (strcmp(type, "[cost]")==0) return COST;
+    if (strcmp(type, "[detection]")==0) return DETECTION;
+    if (strcmp(type, "[region]")==0) return REGION;
+    if (strcmp(type, "[yolo]")==0) return YOLO;
+    if (strcmp(type, "[iseg]")==0) return ISEG;
+    if (strcmp(type, "[local]")==0) return LOCAL;
+    if (strcmp(type, "[conv]")==0
+            || strcmp(type, "[convolutional]")==0) return CONVOLUTIONAL;
+    if (strcmp(type, "[deconv]")==0
+            || strcmp(type, "[deconvolutional]")==0) return DECONVOLUTIONAL;
+    if (strcmp(type, "[activation]")==0) return ACTIVE;
+    if (strcmp(type, "[logistic]")==0) return LOGXENT;
+    if (strcmp(type, "[l2norm]")==0) return L2NORM;
+    if (strcmp(type, "[net]")==0
+            || strcmp(type, "[network]")==0) return NETWORK;
+    if (strcmp(type, "[crnn]")==0) return CRNN;
+    if (strcmp(type, "[gru]")==0) return GRU;
+    if (strcmp(type, "[lstm]") == 0) return LSTM;
+    if (strcmp(type, "[rnn]")==0) return RNN;
+    if (strcmp(type, "[conn]")==0
+            || strcmp(type, "[connected]")==0) return CONNECTED;
+    if (strcmp(type, "[max]")==0
+            || strcmp(type, "[maxpool]")==0) return MAXPOOL;
+    if (strcmp(type, "[reorg]")==0) return REORG;
+    if (strcmp(type, "[avg]")==0
+            || strcmp(type, "[avgpool]")==0) return AVGPOOL;
+    if (strcmp(type, "[dropout]")==0) return DROPOUT;
+    if (strcmp(type, "[lrn]")==0
+            || strcmp(type, "[normalization]")==0) return NORMALIZATION;
+    if (strcmp(type, "[batchnorm]")==0) return BATCHNORM;
+    if (strcmp(type, "[soft]")==0
+            || strcmp(type, "[softmax]")==0) return SOFTMAX;
+    if (strcmp(type, "[route]")==0) return ROUTE;
+    if (strcmp(type, "[upsample]")==0) return UPSAMPLE;
+    return BLANK;
+}
+```
+
+- type을 LAYER_TYPE 구조체에 매핑시켜준다.
