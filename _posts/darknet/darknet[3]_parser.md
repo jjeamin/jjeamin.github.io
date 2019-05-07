@@ -36,7 +36,7 @@ network *parse_network_cfg(char *filename)
         s = (section *)n->val;                               /// section의 값
         options = s->options;                                /// option 불러오기
         layer l = {0};   
-        LAYER_TYPE lt = string_to_layer_type(s->type);
+        LAYER_TYPE lt = string_to_layer_type(s->type);       /// LAYER_TYPE 찾기
         if(lt == CONVOLUTIONAL){
             l = parse_convolutional(options, params);
         }else if(lt == DECONVOLUTIONAL){

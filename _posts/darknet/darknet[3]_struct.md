@@ -61,3 +61,5 @@ typedef struct size_params{
     network *net;
 } size_params;
 ```
+
+- input image에 대한 정보
