@@ -22,6 +22,8 @@ convolution은 합성곱이라고 정의를 할 수 있다. 합성곱을 쉽게 
 
 convolution layer는 보통 딥러닝에서 이미지를 처리하는 모델에서 많이 사용하는 layer다. convolution layer는 image에 filter를 옮겨가며 합성곱을 하여 이미지의 특징을 뽑아내주는 layer다. 보통 뒤에 pooling layer와 같이 사용된다.
 
+---
+
 ## /src/parser.c/parse_convolutional
 
 ```
@@ -58,19 +60,22 @@ convolutional_layer parse_convolutional(list *options, size_params params)
 
 convolution section을 파싱하는 부분이다. `convolutional_layer`는 layer 구조체이고 convolution에 필요한 매개변수들을 구조체에 넣어준다.
 
-- filters : 필터의 개수
+- filters : 필터의 개수 = n
 - size : 필터 크기 `size x size`
 - stride : 필터를 몇 픽셀 움직일 것인가
 - pad : 이미지 주변을 특정 숫자(보통 0)로 채워서 이미지의 size를 증가시켜준다.
 - padding : pad랑 같은거 같다..?
-- groups : 이미지 개수
+- groups : filter groups = batch?
 - batch_normalize : batch normalization 사용 유무
 - binary : 이진화 (모델 크기 감소 영향)
 - xnor : 이진화 (모델 크기 감소 영향)
+
 - flipped : ?
 - dot : ?
 
 이진화 기법도 사용된 것을 볼 수 있다.
+
+---
 
 ## /src/parser.c/make_convolutional_layer
 
@@ -94,46 +99,46 @@ convolutional_layer make_convolutional_layer(int batch, int h, int w, int c, int
     l.pad = padding;
     l.batch_normalize = batch_normalize;
 
-    l.weights = calloc(c/groups*n*size*size, sizeof(float));           /// 여기서부터
+    l.weights = calloc(c/groups*n*size*size, sizeof(float));           /// weight(filter) 크기 할당
     l.weight_updates = calloc(c/groups*n*size*size, sizeof(float));
 
-    l.biases = calloc(n, sizeof(float));
+    l.biases = calloc(n, sizeof(float));                              /// bias 크기 할당
     l.bias_updates = calloc(n, sizeof(float));
 
     l.nweights = c/groups*n*size*size;
     l.nbiases = n;
 
     // float scale = 1./sqrt(size*size*c);
-    float scale = sqrt(2./(size*size*c/l.groups));
+    float scale = sqrt(2./(size*size*c/l.groups));                    /// random weight initialization
     //printf("convscale %f\n", scale);
     //scale = .02;
     //for(i = 0; i < c*n*size*size; ++i) l.weights[i] = scale*rand_uniform(-1, 1);
     for(i = 0; i < l.nweights; ++i) l.weights[i] = scale*rand_normal();
-    int out_w = convolutional_out_width(l);
-    int out_h = convolutional_out_height(l);
+    int out_w = convolutional_out_width(l);                           /// convolution filter를 통과한 image 폭
+    int out_h = convolutional_out_height(l);                          /// convolution filter를 통과한 image 높이
     l.out_h = out_h;
     l.out_w = out_w;
     l.out_c = n;
-    l.outputs = l.out_h * l.out_w * l.out_c;
-    l.inputs = l.w * l.h * l.c;
+    l.outputs = l.out_h * l.out_w * l.out_c;                          /// output image 크기
+    l.inputs = l.w * l.h * l.c;                                       /// input image 크기
 
-    l.output = calloc(l.batch*l.outputs, sizeof(float));
-    l.delta  = calloc(l.batch*l.outputs, sizeof(float));
+    l.output = calloc(l.batch*l.outputs, sizeof(float));              /// 한번 학습때 사용되는 output image 크기
+    l.delta  = calloc(l.batch*l.outputs, sizeof(float));              
 
-    l.forward = forward_convolutional_layer;
+    l.forward = forward_convolutional_layer;                          /// 학습
     l.backward = backward_convolutional_layer;
     l.update = update_convolutional_layer;
-    if(binary){
+    if(binary){                                                       /// binary 사용시
         l.binary_weights = calloc(l.nweights, sizeof(float));
         l.cweights = calloc(l.nweights, sizeof(char));
         l.scales = calloc(n, sizeof(float));
     }
-    if(xnor){
+    if(xnor){                                                         /// xnor 사용시
         l.binary_weights = calloc(l.nweights, sizeof(float));
         l.binary_input = calloc(l.inputs*l.batch, sizeof(float));
     }
 
-    if(batch_normalize){
+    if(batch_normalize){                                              /// batch normalize 사용시
         l.scales = calloc(n, sizeof(float));
         l.scale_updates = calloc(n, sizeof(float));
         for(i = 0; i < n; ++i){
@@ -151,7 +156,7 @@ convolutional_layer make_convolutional_layer(int batch, int h, int w, int c, int
         l.x = calloc(l.batch*l.outputs, sizeof(float));
         l.x_norm = calloc(l.batch*l.outputs, sizeof(float));
     }
-    if(adam){
+    if(adam){                                                       /// abam 사용시
         l.m = calloc(l.nweights, sizeof(float));
         l.v = calloc(l.nweights, sizeof(float));
         l.bias_m = calloc(n, sizeof(float));
@@ -160,7 +165,7 @@ convolutional_layer make_convolutional_layer(int batch, int h, int w, int c, int
         l.scale_v = calloc(n, sizeof(float));
     }
 
-#ifdef GPU
+#ifdef GPU                                                          /// GPU 사용시
     l.forward_gpu = forward_convolutional_layer_gpu;
     l.backward_gpu = backward_convolutional_layer_gpu;
     l.update_gpu = update_convolutional_layer_gpu;
@@ -230,7 +235,98 @@ convolutional_layer make_convolutional_layer(int batch, int h, int w, int c, int
 }
 ```
 
-convolution을 종합해서 만들어주는 함수다. convolution layer에서
+convolution을 종합해서 만들어주는 함수다. convolution layer의 구조체에 들어간 값들을 이용해 convolution layer를 완성시킨다.
+
+
+
+![conv2](https://github.com/jjeamin/jjeamin.github.io/raw/master/_posts/post_img/darknet/convolution_2.PNG)
+
+
+
+## src/convolutional_layer.c/convolutional_out_width
+
+```
+int convolutional_out_width(convolutional_layer l)
+{
+    return (l.w + 2*l.pad - l.size) / l.stride + 1;
+}
+```
+
+- convolution을 통과한 output의 width
+
+- `input width` + 2 * `pad` - `filter size` / `stride` + 1
+
+## src/convolutional_layer.c/convolutional_out_height
+
+```
+int convolutional_out_height(convolutional_layer l)
+{
+    return (l.h + 2*l.pad - l.size) / l.stride + 1;
+}
+```
+
+- convolution을 통과한 output의 height
+
+- `input height` + 2 * `pad` - `filter size` / `stride` + 1
+
+---
+
+# 전파,역전파,업데이트
+
+이 부분이 딥러닝의 가장 중요한 기초라고 생각되는 부분이기 때문에 자세히 살펴보도록 해야할 것 같다. 직접 c언어로 구현이 되어있기 때문에 분석하기 쉬울거 같다.
+
+```
+void forward_convolutional_layer(convolutional_layer l, network net)
+{
+    int i, j;
+
+    fill_cpu(l.outputs*l.batch, 0, l.output, 1);
+
+    if(l.xnor){                                                           /// xnor 사용시
+        binarize_weights(l.weights, l.n, l.c/l.groups*l.size*l.size, l.binary_weights);
+        swap_binary(&l);
+        binarize_cpu(net.input, l.c*l.h*l.w*l.batch, l.binary_input);
+        net.input = l.binary_input;
+    }
+
+    int m = l.n/l.groups;
+    int k = l.size*l.size*l.c/l.groups;                                   /// 여기서부터
+    int n = l.out_w*l.out_h;
+    for(i = 0; i < l.batch; ++i){
+        for(j = 0; j < l.groups; ++j){
+            float *a = l.weights + j*l.nweights/l.groups;
+            float *b = net.workspace;
+            float *c = l.output + (i*l.groups + j)*n*m;
+            float *im =  net.input + (i*l.groups + j)*l.c/l.groups*l.h*l.w;
+
+            if (l.size == 1) {
+                b = im;
+            } else {
+                im2col_cpu(im, l.c/l.groups, l.h, l.w, l.size, l.stride, l.pad, b);
+            }
+            gemm(0,0,m,n,k,1,a,k,b,n,1,c,n);
+        }
+    }
+
+    if(l.batch_normalize){
+        forward_batchnorm_layer(l, net);
+    } else {
+        add_bias(l.output, l.biases, l.batch, l.n, l.out_h*l.out_w);
+    }
+
+    activate_array(l.output, l.outputs*l.batch, l.activation);
+    if(l.binary || l.xnor) swap_binary(&l);
+}
+```
+
+
+
+
+
+
+
+
+
 
 # 참조
 - [https://dkeemin.com/%EC%BB%A8%EB%B3%BC%EB%A3%A8%EC%85%98convolution-%EC%A0%95%EC%9D%98%EB%A5%BC-%EC%89%BD%EA%B2%8C-%EC%9D%B4%ED%95%B4%ED%95%B4%EB%B3%B4%EC%9E%90/](https://dkeemin.com/%EC%BB%A8%EB%B3%BC%EB%A3%A8%EC%85%98convolution-%EC%A0%95%EC%9D%98%EB%A5%BC-%EC%89%BD%EA%B2%8C-%EC%9D%B4%ED%95%B4%ED%95%B4%EB%B3%B4%EC%9E%90/)

@@ -84,13 +84,13 @@ typedef struct network{
 
 - `epoch` : 전체 학습 데이터셋을 몇번 학습시킬지에 대한 의미이다. epoch 이 1이면 전체 학습 데이터셋을 한번 학습하는 것이다.
 
-- `subdivision` : mini batch라고도 불리는데 batch를 몇 개의 분할해서 GPU로 보내 학습하는 것이다.
+- `subdivision` : mini batch라고도 불리는데 batch를 몇 개의 분할해서 GPU로 보내 병렬로 학습하는 것이다.
 
 - `learning_rate` : 학습률은 한번의 학습에 최적의 값에 얼마만큼 수렴시킬 것인지에 대한 학습 비율을 의미한다. (`Gradient Descent Algorithm`)
 
 - `momentum` : 모멘텀(관성) 상수를 의미하고 모멘텀은 `Gradient Descent Algorithm`의 너무 느린 단점을 보완하기 위해 사용하는 매개변수다. *개념정리*
 
-- `decay` : 감쇠를 의미하며 가중치가 너무클수 있기 때문에 가중치를 제한해주는 매개변수다. *개념정리*
+- `decay` : 감쇠를 의미하며 가중치가 너무 클수 있기 때문에 가중치를 제한해주는 매개변수다. *개념정리*
 
 - `random` : random이 1일 경우 10회마다 네트워크의 크기(입력,출력)를 조정한다.
 
@@ -137,7 +137,7 @@ typedef struct network{
 
 - `policy` : learning rate decay policy
   + `step` : 몇번의 배치 후에 learning rate를 바꿀 것인가 (500)
-  + `scale` : step이 끝나고 scale을 곱해서 learning rate 조정 (0.1) -> 500*0.1
+  + `scale` : step이 끝나고 scale을 곱해서 learning rate 조정 (0.1) -> 500번째*0.1
   + `steps` : 몇번의 배치 후에 learning rate를 바꿀 것인가 (500,1000)
   + `scales` : steps이 끝나고 scales을 곱해서 learning rate 조정 (0.1,0.2) -> 500*0.1*1000*0.2
   + `gamma` : learning rate decay 파라미터
