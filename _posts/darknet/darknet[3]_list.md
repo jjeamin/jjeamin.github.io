@@ -12,7 +12,7 @@ list *make_list()
 	return l;
 }
 ```
-- list를 생성해주는 함수(0으로 초기화)
+list를 생성해주는 함수(0으로 초기화)
 
 # list_insert
 
@@ -35,4 +35,4 @@ void list_insert(list *l, void *val)
 }
 ```
 
-- list에 node를 추가하는 함수
+list에 node를 추가하는 함수

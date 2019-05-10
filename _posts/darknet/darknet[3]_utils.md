@@ -123,7 +123,7 @@ float rand_normal()
 - rand2
 
 
-![cos](https://github.com/jjeamin/jjeamin.github.io/raw/master/_posts/post_img/darknet/sqrt.PNG)
+![cos](https://github.com/jjeamin/jjeamin.github.io/raw/master/_posts/post_img/darknet/cos.PNG)
 
 
 

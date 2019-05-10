@@ -105,8 +105,8 @@ convolutional_layer make_convolutional_layer(int batch, int h, int w, int c, int
     l.biases = calloc(n, sizeof(float));                              /// bias 크기 할당
     l.bias_updates = calloc(n, sizeof(float));
 
-    l.nweights = c/groups*n*size*size;
-    l.nbiases = n;
+    l.nweights = c/groups*n*size*size;                                /// weight의 수
+    l.nbiases = n;                                                    /// bias의 수
 
     // float scale = 1./sqrt(size*size*c);
     float scale = sqrt(2./(size*size*c/l.groups));                    /// random weight initialization
@@ -122,7 +122,7 @@ convolutional_layer make_convolutional_layer(int batch, int h, int w, int c, int
     l.outputs = l.out_h * l.out_w * l.out_c;                          /// output image 크기
     l.inputs = l.w * l.h * l.c;                                       /// input image 크기
 
-    l.output = calloc(l.batch*l.outputs, sizeof(float));              /// 한번 학습때 사용되는 output image 크기
+    l.output = calloc(l.batch*l.outputs, sizeof(float));              /// 한번 학습때 사용되는 output image 크기 할당
     l.delta  = calloc(l.batch*l.outputs, sizeof(float));              
 
     l.forward = forward_convolutional_layer;                          /// 학습
@@ -280,7 +280,7 @@ void forward_convolutional_layer(convolutional_layer l, network net)
 {
     int i, j;
 
-    fill_cpu(l.outputs*l.batch, 0, l.output, 1);
+    fill_cpu(l.outputs*l.batch, 0, l.output, 1);                          /// output을 0으로 초기화
 
     if(l.xnor){                                                           /// xnor 사용시
         binarize_weights(l.weights, l.n, l.c/l.groups*l.size*l.size, l.binary_weights);
@@ -289,20 +289,20 @@ void forward_convolutional_layer(convolutional_layer l, network net)
         net.input = l.binary_input;
     }
 
-    int m = l.n/l.groups;
+    int m = l.n/l.groups;                                                 /// filter group 개수
     int k = l.size*l.size*l.c/l.groups;                                   /// 여기서부터
-    int n = l.out_w*l.out_h;
+    int n = l.out_w*l.out_h;                                              /// output 이미지 크기
     for(i = 0; i < l.batch; ++i){
         for(j = 0; j < l.groups; ++j){
-            float *a = l.weights + j*l.nweights/l.groups;
-            float *b = net.workspace;
-            float *c = l.output + (i*l.groups + j)*n*m;
-            float *im =  net.input + (i*l.groups + j)*l.c/l.groups*l.h*l.w;
+            float *a = l.weights + j*l.nweights/l.groups;                 /// 배열에서 학습 시작 포인터 이동
+            float *b = net.workspace;                                     /// workspace ??
+            float *c = l.output + (i*l.groups + j)*n*m;                   /// output 위치 이동
+            float *im =  net.input + (i*l.groups + j)*l.c/l.groups*l.h*l.w; /// 배열에서 input 시작 포인터 이동
 
-            if (l.size == 1) {
+            if (l.size == 1) {                                            /// filter size가 1일 때
                 b = im;
             } else {
-                im2col_cpu(im, l.c/l.groups, l.h, l.w, l.size, l.stride, l.pad, b);
+                im2col_cpu(im, l.c/l.groups, l.h, l.w, l.size, l.stride, l.pad, b); /// image를 columns로 바꾸어준다.
             }
             gemm(0,0,m,n,k,1,a,k,b,n,1,c,n);
         }

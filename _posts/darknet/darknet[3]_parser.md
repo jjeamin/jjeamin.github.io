@@ -1,6 +1,6 @@
 # /src/parser.c
 
-## /src/parser.c/parse_network_cfg
+## parse_network_cfg
 
 ```
 network *parse_network_cfg(char *filename)
@@ -153,7 +153,7 @@ network *parse_network_cfg(char *filename)
 }
 ```
 
-## /src/parser/read_cfg
+## read_cfg
 
 ```
 list *read_cfg(char *filename)
@@ -208,7 +208,7 @@ network 정보 -> convolution -> ... -> output 이렇게 되어 있는 cfg 파�
 
 주석을 작성할 떄 위와 같이 이해해서 작성했습니다.
 
-## /src/parser/parse_net_options
+## parse_net_options
 
 ```
 void parse_net_options(list *options, network *net)                               /// network option을 가져온다.
@@ -296,7 +296,7 @@ void parse_net_options(list *options, network *net)                             
 network의 정보가 담긴 section에서 network 구조체로 매핑
 
 
-## /src/parser/get_policy
+## get_policy
 
 ```
 learning_rate_policy get_policy(char *s)
@@ -318,7 +318,7 @@ learning rate decay policy 라고 생각하면 된다. 학습을 할 때 속도�
 
 학습을 할때 최적의 값에 도달해도 Noise 때문에 그 주위를 머물게 된다. 그래서 천천히 학습률을 줄이면 학습 속도를 빠르게 할 수 있다. 처음에는 큰폭으로 움직이고 점점 작은폭으로 움직이며 최적의 값에 빠르게 도달 할수 있다. 자세한 공식은 policy를 해석할 때 다루어 보자.
 
-## /src/parser/free_section
+## free_section
 
 ```
 void free_section(section *s)
@@ -340,7 +340,7 @@ void free_section(section *s)
 
 section 구조체 할당 해제. section안에 있는 type, options를 먼저 할당을 해제 해줘야하기 때문에 type을 할당 해제하고 그 뒤에 options 안에 있는 모든 값들을 할당 해제 한다. 그리고 options를 할당 해제 하고 section을 할당 해제한다.
 
-## /src/parser/string_to_layer_type
+## string_to_layer_type
 
 ```
 LAYER_TYPE string_to_layer_type(char * type)

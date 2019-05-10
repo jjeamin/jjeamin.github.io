@@ -22,4 +22,4 @@ ACTIVATION get_activation(char *s)
 }
 ```
 
-- ACTIVATION에 매핑 시켜준다
+ACTIVATION에 매핑 시켜준다
