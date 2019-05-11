@@ -1,4 +1,6 @@
-#/src/list.c
+# LIST
+
+`/src/list.c`
 
 # make_list
 

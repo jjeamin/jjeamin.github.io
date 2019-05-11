@@ -31,25 +31,24 @@ Convolution layer에 GEMM을 선택하는 것이 좋다. 높이,폭,깊이가 �
 
 ---
 
-# /src/gemm.c/
+`/src/gemm.c/`
 
 ## gemm
 
 ```
 /**
-TA :
-TB :
-M :
-N :
-K :
+TA , TB : A와 B를 곱하기전에 transpose(전치) 연산을 A에 적용할 것인지 B에 적용할 것인지 여부
+M : filter 개수
+N : output 크기
+K : filter 크기
 ALPHA :
-A :
-lda :
-B :
-ldb :
-BETA :
-C :
-ldc :
+A : weights 포인터
+lda : output 크기(포인터 이동용)
+B : input_columns 포인터
+ldb : filter 크기(포인터 이동용)
+BETA : 초기화 값
+C : outputs 포인터
+ldc : filter 크기(포인터 이동용)
 
 **/
 void gemm(int TA, int TB, int M, int N, int K, float ALPHA,
@@ -75,7 +74,7 @@ void gemm_cpu(int TA, int TB, int M, int N, int K, float ALPHA,
     int i, j;
     for(i = 0; i < M; ++i){
         for(j = 0; j < N; ++j){
-            C[i*ldc + j] *= BETA;
+            C[i*ldc + j] *= BETA;                             /// outputs 초기화
         }
     }
     if(!TA && !TB)
@@ -88,6 +87,8 @@ void gemm_cpu(int TA, int TB, int M, int N, int K, float ALPHA,
         gemm_tt(M, N, K, ALPHA,A,lda, B, ldb,C,ldc);
 }
 ```
+
+gemm 연산을 실행시키는 부분
 
 ## gemm_nn
 
@@ -109,6 +110,8 @@ void gemm_nn(int M, int N, int K, float ALPHA,
     }
 }
 ```
+
+전치행렬을 사용하지 않고 연산
 
 ## gemm_nt
 
@@ -133,6 +136,8 @@ void gemm_nt(int M, int N, int K, float ALPHA,
 }
 ```
 
+weight를 전치행렬
+
 ## gemm_tn
 
 ```
@@ -153,6 +158,8 @@ void gemm_tn(int M, int N, int K, float ALPHA,
     }
 }
 ```
+
+input을 전치행렬
 
 ## gemm_tt
 
@@ -175,3 +182,5 @@ void gemm_tt(int M, int N, int K, float ALPHA,
     }
 }
 ```
+
+input,weight 둘다 전치행렬

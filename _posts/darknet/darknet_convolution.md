@@ -275,6 +275,8 @@ int convolutional_out_height(convolutional_layer l)
 
 이 부분이 딥러닝의 가장 중요한 기초라고 생각되는 부분이기 때문에 자세히 살펴보도록 해야할 것 같다. 직접 c언어로 구현이 되어있기 때문에 분석하기 쉬울거 같다.
 
+## forward_convolutional_layer
+
 ```
 void forward_convolutional_layer(convolutional_layer l, network net)
 {
@@ -289,36 +291,35 @@ void forward_convolutional_layer(convolutional_layer l, network net)
         net.input = l.binary_input;
     }
 
-    int m = l.n/l.groups;                                                 /// filter group 개수
-    int k = l.size*l.size*l.c/l.groups;                                   /// 여기서부터
-    int n = l.out_w*l.out_h;                                              /// output 이미지 크기
+    int m = l.n/l.groups;                                                           /// filter 개수
+    int k = l.size*l.size*l.c/l.groups;                                             /// filter 크기
+    int n = l.out_w*l.out_h;                                                        /// output 크기
     for(i = 0; i < l.batch; ++i){
         for(j = 0; j < l.groups; ++j){
-            float *a = l.weights + j*l.nweights/l.groups;                 /// 배열에서 학습 시작 포인터 이동
-            float *b = net.workspace;                                     /// workspace ??
-            float *c = l.output + (i*l.groups + j)*n*m;                   /// output 위치 이동
-            float *im =  net.input + (i*l.groups + j)*l.c/l.groups*l.h*l.w; /// 배열에서 input 시작 포인터 이동
+            float *a = l.weights + j*l.nweights/l.groups;                           /// 배열에서 학습 시작 포인터 이동
+            float *b = net.workspace;                                               /// workspace 작업공간?
+            float *c = l.output + (i*l.groups + j)*n*m;                             /// output 위치 이동
+            float *im =  net.input + (i*l.groups + j)*l.c/l.groups*l.h*l.w;         /// 배열에서 input 시작 포인터 이동
 
-            if (l.size == 1) {                                            /// filter size가 1일 때
+            if (l.size == 1) {                                                      /// filter size가 1일 때
                 b = im;
             } else {
                 im2col_cpu(im, l.c/l.groups, l.h, l.w, l.size, l.stride, l.pad, b); /// image를 columns로 바꾸어준다.
             }
-            gemm(0,0,m,n,k,1,a,k,b,n,1,c,n);
+            gemm(0,0,m,n,k,1,a,k,b,n,1,c,n);                                        /// 실질적인 계산이 이루어진다. ***
         }
     }
 
-    if(l.batch_normalize){
-        forward_batchnorm_layer(l, net);
+    if(l.batch_normalize){                                                          /// batch normalization 실행 유무
+        forward_batchnorm_layer(l, net);                                            /// batch normalization 실행
     } else {
-        add_bias(l.output, l.biases, l.batch, l.n, l.out_h*l.out_w);
+        add_bias(l.output, l.biases, l.batch, l.n, l.out_h*l.out_w);                /// convolution에서 그냥 0값인거 같다.
     }
 
     activate_array(l.output, l.outputs*l.batch, l.activation);
     if(l.binary || l.xnor) swap_binary(&l);
 }
 ```
-
 
 
 

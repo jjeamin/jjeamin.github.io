@@ -1,4 +1,4 @@
-## network 구조체
+# network 구조체
 
 ```
 typedef struct network{

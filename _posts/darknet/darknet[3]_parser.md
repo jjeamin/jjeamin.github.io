@@ -1,4 +1,6 @@
-# /src/parser.c
+# PARSE
+
+`/src/parser.c`
 
 ## parse_network_cfg
 

@@ -1,4 +1,6 @@
-# /src/bias.c
+# CPU 계산부분
+
+`/src/bias.c`
 
 ## fill_cpu
 
@@ -12,8 +14,9 @@ void fill_cpu(int N, float ALPHA, float *X, int INCX)
 
 X를 0 ~ N까지 ALPHA 값으로 초기화
 
+---
 
-# /src/im2col.c
+`/src/im2col.c`
 
 ## im2col_cpu
 

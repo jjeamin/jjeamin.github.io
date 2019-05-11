@@ -1,4 +1,6 @@
-# /src/network.c
+# NETWORK
+
+`/src/network.c`
 
 ## make_network
 

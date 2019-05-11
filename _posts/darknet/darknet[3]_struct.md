@@ -1,4 +1,6 @@
-# /include/darknet.h/
+# STRUCT
+
+`/include/darknet.h`
 
 ## node 구조체
 

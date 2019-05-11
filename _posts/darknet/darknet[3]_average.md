@@ -1,4 +1,8 @@
-# /example/derknet.c/average()
+# ABERAGE
+
+`/example/darknet.c/`
+
+## average
 
 ```
 void average(int argc, char *argv[])
