@@ -196,7 +196,7 @@ static inline float relie_activate(float x){return (x>0) ? x : .01*x;}
 ```
 
 
-![relie](https://github.com/jjeamin/jjeamin.github.io/raw/master/_posts/post_img/darknet/relie.PNG)
+![relie](https://github.com/jjeamin/jjeamin.github.io/raw/master/_posts/post_img/darknet/reile.PNG)
 
 
 
