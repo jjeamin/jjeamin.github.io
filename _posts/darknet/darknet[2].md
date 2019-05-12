@@ -8,6 +8,9 @@ categories: Darknet
 # c언어 정리
 - `extern void function()` : 다른 소스 파일에 있는 함수 사용
 - `ifndef` ~ `endif` : 헤더파일을 여러번 include하는 것을 방지하거나 특정 이벤트에서만 발생시키게 해주는 조건문
+- `header file` : 함수의 메뉴판
+
+---
 
 # /example
 darknet framework를 실행시키는 예제들을 모아놓은 폴더이다. 제일 흔하게 예시로 쓰이는 darknet.c와 detector.c를 먼저 살펴보고 나머지를 전부 살펴 볼 것이다.

@@ -1,4 +1,4 @@
-# GAMM
+# GAMM 이란?
 
 이 단어는 딥러닝의 핵심이라고 한다. 딥러닝을 하면서 이런 단어는 처음 들어봤는데 이번에 본격적으로 알아봐야겠다.
 
@@ -30,6 +30,7 @@ Convolution layer에 GEMM을 선택하는 것이 좋다. 높이,폭,깊이가 �
 - [https://petewarden.com/2015/04/20/why-gemm-is-at-the-heart-of-deep-learning/](https://petewarden.com/2015/04/20/why-gemm-is-at-the-heart-of-deep-learning/)
 
 ---
+# GAMM
 
 `/src/gemm.c/`
 

@@ -1,3 +1,9 @@
+# Batch normalization 이란?
+
+`Batch normalization`이란 딥러닝의 근본적인 문제(많은 파라미터, weight의 크기 변화)를 해결하기 위한 정규화 방법이다. 이에 따른 설명은 [포스트](https://jjeamin.github.io/dnn/2019/02/11/batch_norm/)에 적어놨다.
+
+---
+
 # BATCH NORM
 
 `/src/batchnorm_layer.c`
