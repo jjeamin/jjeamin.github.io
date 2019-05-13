@@ -316,15 +316,82 @@ void forward_convolutional_layer(convolutional_layer l, network net)
         add_bias(l.output, l.biases, l.batch, l.n, l.out_h*l.out_w);                /// convolution에서 그냥 0값인거 같다.
     }
 
-    activate_array(l.output, l.outputs*l.batch, l.activation);
-    if(l.binary || l.xnor) swap_binary(&l);
+    activate_array(l.output, l.outputs*l.batch, l.activation);                      /// activation function 적용
+    if(l.binary || l.xnor) swap_binary(&l);                                         /// binary 일때 변환
 }
 ```
 
+## swap binary
 
+```
+void swap_binary(convolutional_layer *l)
+{
+    float *swap = l->weights;
+    l->weights = l->binary_weights;
+    l->binary_weights = swap;
 
+#ifdef GPU
+    swap = l->weights_gpu;
+    l->weights_gpu = l->binary_weights_gpu;
+    l->binary_weights_gpu = swap;
+#endif
+}
+```
 
+## backward_convolutional_layer
 
+```
+void backward_convolutional_layer(convolutional_layer l, network net)
+{
+    int i, j;
+    int m = l.n/l.groups;                                                           /// filter 개수
+    int k = l.size*l.size*l.c/l.groups;                                             /// filter 크기
+    int n = l.out_w*l.out_h;                                                        /// output 크기
+
+    gradient_array(l.output, l.outputs*l.batch, l.activation, l.delta);
+
+    if(l.batch_normalize){
+        backward_batchnorm_layer(l, net);
+    } else {
+        backward_bias(l.bias_updates, l.delta, l.batch, l.n, k);
+    }
+
+    for(i = 0; i < l.batch; ++i){
+        for(j = 0; j < l.groups; ++j){
+            float *a = l.delta + (i*l.groups + j)*m*k;
+            float *b = net.workspace;
+            float *c = l.weight_updates + j*l.nweights/l.groups;
+
+            float *im  = net.input + (i*l.groups + j)*l.c/l.groups*l.h*l.w;
+            float *imd = net.delta + (i*l.groups + j)*l.c/l.groups*l.h*l.w;
+
+            if(l.size == 1){
+                b = im;
+            } else {
+                im2col_cpu(im, l.c/l.groups, l.h, l.w,
+                        l.size, l.stride, l.pad, b);
+            }
+
+            gemm(0,1,m,n,k,1,a,k,b,k,1,c,n);
+
+            if (net.delta) {
+                a = l.weights + j*l.nweights/l.groups;
+                b = l.delta + (i*l.groups + j)*m*k;
+                c = net.workspace;
+                if (l.size == 1) {
+                    c = imd;
+                }
+
+                gemm(1,0,n,k,m,1,a,n,b,k,0,c,k);
+
+                if (l.size != 1) {
+                    col2im_cpu(net.workspace, l.c/l.groups, l.h, l.w, l.size, l.stride, l.pad, imd);
+                }
+            }
+        }
+    }
+}
+```
 
 
 

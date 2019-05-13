@@ -318,8 +318,167 @@ static inline float lhtan_activate(float x)
 0.001을 곱해서 잘 안보이지만 매우 살짝 기울어져 있다.
 
 
+
+**활성화 함수들은 거의다 조금씩 조금씩 변형한게 많기 때문에 인기가 많았던 것 위주로 봤다. 게다가 활성화 함수에서 Gradient를 계산 하는게 중요한 것 같다. Gradient는 역전파에서 자세히 살펴보도록 해야할 것 같다.**
+
 ---
-활성화 함수들은 거의다 조금씩 조금씩 변형한게 많기 때문에 인기가 많았던 것 위주로 봤다. 게다가 활성화 함수에서 Gradient를 계산 하는게 중요한 것 같다. Gradient는 역전파에서 자세히 살펴보도록 해야할 것 같다.
+
+# GRADIENT
+
+backpropagation로 값들을 업데이트 해야하기 때문에 미분 값(기울기)을 이용한다.
+
+## gradient_array
+
+```
+void gradient_array(const float *x, const int n, const ACTIVATION a, float *delta)
+{
+    int i;
+    for(i = 0; i < n; ++i){
+        delta[i] *= gradient(x[i], a);
+    }
+}
+```
+
+## gradient
+
+```c
+float gradient(float x, ACTIVATION a)
+{
+    switch(a){
+        case LINEAR:
+            return linear_gradient(x);
+        case LOGISTIC:
+            return logistic_gradient(x);
+        case LOGGY:
+            return loggy_gradient(x);
+        case RELU:
+            return relu_gradient(x);
+        case ELU:
+            return elu_gradient(x);
+        case SELU:
+            return selu_gradient(x);
+        case RELIE:
+            return relie_gradient(x);
+        case RAMP:
+            return ramp_gradient(x);
+        case LEAKY:
+            return leaky_gradient(x);
+        case TANH:
+            return tanh_gradient(x);
+        case PLSE:
+            return plse_gradient(x);
+        case STAIR:
+            return stair_gradient(x);
+        case HARDTAN:
+            return hardtan_gradient(x);
+        case LHTAN:
+            return lhtan_gradient(x);
+    }
+    return 0;
+}
+
+```
+
+## linear
+
+```c
+static inline float linear_gradient(float x){return 1;}
+```
+
+## logistic
+
+```
+static inline float logistic_gradient(float x){return (1-x)*x;}
+```
+
+## loggy
+
+```
+static inline float loggy_gradient(float x)
+{
+    float y = (x+1.)/2.;
+    return 2*(1-y)*y;
+}
+```
+
+## relu
+
+```c
+static inline float relu_gradient(float x){return (x>0);}
+```
+
+## elu
+
+```
+static inline float elu_gradient(float x){return (x >= 0) + (x < 0)*(x + 1);}
+```
+
+## selu
+
+```c
+static inline float selu_gradient(float x){return (x >= 0)*1.0507 + (x < 0)*(x + 1.0507*1.6732);}
+```
+
+## relie
+
+```c
+static inline float relie_gradient(float x){return (x>0) ? 1 : .01;}
+```
+
+## ramp
+
+```c
+static inline float ramp_gradient(float x){return (x>0)+.1;}
+```
+
+## leaky relu
+
+```c
+static inline float leaky_gradient(float x){return (x>0) ? 1 : .1;}
+```
+
+## tanh
+
+```c
+static inline float tanh_gradient(float x){return 1-x*x;}
+```
+
+## plse
+
+```c
+static inline float plse_gradient(float x){return (x < 0 || x > 1) ? .01 : .125;}
+```
+
+## stair
+
+```c
+static inline float stair_gradient(float x)
+{
+    if (floor(x) == x) return 0;
+    return 1;
+}
+```
+
+## lhtan
+
+```c
+static inline float lhtan_gradient(float x)
+{
+    if(x > 0 && x < 1) return 1;
+    return .001;
+}
+
+```
+
+## hardtan
+
+```c
+static inline float hardtan_gradient(float x)
+{
+    if (x > -1 && x < 1) return 1;
+    return 0;
+}
+```
 
 
 # 참조
