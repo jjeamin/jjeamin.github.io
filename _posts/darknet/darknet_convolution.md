@@ -125,9 +125,9 @@ convolutional_layer make_convolutional_layer(int batch, int h, int w, int c, int
     l.output = calloc(l.batch*l.outputs, sizeof(float));              /// 한번 학습때 사용되는 output image 크기 할당
     l.delta  = calloc(l.batch*l.outputs, sizeof(float));              
 
-    l.forward = forward_convolutional_layer;                          /// 학습
-    l.backward = backward_convolutional_layer;
-    l.update = update_convolutional_layer;
+    l.forward = forward_convolutional_layer;                          /// 전파
+    l.backward = backward_convolutional_layer;                        /// 역전파
+    l.update = update_convolutional_layer;                            /// 값 업데이트
     if(binary){                                                       /// binary 사용시
         l.binary_weights = calloc(l.nweights, sizeof(float));
         l.cweights = calloc(l.nweights, sizeof(char));
@@ -348,7 +348,7 @@ void backward_convolutional_layer(convolutional_layer l, network net)
     int k = l.size*l.size*l.c/l.groups;                                             /// filter 크기
     int n = l.out_w*l.out_h;                                                        /// output 크기
 
-    gradient_array(l.output, l.outputs*l.batch, l.activation, l.delta);
+    gradient_array(l.output, l.outputs*l.batch, l.activation, l.delta);             /// activation function 미분값 적용
 
     if(l.batch_normalize){
         backward_batchnorm_layer(l, net);

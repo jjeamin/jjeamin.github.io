@@ -1,6 +1,6 @@
 # layer 구조체
 
-```
+```c
 struct layer{
     LAYER_TYPE type;
     ACTIVATION activation;
@@ -313,14 +313,14 @@ struct layer{
 
 아래 구조체를 알기전에 enum 이라는 열거형 구조체를 알아야한다. 열거형 구조체는 안에 있는 원소가 int형인 상수를 자동으로 가지고 있는 구조체다. enum 앞에오는 집합명은 tag라고 하고 맨 왼쪽을 0부터 시작해서 오른쪽으로 갈수록 1씩 증가하는 규칙을 가지고 있으며 중간에 다른 숫자가 초기화 된 경우 초기화 된 숫자 부터 시작한다.
 
-```
+```c
 enum ONE {A, B}                 // A : 0, B : 1
 enum B {A=1, B, C=1, D, E=8, F} // B : 2, D : 2, F : 9    
 ```
 
 ## LAYER_TYPE
 
-```
+```c
 typedef enum {
     CONVOLUTIONAL,
     DECONVOLUTIONAL,
@@ -357,7 +357,7 @@ typedef enum {
 
 ## ACTIVATION
 
-```
+```c
 typedef enum{
     LOGISTIC, RELU, RELIE, LINEAR, RAMP, TANH, PLSE, LEAKY, ELU, LOGGY, STAIR, HARDTAN, LHTAN, SELU
 } ACTIVATION;
@@ -365,7 +365,7 @@ typedef enum{
 
 ## COST_TYPE
 
-```
+```c
 typedef enum{
     SSE, MASKED, L1, SEG, SMOOTH,WGAN
 } COST_TYPE;

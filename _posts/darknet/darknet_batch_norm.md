@@ -187,3 +187,156 @@ void add_bias(float *output, float *biases, int batch, int n, int size)
 ```
 
 bias에 값을 더한다.
+
+
+---
+
+## backward_batchnorm_layer
+
+```c
+void backward_batchnorm_layer(layer l, network net)
+{
+    if(!net.train){
+        l.mean = l.rolling_mean;
+        l.variance = l.rolling_variance;
+    }
+    backward_bias(l.bias_updates, l.delta, l.batch, l.out_c, l.out_w*l.out_h);
+    backward_scale_cpu(l.x_norm, l.delta, l.batch, l.out_c, l.out_w*l.out_h, l.scale_updates);
+
+    scale_bias(l.delta, l.scales, l.batch, l.out_c, l.out_h*l.out_w);
+
+    mean_delta_cpu(l.delta, l.variance, l.batch, l.out_c, l.out_w*l.out_h, l.mean_delta);
+    variance_delta_cpu(l.x, l.delta, l.mean, l.variance, l.batch, l.out_c, l.out_w*l.out_h, l.variance_delta);
+    normalize_delta_cpu(l.x, l.mean, l.variance, l.mean_delta, l.variance_delta, l.batch, l.out_c, l.out_w*l.out_h, l.delta);
+    if(l.type == BATCHNORM) copy_cpu(l.outputs*l.batch, l.delta, 1, net.delta, 1);
+}
+```
+
+## backward_bias
+
+```c
+void backward_bias(float *bias_updates, float *delta, int batch, int n, int size)
+{
+    int i,b;
+    for(b = 0; b < batch; ++b){
+        for(i = 0; i < n; ++i){
+            bias_updates[i] += sum_array(delta+size*(i+b*n), size);
+        }
+    }
+}
+```
+
+bias를 업데이트할 값을 저장
+
+## backward_scale_cpu
+
+```c
+void backward_scale_cpu(float *x_norm, float *delta, int batch, int n, int size, float *scale_updates)
+{
+    int i,b,f;
+    for(f = 0; f < n; ++f){
+        float sum = 0;
+        for(b = 0; b < batch; ++b){
+            for(i = 0; i < size; ++i){
+                int index = i + size*(f + n*b);
+                sum += delta[index] * x_norm[index];
+            }
+        }
+        scale_updates[f] += sum;
+    }
+}
+```
+
+scale을 업데이트할 값을 저장
+
+## scale_bias
+
+```
+void scale_bias(float *output, float *scales, int batch, int n, int size)
+{
+    int i,j,b;
+    for(b = 0; b < batch; ++b){
+        for(i = 0; i < n; ++i){
+            for(j = 0; j < size; ++j){
+                output[(b*n + i)*size + j] *= scales[i];
+            }
+        }
+    }
+}
+```
+
+bias의 scale을 조정한다.
+
+## mean_delta_cpu
+
+```
+void mean_delta_cpu(float *delta, float *variance, int batch, int filters, int spatial, float *mean_delta)
+{
+
+    int i,j,k;
+    for(i = 0; i < filters; ++i){
+        mean_delta[i] = 0;
+        for (j = 0; j < batch; ++j) {
+            for (k = 0; k < spatial; ++k) {
+                int index = j*filters*spatial + i*spatial + k;
+                mean_delta[i] += delta[index];
+            }
+        }
+        mean_delta[i] *= (-1./sqrt(variance[i] + .00001f));
+    }
+}
+```
+
+표본 평균 미분
+
+## variance_delta_cpu
+
+```
+void  variance_delta_cpu(float *x, float *delta, float *mean, float *variance, int batch, int filters, int spatial, float *variance_delta)
+{
+
+    int i,j,k;
+    for(i = 0; i < filters; ++i){
+        variance_delta[i] = 0;
+        for(j = 0; j < batch; ++j){
+            for(k = 0; k < spatial; ++k){
+                int index = j*filters*spatial + i*spatial + k;
+                variance_delta[i] += delta[index]*(x[index] - mean[i]);
+            }
+        }
+        variance_delta[i] *= -.5 * pow(variance[i] + .00001f, (float)(-3./2.));
+    }
+}
+```
+
+표본 분산 미분
+
+## normalize_delta_cpu
+
+```
+void normalize_delta_cpu(float *x, float *mean, float *variance, float *mean_delta, float *variance_delta, int batch, int filters, int spatial, float *delta)
+{
+    int f, j, k;
+    for(j = 0; j < batch; ++j){
+        for(f = 0; f < filters; ++f){
+            for(k = 0; k < spatial; ++k){
+                int index = j*filters*spatial + f*spatial + k;
+                delta[index] = delta[index] * 1./(sqrt(variance[f] + .00001f)) + variance_delta[f] * 2. * (x[index] - mean[f]) / (spatial * batch) + mean_delta[f]/(spatial*batch);
+            }
+        }
+    }
+```
+
+정규화 미분
+
+## copy_cpu
+
+```
+void copy_cpu(int N, float *X, int INCX, float *Y, int INCY)
+{
+    int i;
+    for(i = 0; i < N; ++i) Y[i*INCY] = X[i*INCX];
+}
+```
+
+배열 복사하기
