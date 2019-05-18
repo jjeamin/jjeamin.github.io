@@ -137,7 +137,7 @@ void gemm_nt(int M, int N, int K, float ALPHA,
 }
 ```
 
-weight를 전치행렬
+B를 전치행렬
 
 ## gemm_tn
 
@@ -160,7 +160,7 @@ void gemm_tn(int M, int N, int K, float ALPHA,
 }
 ```
 
-input을 전치행렬
+A을 전치행렬
 
 ## gemm_tt
 
@@ -196,10 +196,10 @@ input,weight 둘다 전치행렬
 void im2col_cpu(float* data_im, int channels,  int height,  int width, int ksize,  int stride, int pad, float* data_col)
 {
     int c,h,w;
-    int height_col = (height + 2*pad - ksize) / stride + 1;     /// output 크기
+    int height_col = (height + 2*pad - ksize) / stride + 1;     /// output 크기(높이,폭)
     int width_col = (width + 2*pad - ksize) / stride + 1;
 
-    int channels_col = channels * ksize * ksize;                ///
+    int channels_col = channels * ksize * ksize;                /// output 채널수
     for (c = 0; c < channels_col; ++c) {
         int w_offset = c % ksize;
         int h_offset = (c / ksize) % ksize;
@@ -250,3 +250,52 @@ float im2col_get_pixel(float *im, int height, int width, int channels,
 ```
 
 image에서 pixel을 찾아주는 역할
+
+## col2im_cpu
+
+```
+void col2im_cpu(float* data_col,
+         int channels,  int height,  int width,
+         int ksize,  int stride, int pad, float* data_im)
+{
+    int c,h,w;
+    int height_col = (height + 2*pad - ksize) / stride + 1;
+    int width_col = (width + 2*pad - ksize) / stride + 1;
+
+    int channels_col = channels * ksize * ksize;
+    for (c = 0; c < channels_col; ++c) {
+        int w_offset = c % ksize;
+        int h_offset = (c / ksize) % ksize;
+        int c_im = c / ksize / ksize;
+        for (h = 0; h < height_col; ++h) {
+            for (w = 0; w < width_col; ++w) {
+                int im_row = h_offset + h * stride;
+                int im_col = w_offset + w * stride;
+                int col_index = (c * height_col + h) * width_col + w;
+                double val = data_col[col_index];
+                col2im_add_pixel(data_im, height, width, channels,
+                        im_row, im_col, c_im, pad, val);
+            }
+        }
+    }
+}
+```
+
+열을 다시 이미지로 바꾸어주는 함수 im2col과 다른 것은 거의 없다. 펼쳐진 행렬을 이미지로 변환한다.
+
+## col2im_add_pixel
+
+```
+void col2im_add_pixel(float *im, int height, int width, int channels,
+                        int row, int col, int channel, int pad, float val)
+{
+    row -= pad;
+    col -= pad;
+
+    if (row < 0 || col < 0 ||
+        row >= height || col >= width) return;
+    im[col + width*(row + height*channel)] += val;
+}
+```
+
+각 픽셀을 이미지에 매핑하는 함수다.
