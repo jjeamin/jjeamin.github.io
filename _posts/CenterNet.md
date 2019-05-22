@@ -54,13 +54,13 @@ categories: paper
 
 ---
 
-## Related work
+# Related work
 
-### Object detection by region classification
+## Object detection by region classification
 
 가장 먼저 성공적인 object detectors 중 하나인 RCNN은 많은 region 후보들로 부터 대상 위치를 찾고 각각을 deep network를 사용하여 분류한다. Fast-RCNN은 계산을 저장하기 위해 이미지의 특징을 자른다. 그러나 두 방법 모두 성능이 좋지않은 region proposal 방법에 의존한다.
 
-### Object detection with implicit anchors
+## Object detection with implicit anchors
 
 Faster RCNN은 detection network 내에서 region proposal을 생성한다. 저해상도 이미지 격자 주위에 `고정된 모양의 bounding box(anchor box)`를 sampling하고 각각을 foreground background로 분류한다. anchor는 모든 ground truth object에 0.7보다 크면 foreground로 표시되며 0.3보다 작으면 background로 표시되거나 무시된다. proposal classifier를 multi-class classification로 변경하는 것이 1단계 검출기의 기초를 형성한다. 1단계 검출기에 대한 몇 가지 개선사항으로는 `anchor shape priors`, `different feature resolution`, 다른 샘플 사이의 `loss re-weighting` 이 있다. **이 논문 또한 anchor기반 1단계 검출기와 밀접하게 연관이 되어 있다.**
 
@@ -76,7 +76,7 @@ Faster RCNN은 detection network 내에서 region proposal을 생성한다. 저�
 
 3. CenterNet은 기존의 object detector과 비교해서 더 큰 출력 해상도를 사용한다. 이것이 다중 anchor의 필요성을 제거한다.
 
-### Object detection by keypoint extimation
+## Object detection by keypoint extimation
 
 object detection을 위해서 keypoint 추정을 사용하는 것이 처음은 아니다. CornerNet은 두 개의 bounding box의 모서리를 keypoint로 detection하는 반면 ExtremeNet은 모든 object의 상단,좌측,하단,우측 및 중심점을 detection한다. 이 두가지 방법 모두 CenterNet과 동일한 keypoint 추정 네트워크를 기반으로 한다. 그러나 keypoint 추정후 그룹화 단계가 필요하고 그에 따라서 알고리즘 속도가 현저히 줄어든다. 반면 CenterNet은 그룹화 또는 후처리 작업 없이도 object당 하나의 중심점만 추출한다.
 
@@ -88,7 +88,7 @@ object detection을 위해서 keypoint 추정을 사용하는 것이 처음은 �
 
 ---
 
-## Preliminary
+# Preliminary
 
 `I ∈ R^(W×H×3)`를 W인 폭과 H인 높이를 가진 이미지라고 해보면 이 논문의 목표는 keypoint 히트맵 `Y ∈ [0, 1]^(W/R × H/R × C)`를 생성하는 것이다. 여기서 R은 `output stride`이고 C는 keypoint 유형의 수다. keypoint의 유형은 인간의 자세의 추정에서 C=17(인간 관절), object detection에서 C=80 범주를 포함한다. 그리고 기본적으로 R=4이다. 예측값 `Y'(x,y,z) = 1`은 keypoint이고 `Y'(x,y,z) = 0`은 background이다. 이미지 I로부터 Y를 예측하기 위해 여러개의 fully convolution encoder-decoder network를 사용한다. 클래스 c의 각 groud truth인 keypoint `p ∈ R^2`에 대해 저해상도 `p' = [p/R]`를 계산한다. gaussian kernel인
 
@@ -179,10 +179,49 @@ scale을 표준화하지 않고 원시 픽셀 좌표를 직접 사용한다. 대
 
 ## Implementation details
 
-이 논문은 `ResNet-18`, `ResNet101`, `DLA-34`, `Hourglass-104`의 4 가지 아키텍처를 실험한다. 변형 가능한 convolution layer를 사용하여 ResNet과 DLA-34를 수정하고 Hourglass network를 그대로 사용한다.
+이 논문은 `ResNet-18`, `ResNet101`, `DLA-34`, `Hourglass-104`의 4 가지 아키텍처를 실험한다. `deformable convolution layer`를 사용하여 ResNet과 DLA-34를 수정하고 Hourglass network를 그대로 사용한다.
 
 ### Hourglass
+
 `Hourglass Network`는 input을 4배씩 downsampling하고 순차적으로 두개의 Hourglass modules을 downsampling한다. 각 Hourglass modules는 skip connection을 사용하는 대칭 `5 layer down- and up-convolution network`다. 이 네트워크는 꽤 큰 모델이지만 일반적으로 최상의 keypoint 추정 성능을 가지고 있다.
+
+### ResNet
+
+고해상도 출력을 하기 위해서 3개의  `up-convolution network`를 사용하여 `residual network`을 강화했다. 계산을 저장하기 위해 먼저 3개의 upsampling layer의 채널을 각각 256,128,64로 변경한다. 그런 다음 각각 up-convolution 전에 3x3 `deformable convolution layer`를 추가한다. up-convolution kernel은 선형 보간으로 초기화된다.
+
+### DLA
+
+DLA(Deep Layer Aggregation)는 `hierarchical skip connection`을 사용하는 이미지 분류 네트워크다. 밀도 예측을 위해 DLA의 fully convolution upsampling 버전을 사용하며 feature map의 해상도를 높이기 위해 반복적으로 `deep aggregation`을 사용한다. low layer 에서 output까지 `deformable convolution layer`를 사용해서 `skip connection`을 강화한다. 구체적으로 원래 convolution을 모든 upsampling layer에서 3x3 `deformable convolution layer`으로 바꾼다.
+
+### Training
+
+- `input` : 512x512 / `output` : 128x128
+- `data argument` : random flip, random scaling, cropping, color jitering
+- `optimize` : Adam
+
+cropping, scaling이 3D 측정값을 변경시키기 때문에 argumentation을 사용하지 않는다.
+
+**`residual network`와 `DLA-34`**
+
+ - `batch size`가 128(8 GPU)이고 `learning rate`가 140 epoch 동안 5e-4 이며 90과 120 epoch에서는 각각 10배씩 줄인다.
+
+ - downsampling layer는 image Net의 pretrain으로 초기화되고 upsampling layer는 무작위로 초기화 된다.
+
+
+**`Hourglass-104`**
+
+`ExtremeNet`을 따르고 배치 크기를 29(5 GPU), 40 epoch에서 10배 줄이고 50 epoch에서 학습 속도 2.5e-4를 사용한다. detection 하기 위해 `ExtremeNet`에서 `Hourglass-104`를 계산해 계산량을 절약한다.
+
+### Inference
+
+- 3 가지 등급의 test argumentation을 사용한다 : `no argumentation`, `flip argumentation`, `multi scale(0.5,0.75,1.25,1.5)`
+
+- flip의 경우 bounding box를 decoding 하기 전에 네트워크의 output의 평균을 구한다.
+
+- multi scale의 경우 NMS를 사용하여 결과를 합친다.
+
+## Experiments
+
 
 
 ---
@@ -214,6 +253,21 @@ backbone이란 등뼈라는 뜻을 가지고 있다. 등뼈는 뇌와 몸의 각
 
 ## bin
 히스토그램의 한 cell
+
+## Hourglass Network
+
+## ResNet
+
+## 선형 보간
+
+## DLA
+
+deformable convolution layer
+hierarchical skip connection
+deep aggregation
+
+## color jitering
+이미지의 채도를 랜덤하게 노이즈를 주는 data argumentation 방식 중 하나
 
 ---
 
