@@ -42,7 +42,7 @@ categories: paper
 
 - Sliding window 기반의 object detector는 가능한 모든 object의 위치를 찾아야하기 때문에 낭비가 된다. 그래서 그에 따른 대안을 이 논문이 설명한다.
 
-- **object detection은 표준 key point estimaion 문제이다.** 히트맵을 생성하는 convolution network에 이미지를 넣어주기만 하면 된다. **이 히트맵의 peaks는 물체 중심에 해당하고 각 peaks의 image feature는 object bounding box의 높이 및 두께를 예측한다.**
+- **object detection은 표준 key point estimation 문제이다.** 히트맵을 생성하는 convolution network에 이미지를 넣어주기만 하면 된다. **이 히트맵의 peaks는 물체 중심에 해당하고 각 peaks의 image feature는 object bounding box의 높이 및 두께를 예측한다.**
 
 - 이 논문은 각 중심점에서 추가적인 출력을 예측하여 3D object detection 및 다중 사람 자세 추정에 대한 실험을 제공한다. 3차원 bounding box를 추정하기 위해서 object의 절대 깊이, 3D bounding box의 크기, object의 방향을 회귀한다.
 
@@ -121,7 +121,7 @@ object detection을 위해서 keypoint 추정을 사용하는 것이 처음은 �
 
 ---
 
-## Objects as Points
+# Objects as Points
 
 범주 C(k)를 갖는 대상 k의 bounding box가 `x1`,`y1`,`x2`,`y2` 라고 하자. 중심점은 `p(k) = ((x1+x2)/2,(y1+y2)/2)`에 놓여있다. 예측 keypoint `Y'`을 사용해서 모든 중심점을 예측한다. 또한 각 object k에 대해 `s(k) = ((x2-x1),(y2-y1))`로 회귀한다. 계산적인 부담을 줄이기 위해 모든 object 범주에 대해 단일 크기 예측 `S' ∈ R^(W/R x H/R x 2)`을 사용한다. 그리고 목표2와 비슷한 중심점에 L1 loss를 사용한다.
 
@@ -141,7 +141,7 @@ scale을 표준화하지 않고 원시 픽셀 좌표를 직접 사용한다. 대
 
 논문에서 달리 명시하지 않는이상 모든 실험에서 `λsize = 0.1` 와 `λoff = 1`로 설정했다. 단일 네트워크를 사용하여 keypoint `Y'`, offset `O'`, 크기 `S'`를 예측한다. 네트워크는 각 위치에서 총 `C+4`개의 output을 예측한다. 모든 출력은 `commonfully-convolutional backbone network`를 공유한다. 각 형태에 대해서 backbone의 특징은 별도의 3x3 convolution, relu와 다른 1x1 convolution을 통과한다.
 
-### From points to bounding boxes
+## From points to bounding boxes
 
 추론을 할때, 먼저 각 범주에 대한 히트맵의 peaks를 추출한다. 값이 8개의 연결된 이웃들 보다 크거나 같은 모든 응답을 detection하고 최고 100개의 peaks를 유지한다. `P'(c)`는 클래스 c의 n개의 검출된 중심점 `P' = {(xi'yi')}(i = 1~n)` 의 집합이라고 하자. 각 keypoint의 위치는 정수 좌표 (xi,yi)로 표시된다. keypoint 값 `Y'(x,y,z)`를 검출 신뢰도와 동일하게 사용하고 위치에 bounding box를 생성한다.
 
@@ -177,23 +177,23 @@ scale을 표준화하지 않고 원시 픽셀 좌표를 직접 사용한다. 대
 
 에 할당된다.
 
-## Implementation details
+# Implementation details
 
 이 논문은 `ResNet-18`, `ResNet101`, `DLA-34`, `Hourglass-104`의 4 가지 아키텍처를 실험한다. `deformable convolution layer`를 사용하여 ResNet과 DLA-34를 수정하고 Hourglass network를 그대로 사용한다.
 
-### Hourglass
+## Hourglass
 
 `Hourglass Network`는 input을 4배씩 downsampling하고 순차적으로 두개의 Hourglass modules을 downsampling한다. 각 Hourglass modules는 skip connection을 사용하는 대칭 `5 layer down- and up-convolution network`다. 이 네트워크는 꽤 큰 모델이지만 일반적으로 최상의 keypoint 추정 성능을 가지고 있다.
 
-### ResNet
+## ResNet
 
 고해상도 출력을 하기 위해서 3개의  `up-convolution network`를 사용하여 `residual network`을 강화했다. 계산을 저장하기 위해 먼저 3개의 upsampling layer의 채널을 각각 256,128,64로 변경한다. 그런 다음 각각 up-convolution 전에 3x3 `deformable convolution layer`를 추가한다. up-convolution kernel은 선형 보간으로 초기화된다.
 
-### DLA
+## DLA
 
 DLA(Deep Layer Aggregation)는 `hierarchical skip connection`을 사용하는 이미지 분류 네트워크다. 밀도 예측을 위해 DLA의 fully convolution upsampling 버전을 사용하며 feature map의 해상도를 높이기 위해 반복적으로 `deep aggregation`을 사용한다. low layer 에서 output까지 `deformable convolution layer`를 사용해서 `skip connection`을 강화한다. 구체적으로 원래 convolution을 모든 upsampling layer에서 3x3 `deformable convolution layer`으로 바꾼다.
 
-### Training
+## Training
 
 - `input` : 512x512 / `output` : 128x128
 - `data argument` : random flip, random scaling, cropping, color jitering
@@ -212,7 +212,7 @@ cropping, scaling이 3D 측정값을 변경시키기 때문에 argumentation을 
 
 `ExtremeNet`을 따르고 배치 크기를 29(5 GPU), 40 epoch에서 10배 줄이고 50 epoch에서 학습 속도 2.5e-4를 사용한다. detection 하기 위해 `ExtremeNet`에서 `Hourglass-104`를 계산해 계산량을 절약한다.
 
-### Inference
+## Inference
 
 - 3 가지 등급의 test argumentation을 사용한다 : `no argumentation`, `flip argumentation`, `multi scale(0.5,0.75,1.25,1.5)`
 
@@ -220,12 +220,84 @@ cropping, scaling이 3D 측정값을 변경시키기 때문에 argumentation을 
 
 - multi scale의 경우 NMS를 사용하여 결과를 합친다.
 
-## Experiments
+---
+
+# Experiments
+- train image : 118K
+- validation image : 5k
+- test image : 20k
+- IOU 임계값 : 0.5
+
+성능이 출력이 적어지고 box의 decoding 방식이 단순해짐으로 인해서 속도가 높다.
+
+## Additional experiments
+운이 안좋은 환경에서는 두개의 서로 다른 물체가 완벽히 정렬해서 같은 중심을 공유 할 수 있다. 이런 시나리오가 발생하면 그 중 하나만 검색한다.
+
+### Center point collision
+COCO 훈련 데이터셋에서 stride 4 에 동일한 중심점에 충돌하는 614쌍의 물체가 있다. 총 860001 개의 물체가 있으므로 0.1 % 미만의 물체를 검출할 수 없다. RCNN보다 좋다.
+
+### NMS
+CenterNet에서는 NMS가 필요하지 않아서 후처리를 이용했다. 성능은 조금더 좋거나 거기서 거기다. 다음으로는 새로운 파라미터를 삭제한다.
+
+### Train and Testing resolution
+훈련동안 input의 해상도는 512x512로 고정된다. CenterNet을 사용해 원본 이미지의 해상도를 유지하고 네트워크의 최대 stride에 대해서 input에 zero padding을 적용시킨다. ResNet이나 DLA의 경우 최대 32픽셀 Hourglass의 경우 128픽셀을 사용한다. 원래의 해상도를 유지 시키지 않고 저해상도를 사용할 경우 속도는 높아지지만 정확성은 떨어진다.
+
+### Regression loss
+vanilla L1 loss를 Smooth L1에 비교한다. L1보다 Smooth L1이 좋다.
+
+
+
+![loss](https://github.com/jjeamin/jjeamin.github.io/raw/master/_posts/post_img/centernet/loss.PNG)
+
+
+
+### Bounding box size weight
+loss weight λsize에 대한 접근 방식의 민감한 부분을 분석한다.
+
+
+
+![loss_w](https://github.com/jjeamin/jjeamin.github.io/raw/master/_posts/post_img/centernet/loss_w.PNG)
+
+
+
+0.1이 좋은 결과이며 더 큰값의 경우 AP는 0~1 대신 출력 크기 W/R 또는 H/R 범위로 인해 크게 저하된다.
+
+### Training schedule
+기본적으로 keypoint estimation network를 훈련하는 140 epochs 동안 90 epochs에서 learning rate 감소한다. learning rate를 떨어뜨리기 전에 훈련을 두배로 늘리면 성능은 1.1 AP 만큼 오른다.
+
+
+## 3Ddetection
+- KITTI 데이터셋
+
+KITTI는 7841개의 훈련 이미지를 포함하고 있다. `2D 경계상자`, `방향`, `Bird-eye-view bounding box`를 기반으로 IOU를 평가한다. 훈련과 테스트를 위해 원본 이미지의 해상도는 1280x384로 유지한다. 훈련은 70 epochs로 수렴하고 45와 60 epoch마다 learning rate가 떨어진다. DLA-34 backbone을 사용해 깊이, 방향, 면적에 대한 loss weight를 1로 설정한다. recall thresholds 의 수가 매우 적어서 validation AP는 최대 10% AP 만큼 변한다. 다른 RCNN 보다 BEV(bird eye view)가 더 좋고 속도가 빠르다.
+
+## pose estimation
+- MS COCO 데이터셋
+
+bounding box AP와 유사하지만 bounding box IOU를 object의 keypoint 유사성으로 대체하는 keypoint AP를 평가한다. 먼저 DLA-34와 Hourglass-104를 중심점 검출에서 fine-tuning 해서 실험한다. DLA-34는 320 epochs로 수렴하고 Hourglass-104는 150 epochs로 수렴한다. 모든 추가적인 loss weight를 1로 설정한다. keypoint의 직접 회귀는 합리적으로 수행되지만 최첨단에서는 수행이 안된다. 가장 가까운 관절 detection으로 결과물을 투사하면 전반적으로 결과가 개선되고 최첨단 기술자들과 경쟁할 수 있다. CenterNet이 일반적이며 새로운 작업에 쉽게 적응할 수 있다는 사실을 확신 할 수 있다.
+
+
+
+![그림4](https://github.com/jjeamin/jjeamin.github.io/raw/master/_posts/post_img/centernet/그림4.PNG)
 
 
 
 ---
 
+# 결론
+object에 대한 새로운 표현을 포인트로 제시한다. **object의 center를 찾아내어 크기를 회귀한다.** 이 알고리즘은 NMS 후처리 과정없이 간단하고 빠르고 정확하면서 end-to-end 차별화가 가능하다.
+
+---
+
+# MODEL
+
+
+
+![그림4](https://github.com/jjeamin/jjeamin.github.io/raw/master/_posts/post_img/centernet/그림4.PNG)
+
+
+
+---
 # 용어 정리
 
 ## axis aligned bounding box
