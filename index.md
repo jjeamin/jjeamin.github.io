@@ -32,6 +32,7 @@ tags: index
 - [YOLO](https://jjeamin.github.io/paper/2019/03/23/yolo/)
 - [YOLOv2](https://jjeamin.github.io/paper/2019/04/20/yolo_v2/)
 - [SORT](https://jjeamin.github.io/paper/2019/04/25/sort/) 
+- [CenterNet](https://jjeamin.github.io/paper/2019/05/19/CenterNet/)
 
 # GAN - tensorflow
 - [GAN](https://github.com/jjeamin/my_gan/tree/master/gan)
