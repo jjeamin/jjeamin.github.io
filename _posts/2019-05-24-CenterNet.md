@@ -84,7 +84,7 @@ object detection을 위해서 keypoint estimation을 사용하는 것이 처음�
 
 # Preliminary
 
-`I ∈ R^(W×H×3)`를 W인 폭과 H인 높이를 가진 이미지라고 해보면 이 논문의 목표는 keypoint 히트맵 `Y' ∈ [0, 1]^(W/R × H/R × C)`를 생성하는 것이다. 여기서 R은 `output stride`이고 C는 keypoint 유형의 수다. keypoint의 유형은 사람의 자세를 추정하는데에서 C=17(사람 관절), object detection에서 C=80 범주를 포함한다. 그리고 기본적으로 R=4이다. 예측값 `Y'|x,y,z = 1`은 keypoint이고 `Y'|x,y,z = 0`은 background이다. 이미지 I로부터 Y'를 예측하기 위해 여러개의 fully convolution encoder-decoder network를 사용한다. 클래스 c의 각 groud truth인 keypoint `p ∈ R^2`에 대해 저해상도 `p' = [p/R]`를 계산한다. gaussian kernel인
+`I ∈ R^(W×H×3)`를 W인 폭과 H인 높이를 가진 이미지라고 해보면 이 논문의 목표는 keypoint 히트맵 `Y' ∈ [0, 1]^(W/R × H/R × C)`를 생성하는 것이다. 여기서 R은 `output stride`이고 C는 keypoint 유형의 수다. keypoint의 유형은 사람의 자세를 추정하는데에서 C=17(사람 관절), object detection에서 C=80 범주를 포함한다. 그리고 기본적으로 R=4이다. 예측값 `Y'|x,y,z = 1`은 keypoint이고 `Y'|x,y,z = 0`은 background이다. 이미지 I로부터 Y'를 예측하기 위해 여러개의 fully convolution encoder-decoder network를 사용한다. 클래스 c의 각 ground truth인 keypoint `p ∈ R^2`에 대해 저해상도 `p' = [p/R]`를 계산한다. gaussian kernel인
 
 
 
