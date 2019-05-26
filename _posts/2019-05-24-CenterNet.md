@@ -101,11 +101,11 @@ object detection을 위해서 keypoint estimation을 사용하는 것이 처음�
 
 
 - `α,β` : focal loss의 hyper parameter
-- `N` : 이미지 I의 keypoint의 수이다. N은 모든 양수의 focal los를 1로 정규화하기 위해 선택된다.
+- `N` : 이미지 I의 keypoint의 수이다. N은 모든 양수의 focal loss를 1로 정규화하기 위해 선택된다.
 - Law and Deng을 따라서 `α` = 2, `β` = 4 로 정했다.
 - output stride에 의해 발생된 수학적 오류를 복구하기 위해서 local offset을 각 중심점마다 추가로 예측한다. : `O' ∈ R^(W/R x H/R x 2)`
 
-모든 클래스 c는 동일한 offset 예측을 공유한다. offset은 L1 loss로 훈련된다. 감독자는 오직 keypoint 위치 `p'`에서만 작동하고 다른 모든 위치는 무시된다. 다음 섹션에서 keypoint 추정을 범용 object detector로 확장하는 방법을 보여준다.
+모든 클래스 c는 동일한 offset 예측을 사용한다. offset은 L1 loss로 훈련된다. 감독자는 오직 keypoint 위치 `p'`에서만 작동하고 다른 모든 위치는 무시된다. 다음 섹션에서 keypoint 추정을 범용 object detector로 확장하는 방법을 보여준다.
 
 
 
@@ -117,7 +117,7 @@ object detection을 위해서 keypoint estimation을 사용하는 것이 처음�
 
 # Objects as Points
 
-범주 C(k)를 갖는 대상 k의 bounding box가 `x1`,`y1`,`x2`,`y2` 라고 하자. 중심점은 `p(k) = ((x1+x2)/2,(y1+y2)/2)`에 놓여있다. 예측 keypoint `Y'`을 사용해서 모든 중심점을 예측한다. 또한 각 object k에 대해 `s(k) = ((x2-x1),(y2-y1))`로 회귀한다. 계산적인 부담을 줄이기 위해 모든 object 범주에 대해 단일 크기 예측 `S' ∈ R^(W/R x H/R x 2)`을 사용한다. 그리고 목표2와 비슷한 중심점에 L1 loss를 사용한다.
+범주 C(k)를 갖는 대상 k의 bounding box가 `x1`,`y1`,`x2`,`y2` 라고 하자. 중심점은 `p(k) = ((x1+x2)/2,(y1+y2)/2)`에 놓여있다. 예측 keypoint `Y'`을 사용해서 모든 중심점을 예측한다. 또한 각 object k에 대해 `s(k) = ((x2-x1),(y2-y1))`로 회귀한다.(w,h) 계산적인 부담을 줄이기 위해 모든 object 범주에 대해 단일 크기 예측 `S' ∈ R^(W/R x H/R x 2)`을 사용한다. 그리고 L1 loss를 사용한다.
 
 
 
@@ -125,7 +125,7 @@ object detection을 위해서 keypoint estimation을 사용하는 것이 처음�
 
 
 
-scale을 표준화하지 않고 원시 픽셀 좌표를 직접 사용한다. 대신 loss를 일정한 λsize로 조정한다. 전반적인 교육 목표는
+scale을 표준화하지 않고 원본 픽셀 좌표를 직접 사용한다. 대신 loss를 일정한 λsize로 조정한다. 전반적인 교육 목표는
 
 
 
@@ -159,7 +159,7 @@ scale을 표준화하지 않고 원시 픽셀 좌표를 직접 사용한다. 대
 
 ## Human pose estimation
 
-사람의 자세를 추정하는 것은 모든 사람에 대해 k개의 2D 사람 관절 위치를 추정하는 것을 목표로 한다 (COCO k = 17). 포즈를 중심점의 k x 2 차원 속성으로 간주하고 각 keypoint를 중심점에 대한 간격을 띄우는 방식으로 매개변수화 한다. 직접적으로 L1 loss를 갖는 픽셀 단위의 관절 offset `J' ∈ R^(W/R x H/R x k x 2)`로 회귀한다. 그리고 보이지 않는 keypoint는 무시한다. 결과적으로 `slow-RCNN`과 유사한 회귀 기반의 1단계 사람 자세 추정기가 된다. keypoint를 다시 정의하기 위해서, 우리는 `standard bottom-up multi-human pose extimation`을 사용해서 k 개의 사람 관절 히트맵 `Φ' ∈ R^(W/R × H/R × k)` 을 추정한다. 중심 검출과 유사한 `focal loss`와 `local pixel offset`을 가진 사람의 관절 히트맵을 훈련한다.
+사람의 자세를 추정하는 것은 모든 사람에 대해 k개의 2D 사람 관절 위치를 추정하는 것을 목표로 한다 (COCO k = 17). 포즈를 중심점의 k x 2 차원 속성으로 간주하고 각 keypoint를 중심점으로부터 간격을 띄우는 방식으로 매개변수화 한다. 직접적으로 L1 loss를 갖는 픽셀 단위의 관절 offset `J' ∈ R^(W/R x H/R x k x 2)`로 회귀한다. 그리고 보이지 않는 keypoint는 무시한다. 결과적으로 `slow-RCNN`과 유사한 회귀 기반의 1단계 사람 자세 추정기가 된다. keypoint를 다시 정의하기 위해서, 우리는 `standard bottom-up multi-human pose extimation`을 사용해서 k 개의 사람 관절 히트맵 `Φ' ∈ R^(W/R × H/R × k)` 을 추정한다. 중심 검출과 유사한 `focal loss`와 `local pixel offset`을 가진 사람의 관절 히트맵을 훈련한다.
 
 그러면 이 히트맵에서 가장 가깝게 검출된 keypoint에 초기 예측을 스냅한다. 여기서 중심 오프셋은 가장 가까운 사람에 개별 keypoint 탐지를 할당하는 그룹 큐 역할을 한다. 구체적으로 (x',y')가 검출된 중심점이라고 하자. `j= 1 ~ k`에 대한 모든 접합 위치 `l(j) = (x',y') + J'|x',y',j'`로 회귀한다. 또한 대응하는 히트맵 `Φ(..j)`로 부터 각 관절 유형에 대해 `confidence > 0.1`인 모든 keypoint 위치 `L(j) = {l'(ji)} (i = 1 ~ n(j))` 다음으로 회귀된 각 위치 lj를 검출된 물체의 바운딩 박스 내에서 관절 검출만을 고려하여 가장 가깝게 검출된
 
@@ -177,7 +177,7 @@ scale을 표준화하지 않고 원시 픽셀 좌표를 직접 사용한다. 대
 
 ## Hourglass
 
-`Hourglass Network`는 input을 4배씩 downsampling하고 순차적으로 두개의 Hourglass modules을 downsampling한다. 각 Hourglass modules는 skip connection을 사용하는 대칭 `5 layer down- and up-convolution network`다. 이 네트워크는 꽤 큰 모델이지만 일반적으로 최상의 keypoint 추정 성능을 가지고 있다.
+`Hourglass Network`는 input을 4배씩 downsampling하고 순차적인 두개의 Hourglass modules을 따른다. 각 Hourglass modules는 skip connection을 사용하는 대칭 `5 layer down- and up-convolution network`다. 이 네트워크는 꽤 큰 모델이지만 일반적으로 최상의 keypoint 추정 성능을 가지고 있다.
 
 ## ResNet
 
