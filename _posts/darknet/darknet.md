@@ -95,3 +95,10 @@ sudo apt-get install graphviz
 
 doxywizard
 ```
+
+---
+
+yolo의 방식은 classification과 bounding box를 동시에 찾는것이고 미리 학습된 모델을 사용하는 것이 특징이다. end to end가 되지않기에 후처리가 필요하며 그에 반해서 성능이 괜찮다. 검출시 중간마다 3번의 detection을 하고 그 3개의 값을 전부 이용해서 x,y,w,h,confidence,class를 예측한다.
+
+`output` : (n_anchor x (n_class + 5) ,13 ,13)
+`post processing` : (13 x 13 x n_anchor ,n_class + 5)
