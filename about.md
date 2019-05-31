@@ -16,7 +16,7 @@ Motto : JUST DO IT
 일단 해보자
 ```
 
-* * *
+---
 
 ### 학력
 - 신일중학교 졸업
@@ -24,7 +24,7 @@ Motto : JUST DO IT
 - 한림대학교 재학중(4학년)
 - 한림대학교 학석사
 
-* * *
+---
 
 ### 회사경험
 - 주식회사 프론트유(2018.7 ~ 2018.8)
@@ -35,7 +35,14 @@ Motto : JUST DO IT
 > 앞으로 Git을 많이 사용하는 계기가 될 것 이라고 생각합니다.
 
 - 주식회사 프론트유(2019.1 ~ 2019.2)
-- 라즈베리파이를 이용해 Human Folloing Robot 개발
+- 라즈베리파이를 이용해 Human Folloing Robot 개발 [[Here](https://jjeamin.github.io/pi/2019/02/07/human_following_robot/)]
 
+---
 
-**추후 작성할 예정**
+### 교내활동
+- [해커톤](https://github.com/jjeamin/Hackathon)
+- [캡스톤](https://github.com/BJ-Lim/Capstone_Design)
+- 연구실
+- [연구 동아리](https://github.com/jeonggunlee/MichinLearning)
+
+---
