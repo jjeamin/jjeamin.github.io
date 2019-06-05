@@ -6,17 +6,19 @@ date:   2019-02-12 13:10 -0400
 categories: pi
 ---
 
-## 구성
+[ [깃허브](https://github.com/jjeamin/Raspi_QRread) ]
+
+# 구성
 - Raspberry PI 3(라즈비안)
 - PI camera
 
-## requirement
+# requirement
 - python 2.7
 - opencv 4.0.0
 - zbar
 - pyzbar
 
-### 패키지 설치
+## 패키지 설치
 zbar
 
 ```
@@ -29,7 +31,10 @@ pyzbar
 pip install pyzbar
 ```
 
-### qr.py
+---
+# CODE
+
+## qr.py
 
 ```python
 import cv2
@@ -56,9 +61,11 @@ cv2.destroyAllWindows()
 
 ```
 
-### 기존 human_following_robot 코드 변경
+단순하게 QR code를 읽는 코드이다.
 
-#### 기존 소스
+## 기존 [human_following_robot](https://jjeamin.github.io/pi/2019/02/07/human_following_robot/) 코드 변경
+
+### 기존 소스
 
 ``` python
 def detectAndDisply(img,cascade):
@@ -85,7 +92,7 @@ def detectAndDisply(img,cascade):
 
 ```
 
-#### 변경 소스
+### 변경 소스
 
 ``` python
 def detectAndDisply(img):
@@ -105,7 +112,7 @@ def detectAndDisply(img):
 
 ```
 
-### 결과
+# 결과
 - 얼굴인식보다 속도가 매우 빠르다.
 - 간단한 코드
 
