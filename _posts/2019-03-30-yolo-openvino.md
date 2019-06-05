@@ -81,7 +81,9 @@ python mo_tf.py
 - input shape는 summary에서 봤듯이 batch size가 -1로 되어있었기 때문에 잘 조정하시면 됩니다.
 - bin,xml 이 잘 만들어졌으면 라즈베리파이로 가져가서 실행을 시켜봅시다.
 
+
 ---
+
 
 # YOLOv1,v2
 yolov1,v2를 사용하고 싶을때 보기
