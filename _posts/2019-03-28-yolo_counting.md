@@ -13,6 +13,8 @@ categories: yolo
 
 YOLO를 이용하여 `people counting`을 해보려고 합니다. 일단 `people counting`하기 전에 yolo를 이용해 car를 counting하는 소스 부터 찾아서 분석해 보겠습니다.
 
+---
+
 # YOLO Traffic Counter
 
 [[깃허브](https://github.com/guillelopez/python-traffic-counter-with-yolo-and-sort)]

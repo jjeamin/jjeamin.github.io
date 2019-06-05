@@ -19,18 +19,28 @@ categories: Reinforcement
   + 컨텐츠
   + 광고
 
+
+
 ![example](https://github.com/jjeamin/jjeamin.github.io/raw/master/_posts/post_img/reinforcement/example.JPG)
+
+
+
+---
 
 ## Dependency
 - python
 - tensorflow
 - OpenAI Gym
 
+---
+
 ## OpenAI Gym
 환경을 만들어주는 프레임 워크
 - input : action
 - output : state,reward
 - game
+
+---
 
 ## source
 

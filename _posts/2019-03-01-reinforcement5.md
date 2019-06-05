@@ -11,6 +11,8 @@ categories: Reinforcement
 - tensorflow
 - OpenAI Gym
 
+---
+
 ## Q-Network
 
 
@@ -20,6 +22,8 @@ categories: Reinforcement
 
 
 network를 이용하자
+
+---
 
 ## algorithm
 
@@ -46,6 +50,8 @@ while not done:
 ```python
 np.identity(16)[s1:s2 + 1]
 ```
+
+---
 
 ## source
 

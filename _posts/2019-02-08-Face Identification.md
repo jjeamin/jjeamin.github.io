@@ -242,6 +242,8 @@ cv2.destroyAllWindows()
 
 
 
+---
+
 # 참조
 - [https://www.pyimagesearch.com/2018/06/25/raspberry-pi-face-recognition/](https://www.pyimagesearch.com/2018/06/25/raspberry-pi-face-recognition/)
 - [https://github.com/jjeamin/faceid](https://github.com/jjeamin/faceid)

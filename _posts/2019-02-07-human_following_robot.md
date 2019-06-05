@@ -24,6 +24,8 @@ categories: pi
 라즈비안 설치와 원격 설정과 같은 기본적인 설정은 완료되었다는 가정하에 진행합니다.
 ```
 
+---
+
 ## 0. git
 git이 없다면 설치해줍니다.
 ```
@@ -236,10 +238,14 @@ def back_right
 	+ -> **Threading 추가후** 어느정도 속도가 나온다.
 - 인식은 잘되지만 동작하는 부분을 잘 조정해야 할 것 같다.
 
+---
+
 # 참조
 - [https://www.pyimagesearch.com/](https://www.pyimagesearch.com/)
 
 - [https://github.com/ankitdhall/Arduino-OpenCV-Human-Follower](https://github.com/ankitdhall/Arduino-OpenCV-Human-Follower)
+
+---
 
 # 부록
 QR코드로 인식하게 하기

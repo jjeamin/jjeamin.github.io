@@ -11,6 +11,8 @@ categories: Reinforcement
 - tensorflow
 - OpenAI Gym
 
+---
+
 ## Q-Learning(Table)
 - 행동 선택 후 실행
 - 보상받기
@@ -25,6 +27,8 @@ Q(s,a) <= r + maxQ(s',a')
 ```
 s => s'
 ```
+
+---
 
 ## Deterministic vs Stochastic
 - Deterministic : 행동이 일정함
@@ -44,6 +48,8 @@ env = gym.make('FrozenLake-v0')
 a = 0.1
 Q(s,a) <= (1-a)Q(s,a) + a[r + maxQ(s',a')]
 ```
+
+---
 
 ## source
 ```python

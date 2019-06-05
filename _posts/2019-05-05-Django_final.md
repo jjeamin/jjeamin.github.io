@@ -245,4 +245,4 @@ vi bookmark_list.html
 
 - html 작성
 
-## Admin에서 작성
+## Admin에서 데이터 작성~

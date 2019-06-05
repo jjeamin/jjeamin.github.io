@@ -55,5 +55,7 @@ bn = tf.layers.batch_normalization(layer, training=training)
 - 초기값을 신중하게 잡지않아도 된다.
 - dropout을 쓸필요가 딱히 없다.
 
+---
+
 # 참조
-[https://www.youtube.com/watch?v=TDx8iZHwFtM&index=22&list=PLlMkM4tgfjnJhhd4wn5aj8fVTYJwIpWkS](https://www.youtube.com/watch?v=TDx8iZHwFtM&index=22&list=PLlMkM4tgfjnJhhd4wn5aj8fVTYJwIpWkS)
+- [https://www.youtube.com/watch?v=TDx8iZHwFtM&index=22&list=PLlMkM4tgfjnJhhd4wn5aj8fVTYJwIpWkS](https://www.youtube.com/watch?v=TDx8iZHwFtM&index=22&list=PLlMkM4tgfjnJhhd4wn5aj8fVTYJwIpWkS)

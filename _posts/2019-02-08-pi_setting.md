@@ -26,6 +26,7 @@ sudo raspi-config
 sudo apt-get install ibus ibus-hangul fonts-unfonts-core
 ```
 
+---
 
 ## 화면 캡쳐
 
@@ -33,6 +34,7 @@ sudo apt-get install ibus ibus-hangul fonts-unfonts-core
 $ scrot
 ```
 
+---
 
 ## 파이썬 패키지 경로
 
@@ -44,11 +46,15 @@ $ /usr/lib/python2.7/dist-packages
 $ /usr/lib/python3.5/dist-packages
 ```
 
+---
+
 ## 용량 확인
 
 ```
 df -h
 ```
+
+---
 
 ## 메모리 절약
 1.스왑 사이즈 증가시키기
@@ -84,6 +90,8 @@ $ reboot
 ```
 pip --no-cache-dir install packages
 ```
+
+---
 
 ## 부팅시 코드 자동실행
 

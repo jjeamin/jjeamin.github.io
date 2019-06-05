@@ -11,6 +11,8 @@ categories: Reinforcement
 - tensorflow
 - OpenAI Gym
 
+---
+
 ## CartPole Game Start
 
 ```python
@@ -31,6 +33,8 @@ for _ in range(10):
         reward_sum = 0
         env.reset()
 ```
+
+---
 
 ## source
 - 기존 FrozenLake는 input이 한개였고 CartPole은 input의 값이 **4개**  이기 때문에 변경

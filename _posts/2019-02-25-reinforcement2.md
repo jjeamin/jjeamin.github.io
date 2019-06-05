@@ -11,11 +11,15 @@ categories: Reinforcement
 - tensorflow
 - OpenAI Gym
 
+---
+
 ## Q-Learning(Table)
 
 ![q](https://github.com/jjeamin/jjeamin.github.io/raw/master/_posts/post_img/reinforcement/q.JPG)
 
 최대로 보상 받을수 있는 방향을 알려줘~
+
+---
 
 ### 원리
 
@@ -29,6 +33,8 @@ Q(s,a) <= r + maxQ(s',a')
 ```
 
 state,action,reward ~ state,action,reward
+
+---
 
 ### 알고리즘
 - 행동 선택 후 실행

@@ -28,10 +28,10 @@ tags: index
 - [모두의 딥러닝 DQN](https://jjeamin.github.io/reinforcement/2019/03/02/DQN1/)
 
 # paper review
-- [MCNN](https://jjeamin.github.io/people/counting/2019/03/08/MCNN/)/[code](https://github.com/jjeamin/crowd_counting_MCNN)
+- [MCNN](https://jjeamin.github.io/people/paper/2019/03/08/MCNN/)/[code](https://github.com/jjeamin/crowd_counting_MCNN)
 - [YOLO](https://jjeamin.github.io/paper/2019/03/23/yolo/)
 - [YOLOv2](https://jjeamin.github.io/paper/2019/04/20/yolo_v2/)
-- [SORT](https://jjeamin.github.io/paper/2019/04/25/sort/) 
+- [SORT](https://jjeamin.github.io/paper/2019/04/25/sort/)
 - [CenterNet](https://jjeamin.github.io/paper/2019/05/19/CenterNet/)
 
 # GAN - tensorflow

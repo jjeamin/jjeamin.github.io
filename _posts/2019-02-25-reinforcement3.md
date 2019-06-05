@@ -11,6 +11,8 @@ categories: Reinforcement
 - tensorflow
 - OpenAI Gym
 
+---
+
 ## Q-Learning(Table)
 - 행동 선택 후 실행
 - 보상받기
@@ -25,6 +27,8 @@ Q(s,a) <= r + maxQ(s',a')
 ```
 s => s'
 ```
+
+---
 
 ## Exploit vs Exploration
 - action을 조정해준다.
@@ -42,6 +46,8 @@ s => s'
 - **랜덤한 방향**
 - 반복될수록 랜덤 노이즈는 작아짐(영향x)
 
+---
+
 ## discount future reward
 - 보상 값이 같을때 어디로 갈지 애매하다.
 - 미래 보상을 discount시킨다.
@@ -50,7 +56,7 @@ s => s'
 
 ---
 
-바뀐부분
+## 바뀐부분
 - action(random noise)
 
 ```python
@@ -62,6 +68,8 @@ action = np.argmax(Q[state, :] + np.random.randn(1,env.action_space.n) / (i+1))
 ```python
 Q[state, action] = reward + dis * np.max(Q[new_state, :])
 ```
+
+---
 
 ## source
 

@@ -65,7 +65,7 @@ cv2.destroyAllWindows()
 
 ---
 
-# 기존 [human_following_robot](https://jjeamin.github.io/pi/2019/02/07/human_following_robot/) 코드 변경
+## 기존 [human_following_robot](https://jjeamin.github.io/pi/2019/02/07/human_following_robot/) 코드 변경
 
 ## 기존 소스
 
@@ -119,6 +119,8 @@ def detectAndDisply(img):
 # 결과
 - 얼굴인식보다 속도가 매우 빠르다.
 - 간단한 코드
+
+---
 
 # 참조
 - [https://www.pyimagesearch.com/2018/05/21/an-opencv-barcode-and-qr-code-scanner-with-zbar/](https://www.pyimagesearch.com/2018/05/21/an-opencv-barcode-and-qr-code-scanner-with-zbar/)
