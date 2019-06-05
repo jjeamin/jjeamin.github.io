@@ -15,14 +15,16 @@ YOLO를 이용하여 `people counting`을 해보려고 합니다. 일단 `people
 
 # YOLO Traffic Counter
 
-*[깃허브](https://github.com/guillelopez/python-traffic-counter-with-yolo-and-sort)*
+[[깃허브](https://github.com/guillelopez/python-traffic-counter-with-yolo-and-sort)]
 
 이미 학습되어있는 YOLO를 이용하고 opencv를 이용해서 차량을 검출하고 counting 해주는 소스입니다.
 
-## Dependency
+---
+
+# Dependency
 - python 3.7
 
-## requirement
+# requirement
 - opencv
 - numba
 - sklearn
@@ -35,7 +37,7 @@ pip install opencv-contrib-python
 pip install imutils numba filterpy sklearn
 ```
 
-## 실행
+# 실행
 
 - weight 파일을 yolo-coco 폴더에 넣는다.
 
@@ -55,14 +57,14 @@ python main.py --input input/highway.mp4 --output output/highway.avi --yolo yolo
 
 ---
 
-## 수정
+# 수정
 - 코드 주석 한글화
 - 이미지 저장하는것 해제
 - tqdm 추가로 변환 상태바 추가
 
-*[깃허브](https://github.com/jjeamin/python-traffic-counter-with-yolo-and-sort)*
+[[깃허브](https://github.com/jjeamin/python-traffic-counter-with-yolo-and-sort)]
 
-## 참고해서 직접 코딩할 것
+# 참고해서 직접 코딩할 것
 - 중심점으로 추적선을 만들지 않고 그보다 조금더 앞에 만든다. (중간 쯤에 트럭을 검출 못함)
 - 사람만 카운팅하게 할 것
 - 동영상말고 캠으로 동작하게 할 것
@@ -72,14 +74,14 @@ python main.py --input input/highway.mp4 --output output/highway.avi --yolo yolo
 
 # YOLO People Counting
 
-*[깃허브](https://github.com/jjeamin/People_counting_yolo)*
+[[깃허브](https://github.com/jjeamin/People_counting_yolo)]
 
-## 구성
+# 구성
 - raspberry pi 3 (rasbian)
 - webcam
 - NCS2
 
-## requirement
+# requirement
 - openvino toolkit [[설치방법](https://jjeamin.github.io/pi/2019/03/08/NCS2/)]
 - opencv
 - numba
@@ -117,7 +119,9 @@ python3 -m pip ~
 python3 -m pip install sklearn tqdm imutils
 ```
 
-## source
+---
+
+# source
 - [깃허브](https://github.com/jjeamin/People_counting_yolo)
 
 ### /test
@@ -169,6 +173,9 @@ python3 -m pip install sklearn tqdm imutils
 - YOLOv3 + NCS2 + SORT
 
 *추가적으로 사람만 판별하는 추론기를 만들어야 하고 그 후에 사람을 카운팅*
+*현재 계속 진행중이다..*
+
+---
 
 # 참조
 - [https://github.com/guillelopez/python-traffic-counter-with-yolo-and-sort](https://github.com/guillelopez/python-traffic-counter-with-yolo-and-sort)

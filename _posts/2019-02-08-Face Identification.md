@@ -5,18 +5,19 @@ summary: "Face_recognition을 이용한 얼굴 인식 using Raspberry"
 date:   2019-02-12 09:10 -0400
 categories: pi
 ---
-## 얼굴검출 방식
+# 얼굴검출 방식
 1. 얼굴을 찾습니다.
 2. 고유한 특징을 찾습니다.
 3. 학습시킵니다.
 4. 누구인지 알아냅니다.
 
+---
 
-## Dependency
+# Dependency
 - Raspberry PI 3(라즈비안)
 - PI camera
 
-## requirement
+# requirement
 - python 2.7
 - opencv 4.0.0 [[<span style="color:blue">다운로드 방법</span>]](https://webnautes.tistory.com/916)
 - Face_recognition(deep learning)
@@ -25,7 +26,9 @@ categories: pi
 라즈비안 설치와 원격 설정과 같은 기본적인 설정은 완료되었다는 가정하에 진행합니다.
 ```
 
-### 0. git
+---
+
+## 0. git
 git이 없다면 설치해줍니다.
 ```
 sudo apt-get install git-core
@@ -33,7 +36,7 @@ git config --global user.name “NewUser"
 git config --global user.email newuser@example.com
 ```
 
-### 1. 패키지 설치
+## 1. 패키지 설치(공식적)
 라즈베리파이는 메모리가 1GB 밖에 되지않기 때문에 파이썬 라이브러리를 설치하기가 곤란합니다.
 
 ```
@@ -53,10 +56,13 @@ git config --global user.email newuser@example.com
 
 약 라이브러리 설치도중 오류가 발생한다면 오류 마지막 부분을 잘 읽어본 뒤에 찾으시길 바랍니다. (삽질은 끝이없다...)
 
-### 2. 패키지 설치(직접 한 것)
-** opencv 설치가 끝난 상태로 진행했습니다 **
+---
 
-#### 설치전 초기설정
+## 2. 패키지 설치(직접 한 것)
+
+*opencv 설치가 **끝난 상태**로 진행했습니다*
+
+### 설치전 초기설정
 
 ```
 $ sudo vi /etc/dphys-swapfile
@@ -86,7 +92,7 @@ $ reboot
 
 부팅모드로 진입했다면
 
-#### 툴설치
+### 툴설치
 
 ```
 $ sudo apt-get update
@@ -95,14 +101,14 @@ $ sudo apt-get install libgtk-3-dev
 $ sudo apt-get install libboost-all-dev
 ```
 
-#### pip 설치
+### pip 설치
 
 ```
 $ wget https://bootstrap.pypa.io/get-pip.py
 $ sudo python get-pip.py
 ```
 
-#### 패키지 설치
+### 패키지 설치
 
 ```
 $ pip install numpy
@@ -115,13 +121,15 @@ $ pip --no-cache-dir install face_recognition
 
 여기까지 하는데 하루의 반은 쓴거 같습니다.
 
-#### face_recognition
+---
+
+## 3. face_recognition
 - [https://github.com/ageitgey/face_recognition](https://github.com/ageitgey/face_recognition)
 - dlib(deeplearning)
 
 
-#### 테스트
-출처 : [깃허브](https://github.com/jjeamin/face_recognition/blob/master/examples/facerec_from_webcam_faster.py)
+## 4. 테스트
+출처 : [깃허브](https://github.com/ageitgey/face_recognition/blob/master/examples/facerec_from_webcam_faster.py)
 
 ```python
 import face_recognition
@@ -225,7 +233,7 @@ cv2.destroyAllWindows()
 
 이미지를 한장만 가지고 학습이 잘되서 좋은거 같습니다. 테스트를 할 때는 자신의 이미지를 사용해야합니다.
 
-#### 결과
+# 결과
 - 실행시간이 조금 걸립니다.
 - 인식 후 초당 1프레임 정도 나옵니다.
 

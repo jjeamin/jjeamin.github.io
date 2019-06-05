@@ -5,10 +5,10 @@ summary: "객체 추적"
 date:   2019-02-13 10:10 -0400
 categories: opencv
 ---
-## requirement
+# requirement
 - OpenCV
 
-### HSV
+# HSV
 - H(Hue) : 색조
 - S(Saturation) : 채도
 - V(Value) : 명도
@@ -25,8 +25,7 @@ hsv = cv2.cvtColor(frame,cv2.COLOR_BGR2HSV)
 
 
 
-
-### cv2.inRange()
+## cv2.inRange()
 
 ```python
 mask = cv2.inRange(img,color_lower,color_upper)
@@ -34,7 +33,7 @@ mask = cv2.inRange(img,color_lower,color_upper)
 
 lower ~ upper 영역의 색을 남긴다.
 
-### cv2.erode()
+## cv2.erode()
 
 ```python
 mask = cv2.erode(img,kernel,iterations=1)
@@ -46,7 +45,7 @@ mask = cv2.erode(img,kernel,iterations=1)
 
 이미지의 경계부분을 침식시켜서 배경 이미지로 전환합니다. 즉, 이미지가 반복횟수를 늘릴수록 가늘어지게 됩니다.
 
-### cv2.dilate()
+## cv2.dilate()
 
 ```
 mask = cv2.dilate(img,kernel,iterations=1)
@@ -60,11 +59,11 @@ mask = cv2.dilate(img,kernel,iterations=1)
 
 ---
 
-### Image Contour
+# Image Contour
 - 컨투어란 동일한 픽셀값을 가지고 있는 영역의 경계선입니다.
 - 윤곽선,외형을 파악하는데 사용됩니다.
 
-#### cv2.findcontours()
+## cv2.findcontours()
 
 ```python
 cnts = cv2.findcontours(img,option,method)
@@ -80,7 +79,7 @@ cnts = cv2.findcontours(img,option,method)
 - method : 컨투어를 표현하는 방법
   + cv2.CHAIN_APPROX_SIMPLE : 라인을 그릴수 있는 포인트만 반환
 
-#### cv2.boundingRect()
+## cv2.boundingRect()
 
 ```python
 x,y,w,h = cv2.boundingRect(cnt)
@@ -89,7 +88,7 @@ cv2.rectangle(frame,(x,y),(x+w,y+h),(0, 0, 255))
 
 컨투어 영역의 사각형 좌표를 찾아줍니다. 사각형 영역까지 그려주었습니다.
 
-### cv2.minEnclosingCircle()
+## cv2.minEnclosingCircle()
 
 ```python
 (x,y),radius = cv2.minEnclosingCircle(cnt)
@@ -108,10 +107,10 @@ cv2.circle(frame,center,radius,7)
 
 ---
 
-### Tracking
+# Tracking
 추적하는 경로를 시각화하려면 매번 검출된 영역의 중심 위치의 변화값을 잘 저장하고 잘 처리해야합니다. 그렇기 때문에 자료구조 **deque** 를 사용합니다.
 
-#### deque
+## deque
 deque는 양방향 queue 입니다. 앞이나 뒤에서 값을 추가하거나 값을 출력할수 있습니다.
 
 **선언**

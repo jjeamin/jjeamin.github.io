@@ -5,14 +5,16 @@ summary: "Cascade Training을 이용한 Human Following Robot using Raspberry"
 date:   2019-02-07 12:00 -0400
 categories: pi
 ---
-[깃허브](https://github.com/jjeamin/raspi-humanfollow)
-## Dependency
+
+[[깃허브](https://github.com/jjeamin/raspi-humanfollow)]
+
+# Dependency
 - Raspberry PI 3(라즈비안)
 - DC 모터 2개
 - L293D
 - PI camera
 
-## requirement
+# requirement
 - python 2.7
 - opencv 4.0.0 [[<span style="color:blue">다운로드 방법</span>]](https://webnautes.tistory.com/916)
 - RPI.GPIO
@@ -21,7 +23,8 @@ categories: pi
 ```
 라즈비안 설치와 원격 설정과 같은 기본적인 설정은 완료되었다는 가정하에 진행합니다.
 ```
-### 0. git
+
+## 0. git
 git이 없다면 설치해줍니다.
 ```
 sudo apt-get install git-core
@@ -35,7 +38,7 @@ git clone https://github.com/jjeamin/raspi-humanfollow.git
 
 
 
-### 1. 라즈베리파이 GPIO
+## 1. 라즈베리파이 GPIO
 
 
 
@@ -55,7 +58,7 @@ git clone https://github.com/jjeamin/raspi-humanfollow.git
 
 위와 같은 방식으로 라즈베리파이와 DC모터를 결합합니다. L293D에서 **보라색선과 파란색선** 를 어디에 꽂았는지를 기억해 주어야합니다.
 
-### 2. test/motor_test.py
+## 2. test/motor_test.py
 모터가 잘동작하는지 테스트해줍니다.(항상 테스트가 중요한거 같습니다...)
 자신이 보라색선 오른쪽 맨 끝에 꽂은 번호를 Motor1E에 적고 나머지를 왼쪽부터 차례대로 Motor1A,Motor1B에 적습니다. (파란색선은 반대 입니다)
 
@@ -116,10 +119,10 @@ GPIO.output(Motor2E,GPIO.LOW)
 GPIO.cleanup()
 ```
 
-### 3. PI camera
+## 3. PI camera
 설정방법 :  [https://webnautes.tistory.com/929](https://webnautes.tistory.com/929)
 
-### 4. test/picamera_test.py
+## 4. test/picamera_test.py
 ```python
 import cv2
 
@@ -145,7 +148,7 @@ cam = cv2.VideoCapture(0)
 cam = cv2.VideoCapture(-1)
 ```
 
-### 5. Cascade classifier
+## 5. Cascade classifier
 - Cascade classifier란 긍정데이터와 부정데이터를 학습시켜 특징을 찾아내는 분류기법이다.
 
 - Haar Cascade
@@ -159,7 +162,7 @@ cam = cv2.VideoCapture(-1)
   + 영역의 상대적인 밝기차를 2진수로 코딩한 인덱스입니다.
   + 우리는 이것을 사용합니다.
 
-### 6. human_following_robots.py
+## 6. human_following_robots.py
 haar 폴더에 인터넷에 기본적으로 제공되는 학습된 cascade 파일이 들어있습니다. 각자 상황에 맞게 사용하지면 됩니다.(눈, 하반신, 상반신, 얼굴 등)
 ```
 cascade = cv2.CascadeClassifier('./haar lbpcascade_frontalface_improved.xml')
@@ -196,7 +199,7 @@ while 1:
 cv2.destroyAllWindows()
 cam.stop()
 ```
-### 7. motor.py
+## 7. motor.py
 
 모터의 동작을 제어한다.
 
@@ -218,17 +221,17 @@ def back_left
 def back_right
 ```
 
-### 8. 자신만의 cascade 만들기
+## 8. 자신만의 cascade 만들기
 이 홈페이지를 따라하면 쉽게 할 수 있습니다.
 
 [https://pythonprogramming.net/haar-cascade-object-detection-python-opencv-tutorial/](https://pythonprogramming.net/haar-cascade-object-detection-python-opencv-tutorial/)
 
-### 9. FPS 향상 시키기
+## 9. FPS 향상 시키기
 - 출처 : [https://www.pyimagesearch.com/2015/12/21/increasing-webcam-fps-with-python-and-opencv/](https://www.pyimagesearch.com/2015/12/21/increasing-webcam-fps-with-python-and-opencv/)
 
 - 정리 : [https://jjeamin.github.io/pi/2019/02/14/fps/](https://jjeamin.github.io/pi/2019/02/14/fps/)
 
-### 10. 결과
+## 10. 결과
 - 속도가 느린것은 어쩔수 없는 것 같다.
 	+ -> **Threading 추가후** 어느정도 속도가 나온다.
 - 인식은 잘되지만 동작하는 부분을 잘 조정해야 할 것 같다.

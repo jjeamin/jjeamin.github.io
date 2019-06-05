@@ -96,25 +96,3 @@ $ sudo vi /etc/profile/dbash_completion.sh
 ```
 /home/pi/경로/실행파일
 ```
-
-## 파이썬
-### os
-
-```python
-os.path.isdir(dir) //디렉토리 존재 여부
-os.path.exists(file) //파일 존재 여부
-```
-
-### 문자열 처리
-
-```python
-' '.join(list) //문자열 합치기
-str.split(' ') //문자열 나누기
-```
-
-### OpenCV
-텍스트 넣기
-```python
-cv2.putText(img,str,(100,100),cv2.FONT_HERSHEY_SIMPLEX,1.5,(0,0,255),2)
-```
-(이미지,메세지,위치,폰트,크기,색깔,두께)

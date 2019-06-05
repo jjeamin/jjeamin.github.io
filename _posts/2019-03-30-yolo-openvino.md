@@ -16,7 +16,9 @@ categories: openvino
 - openvino
 
 ---
+
 # YOLOv3
+yolov3를 사용할 경우에 보기
 
 ## YOLOv3 모델 다운로드 받기
 - [YOLOv3 weight](https://pjreddie.com/media/files/yolov3.weights)
@@ -82,13 +84,15 @@ python mo_tf.py
 ---
 
 # YOLOv1,v2
+yolov1,v2를 사용하고 싶을때 보기
+
 
 ## YOLOv1,v2 모델 다운로드 받기
 
 - [YOLOv1](https://pjreddie.com/darknet/yolov1/)
 - [YOLOv2](https://pjreddie.com/darknet/yolov2/)
 
-- [[config file](https://github.com/pjreddie/darknet)] 여기서 cfg폴더를 가져오면 됩니다.
+- [Config File](https://github.com/pjreddie/darknet) : 여기서 cfg폴더를 가져오면 됩니다.
 
 
 ## pb 변환기 실행
@@ -160,6 +164,8 @@ print("inference time : ",(end - start))
 
 - 코드가 간단하지만 추론엔진을 사용하지 않기 때문에 추론이 오래걸린다.
 
+---
+
 ## openvino IE엔진을 이용한 테스트
 
 **MYRIAD.. NCS2는 FP32는 지원하지 않습니다..**
@@ -219,7 +225,9 @@ print('inference time : ',end-start)
 
 
 
-처음 추론할 때 opencv가 느리게 보이지만 계속 추론시키면 시간 차이가 그렇게 크지 않습니다.
+**둘다 계속돌려보니까 알게된건데 처음 추론할 때 opencv가 느리게 보이지만 계속 추론시키면 시간 차이가 그렇게 크지 않습니다.**
+
+---
 
 # 참조
 
