@@ -164,8 +164,6 @@ end = time.time()
 print("inference time : ",(end - start))
 ```
 
-- 코드가 간단하지만 추론엔진을 사용하지 않기 때문에 추론이 오래걸린다.
-
 ---
 
 ## openvino IE엔진을 이용한 테스트
