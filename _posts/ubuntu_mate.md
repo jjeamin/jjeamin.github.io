@@ -61,3 +61,20 @@ reboot
 
 
 + 추후 하고싶은거 이것저것 진행 예정
+
+## SSH 설정
+
+```
+sudo apt-get install ssh
+```
+
+```
+sudo systemctl enable ssh
+```
+
+```
+sudo systemctl start ssh
+sudo systemctl status ssh
+```
+
+같은 망에 있는지 ip를 잘 확인해서 Host computer에서 동작시키면 된다.
