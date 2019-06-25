@@ -11,9 +11,13 @@ categories: contest
 장소 : 한동대학교
 날짜 : 2019-06-24 ~ 2019-06-26
 
+---
+
 # Dependency
 - ROS
 - raspberry pi 3 B+ (ubuntu mate)
+
+---
 
 # SSH 설정
 
@@ -23,6 +27,8 @@ sudo systemctl enable ssh
 sudo systemctl start ssh
 sudo systemctl status ssh
 ```
+
+---
 
 # 비밀번호 변경
 
@@ -46,18 +52,341 @@ ROBOT ㅡㅡ 메타 운영체제 ㅡㅡ Sensor
               APP
 ```
 
+- 노드(node) : 최소 단위의 실행 가능한 프로세스
+- 패키지(package) : 여러개의 노드를 묶어 놓은 것
+- 메세지(message) : 노드 간의 데이터를 주고받을 때 사용하는 데이터의 형태
+
+```
+노드1               노드2
+  |    ----토픽--->   |
+  |    <--서비스-->   |
+  |                   |
+  <----->파라미터<----->
+       read/write
+```
+
+- 토픽
+  + 단방향 publisher -> subscriber (S Localization And Mapping)
+  + subscriber가 여러명 일 수 있다.
+
+- 서비스
+  + 양방향 publisher <-> subscriber
+
+
+ROS에서 가장 기본이 되는 기술적인 포인트 : **노드 간의 메세지 통신**
+
+```
+  ------ 마스터 ------
+  |                  |
+노드1 <--접속정보--> 노드2
+      <-메세지통신->
+       (토픽/서비스)
+```
+
+
+
 ## 설치
 
 ```
 sudo apt-get update
 sudo apt-get upgrade
+
 wget https://raw.githubusercontent.com/ROBOTIS-GIT/robotis_tools/master/install_ros_kinetic.sh && chmod 755 ./install_ros_kinetic.sh && bash ./install_ros_kinetic.sh
 ```
+
+리눅스를 부팅할 때 먼저 실행되는 `.bashrc`를 확인해보면 어떤식으로 되어있는지 볼수 있다. 그리고 실행이 끝나면 catkin_ws 폴더가 생긴다. 우리의 workspace는
+
+```
+cd ~/catkin_ws/src
+cs                    # cd ~/catkin_ws/src
+```
+
+안에서 만든다.
+
+```
+catkin_create_pkg ros_tutorials_topic message_generation std_msgs roscpp
+```
+
+개발을 시작하기전에 패키지를 먼저 만들어 주어야한다.
+
+```
+cd ros_tutorials_topic
+ls
+vi package.xml
+```
+
+파일 수정
+
+```
+<?xml version="1.0"?>
+<package format="2">
+  <name>ros_tutorials_topic</name>
+  <version>0.0.0</version>
+  <description>The ros_tutorials_topic package</description>
+  <maintainer email="User@todo.todo">User</maintainer>
+  <license>TODO</license>
+  <buildtool_depend>catkin</buildtool_depend>
+  <build_depend>message_generation</build_depend>
+  <build_depend>roscpp</build_depend>
+  <build_depend>std_msgs</build_depend>
+  <build_export_depend>roscpp</build_export_depend>
+  <build_export_depend>std_msgs</build_export_depend>
+  <exec_depend>message_generation</exec_depend>
+  <exec_depend>roscpp</exec_depend>
+  <exec_depend>std_msgs</exec_depend>
+  <export></export>
+</package>
+```
+
+```
+vi CMakeLists.txt
+```
+
+내용 수정
+
+```c++
+cmake_minimum_required(VERSION 2.8.3)
+project(ros_tutorials_topic)
+## 캐킨 빌드를 할 때 요구되는 구성요소 패키지이다.
+## 의존성 패키지로 message_generation, std_msgs, roscpp이며
+## 이 패키지들이 존재하지 않으면 빌드 도중에 에러가 난다.
+find_package(catkin REQUIRED COMPONENTS
+  message_generation
+  roscpp
+)
+
+## 메시지 선언: MsgTutorial.msg
+add_message_files(
+  FILES
+  MsgTutorial.msg
+)
+
+## 의존하는 메시지를 설정하는 옵션이다.
+## std_msgs가 설치되어 있지 않다면 빌드 도중에 에러가 난다.
+generate_messages(
+  DEPENDENCIES
+  std_msgs
+)
+
+## 캐킨 패키지 옵션으로 라이브러리, 캐킨 빌드 의존성, 시스템 의존 패키지
+를 기술한다.
+catkin_package(
+  LIBRARIES ros_tutorials_topic
+  CATKIN_DEPENDS roscpp std_msgs
+)
+
+## 인클루드 디렉터리를 설정한다.
+include_directories(
+  ${catkin_INCLUDE_DIRS}
+)
+
+## topic_publisher 노드에 대한 빌드 옵션이다.
+## 실행 파일, 타깃 링크 라이브러리, 추가 의존성 등을 설정한다.
+add_executable(
+  topic_publisher
+  src/topic_publisher.cpp
+)
+
+add_dependencies(
+  topic_publisher
+  ${${PROJECT_NAME}_EXPORTED_TARGETS}
+  ${catkin_EXPORTED_TARGETS})
+
+target_link_libraries(
+  topic_publisher
+  ${catkin_LIBRARIES}
+)
+
+## topic_subscriber 노드에 대한 빌드 옵션이다.
+add_executable(
+  topic_subscriber
+  src/topic_subscriber.cpp
+)
+
+add_dependencies(
+  topic_subscriber
+  ${${PROJECT_NAME}_EXPORTED_TARGETS}
+  ${catkin_EXPORTED_TARGETS}
+)
+
+target_link_libraries(
+topic_subscriber
+${catkin_LIBRARIES}
+)
+```
+
+메세지 파일 작성
+
+```
+roscd ros_tutorials_topic
+mkdir msg
+cd msg
+vi MsgTutorial.msg
+```
+
+내용 수정
+
+```
+time stamp
+int32 data
+```
+
+퍼블리셔 노드 작성
+
+```
+roscd ros_tutorials_topic/src
+vi topic_publisher.cpp
+```
+
+내용 수정
+
+```c++
+#include "ros/ros.h"    // ROS 기본 헤더파일
+#include "ros_tutorials_topic/MsgTutorial.h"    // MsgTutorial 메시지 파일 헤더(빌드 후 자동 생성됨)
+
+int main(int argc, char **argv)                 
+{
+
+    ros::init(argc, argv, "topic_publisher");    // 노드명 초기화
+    ros::NodeHandle nh;    // ROS 시스템과 통신을 위한 노드 핸들 선언
+
+    // 퍼블리셔 선언, ros_tutorials_topic 패키지의 MsgTutorial 메시지 파일을 이용
+    // 퍼블리셔 ros_tutorial_pub 를 작성한다. 토픽명은 "ros_tutorial_msg" 이며,
+    // 퍼블리셔 큐(queue) 사이즈를 100개로 설정한다는 것이다
+
+    ros::Publisher ros_tutorial_pub = nh.advertise<ros_tutorials_topic::MsgTutorial>("ros_tutorial_msg", 100);
+
+    // 루프 주기를 설정한다. "10" 이라는 것은 10Hz를 말하는 것으로 0.1초 간격으로 반복된다.
+    ros::Rate loop_rate(10);
+    // MsgTutorial 메시지 파일 형식으로 msg 라는 메시지를 선언
+    ros_tutorials_topic::MsgTutorial msg;  
+
+  // 메시지에 사용될 변수 선언
+    int count = 0;                                   
+    while (ros::ok())
+    {
+        msg.stamp = ros::Time::now();    // 현재 시간을 msg의 하위 stamp 메시지에 담는다
+        msg.data  = count;    // count라는 변수 값을 msg의 하위 data 메시지에 담는다
+        ROS_INFO("send msg = %d", msg.stamp.sec);    // stamp.sec 메시지를 표시한다
+        ROS_INFO("send msg = %d", msg.stamp.nsec);    // stamp.nsec 메시지를 표시한다
+        ROS_INFO("send msg = %d", msg.data);    // data 메시지를 표시한다
+        ros_tutorial_pub.publish(msg);    // 메시지를 발행한다
+        loop_rate.sleep();    // 위에서 정한 루프 주기에 따라 슬립에 들어간다
+        ++count;    // count 변수 1씩 증가
+
+    }
+    return 0;
+}
+```
+
+서브스크라이버 노드 작성
+
+```
+roscd ros_tutorials_topic/src
+vi topic_subscriber.cpp
+```
+
+```c++
+#include "ros/ros.h"    // ROS 기본 헤더파일
+#include "ros_tutorials_topic/MsgTutorial.h"    // MsgTutorial 메시지 파일 헤더 (빌드 후 자동 생성됨)
+// 메시지 콜백 함수로써, 밑에서 설정한 ros_tutorial_msg라는 이름의 토픽
+// 메시지를 수신하였을 때 동작하는 함수이다
+// 입력 메시지로는 ros_tutorials_topic 패키지의 MsgTutorial 메시지를 받도록 되어있다
+
+void msgCallback(const ros_tutorials_topic::MsgTutorial::ConstPtr& msg)
+{
+    ROS_INFO("recieve msg = %d", msg->stamp.sec);    // stamp.sec 메시지를 표시한다
+    ROS_INFO("recieve msg = %d", msg->stamp.nsec);    // stamp.nsec 메시지를 표시한다
+    ROS_INFO("recieve msg = %d", msg->data);    // data 메시지를 표시한다
+}
+
+int main(int argc, char **argv)    // 노드 메인 함수
+{
+    ros::init(argc, argv, "topic_subscriber");    // 노드명 초기화
+    ros::NodeHandle nh;    // ROS 시스템과 통신을 위한 노드 핸들 선언
+
+    // 서브스크라이버 선언, ros_tutorials_topic 패키지의 MsgTutorial 메시지 파일을 이용한
+    // 서브스크라이버 ros_tutorial_sub 를 작성한다. 토픽명은 "ros_tutorial_msg" 이며,
+    // 서브스크라이버 큐(queue) 사이즈를 100개로 설정한다는 것이다
+
+    ros::Subscriber ros_tutorial_sub = nh.subscribe("ros_tutorial_msg", 100, msgCallback);
+
+    // 콜백함수 호출을 위한 함수로써, 메시지가 수신되기를 대기,
+    // 수신되었을 경우 콜백함수를 실행한다
+
+    ros::spin();
+
+    return 0;
+}
+```
+
+build 진행하기
+
+```
+cm                    # build
+```
+
+or
+
+```
+cd ~/catkin_ws
+catkin_make
+```
+
+실행하기
+
+```
+roscore
+```
+
+publisher 실행
+
+```
+rosrun ros_tutorials_topic topic_publisher
+```
+
+토픽 목록 확인
+
+```
+rostopic list
+rostopic info /ros_tutorial_msg
+rostopic echo /ros_tutorial_msg
+```
+
+subscriber 실행
+
+```
+rosrun ros_tutorials_topic topic_subscriber
+```
+
+---
+
+# Example
 
 ## camera test
 
 ```
-cm -ji
 one terminal : roscore
 second terminal : rosrun camera_show camera_show_node
+```
+
+## ROS test
+
+간단한 터틀심 동작시키기
+
+```
+roscore
+rosrun turtlesim turtlesim_node
+```
+
+```
+-- new terminal --
+
+rosrun turtlesim turtle_telop_key
+```
+
+```
+-- new terminal --
+
+rosrun rqt_graph rqt_graph
 ```
