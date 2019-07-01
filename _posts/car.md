@@ -390,3 +390,17 @@ rosrun turtlesim turtle_telop_key
 
 rosrun rqt_graph rqt_graph
 ```
+
+## geometry_msg::twist
+- linear.x : 차량의 스피드를 주는 data (min : -200, max : 200)
+- linear.y : data_msg 메세지 block and non-block으로 활용 0 block
+- linear.z : empty
+- angular.x : empty
+- angular.y : empty
+- angular.z : 방향전환 값을 주는 data(min : 20, max : 150, 90:정면 기준)
+
+```
+sudo chmod 666 /dev/ttyACM0
+rosrun rosserial_python serial_node.py /dev/ttyACM0      # serial node
+rosrun KeyPad KeyPad_node
+```
