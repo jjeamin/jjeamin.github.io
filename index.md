@@ -9,7 +9,7 @@ tags: index
 - [YOLO - counting](https://jjeamin.github.io/yolo/2019/03/28/yolo_counting/) - 제작중
 
 # Raspberry Pi
-- [Human Following Robot](https://jjeamin.github.io/pi/2019/02/07/following_robot/)
+- [Following Robot](https://jjeamin.github.io/pi/2019/02/07/following_robot/)
   + [QR Reader](https://jjeamin.github.io/pi/2019/02/12/QR_code_reader/)
   + [Object Tracking](https://jjeamin.github.io/opencv/2019/02/13/object_tracking/)
   + [Picamera FPS UP](https://jjeamin.github.io/pi/2019/02/14/fps/)
