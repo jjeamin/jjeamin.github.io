@@ -1,12 +1,12 @@
 ---
 layout: post
-title:  "Human Following Robot"
-summary: "Cascade Training을 이용한 Human Following Robot using Raspberry"
+title:  "Following Robot"
+summary: "Cascade Training을 이용한 Following Robot using Raspberry"
 date:   2019-02-07 12:00 -0400
 categories: pi
 ---
 
-[[깃허브](https://github.com/jjeamin/raspi-humanfollow)]
+[[깃허브](https://github.com/jjeamin/Raspi_following_Robot)]
 
 # Dependency
 - Raspberry PI 3(라즈비안)
@@ -35,7 +35,7 @@ git config --global user.email newuser@example.com
 ```
 소스코드 clone
 ```
-git clone https://github.com/jjeamin/raspi-humanfollow.git
+git clone https://github.com/jjeamin/Raspi_following_Robot.git
 ```
 
 
@@ -247,7 +247,7 @@ def back_right
 
 ---
 
-# 부록
+# 다른 Target
 QR코드로 인식하게 하기
 
 - [https://jjeamin.github.io/pi/2019/02/12/QR_code_reader/](https://jjeamin.github.io/pi/2019/02/12/QR_code_reader/)
