@@ -65,7 +65,7 @@ cv2.destroyAllWindows()
 
 ---
 
-## 기존 [human_following_robot](https://jjeamin.github.io/pi/2019/02/07/human_following_robot/) 코드 변경
+## 기존 [following_robot](https://jjeamin.github.io/pi/2019/02/07/following_robot/) 코드 변경
 
 ## 기존 소스
 
@@ -111,7 +111,6 @@ def detectAndDisply(img):
         m.stop()
 
     cv2.imshow('img',img)
-
 ```
 
 ---
