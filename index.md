@@ -17,6 +17,7 @@ tags: index
 - [Face Identification](https://jjeamin.github.io/pi/2019/02/12/Face-Identification/)
 - [NCS2](https://jjeamin.github.io/pi/2019/03/08/NCS2/)
 - [NCS2 - IR](https://jjeamin.github.io/pi/2019/03/08/NCS2_IR/)
+- [Coral USB](https://jjeamin.github.io/pi/2019/07/05/coralusb/)
 
 # Reinforcement
 - [모두의 딥러닝 1](https://jjeamin.github.io/reinforcement/2019/02/15/reinforcement1/)
