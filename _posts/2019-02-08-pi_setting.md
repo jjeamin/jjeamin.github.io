@@ -31,6 +31,13 @@ sudo raspi-config
 sudo apt-get install ibus ibus-hangul fonts-unfonts-core
 ```
 
+4. 한글 입력
+```
+ibus-setup
+```
+
+한글 추가
+
 ---
 
 ## 화면 캡쳐
