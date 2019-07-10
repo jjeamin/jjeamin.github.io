@@ -13,6 +13,8 @@ tags: index
   + [QR Reader](https://jjeamin.github.io/pi/2019/02/12/QR_code_reader/)
   + [Object Tracking](https://jjeamin.github.io/opencv/2019/02/13/object_tracking/)
   + [Picamera FPS UP](https://jjeamin.github.io/pi/2019/02/14/fps/)
+- Google API Robot
+  + [Google API 설정](https://jjeamin.github.io/pi/2019/07/09/googleapi/)
 
 - [Face Identification](https://jjeamin.github.io/pi/2019/02/12/Face-Identification/)
 - [NCS2](https://jjeamin.github.io/pi/2019/03/08/NCS2/)
