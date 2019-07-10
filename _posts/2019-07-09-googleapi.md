@@ -39,11 +39,13 @@ Google Assistant API를 사용하는 방법에 대해서 리뷰 할 것이다.
 
 4. 다운받은 JSON 파일을 라즈베리파이에 옮겨 넣는다.
 
+---
+
 # Raspberry pi
 
 라즈베리파이에 접속해서 작업을 시작하는 부분이다.
 
-# 스피커 설정
+## 스피커 설정
 
 ```
 // 마이크
@@ -149,7 +151,9 @@ $ google-oauthlib-tool --scope https://www.googleapis.com/auth/assistant-sdk-pro
 $ googlesamples-assistant-devicetool register-model --manufacturer "INPUT/manufacturer" --product-name "INPUT/product" --description "INPUT/descript" --type LIGHT --model "INPUT/model"
 ```
 
-## 실행
+---
+
+# 실행
 
 - Library
 
@@ -172,7 +176,9 @@ $ googlesamples-assistant-pushtotalk --project-id "INPUT/project-id" --device_mo
 - `Service` : pushtotalk 사용가능
 - `Library` : hotword 사용가능
 
-## 부록 : 한국어로 대화하기
+---
+
+# 부록 : 한국어로 대화하기
 
 ```
 $ googlesamples-assistant-pushtotalk  --lang ko-KR
