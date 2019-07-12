@@ -22,13 +22,17 @@ categories: pi
 
 Google Assistant API를 사용하는 방법에 대해서 리뷰 할 것이다.
 
-# Google cloud
-- [https://console.cloud.google.com/home/dashboard?project=frontu](https://console.cloud.google.com/home/dashboard?project=frontu) 접속
+# Google action console
 
 1. 프로젝트를 생성한다.
-2. API 및 서비스의 대시보드 탭에 들어간다.
-3. API 및 서비스 사용설정을 클릭한다.
-4. Google Assistant API를 검색하고 활성화를 누른다.
+2. 아래 `Device registration`을 실행한다.
+
+# Google cloud
+- [https://console.cloud.google.com/home/dashboard](https://console.cloud.google.com/home/dashboard) 접속
+
+1. API 및 서비스 -> 대시보드
+2. API 및 서비스 사용설정 클릭
+3. Google Assistant API를 검색하고 활성화를 누른다.
 
 # OAuth Client ID 생성
 1. API 및 서비스 -> 사용자 인증 정보 -> 사용자 인증 정보 만들기 -> OAuth 클라이언트 ID
@@ -104,6 +108,8 @@ speaker-test -t wav
 alsamixer
 ```
 
+---
+
 ## 라이브러리 설치
 
 ```
@@ -122,8 +128,6 @@ $ source py3/bin/activate
 ```
 
 ## Google Assistant 설치
-
-아래것을 설치하고 진행하면 Library가 되고 설치하지 않고 진행하면 Service가 되는것같다.
 
 ```
 $ python -m pip install --upgrade google-assistant-library
@@ -145,7 +149,9 @@ $ google-oauthlib-tool --scope https://www.googleapis.com/auth/assistant-sdk-pro
 3. 동의 클릭
 4. 생성된 코드를 터미널에 적는다.
 
-## 디바이스 등록
+## 디바이스 등록[명령어]
+
+*위에 디바이스 등록을 했으면 안해도 된다.*
 
 ```
 $ googlesamples-assistant-devicetool register-model --manufacturer "INPUT/manufacturer" --product-name "INPUT/product" --description "INPUT/descript" --type LIGHT --model "INPUT/model"
@@ -169,9 +175,7 @@ $ googlesamples-assistant-pushtotalk --project-id "INPUT/project-id" --device_mo
 
 ---
 
-*여기까지 했는데 자신이 원하는 것이 안될 경우가 태반이다. 그럴때는 모델을 새로 만드는 것을 추천한다. 위와 같이 디바이스를 등록하면 action on google 페이지에 device registration이 생길 것이다. 거기서 새롭게 모델을 등록하고 Credential을 새롭게 등록 하는 것을 추천한다.*
-
-이상하게 pushtotalk이 되면 hotword가 안되고 그런다.. **Service와 Library의 차이인 것 같다.** 상황에 따라서 알맞은것을 사용하는 것이 중요하다.
+이상하게 pushtotalk이 되면 hotword가 안되고 그런다.. 구글 메뉴얼도 pushtotalk을 이용한 service 예제만 활성화 시켰기 때문에 나중에 기회가 되면 찾아봐야겠다. 일단 필요한건 pushtotalk이기 때문에 넘어가도록 하자
 
 - `Service` : pushtotalk 사용가능
 - `Library` : hotword 사용가능
@@ -191,3 +195,4 @@ $ googlesamples-assistant-pushtotalk  --lang ko-KR
 - [https://diy-project.tistory.com/88](https://diy-project.tistory.com/88)
 - [https://diy-project.tistory.com/89](https://diy-project.tistory.com/89)
 - [https://diy-project.tistory.com/91](https://diy-project.tistory.com/91)
+- [https://www.sigmdel.ca/michel/ha/rpi/voice_rec_02_en.html#decoder](https://www.sigmdel.ca/michel/ha/rpi/voice_rec_02_en.html#decoder)
