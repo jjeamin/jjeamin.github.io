@@ -70,6 +70,7 @@ resnet에서 사용되는 지름길을 만들어주는 기술이라고 생각하
 `depthwise separable convolution`과 유사한 Strong Inception module을 만들었으며 그에 따라서 Inception v3 보다 성능이 좋아졌다.
 
 ---
+---
 
 # 모바일 환경에서 조건
 
@@ -95,7 +96,7 @@ resnet에서 사용되는 지름길을 만들어주는 기술이라고 생각하
 - **distillation and compression**
 
 # MobileNet
-모바일 환경에서 동작하게 하기 위해 만들어진 네트워크
+모바일 환경에서 동작하게 하기 위해 모델의 사이즈를 줄이기 위함이 아니라 속도를 향상시키기 위해 만들어진 네트워크
 
 key : `depthwise separable convolution`
 
@@ -105,7 +106,7 @@ key : `depthwise separable convolution`
 
 
 
-`depthwise separable convolution` : `depthwise convolution` + `pointwise convolution`
+`depthwise separable convolution` = `depthwise convolution` + `pointwise convolution`
 
 **normal conv**
 
@@ -125,13 +126,14 @@ key : `depthwise separable convolution`
 
 계산량 약 8~9배 줄어든다고 한다.
 
-# VGG
-3x3 필터만 사용한다. 3x3 필터만 사용해도 5x5 7x7과 같은 receptive field를 가질 수 있고 더욱더 non-linear 하기 때문에 효과적이다.
-
 # 결론
 계산량이 9배정도 줄어들고 accuracy는 약 1% 밖에 떨어지지 않았다.
 
 ---
+---
+
+# VGG
+3x3 필터만 사용한다. 3x3 필터만 사용해도 5x5 7x7과 같은 receptive field를 가질 수 있고 더욱더 non-linear 하기 때문에 효과적이다.
 
 # 참조
 
