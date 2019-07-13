@@ -61,6 +61,7 @@ resnet에서 사용되는 지름길을 만들어주는 기술이라고 생각하
 # 모델
 
 
+
 ![model](https://github.com/jjeamin/jjeamin.github.io/raw/master/_posts/post_img/xception/model.PNG)
 
 
@@ -69,15 +70,78 @@ resnet에서 사용되는 지름길을 만들어주는 기술이라고 생각하
 `depthwise separable convolution`과 유사한 Strong Inception module을 만들었으며 그에 따라서 Inception v3 보다 성능이 좋아졌다.
 
 ---
+
+# 모바일 환경에서 조건
+
+**모바일**
+
+- 안전에 치명적이다.(드론, 자동차)
+- 저전력이어야 한다.
+- 실시간이 요구된다.
+
+**네트워크**
+
+- 상당히 높은 정확성을 가져야 한다.
+- 계산 복잡성이 낮아야한다.
+- 모델 크기가 작아야한다.
+
+# Small Deep learning
+- Fully Connected Layer를 제거한다.
+- 커널을 줄인다.(3x3 -> 1x1) [squeezenet]
+- **채널을 줄인다.**
+- Downsampling을 골고루 퍼지게 한다.(maxpooling)
+- **Depthwise Separable Convolution**
+- shuffle operation
+- **distillation and compression**
+
 # MobileNet
-- Google에서 만든 논문
+모바일 환경에서 동작하게 하기 위해 만들어진 네트워크
+
+key : `depthwise separable convolution`
 
 
+
+![cost3](https://github.com/jjeamin/jjeamin.github.io/raw/master/_posts/post_img/xception/cost3.PNG)
+
+
+
+`depthwise separable convolution` : `depthwise convolution` + `pointwise convolution`
+
+**normal conv**
+
+
+
+![cost](https://github.com/jjeamin/jjeamin.github.io/raw/master/_posts/post_img/xception/cost.PNG)
+
+
+
+**depthwise separable conv**
+
+
+
+![cost2](https://github.com/jjeamin/jjeamin.github.io/raw/master/_posts/post_img/xception/cost2.PNG)
+
+
+
+계산량 약 8~9배 줄어든다고 한다.
+
+# VGG
+3x3 필터만 사용한다. 3x3 필터만 사용해도 5x5 7x7과 같은 receptive field를 가질 수 있고 더욱더 non-linear 하기 때문에 효과적이다.
+
+# 결론
+계산량이 9배정도 줄어들고 accuracy는 약 1% 밖에 떨어지지 않았다.
 
 ---
 
 # 참조
-- [MobileNet](https://www.youtube.com/watch?v=V0dLhyg5_Dw)
-- [Xception](https://www.youtube.com/watch?v=V0dLhyg5_Dw)
+
+**Xception**
+- [https://www.youtube.com/watch?v=V0dLhyg5_Dw](https://www.youtube.com/watch?v=V0dLhyg5_Dw)
 - [https://norman3.github.io/papers/docs/google_inception.html](https://norman3.github.io/papers/docs/google_inception.html)
 - [https://gamer691.blogspot.com/2019/02/paper-review-xception-deep-learning.html](https://gamer691.blogspot.com/2019/02/paper-review-xception-deep-learning.html)
+
+**MobileNet**
+- [https://www.youtube.com/watch?v=V0dLhyg5_Dw](https://www.youtube.com/watch?v=V0dLhyg5_Dw)
+
+**Inception**
+- [https://norman3.github.io/papers/docs/google_inception.html](https://norman3.github.io/papers/docs/google_inception.html)
