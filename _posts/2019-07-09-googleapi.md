@@ -23,9 +23,16 @@ categories: pi
 Google Assistant API를 사용하는 방법에 대해서 리뷰 할 것이다.
 
 # Google action console
+- [https://console.actions.google.com/](https://console.actions.google.com/)
 
 1. 프로젝트를 생성한다.
 2. 아래 `Device registration`을 실행한다.
+
+
+
+![device](https://github.com/jjeamin/jjeamin.github.io/raw/master/_posts/post_img/google/device.PNG)
+
+
 
 # Google cloud
 - [https://console.cloud.google.com/home/dashboard](https://console.cloud.google.com/home/dashboard) 접속
@@ -41,7 +48,7 @@ Google Assistant API를 사용하는 방법에 대해서 리뷰 할 것이다.
 
 3. OAuth 2.0 클라이언트 ID 탭에서 기타 클라이언트의 맨 오른쪽 아래 화살표를 클릭해 JSON 파일을 다운로드 받는다.
 
-4. 다운받은 JSON 파일을 라즈베리파이에 옮겨 넣는다.
+4. 다운받은 JSON 파일을 라즈베리파이에 옮겨 넣는다. `(경로 : /home/pi/)`
 
 ---
 
@@ -149,14 +156,6 @@ $ google-oauthlib-tool --scope https://www.googleapis.com/auth/assistant-sdk-pro
 3. 동의 클릭
 4. 생성된 코드를 터미널에 적는다.
 
-## 디바이스 등록[명령어]
-
-*위에 디바이스 등록을 했으면 안해도 된다.*
-
-```
-$ googlesamples-assistant-devicetool register-model --manufacturer "INPUT/manufacturer" --product-name "INPUT/product" --description "INPUT/descript" --type LIGHT --model "INPUT/model"
-```
-
 ---
 
 # 실행
@@ -186,6 +185,14 @@ $ googlesamples-assistant-pushtotalk --project-id "INPUT/project-id" --device_mo
 
 ```
 $ googlesamples-assistant-pushtotalk  --lang ko-KR
+```
+
+# 부록 : 디바이스 등록[명령어]
+
+*위에 디바이스 등록을 했으면 안해도 된다.*
+
+```
+$ googlesamples-assistant-devicetool register-model --manufacturer "INPUT/manufacturer" --product-name "INPUT/product" --description "INPUT/descript" --type LIGHT --model "INPUT/model"
 ```
 
 ---
