@@ -9,10 +9,6 @@ categories: pi
 # Google Assistant Robot
 Google Assistant와 IFTTT를 이용해 명령하며 동작하는 Robot 만들기
 
-# Google Assistant API 설정하기
-
-**참조** : [Here](https://jjeamin.github.io/pi/2019/07/09/googleapi/)
-
 # Dependency
 - IFTTT[미정]
 - Google Assistant
@@ -132,6 +128,52 @@ pip install pyaudio
 
 google assistant sdk의 sample code인 `push to talk.py`를 수정해서 speech to text를 동작시키는 구문만 뽑아 오기로 했다.
 
+---
+# 원리
+
+`Snow boy` -> `google assistant` -> `action`
+
+# Snow boy 설치
+
+Snow boy는 wake up 단어를 설정해 이용할 수 있는 오픈소스 라이브러리다.
+
+## 오디오 설치
+
+```
+$ sudo apt-get install python-pyaudio python3-pyaudio sox
+$ sudo apt-get install portaudio19-dev
+$ sudo apt-get install python-dev
+$ pip install pyaudio
+```
+
+## swig 설치
+
+```
+$ sudo apt-get install swig
+```
+
+## git 설치
+
+```
+git clone https://github.com/kitt-ai/snowboy
+
+$ sudo apt-get install libatlas-base-dev
+
+$ cd snowboy
+$ cd swig
+$ cd Python3
+$ make
+```
+
+##
+
+```
+jack_control start
+```
+
+# Google Assistant API 설치
+
+**참조** : [Here](https://jjeamin.github.io/pi/2019/07/09/googleapi/)
 
 
 ---
@@ -154,3 +196,5 @@ google assistant sdk의 sample code인 `push to talk.py`를 수정해서 speech 
 
 
 - Adafruit : [https://passionbull.net/2018/12/others/iot-switch-adafruit-ifttt-google-assistant/](https://passionbull.net/2018/12/others/iot-switch-adafruit-ifttt-google-assistant/) - esp8266
+
+- snowboy : [https://blog.naver.com/chandong83/221130096432](https://blog.naver.com/chandong83/221130096432)
