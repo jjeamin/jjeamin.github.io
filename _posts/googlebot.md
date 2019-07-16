@@ -10,7 +10,6 @@ categories: pi
 Google Assistant와 IFTTT를 이용해 명령하며 동작하는 Robot 만들기
 
 # Dependency
-- IFTTT[미정]
 - Google Assistant
 - Raspberry Pi 3B+
 
@@ -23,6 +22,9 @@ Go forward : 앞으로 가
 Go back    : 뒤로 가
 Go right   : 오른쪽으로 가
 Go left    : 왼쪽으로 가
+Hello      : 안녕(양손을 흔든다.)
+bye        : 가지마(고개를 젓는다.)
+see you    : 잘가(한손을 흔든다.)
 ```
 
 ---
@@ -33,13 +35,13 @@ Go left    : 왼쪽으로 가
 
 방법2 : 라즈베리파이를 구글어시스턴트로 사용하고 동작은 아두이노로.. esp8266 구매해야함
 
-방법3 : google speech api 사용하기
+방법3 : google speech api 사용하기.. 요금이 발생
 
 방법4 : 스마트미러 깔고 그 부분만 바꾼다.
 
 방법5 : 앱인벤터 speech recognition
 
-**최종 결정 방법** : 구글 어시스턴트 샘플 소스코드에 추가하기
+**최종 결정 방법** : 구글 어시스턴트 샘플 소스코드에서 동작 추가하기
 
 ---
 
@@ -73,7 +75,6 @@ IFTTT에서 reqeust를 받기 위해서는 라즈베리파이에 Flask 서버를
 google assistant ---(webhook)---> Flask --------> Raspberry Pi
 ```
 
----
 
 # 방법2 : 아두이노 구현
 
@@ -85,7 +86,6 @@ google assistant ---(webhook)---> adafruit -------> IOT Device
 
 문제점 : IoT Device의 ip를 신경쓸 필요가 없지만 esp8266를 구매해야한다.
 
----
 
 # 방법3 : Google Speech API 사용하기
 
@@ -109,13 +109,11 @@ pip install pyaudio
 
 - [Sample Code](https://webnautes.tistory.com/1247)
 
----
 
 # 방법4 : 스마트미러 다운받고 부분수정
 
 - [설치 강의](https://www.youtube.com/watch?v=O3l46ogmgLY)
 
----
 
 # 방법5 : 앱인벤터를 이용해 제어하기
 
@@ -129,11 +127,13 @@ pip install pyaudio
 google assistant sdk의 sample code인 `push to talk.py`를 수정해서 speech to text를 동작시키는 구문만 뽑아 오기로 했다.
 
 ---
-# 원리
+# Robot 원리[예상]
 
-`Snow boy` -> `google assistant` -> `action`
+`Snow boy` -> `google assistant` -> `action`,`tts`
 
-# Snow boy 설치
+---
+
+# 1. Snow boy 설치
 
 Snow boy는 wake up 단어를 설정해 이용할 수 있는 오픈소스 라이브러리다.
 
@@ -165,16 +165,86 @@ $ cd Python3
 $ make
 ```
 
-##
+## ERROR
+
+- jack control error
 
 ```
 jack_control start
 ```
 
-# Google Assistant API 설치
+- alsa error
+
+아직 잡질 못했다....
+
+```
+Expression 'alsa snd_pcm_hw_params_set_period_size_near' ...
+```
+
+---
+
+# 2. Google Assistant API 설치
 
 **참조** : [Here](https://jjeamin.github.io/pi/2019/07/09/googleapi/)
 
+예제 실행시켜보고 감을 익히자
+
+## Sample 설치
+
+```
+git clone https://github.com/jjeamin/assistant-sdk-python
+```
+
+## sample 수정
+
+```
+cd assistant-sdk-python/google-assistant-sdk/googlesamples/assistant/grpc/pushtotalk.py
+```
+
+수정진행중 : [깃허브](https://github.com/jjeamin/Raspi_google_robot)
+
+---
+
+# 3. TTS 사용하기
+
+동작 부분은 응답 요청을 없앨 예정이기 때문에 응답을 만들어 줘야할것 같다.
+
+```
+pip install gTTS
+```
+
+- [메뉴얼](https://gtts.readthedocs.io/en/latest/?ababcaca)
+
+## 영어 쓰기
+
+```python
+from gtts import gTTS
+tts = gTTS('hello', lang='en')
+tts.save('hello.mp3')
+```
+
+## 한글 쓰기
+```python
+from gtts import gTTS
+tts = gTTS('안녕', lang='ko')
+tts.save('hello.mp3')
+```
+
+## 한글 영어 섞어 쓰기
+
+```python
+from gtts import gTTS
+
+tts_en = gTTS(text='hello', lang='en')
+tts_kr = gTTS(text='안녕하세요',lang='ko')
+
+with open(FileName,'wb') as f            
+  tts_en.write_to_fp(f)    # 영어로 한번 말하고
+  tts_kr.write_to_fp(f)    # 한글로 한번 말하기
+f.close()
+```
+
+## 가능한 언어
 
 ---
 
