@@ -7,7 +7,7 @@ categories: pi
 ---
 
 # Google Assistant Robot
-Google Assistant와 IFTTT를 이용해 명령하며 동작하는 Robot 만들기
+Google Assistant를 이용해 명령으로 동작하는 Robot 만들기
 
 # Dependency
 - Google Assistant
@@ -244,7 +244,51 @@ with open(FileName,'wb') as f
 f.close()
 ```
 
-## 가능한 언어
+---
+
+yahboom 로봇의 동작 방식을 이용해 기기에 추가하기로 결정했다.
+
+# + 블루투스를 이용해 조종하기
+
+시리얼 통신을 이용해서 블루투스를 이용하기 위해서는 기존의 블루투스의 기능을 없애줘야 하기 때문에 없애고 시작을 하기로 하자
+
+```
+sudo raspi-config
+```
+
+`Interfacing Options` -> `Serial Port Enable`, `Serial Console Disable`
+
+```
+sudo vi /boot/config.txt
+```
+
+맨아래로 가서 아래 코드 삽입
+
+```
+enable_uart=1
+#disable bluetooth
+dtoverlay=pi3-disable-bt
+```
+
+저장한 뒤에 아래 명령어를 사용하고 재부팅
+
+```
+sudo systemctl disable hciuart
+```
+
+python 코드 사용법
+
+```python
+import serial
+
+ser = serial.Serial("/dev/ttyAMA0", "9600")
+```
+
+통신속도 확인
+
+```
+sudo stty -F /dev/ttyAMA0
+```
 
 ---
 
