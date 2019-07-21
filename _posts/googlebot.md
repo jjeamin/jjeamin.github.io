@@ -246,8 +246,6 @@ f.close()
 
 ---
 
-yahboom 로봇의 동작 방식을 이용해 기기에 추가하기로 결정했다.
-
 # + 블루투스를 이용해 조종하기
 
 시리얼 통신을 이용해서 블루투스를 이용하기 위해서는 기존의 블루투스의 기능을 없애줘야 하기 때문에 없애고 시작을 하기로 하자
@@ -292,6 +290,30 @@ sudo stty -F /dev/ttyAMA0
 
 ---
 
+# + 라즈베리파 동영상 스트리밍
+
+```
+sudo apt-get update
+sudo apt-get upgrade
+sudo apt-get install git cmake libjpeg-dev imagemagick -y
+```
+
+```
+cd mjpg-streamer/mjpg-streamer-experimental/
+make CMAKE_BUILD_TYPE=Debug
+sudo make install
+```
+
+```
+./start.sh
+```
+
+```
+127.0.0.1:8080 접속
+```
+
+---
+
 # 부록
 - `gtts` : 음성합성
 
@@ -312,3 +334,5 @@ sudo stty -F /dev/ttyAMA0
 - Adafruit : [https://passionbull.net/2018/12/others/iot-switch-adafruit-ifttt-google-assistant/](https://passionbull.net/2018/12/others/iot-switch-adafruit-ifttt-google-assistant/) - esp8266
 
 - snowboy : [https://blog.naver.com/chandong83/221130096432](https://blog.naver.com/chandong83/221130096432)
+
+- mjpg : [http://www.rasplay.org/?p=7174](http://www.rasplay.org/?p=7174)
