@@ -314,6 +314,53 @@ sudo make install
 
 ---
 
+## problem
+
+문제를 풀어야 하는 Mode
+
+통과할 때 까지 진행
+제한시간이 지나면 종료
+
+## voca
+단어의 발음을 맞추는 Mode
+
+단어의 발음이 틀리면 재시도
+통과할 때 까지 진행
+제한시간이 지나면 종료
+
+## story
+시간마다 이야기를 들려주는 Mode
+
+crontab을 이용해서 설정 시간마다 이야기를 들려줌
+
+## google
+구글 어시스턴트 Mode
+
+## move
+명령에 따라 움직이는 Mode
+
+앞으로가
+왼쪽으로가
+오른쪽으로가
+뒤로가
+
+## line
+라인을 Tracking 하는 Mode
+
+## avoid
+초음파 센서 + dc모터 동작 Mode
+
+## avoid2
+초음파 센서 + dc모터 + servo모터 동작 Mode
+
+## led
+LED가 색상 별로 나오는 Mode
+
+## led2
+LED와 servo모터를 동작시키는 Mode
+
+---
+
 # 부록
 - `gtts` : 음성합성
 
