@@ -187,22 +187,22 @@ Expression 'alsa snd_pcm_hw_params_set_period_size_near' ...
 
 ---
 
-# 2. Google Assistant API 설치
+# 2. Google Assistant 설치
 
 **참조** : [Here](https://jjeamin.github.io/pi/2019/07/09/googleapi/)
 
-예제 실행시켜보고 감을 익히자
+위에 google api를 설치 후에 sdk를 설치해서 예제 코드를 수정해 실행시키자
 
-## sample 설치
+## sdk sample 설치
 
 ```
 git clone https://github.com/jjeamin/assistant-sdk-python
 ```
 
-## sample 수정
+## sdk sample 수정
 
 ```
-cd assistant-sdk-python/google-assistant-sdk/googlesamples/assistant/grpc/pushtotalk.py
+vi assistant-sdk-python/google-assistant-sdk/googlesamples/assistant/grpc/pushtotalk.py
 ```
 
 ---
@@ -250,7 +250,7 @@ f.close()
 
 ## + 블루투스를 이용하기
 
-시리얼 통신을 이용해서 블루투스를 이용하기 위해서는 기존의 블루투스의 기능을 없애줘야 하기 때문에 없애고 시작을 하기로 하자
+시리얼 통신을 이용해서 블루투스를 이용하기 위해서는 기존의 블루투스의 기능을 없애줘야 하기 때문에 기능을 없애고 시작을 하기로 하자
 
 ```
 sudo raspi-config
