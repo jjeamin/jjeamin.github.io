@@ -29,6 +29,10 @@ see you    : 잘가(한손을 흔든다.)
 
 ---
 
+# 중요한점
+
+**Google Assistant의 기능을 살려야한다.!?**
+
 # How????
 
 방법1 : google assistant, webhook, IFTTT를 이용해 웹으로 통신
@@ -124,7 +128,7 @@ pip install pyaudio
 
 # 최종 결정 방법 : 구글 어시스턴트 샘플 소스코드에 추가하기
 
-google assistant sdk의 sample code인 `push to talk.py`를 수정해서 speech to text를 동작시키는 구문만 뽑아 오기로 했다.
+google assistant sdk의 sample code인 `pushtotalk.py`를 수정해서 google assistant의 기능을 살리고 speech to text를 동작시키는 구문만 뽑아 오기로 했다.
 
 ---
 # Robot 원리[예상]
@@ -189,7 +193,7 @@ Expression 'alsa snd_pcm_hw_params_set_period_size_near' ...
 
 예제 실행시켜보고 감을 익히자
 
-## Sample 설치
+## sample 설치
 
 ```
 git clone https://github.com/jjeamin/assistant-sdk-python
@@ -200,8 +204,6 @@ git clone https://github.com/jjeamin/assistant-sdk-python
 ```
 cd assistant-sdk-python/google-assistant-sdk/googlesamples/assistant/grpc/pushtotalk.py
 ```
-
-수정진행중 : [깃허브](https://github.com/jjeamin/Raspi_google_robot)
 
 ---
 
@@ -246,7 +248,7 @@ f.close()
 
 ---
 
-# + 블루투스를 이용해 조종하기
+# + 블루투스를 이용하기
 
 시리얼 통신을 이용해서 블루투스를 이용하기 위해서는 기존의 블루투스의 기능을 없애줘야 하기 때문에 없애고 시작을 하기로 하자
 
@@ -290,7 +292,7 @@ sudo stty -F /dev/ttyAMA0
 
 ---
 
-# + 라즈베리파 동영상 스트리밍
+# + 라즈베리파이 동영상 스트리밍
 
 ```
 sudo apt-get update
@@ -314,50 +316,9 @@ sudo make install
 
 ---
 
-## problem
+# 결과 : [GitHub](https://github.com/jjeamin/Raspi_google_robot)
 
-문제를 풀어야 하는 Mode
-
-통과할 때 까지 진행
-제한시간이 지나면 종료
-
-## voca
-단어의 발음을 맞추는 Mode
-
-단어의 발음이 틀리면 재시도
-통과할 때 까지 진행
-제한시간이 지나면 종료
-
-## story
-시간마다 이야기를 들려주는 Mode
-
-crontab을 이용해서 설정 시간마다 이야기를 들려줌
-
-## google
-구글 어시스턴트 Mode
-
-## move
-명령에 따라 움직이는 Mode
-
-앞으로가
-왼쪽으로가
-오른쪽으로가
-뒤로가
-
-## line
-라인을 Tracking 하는 Mode
-
-## avoid
-초음파 센서 + dc모터 동작 Mode
-
-## avoid2
-초음파 센서 + dc모터 + servo모터 동작 Mode
-
-## led
-LED가 색상 별로 나오는 Mode
-
-## led2
-LED와 servo모터를 동작시키는 Mode
+최종적으로 snowboy는 사용을 못했고 `gtts`와 `google assistant`를 이용해서 시나리오 형식으로 작성하였다.
 
 ---
 
