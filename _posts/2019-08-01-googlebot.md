@@ -7,6 +7,7 @@ categories: pi
 ---
 
 # Google Assistant Robot
+
 Google Assistant를 이용해 명령으로 동작하는 Robot 만들기
 
 # Dependency
@@ -45,7 +46,7 @@ see you    : 잘가(한손을 흔든다.)
 
 방법5 : 앱인벤터 speech recognition
 
-**최종 결정 방법** : 구글 어시스턴트 샘플 소스코드에서 동작 추가하기
+**최종 결정 방법** : 구글 어시스턴트의 기능을 살리면서 이용하려면 결국 구글 어시스턴트 샘플 소스코드에서 동작 추가하는 방법밖에 없는 것 같다.
 
 ---
 
@@ -80,7 +81,7 @@ google assistant ---(webhook)---> Flask --------> Raspberry Pi
 ```
 
 
-# 방법2 : 아두이노 구현
+# 방법2 : 아두이노
 
 이것도 IFTTT 방식을 이용해서 사용하기 때문에 위에 것과 별다른 차이점이 없다.
 
@@ -91,7 +92,7 @@ google assistant ---(webhook)---> adafruit -------> IOT Device
 문제점 : IoT Device의 ip를 신경쓸 필요가 없지만 esp8266를 구매해야한다.
 
 
-# 방법3 : Google Speech API 사용하기
+# 방법3 : Google Speech API
 
 이 방법이 동작하는게 제일 간편하다. 하지만 google assistant의 기능을 넣을 수 있는지 아직 잘 모르겠다.
 
@@ -114,23 +115,22 @@ pip install pyaudio
 - [Sample Code](https://webnautes.tistory.com/1247)
 
 
-# 방법4 : 스마트미러 다운받고 부분수정
+# 방법4 : 스마트미러 수정하기
 
 - [설치 강의](https://www.youtube.com/watch?v=O3l46ogmgLY)
 
 
-# 방법5 : 앱인벤터를 이용해 제어하기
+# 방법5 : 앱인벤터로 제어하기
 
 - 앱인벤터 : [http://appinventor.mit.edu/explore/](http://appinventor.mit.edu/explore/)
 - 사용법 : [http://blog.naver.com/PostView.nhn?blogId=edisondl&logNo=221090848876](http://blog.naver.com/PostView.nhn?blogId=edisondl&logNo=221090848876)
 
 ---
 
-## 최종 결정 방법 : 구글 어시스턴트 샘플 소스코드에 추가하기
+# 최종 결정 방법 : 구글 어시스턴트 샘플 소스코드에 추가하기
 
 google assistant sdk의 sample code인 `pushtotalk.py`를 수정해서 google assistant의 기능을 살리고 speech to text를 동작시키는 구문만 뽑아 오기로 했다.
 
----
 ## Robot 원리[예상]
 
 `Snow boy` -> `google assistant` -> `action`,`tts`
