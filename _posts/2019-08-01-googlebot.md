@@ -2,7 +2,7 @@
 layout: post
 title:  "Google Assistant Robot"
 summary: "Google Assistant Robot 만들기"
-date:   2019-07-09 13:00 -0400
+date:   2019-08-01 13:00 -0400
 categories: pi
 ---
 
@@ -126,12 +126,12 @@ pip install pyaudio
 
 ---
 
-# 최종 결정 방법 : 구글 어시스턴트 샘플 소스코드에 추가하기
+## 최종 결정 방법 : 구글 어시스턴트 샘플 소스코드에 추가하기
 
 google assistant sdk의 sample code인 `pushtotalk.py`를 수정해서 google assistant의 기능을 살리고 speech to text를 동작시키는 구문만 뽑아 오기로 했다.
 
 ---
-# Robot 원리[예상]
+## Robot 원리[예상]
 
 `Snow boy` -> `google assistant` -> `action`,`tts`
 
@@ -248,7 +248,7 @@ f.close()
 
 ---
 
-# + 블루투스를 이용하기
+## + 블루투스를 이용하기
 
 시리얼 통신을 이용해서 블루투스를 이용하기 위해서는 기존의 블루투스의 기능을 없애줘야 하기 때문에 없애고 시작을 하기로 하자
 
@@ -292,7 +292,7 @@ sudo stty -F /dev/ttyAMA0
 
 ---
 
-# + 라즈베리파이 동영상 스트리밍
+## + 라즈베리파이 동영상 스트리밍
 
 ```
 sudo apt-get update
@@ -316,7 +316,7 @@ sudo make install
 
 ---
 
-# 결과 : [GitHub](https://github.com/jjeamin/Raspi_google_robot)
+## 결과 : [GitHub](https://github.com/jjeamin/Raspi_google_robot)
 
 최종적으로 snowboy는 사용을 못했고 `gtts`와 `google assistant`를 이용해서 시나리오 형식으로 작성하였다.
 
