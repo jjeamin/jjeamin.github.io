@@ -9,6 +9,9 @@ categories: github
 # 출처
 [https://gist.github.com/rxaviers/7360908](https://gist.github.com/rxaviers/7360908)
 
+# 추가 참조
+[https://www.webfx.com/tools/emoji-cheat-sheet/](https://www.webfx.com/tools/emoji-cheat-sheet/)
+
 # People
 
 | :bowtie: `:bowtie:` | :smile: `:smile:` | :laughing: `:laughing:` |
