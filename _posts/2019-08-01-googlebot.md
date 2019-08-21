@@ -2,11 +2,12 @@
 layout: post
 title:  "Google Assistant Robot"
 summary: "Google Assistant Robot 만들기"
-date:   2019-07-09 13:00 -0400
+date:   2019-08-01 13:00 -0400
 categories: pi
 ---
 
 # Google Assistant Robot
+
 Google Assistant를 이용해 명령으로 동작하는 Robot 만들기
 
 # Dependency
@@ -45,7 +46,7 @@ see you    : 잘가(한손을 흔든다.)
 
 방법5 : 앱인벤터 speech recognition
 
-**최종 결정 방법** : 구글 어시스턴트 샘플 소스코드에서 동작 추가하기
+**최종 결정 방법** : 구글 어시스턴트의 기능을 살리면서 이용하려면 결국 구글 어시스턴트 샘플 소스코드에서 동작 추가하는 방법밖에 없는 것 같다.
 
 ---
 
@@ -80,7 +81,7 @@ google assistant ---(webhook)---> Flask --------> Raspberry Pi
 ```
 
 
-# 방법2 : 아두이노 구현
+# 방법2 : 아두이노
 
 이것도 IFTTT 방식을 이용해서 사용하기 때문에 위에 것과 별다른 차이점이 없다.
 
@@ -91,7 +92,7 @@ google assistant ---(webhook)---> adafruit -------> IOT Device
 문제점 : IoT Device의 ip를 신경쓸 필요가 없지만 esp8266를 구매해야한다.
 
 
-# 방법3 : Google Speech API 사용하기
+# 방법3 : Google Speech API
 
 이 방법이 동작하는게 제일 간편하다. 하지만 google assistant의 기능을 넣을 수 있는지 아직 잘 모르겠다.
 
@@ -114,12 +115,12 @@ pip install pyaudio
 - [Sample Code](https://webnautes.tistory.com/1247)
 
 
-# 방법4 : 스마트미러 다운받고 부분수정
+# 방법4 : 스마트미러 수정하기
 
 - [설치 강의](https://www.youtube.com/watch?v=O3l46ogmgLY)
 
 
-# 방법5 : 앱인벤터를 이용해 제어하기
+# 방법5 : 앱인벤터로 제어하기
 
 - 앱인벤터 : [http://appinventor.mit.edu/explore/](http://appinventor.mit.edu/explore/)
 - 사용법 : [http://blog.naver.com/PostView.nhn?blogId=edisondl&logNo=221090848876](http://blog.naver.com/PostView.nhn?blogId=edisondl&logNo=221090848876)
@@ -130,8 +131,7 @@ pip install pyaudio
 
 google assistant sdk의 sample code인 `pushtotalk.py`를 수정해서 google assistant의 기능을 살리고 speech to text를 동작시키는 구문만 뽑아 오기로 했다.
 
----
-# Robot 원리[예상]
+## Robot 원리[예상]
 
 `Snow boy` -> `google assistant` -> `action`,`tts`
 
@@ -187,22 +187,22 @@ Expression 'alsa snd_pcm_hw_params_set_period_size_near' ...
 
 ---
 
-# 2. Google Assistant API 설치
+# 2. Google Assistant 설치
 
 **참조** : [Here](https://jjeamin.github.io/pi/2019/07/09/googleapi/)
 
-예제 실행시켜보고 감을 익히자
+위에 google api를 설치 후에 sdk를 설치해서 예제 코드를 수정해 실행시키자
 
-## sample 설치
+## sdk sample 설치
 
 ```
 git clone https://github.com/jjeamin/assistant-sdk-python
 ```
 
-## sample 수정
+## sdk sample 수정
 
 ```
-cd assistant-sdk-python/google-assistant-sdk/googlesamples/assistant/grpc/pushtotalk.py
+vi assistant-sdk-python/google-assistant-sdk/googlesamples/assistant/grpc/pushtotalk.py
 ```
 
 ---
@@ -248,9 +248,9 @@ f.close()
 
 ---
 
-# + 블루투스를 이용하기
+## + 블루투스를 이용하기
 
-시리얼 통신을 이용해서 블루투스를 이용하기 위해서는 기존의 블루투스의 기능을 없애줘야 하기 때문에 없애고 시작을 하기로 하자
+시리얼 통신을 이용해서 블루투스를 이용하기 위해서는 기존의 블루투스의 기능을 없애줘야 하기 때문에 기능을 없애고 시작을 하기로 하자
 
 ```
 sudo raspi-config
@@ -292,7 +292,7 @@ sudo stty -F /dev/ttyAMA0
 
 ---
 
-# + 라즈베리파이 동영상 스트리밍
+## + 라즈베리파이 동영상 스트리밍
 
 ```
 sudo apt-get update
@@ -316,7 +316,7 @@ sudo make install
 
 ---
 
-# 결과 : [GitHub](https://github.com/jjeamin/Raspi_google_robot)
+## 결과 : [GitHub](https://github.com/jjeamin/Raspi_google_robot)
 
 최종적으로 snowboy는 사용을 못했고 `gtts`와 `google assistant`를 이용해서 시나리오 형식으로 작성하였다.
 
