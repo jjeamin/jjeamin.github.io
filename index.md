@@ -13,7 +13,7 @@ tags: index
   + [QR Reader](https://jjeamin.github.io/pi/2019/02/12/QR_code_reader/)
   + [Object Tracking](https://jjeamin.github.io/opencv/2019/02/13/object_tracking/)
   + [Picamera FPS UP](https://jjeamin.github.io/pi/2019/02/14/fps/)
-- Google API Robot
+- [Google API Robot](https://jjeamin.github.io/pi/2019/08/01/googlebot/)
   + [Google API 설정](https://jjeamin.github.io/pi/2019/07/09/googleapi/)
 
 - [Face Identification](https://jjeamin.github.io/pi/2019/02/12/Face-Identification/)
@@ -34,7 +34,9 @@ tags: index
 - [MCNN](https://jjeamin.github.io/paper/2019/03/08/MCNN/)/[code](https://github.com/jjeamin/crowd_counting_MCNN)
 - [YOLO](https://jjeamin.github.io/paper/2019/03/23/yolo/)
 - [YOLOv2](https://jjeamin.github.io/paper/2019/04/20/yolo_v2/)
+- [SSD](https://jjeamin.github.io/paper/2019/08/21/SSD/)
 - [SORT](https://jjeamin.github.io/paper/2019/04/25/sort/)
+- [Xception/MobileNet](https://jjeamin.github.io/paper/2019/07/07/mobileNet_Xception/)
 - [CenterNet](https://jjeamin.github.io/paper/2019/05/19/CenterNet/)
 
 # GAN - tensorflow
