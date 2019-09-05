@@ -53,7 +53,16 @@ computer hardware
 
 - 시스템의 모든 부분을 초기화
 
-- 운영체제의 커널을 적재하고 실행한다.
+- 운영체제의 커널을 적재
+
+- 시스템 데몬을 시작
+
+- 커널 인터럽트 구동
+  + 하드웨어
+
+  + 소프트웨어
+    + 오류
+    + system call
 
 # interrupt handling
 - 운영체제는 레지스터와 프로그램 카운터(PC)를 저장하여 CPU상태를 유지한다.
@@ -71,3 +80,74 @@ computer hardware
 
   + `System call` : 사용자가 I/O 완료를 기다릴 수 있도록 운영체제에 요청
   + `Device-status table` : 유형, 주소 및 상태를 나타내는 각 I/O 장치에 대한 항목이 있다.
+
+# Storage Structure
+- `메인 메모리` : CPU가 직접 액세스 할 수 있는 대용량 저장 장치
+  + 랜덤 액세스
+  + 휘발성
+  + DRAM
+
+
+- `보조 저장장치` : 메인 메모리의 확장
+  + 비휘발성
+
+
+- `HDD` : 트랙 / 섹터
+
+
+- `NVM 장치` : 비 휘발성 메모리 장치
+  + 다양한 기술
+  + 하드디스크 보다 빠르다
+  + 비 휘발성
+
+## Hirearchy
+
+- `Speed` : 속도
+- `Cost` :  비용
+- `Volatility` : 휘발성
+
+## Speed
+
+```
+ registers
+    V
+  cache
+    V
+main memory
+
+nonvolatile memory
+    V
+hard-disk drives
+
+optical dist
+    V
+magnetic tapes
+```
+
+`opposite` : `capacity`
+
+
+# Unit
+- `bit` -> `byte`(8 bits) -> `word`(8 bytes)
+- `KB` : 2^10
+- `MB` : 2^20
+- `GB` : 2^30
+- `TB` : 2^40
+- `PB` : 2^50
+
+# Multi Programming(Batch)
+- 단일 유저는 CPU,I/O 장치를 항상 사용 중으로 유지할 수 없다.
+- 전체 작업의 일부는 메모리에 보관
+- 작업 스케쥴링에 의해 하나의 작업 선택,실행
+
+# Multi Tasking(Timesharing)
+- CPU가 작업을 자주 전환해서 실행중인 각 작업과 상호작용 할 수 있는 대화형 컴퓨팅
+- 응답시간 1초 미만
+- 메모리에서 프로세스를 실행하는 하나 이상의 프로그램을 가지고 있다.
+- 작업 스케쥴링에 의해 예약
+- Swapping
+
+# Process
+- 실행중인 프로그램, 시스템 내의 작업 단위
+- 프로그램 카운터(PC) : 다음 명령어의 위치를 지정
+- 다중 스레드 프로세스는 스레드 당 하나의 PC가 있다.
