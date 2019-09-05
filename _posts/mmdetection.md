@@ -17,7 +17,7 @@ object detection tool box인 MMDetection과 MMDetection이 지원하는 프레�
 
 # Frameworks
 
-지원하는 프레임워크 한줄 설명
+지원하는 프레임워크 KeyPoint
 
 ## Single stage
 
@@ -41,7 +41,7 @@ Localization, Classification 을 동시에 해결
 Localization, Classification 을 순차적으로 해결
 
 | Name | Content | Year |
-| :------------ | :-----------: | -------------------: |
+| :-: | --- | :-: |
 | `Fast R-CNN` | `Region Proposal(RP)` , `ROI Pooling` | 2015 |
 | `Faster R-CNN` | `Region Proposal Network(RPN)`,`Fast R-CNN` | 2015 |
 | `R-FCN` | `fully convolutional`, `Faster R-CNN` | 2016 |
@@ -50,4 +50,50 @@ Localization, Classification 을 순차적으로 해결
 | `Mask Scoring R-CNN` | `mask IoU prediction`, `Mask R-CNN` | 2019 |
 | `Double-Head R-CNN` | `convolution head(localization) + fully connected head(classification)` | 2019 |
 
+## Multi Stage
+| Name | Content | Year |
+|:-:|---| :-: |
+| `Casecade R-CNN` | `multi-stage` | 2017 |
+| `Hybrid Task Cascade`  | `multi-stage` , `multi-branch` , `instance segmentation` | 2019 |
+
 ## General Modules and Methods
+| Name | Content | Year |
+|:-:|---|:-:|
+| `Mixed Precision Training` | `half precision ﬂoating point (FP16) ` | 2018 |
+| `Soft NMS` | `new NMS` | 2017 |
+| `OHEM` | `hard sampling` | 2016 |
+| `DCN ` | `deformable convolution`, `deformable RoI pooling` | 2017 |
+| `DCNv2` | `deformable operators` | 2018 |
+| `ScratchDet` | `scratch`,`random initialization` | 2018 |
+| `Train from Scratch` | `scratch` | 2018 |
+| `M2Det` | `effective feature pyramids` | 2018 |
+| `GCNet` | `global context block` | 2019 |
+| `Generalized Attention` | `generalized attention formulation` | 2019 |
+| `SyncBN`,`MegDet` | `batch normalization`, `synchronized ` | 2017 |
+| `GroupNormalization` | `group batch normalization` | 2018 |
+| `Weight Standardization` | ` micro-batch training` | 2019 |
+| `HRNet` | `high-resolution representations`, `backbone` | 2019 |
+| `Guided Anchoring` | `new anchoring`, `sparse and arbitrary-shaped anchors` | 2019 |
+| `Libra R-CNN` | `framework`, `balanced learning ` | 2019 |
+
+# Architecture
+
+## Model Representations
+
+- `Backbone` : fully connected layer가 없는 resnet-50
+
+- `Neck` : feature map 수정/재구성 ex) FPN
+
+- `DenseHead` : AnchorHead / AnchorFreeHead(`RPNHead`, `RetinaHead`, `FCOSHead`)를 포함하고 feature map의 밀집된 위치에서 작동한다.
+
+- `RoIExtractor` : `RoIPooling`과 같은 연산을 사용해 `ROIwise feature`를 추출하는 부분이다. ex) SingleRoI
+
+- `RoIHead ` : bounding box를 분류, 회귀, 마스크 예측
+
+
+
+![이름](https://github.com/jjeamin/jjeamin.github.io/raw/master/_posts/post_img/mmdetection/figure1.PNG)
+
+
+
+## Training Pipeline
