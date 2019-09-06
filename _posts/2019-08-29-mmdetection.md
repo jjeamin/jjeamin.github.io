@@ -120,3 +120,90 @@ hooking mechanism을 가지고 있는 pipeline
 
 
 # 부록 : 사용하기
+
+참조 : [깃허브](https://github.com/open-mmlab/mmdetection)
+
+## 환경 설치하기
+
+```
+conda create -n open-mmlab python=3.7 -y
+conda activate open-mmlab
+
+conda install pytorch torchvision -c pytorch
+
+git clone https://github.com/open-mmlab/mmdetection.git
+cd mmdetection
+
+pip install mmcv
+
+python setup.py develop
+# or "pip install -v -e ."
+
+mkdir data
+ln -s $COCO_ROOT data
+```
+
+## 데이터셋 준비하기
+
+```
+mmdetection
+├── mmdet
+├── tools
+├── configs
+├── data
+│   ├── coco
+│   │   ├── annotations
+│   │   ├── train2017
+│   │   ├── val2017
+│   │   ├── test2017
+│   ├── cityscapes
+│   │   ├── annotations
+│   │   ├── train
+│   │   ├── val
+│   ├── VOCdevkit
+│   │   ├── VOC2007
+│   │   ├── VOC2012
+```
+
+데이터셋을 다운로드하고 위와 같은 구조를 맞추어 주어야한다.
+
+- [COCO](http://cocodataset.org/#download)
+- [VOC2007](http://host.robots.ox.ac.uk/pascal/VOC/voc2007/)
+- [VOC2012](http://host.robots.ox.ac.uk/pascal/VOC/voc2012/)
+- [cityscapes](https://github.com/mcordts/cityscapesScripts)
+
+```
+cd data/cityscapes/
+mv train/*/* train/
+```
+
+## 모델 준비하기
+
+다운로드 : [https://github.com/open-mmlab/mmdetection/blob/master/docs/MODEL_ZOO.md](https://github.com/open-mmlab/mmdetection/blob/master/docs/MODEL_ZOO.md)
+
+- 실행하기
+
+*dataset demo*
+
+```
+python tools/test.py configs/faster_rcnn_r50_fpn_1x.py \
+    checkpoints/faster_rcnn_r50_fpn_1x_20181010-3d1b3351.pth \
+    --show
+```
+
+*bbox, mask AP*
+
+```
+python tools/test.py configs/mask_rcnn_r50_fpn_1x.py \
+    checkpoints/mask_rcnn_r50_fpn_1x_20181010-069fa190.pth \
+    --out results.pkl --eval bbox segm
+```
+
+*webcam demo*
+
+```
+python demo/webcam_demo.py configs/faster_rcnn_r50_fpn_1x.py \
+    checkpoints/faster_rcnn_r50_fpn_1x_20181010-3d1b3351.pth
+```
+
+이것저것 테스팅을 해볼수 있는 유용한 toolbox다. [고성능 API](https://github.com/open-mmlab/mmdetection/blob/master/demo/inference_demo.ipynb)도 이용할 수 있기 때문에 사용이 편리하다. 
