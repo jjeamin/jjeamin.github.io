@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "MMDetection"
-summary: "MMDetection 논문 읽어보기"
+summary: "MMDetection 논문 읽어보기 / 사용하기"
 date:   2019-08-29 13:00 -0400
 categories: paper
 ---
@@ -92,8 +92,31 @@ Localization, Classification 을 순차적으로 해결
 
 
 
-![이름](https://github.com/jjeamin/jjeamin.github.io/raw/master/_posts/post_img/mmdetection/figure1.PNG)
+![figure1](https://github.com/jjeamin/jjeamin.github.io/raw/master/_posts/post_img/mmdetection/figure1.PNG)
 
 
 
 ## Training Pipeline
+- `hooking` :  함수 호출, 메시지, 이벤트 등을 중간에서 바꾸거나 가로채는 명령, 방법, 기술이나 행위를 말한다.
+
+hooking mechanism을 가지고 있는 pipeline
+
+
+
+![figure2](https://github.com/jjeamin/jjeamin.github.io/raw/master/_posts/post_img/mmdetection/figure2.PNG)
+
+
+
+# Benchmark
+
+## Dataset
+- VOC
+- COCO
+
+
+
+![figure3](https://github.com/jjeamin/jjeamin.github.io/raw/master/_posts/post_img/mmdetection/figure3.PNG)
+
+
+
+# 부록 : 사용하기
