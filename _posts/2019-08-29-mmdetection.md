@@ -41,7 +41,7 @@ Localization, Classification 을 동시에 해결
 Localization, Classification 을 순차적으로 해결
 
 | Name | Content | Year |
-| :-: | --- | :-: |
+| :------------ | :-----------: | -------------------: |
 | `Fast R-CNN` | `Region Proposal(RP)` , `ROI Pooling` | 2015 |
 | `Faster R-CNN` | `Region Proposal Network(RPN)`,`Fast R-CNN` | 2015 |
 | `R-FCN` | `fully convolutional`, `Faster R-CNN` | 2016 |
@@ -50,15 +50,17 @@ Localization, Classification 을 순차적으로 해결
 | `Mask Scoring R-CNN` | `mask IoU prediction`, `Mask R-CNN` | 2019 |
 | `Double-Head R-CNN` | `convolution head(localization) + fully connected head(classification)` | 2019 |
 
+
 ## Multi Stage
 | Name | Content | Year |
-|:-:|---| :-: |
+| :------------ | :-----------: | -------------------: |
 | `Casecade R-CNN` | `multi-stage` | 2017 |
 | `Hybrid Task Cascade`  | `multi-stage` , `multi-branch` , `instance segmentation` | 2019 |
 
+
 ## General Modules and Methods
 | Name | Content | Year |
-|:-:|---|:-:|
+| :------------ | :-----------: | -------------------: |
 | `Mixed Precision Training` | `half precision ﬂoating point (FP16) ` | 2018 |
 | `Soft NMS` | `new NMS` | 2017 |
 | `OHEM` | `hard sampling` | 2016 |
@@ -75,6 +77,7 @@ Localization, Classification 을 순차적으로 해결
 | `HRNet` | `high-resolution representations`, `backbone` | 2019 |
 | `Guided Anchoring` | `new anchoring`, `sparse and arbitrary-shaped anchors` | 2019 |
 | `Libra R-CNN` | `framework`, `balanced learning ` | 2019 |
+
 
 # Architecture
 
@@ -206,4 +209,4 @@ python demo/webcam_demo.py configs/faster_rcnn_r50_fpn_1x.py \
     checkpoints/faster_rcnn_r50_fpn_1x_20181010-3d1b3351.pth
 ```
 
-이것저것 테스팅을 해볼수 있는 유용한 toolbox다. [고성능 API](https://github.com/open-mmlab/mmdetection/blob/master/demo/inference_demo.ipynb)도 이용할 수 있기 때문에 사용이 편리하다. 
+이것저것 테스팅을 해볼수 있는 유용한 toolbox다. [고성능 API](https://github.com/open-mmlab/mmdetection/blob/master/demo/inference_demo.ipynb)도 이용할 수 있기 때문에 사용이 편리하다.
