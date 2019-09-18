@@ -1,20 +1,37 @@
 ---
 layout: post
-title:  "자주 찾는 명령어(라즈비안)"
-summary: "자주 찾게되는 명령어들을 적어놓았습니다."
+title:  "라즈베리파이 설정(라즈비안)"
+summary: "자주 찾게되는 라즈베리파이 설정방법/명령어를 적어놓았습니다."
 date:   2019-02-08 11:10 -0400
 categories: pi
 ---
+
+```
+sudo apt-get update
+sudo apt-get upgrade
+```
 
 ## 랜선으로 연결하기
 1. 네트워크 연결 탭 들어가기
 2. 무선 네트워크 연결(속성) -> 공유탭 : 인터넷 연결 허용 체크
 3. putty : `raspberrypi.mshome.net`
 
+## SSH 설정
+
+```
+sudo raspi-config
+
+Interfacing Options -> SSH
+
+ifconfig : ip확인하기
+```
+
 ## 한글설정
 
 ```
 sudo raspi-config
+
+Localisation Options -> Change locale,Change Keyboard Layout
 ```
 
 1. local 설정하기
@@ -33,11 +50,10 @@ sudo apt-get install ibus ibus-hangul fonts-unfonts-core
 
 4. 한글 입력
 ```
-ibus-setup
+ibus-setup -> english 제거 hangul 추가 -> reboot
 ```
 
 한글 추가
-
 ---
 
 ## 화면 캡쳐
