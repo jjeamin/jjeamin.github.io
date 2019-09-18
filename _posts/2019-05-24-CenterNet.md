@@ -6,13 +6,15 @@ date:   2019-05-19 13:00 -0400
 categories: paper
 ---
 
-초당 142 프레임에 28.1 `AP`를 가지고 있다고 해서 바로 읽어보았다.(GOOD)
+이 당시에 초당 142 프레임에 28.1 `AP`를 가지고 있다고 해서 바로 읽어보았다.
 
 - `AP` : recall 값들에 대응하는 precision 값들의 average
 
 # CenterNet
 
-- Paper : [Here](https://arxiv.org/abs/1904.07850)(Object as Point)
+(Object as Point)
+
+- Paper : [Here](https://arxiv.org/abs/1904.07850)
 - Github : [Here](https://github.com/xingyizhou/CenterNet)
 
 ---
