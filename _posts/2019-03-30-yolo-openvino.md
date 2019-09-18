@@ -13,7 +13,7 @@ categories: openvino
 
 ## requirement
 - opencv 4.0.0
-- openvino
+- [openvino](https://jjeamin.github.io/pi/2019/03/08/NCS2/)
 
 ---
 
