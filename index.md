@@ -6,9 +6,10 @@ tags: index
 ---
 # Lab
 - [YOLO - openvino](https://jjeamin.github.io/openvino/2019/03/30/yolo-openvino/)(simple)
-- [YOLO - counting](https://jjeamin.github.io/yolo/2019/03/28/yolo_counting/) - 제작중
+- [YOLO - counting](https://jjeamin.github.io/yolo/2019/03/28/yolo_counting/) (제작미정)
 
 # Raspberry Pi
+- [Setting](https://jjeamin.github.io/pi/2019/02/08/pi_setting/)
 - [Following Robot](https://jjeamin.github.io/pi/2019/02/07/following_robot/)
   + [QR Reader](https://jjeamin.github.io/pi/2019/02/12/QR_code_reader/)
   + [Object Tracking](https://jjeamin.github.io/opencv/2019/02/13/object_tracking/)
@@ -17,8 +18,8 @@ tags: index
   + [Google API 설정](https://jjeamin.github.io/pi/2019/07/09/googleapi/)
 
 - [Face Identification](https://jjeamin.github.io/pi/2019/02/12/Face-Identification/)
-- [NCS2](https://jjeamin.github.io/pi/2019/03/08/NCS2/)
-- [NCS2 - IR](https://jjeamin.github.io/pi/2019/03/08/NCS2_IR/)
+- [NCS2 - 설치](https://jjeamin.github.io/pi/2019/03/08/NCS2/)
+- [NCS2 - IR변환](https://jjeamin.github.io/pi/2019/03/08/NCS2_IR/)
 - [Coral USB](https://jjeamin.github.io/pi/2019/07/05/coralusb/)
 
 # Reinforcement
@@ -38,6 +39,9 @@ tags: index
 - [SORT](https://jjeamin.github.io/paper/2019/04/25/sort/)
 - [Xception/MobileNet](https://jjeamin.github.io/paper/2019/07/07/mobileNet_Xception/)
 - [CenterNet](https://jjeamin.github.io/paper/2019/05/19/CenterNet/)
+- [MMDetection](https://jjeamin.github.io/paper/2019/08/29/mmdetection/)
+- [FSAF](https://jjeamin.github.io/paper/2019/09/08/FSAF/)
+- [FPN](https://jjeamin.github.io/paper/2019/09/18/FPN/)
 
 # GAN - tensorflow
 - [GAN](https://github.com/jjeamin/my_gan/tree/master/gan)
@@ -59,7 +63,7 @@ tags: index
 - [Django](https://jjeamin.github.io/web/2019/03/14/Django/)
 - [Django2](https://jjeamin.github.io/web/2019/03/30/Django2/)
 - [Docker](https://jjeamin.github.io/capston/2019/03/22/Docker/)
-- [ROS](https://jjeamin.github.io/contest/2019/08/03/ros/) 
+- [ROS](https://jjeamin.github.io/contest/2019/08/03/ros/)
 
 # Winter School
 - 3등 수상
