@@ -53,7 +53,6 @@ sudo apt-get install ibus ibus-hangul fonts-unfonts-core
 ibus-setup -> english 제거 hangul 추가 -> reboot
 ```
 
-한글 추가
 ---
 
 ## 화면 캡쳐
