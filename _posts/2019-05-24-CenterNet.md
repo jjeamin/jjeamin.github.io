@@ -7,9 +7,9 @@ categories: paper
 use_math : true
 ---
 
-이 당시에 초당 142 프레임에 28.1 `AP`를 가지고 있다고 해서 바로 읽어보았다.
+이 당시에 초당 142 프레임에 28.1 AP를 가지고 있다고 해서 바로 읽어보았다.
 
-- `AP` : recall 값들에 대응하는 precision 값들의 average
+- AP : recall 값들에 대응하는 precision 값들의 average
 
 # CenterNet
 
@@ -23,12 +23,12 @@ use_math : true
 # 요약
 - Detection은 이미지의 `axis aligned box`로 object를 식별한다. 대부분의 성공적인 object detetor들은 모든 잠재적 object 위치를 찾고 각각을 분류한다. 이러한 일은 낭비가 많고 비효율적고 추가적인 post-processing이 필요하다. **그래서 이 논문에서는 다른 접근법을 취한다.**
 
-- 이 논문은 bounding box의 중심점인 **단일 점** 으로 모델링한다. 이 논문의 detector는 `keypoint estimation`를 사용해서 중심점을 찾고 크기, 3D 위치, 방향, 자세와 같은 모든 다른 object의 속성으로 회귀한다.
+- 이 논문은 bounding box의 중심점인 **단일 점** 으로 모델링한다. 이 논문의 detector는 keypoint estimation를 사용해서 중심점을 찾고 크기, 3D 위치, 방향, 자세와 같은 모든 다른 object의 속성으로 회귀한다.
 
 - MS COCO 데이터셋에
-  + Resnet18 : `142FPS에서 28.1 AP`
-  + DLA34 : `52FPS에서 37.4 AP`
-  + Hourglass-104 : `1.4FPS에서 45.1 AP`
+  + `Resnet18` : 142FPS에서 28.1 AP
+  + `DLA34` : 52FPS에서 37.4 AP
+  + `Hourglass-104` : 1.4FPS에서 45.1 AP
 
 - [KITTI 벤치마크](http://www.cvlibs.net/datasets/kitti/eval_object.php?obj_benchmark=3d)에서 3D bounding box를 추정하고 [COCO keypoint 데이터셋](http://cocodataset.org/#download)에서 사람의 자세를 계산하기 위해 동일한 접근법을 사용한다.
 
@@ -39,8 +39,8 @@ use_math : true
 
 - two stage detector는 bounding box 각각에 대해 이미지의 특징을 다시 계산한 다음 해당 특징을 분류한다.
 
-- post-processing를 할 때 구별하기 어렵고 훈련이 어렵다.  그런데도 좋은 성공을 거두었다. Sliding window 기반의 object detector는 가능한 모든 object의 위치를 찾아야하기 때문에 자원이 낭비가 된다. 
-그래서 그에 따른 대안을 이 논문이 설명한다. 
+- post-processing를 할 때 구별하기 어렵고 훈련이 어렵다.  그런데도 좋은 성공을 거두었다. Sliding window 기반의 object detector는 가능한 모든 object의 위치를 찾아야하기 때문에 자원이 낭비가 된다.
+그래서 그에 따른 대안을 이 논문이 설명한다.
 
 - **object detection은 표준 key point estimation 문제**라고 정의했다. 히트맵을 생성하는 convolution network에 이미지를 넣어주기만 하면 된다. **이 히트맵의 peaks는 물체 중심에 해당하고 각 peaks의 image feature는 bounding box의 높이 및 두께를 예측한다.**
 
@@ -62,8 +62,8 @@ use_math : true
 
 ## Object detection with implicit anchors
 
-Faster RCNN는 region proposal을 생성한다. 
-저해상도 이미지 격자 주위에 고정된 모양의 bounding box(anchor box)를 sampling하고 각각을 foreground background로 분류한다. anchor는 모든 ground truth에서 0.7보다 크면 `foreground`로 표시되며 0.3보다 작으면 `background`로 표시되거나 무시된다. 
+Faster RCNN는 region proposal을 생성한다.
+저해상도 이미지 격자 주위에 고정된 모양의 bounding box(anchor box)를 sampling하고 각각을 foreground background로 분류한다. anchor는 모든 ground truth에서 0.7보다 크면 `foreground`로 표시되며 0.3보다 작으면 `background`로 표시되거나 무시된다.
 ```
 Anchor shape priors : YOLOv2,YOLOv3
 Different feature resolution : SSD
@@ -79,7 +79,7 @@ Loss re-weighting : Focal loss for dense object detection
 
 ## Object detection by keypoint extimation
 
-object detection을 위해서 keypoint 추정방법을 사용하는 것이 처음은 아니다. 
+object detection을 위해서 keypoint 추정방법을 사용하는 것이 처음은 아니다.
 - `CornerNet`은 두 개의 bounding box의 모서리를 keypoint로 detection을 한다.
 - `ExtremeNet`은 모든 object의 상단,좌측,하단,우측 및 중심점을 detection한다. 이 두가지 방법 모두 CenterNet과 동일한 keypoint 추정 네트워크를 기반으로 한다. 그러나 keypoint 추정후 그룹화 단계가 필요하고 그에 따라서 알고리즘 속도가 현저히 줄어든다. 반면 CenterNet은 그룹화 또는 후처리 작업 없이도 object당 하나의 중심점만 추출한다.
 
@@ -93,19 +93,19 @@ object detection을 위해서 keypoint 추정방법을 사용하는 것이 처�
 
 # Preliminary
 
-- W인 폭과 H인 높이를 가진 이미지 : $$I \in R^{(W*H*3)}$$ 
+- W인 폭과 H인 높이를 가진 이미지 : $$I \in R^{(W*H*3)}$$
 - keypoint heatmap : $$\hat{Y} \in [0, 1]^{(\frac{W}{R} * \frac{H}{R} * C)}$$
 - R : output stride
-- C : keypoint 유형의 수 
+- C : keypoint 유형의 수
     + keypoint의 유형(사람의 자세를 추정) : C=17(사람 관절)
-    + object detection : C=80 범주를 포함한다. 
+    + object detection : C=80 범주를 포함한다.
     + 기본적으로 R=4이다.
-     
-$$\hat{Y}|x,y,z = 1$$ : keypoint
 
-$$\hat{Y}|x,y,z = 0$$ : background
+$$\hat{Y} \mid x,y,z = 1$$ : keypoint
 
-이미지 $$I$$로부터 $$\hat{Y}$$를 예측하기 위해 여러개의 fully convolution encoder-decoder network를 사용한다. 
+$$\hat{Y} \mid x,y,z = 0$$ : background
+
+이미지 $$I$$로부터 $$\hat{Y}$$를 예측하기 위해 여러개의 fully convolution encoder-decoder network를 사용한다.
 
 ground truth keypoint : $$p \in R^{2}$$
 
@@ -129,12 +129,12 @@ gaussian kernel
 
 
 
-- `α,β` : focal loss의 hyper parameter
-- `N` : 이미지 I의 keypoint의 수이다. N은 모든 양수의 focal loss를 1로 정규화하기 위해 선택된다.
-- Law and Deng을 따라서 `α` = 2, `β` = 4 로 정했다.
+- $$\alpha, \beta $$ : focal loss의 hyper parameter
+- $$N$$ : 이미지 I의 keypoint의 수이다. 모든 양수의 focal loss를 1로 정규화하기 위해 선택된다.
+- Law and Deng을 따라서 $$\alpha$$ = 2, $$\beta$$ = 4 로 정했다.
 - output stride에 의해 발생된 수학적 오류를 복구하기 위해서 local offset을 각 중심점마다 추가로 예측한다. : $$\hat{O} \in R^{(\frac{W}{R} * \frac{H}{R} * 2)}$$
 
-모든 클래스 c는 동일한 offset 예측을 사용한다. offset은 L1 loss로 훈련된다. 감독자는 오직 keypoint 위치 `p'`에서만 작동하고 다른 모든 위치는 무시된다. 다음 섹션에서 keypoint 추정을 범용 object detector로 확장하는 방법을 보여준다.
+모든 클래스 c는 동일한 offset 예측을 사용한다. offset은 L1 loss로 훈련된다. 감독자는 오직 keypoint 위치 $$\hat{p}$$에서만 작동하고 다른 모든 위치는 무시된다. 다음 섹션에서 keypoint 추정을 범용 object detector로 확장하는 방법을 보여준다.
 
 
 
@@ -146,12 +146,12 @@ gaussian kernel
 
 # Objects as Points
 
-범주 C(k)를 갖는 대상 k의 bounding box가 `x1`,`y1`,`x2`,`y2` 라고 하자. 
+범주 C(k)를 갖는 대상 k의 bounding box가 $$x1,y1,x2,y2$$ 라고 하자.
 
 - 중심점 : $$p(k) = (\frac{x1+x2}{2},\frac{y1+y2}{2})$$
-- 예측 keypoint $$hat{Y}$$을 사용해서 모든 중심점을 예측
+- 예측 keypoint $$\hat{Y}$$을 사용해서 모든 중심점을 예측
 - 각 object k에 대해 $$s(k) = (x2-x1,y2-y1)$$로 회귀
-- 계산적인 부담을 줄이기 위해 모든 object 범주에 대해 단일 크기 예측 $$\hat{S} \in R^{(\frac{W}{R} * \frac{H}{R} * 2)}$$을 사용한다. 
+- 계산적인 부담을 줄이기 위해 모든 object 범주에 대해 단일 크기 예측 $$\hat{S} \in R^{(\frac{W}{R} * \frac{H}{R} * 2)}$$을 사용한다.
 - L1 loss를 사용
 
 
@@ -168,13 +168,13 @@ scale을 표준화하지 않고 원본 픽셀 좌표를 직접 사용한다. 대
 
 
 
-논문에서 달리 명시하지 않는이상 모든 실험에서 `λsize = 0.1` 와 `λoff = 1`로 설정했다. 
+논문에서 달리 명시하지 않는이상 모든 실험에서 $$\lambda size = 0.1$$ 와 $$\lambda off = 1$$로 설정했다.
 
-keypoint $$\hat{Y}$$, offset $$\hat{O}$$, 크기 $$\hat{S}$$를 예측한다. 네트워크는 각 위치에서 총 `C+4`개의 output을 예측한다. 모든 출력은 `commonfully-convolutional backbone network`를 공유한다. 각 형태에 대해서 `backbone`의 특징은 별도의 3x3 convolution, relu와 다른 1x1 convolution을 통과한다.
+keypoint $$\hat{Y}$$, offset $$\hat{O}$$, 크기 $$\hat{S}$$를 예측한다. 네트워크는 각 위치에서 총 `C+4`개의 output을 예측한다. 모든 출력은 `commonfully-convolutional backbone network`를 공유한다. 각 형태에 대해서 backbone의 특징은 별도의 3x3 convolution, relu와 다른 1x1 convolution을 통과한다.
 
 ## From points to bounding boxes
 
-추론을 할때, 먼저 각 범주에 대한 히트맵의 peaks를 추출한다. 값이 8개의 연결된 이웃들 보다 크거나 같은 모든 응답을 detection하고 최고 100개의 peaks를 유지한다. `P'(c)`는 클래스 c의 n개의 검출된 중심점 `P' = {(xi'yi')}(i = 1~n)` 의 집합이라고 하자. 각 keypoint의 위치는 정수 좌표 (xi,yi)로 표시된다. keypoint 값 `Y'|x,y,z`를 신뢰도와 동일하게 사용하고 위치에 bounding box를 생성한다.
+추론을 할때, 먼저 각 범주에 대한 히트맵의 peaks를 추출한다. 값이 8개의 연결된 이웃들 보다 크거나 같은 모든 응답을 detection하고 최고 100개의 peaks를 유지한다. $$\hat{P}(c)$$는 클래스 c의 n개의 검출된 중심점 $$\hat{P} = {(\hat{xi}\,hat{yi})}(i = 1~n)$$ 의 집합이라고 하자. 각 keypoint의 위치는 정수 좌표 (xi,yi)로 표시된다. keypoint 값 $$\hat{Y}\mid x,y,z$$를 신뢰도와 동일하게 사용하고 위치에 bounding box를 생성한다.
 
 
 
@@ -182,26 +182,9 @@ keypoint $$\hat{Y}$$, offset $$\hat{O}$$, 크기 $$\hat{S}$$를 예측한다. �
 
 
 
-- offset 예측 : $$(\hat{\delta }(xi) , \hat{\delta }(yi)) = \hat{O}(\hat{xi},\hat{yi})$$ 
+- offset 예측 : $$(\hat{\delta }(xi) , \hat{\delta }(yi)) = \hat{O}(\hat{xi},\hat{yi})$$
 - 크기 예측 : $$(\hat{wi},\hat{hi}) = \hat{S}(\hat{xi},\hat{yi})$$
 - 모든 출력은 IoU기반 NMS(Non Maximum Suppression) 또는 기타 후처리가 필요없는 keypoint 추정에서 직접 생성된다. peak keypoint 추출은 충분한 NMS 대안으로서 역할을 하고 3 x 3 max pooling 연산을 사용하는 장치에서 효율적으로 구현 될수 있다.
-<!--
-## 3D detection
-
-- 3D detection은 object 당 3D bounding box를 추정하고 중심점 당 3개의 추가 속성(깊이,3D면적 및 방향)을 필요로 한다.
-
-- 깊이 d는 중심점 당 하나의 스칼라이다. 그러나 깊이는 직접 회귀하기가 어렵다. 대신 `Eigen et al.`의 출력 변환을 사용한다. 그리고 `d = 1/σ(d') - 1` 여기서 σ는 sigmoid 함수이다. keypoint 추정기의 추가 출력 채널` D' ∈ [0,1]^(W/R x H/R)`로서 깊이를 계산한다.
-
-- Relu로 분리된 2개의 convolution layer를 다시 사용한다. 이전 방식과 달리 출력에서 역 S자형 변환(inverse sigmoidal transformation)을 사용한다. S자형 변환 후 원래 깊이 에서 L1 loss를 사용해 깊이를 훈련시킨다.
-
-- object의 3D 면적은 3개의 스칼라값이다. 별도의 `Γ' ∈ R^(W/R x H/R x 3)` 과 L1 loss를 사용해서 미터값의 절대값으로 직접 회귀한다. 방향은 기본적으로 단일 스칼라이지만 회귀가 어렵다. `Mousavian et al.`,`in-bin regression` 와 함께 두개의 `bin`으로 방향을 표현한다. 특히 방향은 8개의 스칼라와 4개의 스칼라를 사용하여 인코딩한다. 하나의 `bin`에 대해 softmax 분류에는 두개의 스칼라가 사용되고 나머지 두개의 스칼라는 각 `bin`내의 각도로 회귀한다.
-
-## Human pose estimation
-
-사람의 자세를 추정하는 것은 모든 사람에 대해 k개의 2D 사람 관절 위치를 추정하는 것을 목표로 한다 (COCO k = 17). 포즈를 중심점의 k x 2 차원 속성으로 간주하고 각 keypoint를 중심점으로부터 간격을 띄우는 방식으로 매개변수화 한다. 직접적으로 L1 loss를 갖는 픽셀 단위의 관절 offset `J' ∈ R^(W/R x H/R x k x 2)`로 회귀한다. 그리고 보이지 않는 keypoint는 무시한다. 결과적으로 `slow-RCNN`과 유사한 회귀 기반의 1단계 사람 자세 추정기가 된다. keypoint를 다시 정의하기 위해서, 우리는 `standard bottom-up multi-human pose extimation`을 사용해서 k 개의 사람 관절 히트맵 `Φ' ∈ R^(W/R × H/R × k)` 을 추정한다. 중심 검출과 유사한 `focal loss`와 `local pixel offset`을 가진 사람의 관절 히트맵을 훈련한다.
-
-그러면 이 히트맵에서 가장 가깝게 검출된 keypoint에 초기 예측을 스냅한다. 여기서 중심 오프셋은 가장 가까운 사람에 개별 keypoint 탐지를 할당하는 그룹 큐 역할을 한다. 구체적으로 (x',y')가 검출된 중심점이라고 하자. `j= 1 ~ k`에 대한 모든 접합 위치 `l(j) = (x',y') + J'|x',y',j'`로 회귀한다. 또한 대응하는 히트맵 `Φ(..j)`로 부터 각 관절 유형에 대해 `confidence > 0.1`인 모든 keypoint 위치 `L(j) = {l'(ji)} (i = 1 ~ n(j))` 다음으로 회귀된 각 위치 lj를 검출된 물체의 바운딩 박스 내에서 관절 검출만을 고려하여 가장 가깝게 검출된 $$argmin_{l \in L_{j}}(l-l_{j})^{2}$$에 할당된다.
--->
 
 # Implementation details
 
