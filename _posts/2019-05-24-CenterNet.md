@@ -174,7 +174,7 @@ keypoint $$\hat{Y}$$, offset $$\hat{O}$$, 크기 $$\hat{S}$$를 예측한다. �
 
 ## From points to bounding boxes
 
-추론을 할때, 먼저 각 범주에 대한 히트맵의 peaks를 추출한다. 값이 8개의 연결된 이웃들 보다 크거나 같은 모든 응답을 detection하고 최고 100개의 peaks를 유지한다. $$\hat{P}(c)$$는 클래스 c의 n개의 검출된 중심점 $$\hat{P} = {(\hat{xi}\,hat{yi})}(i = 1~n)$$ 의 집합이라고 하자. 각 keypoint의 위치는 정수 좌표 (xi,yi)로 표시된다. keypoint 값 $$\hat{Y}\mid x,y,z$$를 신뢰도와 동일하게 사용하고 위치에 bounding box를 생성한다.
+추론을 할때, 먼저 각 범주에 대한 히트맵의 peaks를 추출한다. 값이 8개의 연결된 이웃들 보다 크거나 같은 모든 응답을 detection하고 최고 100개의 peaks를 유지한다. $$\hat{P}(c)$$는 클래스 c의 n개의 검출된 중심점 $$\hat{P} = {(\hat{xi},\hat{yi})}(i = 1~n)$$ 의 집합이라고 하자. 각 keypoint의 위치는 정수 좌표 (xi,yi)로 표시된다. keypoint 값 $$\hat{Y}\mid x,y,z$$를 신뢰도와 동일하게 사용하고 위치에 bounding box를 생성한다.
 
 
 
