@@ -78,7 +78,7 @@ Localization, Classification 을 순차적으로 해결
 | `Generalized Attention` | `generalized attention formulation` | 2019 |
 | `SyncBN`,`MegDet` | `batch normalization`, `synchronized ` | 2017 |
 | `GroupNormalization` | `group batch normalization` | 2018 |
-| `Weight Standardization` | ` micro-batch training` | 2019 |
+| `Weight Standardization` | `micro-batch training` | 2019 |
 | `HRNet` | `high-resolution representations`, `backbone` | 2019 |
 | `Guided Anchoring` | `new anchoring`, `sparse and arbitrary-shaped anchors` | 2019 |
 | `Libra R-CNN` | `framework`, `balanced learning` | 2019 |
