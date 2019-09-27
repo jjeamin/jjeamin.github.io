@@ -52,6 +52,7 @@ Localization, Classification 을 순차적으로 해결
 
 
 ## Multi Stage
+
 | Name | Content | Year |
 | :------------ | :-----------: | -------------------: |
 | `Casecade R-CNN` | `multi-stage` | 2017 |
@@ -59,6 +60,7 @@ Localization, Classification 을 순차적으로 해결
 
 
 ## General Modules and Methods
+
 | Name | Content | Year |
 | :------------ | :-----------: | -------------------: |
 | `Mixed Precision Training` | `half precision ﬂoating point (FP16) ` | 2018 |
