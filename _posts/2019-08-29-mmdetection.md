@@ -51,6 +51,7 @@ Localization, Classification 을 순차적으로 해결
 | `Double-Head R-CNN` | `convolution head(localization) + fully connected head(classification)` | 2019 |
 
 
+
 ## Multi Stage
 
 | Name | Content | Year |
@@ -59,7 +60,9 @@ Localization, Classification 을 순차적으로 해결
 | `Hybrid Task Cascade`  | `multi-stage` , `multi-branch` , `instance segmentation` | 2019 |
 
 
+
 ## General Modules and Methods
+
 
 | Name | Content | Year |
 | :------------ | :-----------: | -------------------: |
@@ -79,6 +82,7 @@ Localization, Classification 을 순차적으로 해결
 | `HRNet` | `high-resolution representations`, `backbone` | 2019 |
 | `Guided Anchoring` | `new anchoring`, `sparse and arbitrary-shaped anchors` | 2019 |
 | `Libra R-CNN` | `framework`, `balanced learning ` | 2019 |
+
 
 
 # Architecture
