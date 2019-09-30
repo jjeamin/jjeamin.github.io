@@ -17,6 +17,8 @@ use_math: true
 
 - 여러가지 sub policies로 구성된 설계 공간을 탐색하고 각 미니 배치의 각각 이미지에 대해 랜덤으로 선택되었다.
 
+
+
 - sub policies는 Rotation, Translation, shearing 과 같은 **처리 방법** 과 적용되는 **확률,크기** 로 구성된다.
 
 - 검색알고리즘을 사용한다.
@@ -79,7 +81,7 @@ image augmentation은 수동으로 설계되었고 데이터 셋 별로 최상�
 ShearX/Y, TranslateX/Y, Rotate, AutoContrast, Invert, Equalize, Solarize, Posterize, Contrast, Color, Brightness, Sharpness, Cutout, Sample Pairing
 ```
 
-탐색 공간에는 총 16개의 작업이 있다. 탐색 알고리즘을 사용해서 크기를 찾을 수 있도록 크기 범위를 10개의 값(균일한 간격)으로 이산화한다. 11개의 값으로 적용 할 확률도 이산화한다. 즉, $$(16*10*12)^{2}$$ 에서의 탐색 문제다. 그러나 다양성을 높이기 위해서 5개의 하위 정책을 동시에 찾는 것이다. 그래서 $$(16 * 10 * 12)^{2} \approx 2.9 * 10^{32}$$의 엄청나게 많은 가능성을 가진다.
+탐색 공간에는 총 16개의 작업이 있다. 탐색 알고리즘을 사용해서 크기를 찾을 수 있도록 크기 범위를 10개의 값(균일한 간격)으로 이산화한다. 11개의 값으로 적용 할 확률도 이산화한다. 즉, $$(16*10*12)^{2}$$ 에서의 탐색 문제다. 그러나 다양성을 높이기 위해서 5개의 하위 정책을 동시에 찾는 것이다. 그래서 $$(16 * 10 * 12)^{10} \approx 2.9 * 10^{32}$$의 엄청나게 많은 가능성을 가진다.
 
 ## search algorithm detail
 탐색 알고리즘은 RNN 컨트롤러와 `Proximal Policy Optimization algorithm`으로 구성된다. 각 단계에서 컨트롤러는 softmax로 예측한다. 그리고 다음 예측은 다음 단계로 포함된다. 컨트롤러에는 총 2개의 보강 연산이 있는 5개의 하위 정책과 그에 해당하는 크기 및 확률을 예측하기 위해 총 30개의 softmax의 예측이 있다.
