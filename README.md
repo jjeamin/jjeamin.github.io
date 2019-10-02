@@ -1,5 +1,6 @@
 # jjeamin.github.io
 
+- Theme : [https://github.com/johno/pixyll](https://github.com/johno/pixyll)
 - MY BLOG : [GO](https://jjeamin.github.io/) :sunny:
 - INDEX : [GO](https://jjeamin.github.io/index/) &#127918;
 
