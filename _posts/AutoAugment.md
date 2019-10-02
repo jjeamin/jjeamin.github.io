@@ -59,9 +59,90 @@ image augmentation은 수동으로 설계되었고 데이터 셋 별로 최상�
 
 
 
-![figure1](https://github.com/jjeamin/jjeamin.github.io/raw/master/_posts/post_img/autoaugment/figure1.PNG)
+![figure1](https://github.com/jjeamin/jjeamin.github.io/raw/master/_posts/post_img/autoaugment/figure1.PNG){: width="100%" height="100%"}
 
 
+
+## NASNet
+위 그림을 이해하기 위해서는 NASNet을 알아야한다. NASNet은 딥러닝 모델의 구조를 학습해서 구조를 생성하는 모델이다.
+
+
+
+![nas](https://github.com/jjeamin/jjeamin.github.io/raw/master/_posts/post_img/autoaugment/nas.PNG)
+
+
+
+출처 : [https://www.youtube.com/watch?v=XP3vyVrrt3Q](https://www.youtube.com/watch?v=XP3vyVrrt3Q)
+
+위와 같은 방식은 파라미터를 하나하나씩 전부다 찾아주고 네트워크를 만들고 훈련하는데 시간이 너무 오래걸린다는 단점이 있다. 그래서 아래 논문에서는 새롭게 구조를 개선하였다.
+
+```
+B. Zoph, V. Vasudevan, J. Shlens, and Q. V. Le.
+Learning transferable architectures for scalable image recognition.
+In Proceedings of IEEE Conference on Computer Vision and Pattern Recognition, 2017.
+```
+
+
+
+![nas2](https://github.com/jjeamin/jjeamin.github.io/raw/master/_posts/post_img/autoaugment/nas2.PNG)
+
+
+
+이전 같은 경우 각 모델 layer에 해당하는 **파라미터** 값을 하나하나씩 전부 찾아준거라면 이번 같은 경우는 **연산** 을 어떤 것을 사용할지 찾아주는 구조다.
+
+사용하는 연산은
+```
+identity
+1x3 + 3x1 conv
+1x7 + 7x1 conv
+3x3 dilated conv
+3x3 average pooling
+3x3 max pooling
+5x5 max pooling
+7x7 max pooling
+1x1 conv
+3x3 conv
+3x3 depthwise-separable conv
+5x5 depthwise-separable conv
+7x7 depthwise-separable conv
+```
+
+2개의 input layer를 선택하고 연산 중 하나를 선택해서 ADD, Concat 중 하나를 선택해 결합한다.
+
+
+
+![nas3](https://github.com/jjeamin/jjeamin.github.io/raw/master/_posts/post_img/autoaugment/nas3.PNG)
+
+
+
+위 그림은 가장 성능이 좋은 NAS의 구조다.
+이렇게 B개의 블럭이 모여서 하나의 Convolution Cell을 만드는데 이 Cell들이 모여서 네트워크를 만든다. Convolution Cell에는 Normal Cell, Reduction Cell 이렇게 두가지 Cell이 있다.
+
+- Normal Cell : 입출력의 가로 세로 크기가 같은 Cell
+- Reduction Cell : 출력이 입력의 절반의 크기를 같는 Cell
+
+이렇게 B개의 블럭을 모아서 Reduction Cell과 Normal Cell을 생성하고
+
+
+
+![nas3](https://github.com/jjeamin/jjeamin.github.io/raw/master/_posts/post_img/autoaugment/nas3.PNG)
+
+
+
+위와 같은 구조로 만들어 준다.
+
+
+## controller RNN of AutoAugment
+최종적으로 AutoAugment의 RNN controller는 아래와 같은 구조를 가진다.
+
+
+
+![controller](https://github.com/jjeamin/jjeamin.github.io/raw/master/_posts/post_img/autoaugment/controller.PNG)
+
+
+
+## policy gradient
+추가예정
 
 ## search space detail
 보강 정책은 5개의 하위 정책으로 구성되며 각 하위 정책은 2개의 보강 방법으로 구성되어 순서대로 적용된다. 그리고 수치 두가지를 나타낸다.
@@ -98,7 +179,7 @@ ShearX/Y, TranslateX/Y, Rotate, AutoContrast, Invert, Equalize, Solarize, Poster
 
 논문 : B. Zoph, V. Vasudevan, J. Shlens, and Q. V. Le. Learning transferable architectures for scalable image recognition. In Proceedings of IEEE Conference on Computer Vision and Pattern Recognition, 2017
 
-컨트롤러 RNN은 각 계층에서 100개의 hidden layer와 각 아키텍처 결정과 관련된 2개의 convolution cell에 대해 2x5B softmax의 예측을 갖는 one layer LSTM이다. 컨트롤러 RNN의 10B 예측 각각은 확률과 관련된다. childmodel의 공동 확률은 이러한 10B softmax에서 모든 확률의 곱이다. 이 공동 확률은 컨트롤러 RNN의 기울기를 계산하는데 사용한다. 기울기는 childmodel의 검증 정확도에 의해서 조정되고 컨트롤러 RNN을 업데이트한다.
+컨트롤러 RNN은 각 layer에서 100개의 hidden unit과 각 아키텍처 결정과 관련된 2개의 convolution cell에 대해 2x5B softmax(위 논문에서는 B는 일반적으로 5)의 예측을 갖는 one layer LSTM이다. 컨트롤러 RNN의 10B 예측 각각은 확률과 관련된다. childmodel의 공동 확률은 이러한 10B softmax에서 모든 확률의 곱이다. 이 공동 확률은 컨트롤러 RNN의 기울기를 계산하는데 사용한다. 기울기는 childmodel의 검증 정확도에 의해서 조정되고 컨트롤러 RNN을 업데이트한다.
 
 - 학습 속도 0.00035의 PPO(Proximal Policy Optimization)을 사용한다.
 - entropy penalty : 가중치의 0.00001
@@ -111,7 +192,50 @@ ShearX/Y, TranslateX/Y, Rotate, AutoContrast, Invert, Equalize, Solarize, Poster
 5(보강 정책) * 5(하위 정책) * (2(보강 방법) + 2(확률) + 2(크기))
 ```
 
-# 봐야할거
-- B. Zoph, V. Vasudevan, J. Shlens, and Q. V. Le. Learning transferable architectures for scalable image recognition. In Proceedings of IEEE Conference on Computer Vision and Pattern Recognition, 2017.
+# Experiments and Results
 
+## CIFAR10
+- 4000개 추출 사용
+- WideResNet-40-2(layer : 40, widening factor : 2) 모델을 사용
+- 120 epoch
+- weight decay : $$10^{-4}$$
+- learning rate : 0.01
+- cosine learning decay with one annealing cycle
+
+
+## CIFAR100
+- CIFAR10과 같다.
+
+## SVHN
+- 1000개 추출 사용
+- 나머지는 CIFAR10과 동일
+
+# Augmentation
+
+
+
+![figure3](https://github.com/jjeamin/jjeamin.github.io/raw/master/_posts/post_img/autoaugment/figure3.PNG)
+
+
+
+# Final Policy
+
+
+
+![figure4](https://github.com/jjeamin/jjeamin.github.io/raw/master/_posts/post_img/autoaugment/figure4.PNG)
+
+
+
+
+
+
+![figure5](https://github.com/jjeamin/jjeamin.github.io/raw/master/_posts/post_img/autoaugment/figure5.PNG)
+
+
+
+# 봐야할거
 -  J. Schulman, F. Wolski, P. Dhariwal, A. Radford, and O. Klimov. Proximal policy optimization algorithms. arXiv preprint arXiv:1707.06347, 2017.
+
+# 참조
+- [http://research.sualab.com/review/2018/09/28/nasnet-review.html](http://research.sualab.com/review/2018/09/28/nasnet-review.html)
+- [http://openresearch.ai/t/nas-learning-transferable-architectures-for-scalable-image-recognition/154](http://openresearch.ai/t/nas-learning-transferable-architectures-for-scalable-image-recognition/154)
