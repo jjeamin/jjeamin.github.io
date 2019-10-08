@@ -66,7 +66,7 @@ state, action => Q => reward
 이러한 형태가 된다. Q는 어떠한 상태에서 특정한 행동을 취할 때 보상을 얼마나 받을 수 있는지에 대한 지표가 된다. 그러면 이 Q가 어떠한 행동을 했을때 다음상태에서 보상이 최대가 되는 값을 알고있기 때문에 Q를 따라서 이동한다.
 
 ```
-max Q = Q(state,action)
+max Q
 ```
 
 Q의 다음상태의 최대값도 Q-table을 이용해서 알 수 있기 때문에 다음상태에 대해서 다음 행동을 취한 값중 최대값을 보상과 합해서 Q가 어디로 행동해야 할지를 예측한다.
@@ -150,4 +150,111 @@ $$min \sum_{t=0}^{T}[\hat{Q}(s,a | \theta) - \gamma max \hat{Q}(s^{\prime},a^{\p
 5. C스탭후에 $$\bar\theta$$에 $$\theta$$를 복사한다.
 
 # Policy Gradient
-여태까지는 Q의 value값을 이용해서 action을 선택하고 그것
+여태까지는 네트워크에서 state를 입력으로 받고 Q의 value값이 출력이었다. 그리고 그 Q-value값으로 보상을 최대로 하는 action을 선택했다. 이러한 방식을 value-based reinforcement라고 한다. value-based reinforcement에서는 2가지 단점이있다.
+
+1. value function이 약간만 달라져도 policy 자체는 왼쪽으로 가다가 오른쪽으로 간다던지 크게 변화한다. 그래서 최적값에 수렴하는데 불안정하다.
+
+2. 때로는 가위바위보와 같은 게임이 있을 수 있다. 가위바위보는 확률적인 문제로 1/3씩 동등한 확률로 가위바위보를 하는게 최적의 policy이다. 하지만 value-based는 Q-value값을 통해 하나의 action만 선택하는 방법이기 때문에 이러한 문제에 취약하다.
+
+
+그래서 지금부터 설명할 policy-based reinforcement는 출력이 policy인 방법이다. policy는 A라는 상황이 있을때 B라고 행동하라는 정책이고 이러한 정책을 학습하기 위해서는 object function이라는 것을 정의해야한다. 이 object function을 정의하는 3가지 방법이있다.
+
+- start value 사용
+
+$$J_1(\theta) = V^{\pi_\theta}(s_1) = \mathbb{E}_{\pi_\theta}[v_1]$$
+
+- 지속적인 환경에서 값의 평균을 사용
+
+$$J_{avV}(\theta) = \sum_s d^{\pi_\theta}(s) V^{\pi_\theta}(s)$$
+
+- 매 step마다 보상의 평균값을 사용
+
+$$J_{avR}(\theta) = \sum_s d^{\pi_\theta}(s) \sum_a \pi_\theta(s,a)R^a_s$$
+
+
+$$d^{\pi_{\theta}}(s)$$는 $$\pi_\theta$$를 위한 Markov chain의 **stationary distribution**
+
+Markov chain은 상태값의 시퀀스에서 현재 상태는 전 상태에만 영향을 받는다는 가정이다. 예를들어서 우리의 날씨 Markov chain에는 총 4가지의 상태 전이확률(Transition Probabilities)이 있다.
+
+```
+P(맑음 | 맑음), P(비 | 맑음), P(맑음 | 비), P(비 | 비)
+P(맑음 | 맑음) = 0.3
+P(비 | 맑음) = 0.7
+P(맑음 | 비) = 0.1
+P(비 | 비) = 0.9
+```
+
+날씨로 생각하면 오늘 상태로 내일 상태의 날씨확률을 계산하고 그 확률로 내일 모레의 날씨의 확률분포를 계산할 수 있다. 예를 들어 오늘 날씨가 맑을 때 내일이 비가오고 모레가 맑을 확률은
+
+```
+P(비,맑음 | 맑음)
+= P(맑음 | 비, 맑음)*P(비 | 맑음) = P(맑음 | 비)*P(비 | 맑음) <- markov chain
+= 0.1*0.7
+= 0.07
+```
+
+이러한 과정을 반복하면 어느 순간부터 그날의 날씨 확률분포가 그 전날과 같아지는 때가 온다. 이러한 상태에 도달한 날씨의 확률분포를 **stationary distribution** 이라고 한다.
+
+결론은, policy gradient의 목표는 이러한 object function을 최대화시키는 $$\theta$$값을 찾는 것이다. object function을 최대화 시키는 방법은 3가지가 있다.
+
+## Finite Difference Policy Gradient
+numerical한 방법을 사용한다. 조금씩 값을 바꾸어 보면서 gradient를 구하는 방법이고 하나하나씩 천천히 최적의값을 찾는 방법이다. 매우 비효율적이다. 하지만 미분법을 이용하지 않더라도 동작한다.
+
+$$\frac{\partial J(\theta)}{\partial \theta_k} \approx \frac{J(\theta + \epsilon u_k) - J(\theta))}{\epsilon}$$
+
+
+- 각 파라미터를 $$\epsilon$$ 만큼 움직여서 k번째 목적함수 $$w,r,t,\theta$$의 계속해서 최적의 값을 찾을때까지 편미분을 측정한다.
+
+## Monte Carlo Policy Gradient : REINFORCE 알고리즘
+이 방법은 object function의 gradient를 구해서 업데이트 시켜주는 방법이다. gradient descent와 같은 개념이라고 생각하면 될것같다. gradient를 구하는 방법은 아래와 같다.
+
+### score function
+
+
+
+![monte](https://github.com/jjeamin/jjeamin.github.io/raw/master/_posts/post_img/reinforcement/monte.PNG)
+
+
+
+**사용가능한 Policy Example**
+
+- Softmax Policy
+
+$$\pi(s,a) = \frac{e^{\theta^{T}\phi_{sa}}}{\sum_b e^{\theta^{T}\phi_{sb}}}$$
+
+- Gaussian Policy
+
+$$\pi_{\theta}(s,a) = \frac{1}{\sigma\sqrt{2\pi}}e(-\frac{(a-\mu(s))^2}{2\sigma^2})$$
+
+### policy gradient theorem
+output이 바로 보상으로 추출되는 것 말고 Q-table을 사용해서 연산할 수 있다.
+
+
+
+![monte2](https://github.com/jjeamin/jjeamin.github.io/raw/master/_posts/post_img/reinforcement/monte2.PNG)
+
+
+
+### REINFORCE
+monte carlo policy gradient를 REINFORCE 알고리즘이라고 부른다.
+
+이 알고리즘을 표현하면
+
+1. $$\theta$$를 초기화한다.
+2. episode를 진행한다. => 게임이 끝난다.
+3. $$\theta$$를 업데이트한다.
+
+
+
+![monte3](https://github.com/jjeamin/jjeamin.github.io/raw/master/_posts/post_img/reinforcement/monte3.PNG)
+
+
+
+개념을 이해하기는 어렵지만 알고리즘은 간단하다.
+
+# 참조
+- Markov chain : [https://4four.us/article/2014/11/markov-chain-monte-carlo](https://4four.us/article/2014/11/markov-chain-monte-carlo)
+
+- [https://4four.us/article/2018/08/policy-gradient](https://4four.us/article/2018/08/policy-gradient)
+
+- [http://www.modulabs.co.kr/RL_library/3305](http://www.modulabs.co.kr/RL_library/3305)
