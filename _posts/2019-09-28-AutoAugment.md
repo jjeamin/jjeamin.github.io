@@ -59,12 +59,12 @@ image augmentation은 수동으로 설계되었고 데이터 셋 별로 최상�
 
 
 
-![figure1](https://github.com/jjeamin/jjeamin.github.io/raw/master/_posts/post_img/autoaugment/figure1.PNG){: width="100%" height="100%"}
+![figure1](https://github.com/jjeamin/jjeamin.github.io/raw/master/_posts/post_img/autoaugment/figure1.PNG)
 
 
 
 ## NASNet
-위 그림을 이해하기 위해서는 NASNet을 알아야한다. NASNet은 딥러닝 모델의 구조를 학습해서 구조를 생성하는 모델이다.
+위 그림을 이해하기 위해서는 NAS와 NASNet을 알아야한다. NAS는 딥러닝 모델의 구조를 학습해서 구조를 생성하는 모델이다.
 
 
 
@@ -74,7 +74,7 @@ image augmentation은 수동으로 설계되었고 데이터 셋 별로 최상�
 
 출처 : [https://www.youtube.com/watch?v=XP3vyVrrt3Q](https://www.youtube.com/watch?v=XP3vyVrrt3Q)
 
-위와 같은 방식은 파라미터를 하나하나씩 전부다 찾아주고 네트워크를 만들고 훈련하는데 시간이 너무 오래걸린다는 단점이 있다. 그래서 아래 논문에서는 새롭게 구조를 개선하였다.
+NAS는 파라미터를 하나하나씩 전부다 찾아주고 네트워크를 만들고 훈련하는데 직렬적인 구조를 갖기 때문에 시간이 너무 오래걸린다는 단점이 있다. 그래서 아래 NASNet 논문에서는 새롭게 구조를 개선하였다.
 
 ```
 B. Zoph, V. Vasudevan, J. Shlens, and Q. V. Le.
@@ -140,9 +140,6 @@ identity
 ![controller](https://github.com/jjeamin/jjeamin.github.io/raw/master/_posts/post_img/autoaugment/controller.PNG)
 
 
-
-## policy gradient
-추가예정
 
 ## search space detail
 보강 정책은 5개의 하위 정책으로 구성되며 각 하위 정책은 2개의 보강 방법으로 구성되어 순서대로 적용된다. 그리고 수치 두가지를 나타낸다.
@@ -219,6 +216,7 @@ ShearX/Y, TranslateX/Y, Rotate, AutoContrast, Invert, Equalize, Solarize, Poster
 
 
 # Final Policy
+- CIFAR10
 
 
 
@@ -226,6 +224,7 @@ ShearX/Y, TranslateX/Y, Rotate, AutoContrast, Invert, Equalize, Solarize, Poster
 
 
 
+- SVHN
 
 
 
@@ -233,8 +232,13 @@ ShearX/Y, TranslateX/Y, Rotate, AutoContrast, Invert, Equalize, Solarize, Poster
 
 
 
-# 봐야할거
--  J. Schulman, F. Wolski, P. Dhariwal, A. Radford, and O. Klimov. Proximal policy optimization algorithms. arXiv preprint arXiv:1707.06347, 2017.
+- ImageNet
+
+
+
+![figure6](https://github.com/jjeamin/jjeamin.github.io/raw/master/_posts/post_img/autoaugment/figure6.PNG)
+
+
 
 # 참조
 - [http://research.sualab.com/review/2018/09/28/nasnet-review.html](http://research.sualab.com/review/2018/09/28/nasnet-review.html)
