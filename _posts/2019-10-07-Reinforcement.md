@@ -90,11 +90,14 @@ Q(s,a) = r + maxQ(s`,a`)
 Q(s,a) = r + (GAMMA)*maxQ(s`,a`)
 ```
 
-그리고 위의 모든 경우는 항상 정해져 있는 환경인 경우에서 특화되어서 설명하였다. 하지만 환경은 항상 고정적이지 않고 유동적인 변화가 많다. 예를들어서 얼음에서 미끄러지는 즉, Q가 알수없는 행동이 이와 같다. 얼음에서 미끄러지는 경우 내가 오른쪽으로 갔을때 성공했는데 얼음에서 미끄러져서 2칸을 가버려 실패할 경우 Q는 그 환경에 대한 유동적인 변화에 대해서 까지 학습하지 않는다. 그렇기 때문에 Q-table의 값을 다 받아들여서 Q-value를 만들지 말고 내가 가고싶은 방향에 어느정도에 영향을 줄지에 대한 learning rate를 설정시켜 공식을 최종으로 만든다.
+그리고 위의 모든 경우는 항상 정해져 있는 환경인 경우에서 특화되어서 설명하였다. 하지만 환경은 항상 고정적이지 않고 유동적인 변화가 많다.
 
-```
-Q(s,a) = (1-lr)Q(s,a) + (lr)*[r + (GAMMA)*maxQ(s`,a`)]
-```
+예를들어서 얼음에서 미끄러지는 즉, Q가 알수없는 행동이 이와 같다. 얼음에서 미끄러지는 경우 내가 오른쪽으로 갔을때 성공했는데 얼음에서 미끄러져서 2칸을 가버려 실패할 경우 Q는 그 환경에 대한 유동적인 변화에 대해서 까지 학습하지 않는다.
+
+그렇기 때문에 Q-table의 값을 다 받아들여서 Q-value를 만들지 말고 내가 가고싶은 방향에 어느정도에 영향을 줄지에 대한 learning rate를 설정시켜 공식을 최종으로 만든다.
+
+
+$$Q(s,a) = (1-\alpha)Q(s,a) + \alpha[r + \gamma maxQ(s^{\prime},a^{\prime})]$$
 
 # Q-Network
 Q-table은 너무 많은 행동이 있고 환경이 하나의 이미지로 있는 경우에 Q-tabel이 기하급수적으로 커지는 현상이 발생해 아예 접근조차 못하는 경우가 있다.(예를 들어 Atari game) 그래서 이러한 모든 경우의 수를 전부 고려하기 어려운 문제를 Nural Network를 이용해서 표현한다.
@@ -197,6 +200,8 @@ P(비,맑음 | 맑음)
 
 결론은, policy gradient의 목표는 이러한 object function을 최대화시키는 $$\theta$$값을 찾는 것이다. object function을 최대화 시키는 방법은 3가지가 있다.
 
+
+
 ## Finite Difference Policy Gradient
 numerical한 방법을 사용한다. 조금씩 값을 바꾸어 보면서 gradient를 구하는 방법이고 하나하나씩 천천히 최적의값을 찾는 방법이다. 매우 비효율적이다. 하지만 미분법을 이용하지 않더라도 동작한다.
 
@@ -205,8 +210,12 @@ $$\frac{\partial J(\theta)}{\partial \theta_k} \approx \frac{J(\theta + \epsilon
 
 - 각 파라미터를 $$\epsilon$$ 만큼 움직여서 k번째 목적함수 $$w,r,t,\theta$$의 계속해서 최적의 값을 찾을때까지 편미분을 측정한다.
 
+
+
 ## Monte Carlo Policy Gradient : REINFORCE 알고리즘
 이 방법은 object function의 gradient를 구해서 업데이트 시켜주는 방법이다. gradient descent와 같은 개념이라고 생각하면 될것같다. gradient를 구하는 방법은 아래와 같다.
+
+
 
 ### score function
 
@@ -226,8 +235,11 @@ $$\pi(s,a) = \frac{e^{\theta^{T}\phi_{sa}}}{\sum_b e^{\theta^{T}\phi_{sb}}}$$
 
 $$\pi_{\theta}(s,a) = \frac{1}{\sigma\sqrt{2\pi}}e(-\frac{(a-\mu(s))^2}{2\sigma^2})$$
 
+
+$$\phi_sa$$ : 어떠한 상태에서의 행동의 대한 value값 Q function 개념
+
 ### policy gradient theorem
-output이 바로 보상으로 추출되는 것 말고 Q-table을 사용해서 연산할 수 있다.
+output이 바로 보상으로 추출되는 것 말고 Q function을 사용해서 연산할 수 있다.
 
 
 
@@ -250,7 +262,22 @@ monte carlo policy gradient를 REINFORCE 알고리즘이라고 부른다.
 
 
 
+$$v_t$$ : 실제 적용되는 reward
+
 개념을 이해하기는 어렵지만 알고리즘은 간단하다.
+
+결론 : policy를 이용해서 object function을 만들고 object function을 최대화하는 $$\theta$$값을 업데이트 해서 찾는다. policy을 이용해서 object function 정의하는 방법과 object function을 최대화 하는 방법을 배웠고 이러한 과정이 최종적으로 policy를 학습하게 한다.
+
+```
+--> state
+--> Network
+--> output
+--> softmax(output) = action       [policy]
+--> reward maximize(loss minimize) [maximize]
+--> theta update                   [backpropagation]
+--> action                         
+--> state`
+```
 
 # 참조
 - Markov chain : [https://4four.us/article/2014/11/markov-chain-monte-carlo](https://4four.us/article/2014/11/markov-chain-monte-carlo)
