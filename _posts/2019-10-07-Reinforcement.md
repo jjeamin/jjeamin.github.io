@@ -2,7 +2,7 @@
 layout: post
 title:  "Reinforcement Learning"
 summary: "Reinforcement Learning(Q-learning 부터 policy gradient 까지)"
-date:   2019-10-08 16:00 -0400
+date:   2019-10-07 16:00 -0400
 categories: Reinforcement
 ---
 
@@ -133,7 +133,7 @@ $$min \sum_{t=0}^{T}[\hat{Q}(s,a | \theta) - \gamma max \hat{Q}(s^{\prime},a^{\p
 
 2. 네트워크를 target과 pred를 분리시키고 pred 부분의 가중치만 업데이트 하면서 어느정도 학습을 진행할때 그 가중치를 target 네트워크에 복사한다.
 
-위와 같은 방법으로 Q-Network를 해결하며 Nature 논문에도 실릴 정도로 간단하지만 실용적인 방법이다.
+위와 같은 방법으로 Q-Network를 해결하며 Nature 논문에도 실릴 정도로 실용적이지만 간단한 방법이다.
 
 $$min \sum_{t=0}^{T}[\hat{Q}(s,a | \theta) - \gamma max \hat{Q}(s^{\prime},a^{\prime} | \bar\theta)]^2$$
 
@@ -148,3 +148,6 @@ $$min \sum_{t=0}^{T}[\hat{Q}(s,a | \theta) - \gamma max \hat{Q}(s^{\prime},a^{\p
 4. 위에 정의한 공식으로 보상을 최대로하는 $$\theta$$를 업데이트 한다.
 
 5. C스탭후에 $$\bar\theta$$에 $$\theta$$를 복사한다.
+
+# Policy Gradient
+여태까지는 Q의 value값을 이용해서 action을 선택하고 그것
