@@ -22,12 +22,6 @@ categories: Darknet
 
 ---
 
-
-
-![data](https://github.com/jjeamin/jjeamin.github.io/raw/master/_posts/post_img/darknet/data.PNG)
-
-
-
 # /data
 
 - `9k.label` : YOLO9000 dataset label
@@ -68,12 +62,6 @@ object detection,segmentation,keypoint detection 등을 위한 dataset으로 여
 - `91 stuff categories`
 - `5 captions per image`
 - `250,000 people with keypoints`
-
-
-
-![coco](https://github.com/jjeamin/jjeamin.github.io/raw/master/_posts/post_img/darknet/coco.PNG)
-
-
 
 ---
 

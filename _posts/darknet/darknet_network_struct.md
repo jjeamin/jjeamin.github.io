@@ -76,7 +76,7 @@ typedef struct network{
 
 - `t` :
 
-- `seen` :
+- `seen` : 
 
 - `time_steps` :
 
@@ -84,7 +84,9 @@ typedef struct network{
 
 - `epoch` : 전체 학습 데이터셋을 몇번 학습시킬지에 대한 의미이다. epoch 이 1이면 전체 학습 데이터셋을 한번 학습하는 것이다.
 
-- `subdivision` : mini batch라고도 불리는데 batch를 몇 개의 분할해서 GPU로 보내 병렬로 학습하는 것이다.
+- `subdivision` : mini batch라고도 불리는데 batch를 몇 개의 분할해서 GPU로 보내 병렬로 학습하는 것이다. ex) batch = 64 , subdivision = 16 이라면 한번에 4장의 이미지씩 모델에 넣어서 학습돌린다.(학습돌린 후 바로 update가 아님 ) 그 후 총 64개의 이미자(4*16)가 다 완료 된 후 update 진행 (backpropagation)
+
+즉, 몇번 나눌것이냐?
 
 - `learning_rate` : 학습률은 한번의 학습에 최적의 값에 얼마만큼 수렴시킬 것인지에 대한 학습 비율을 의미한다. (`Gradient Descent Algorithm`)
 

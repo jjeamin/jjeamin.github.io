@@ -271,11 +271,6 @@ int convolutional_out_height(convolutional_layer l)
 
 ---
 
-# 전파,역전파,업데이트
-
-이 부분이 딥러닝의 가장 중요한 기초라고 생각되는 부분이기 때문에 자세히 살펴보도록 해야할 것 같다. 직접 c언어로 구현이 되어있기 때문에 분석하기 쉬울거 같다.
-
-
 # 참조
 - [https://dkeemin.com/%EC%BB%A8%EB%B3%BC%EB%A3%A8%EC%85%98convolution-%EC%A0%95%EC%9D%98%EB%A5%BC-%EC%89%BD%EA%B2%8C-%EC%9D%B4%ED%95%B4%ED%95%B4%EB%B3%B4%EC%9E%90/](https://dkeemin.com/%EC%BB%A8%EB%B3%BC%EB%A3%A8%EC%85%98convolution-%EC%A0%95%EC%9D%98%EB%A5%BC-%EC%89%BD%EA%B2%8C-%EC%9D%B4%ED%95%B4%ED%95%B4%EB%B3%B4%EC%9E%90/)
 

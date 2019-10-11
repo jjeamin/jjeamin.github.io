@@ -91,7 +91,7 @@ void scal_cpu(int N, float ALPHA, float *X, int INCX)
 }
 ```
 
-rolling_mean에 값에 ALPHA를 곱한다...? 왜지?
+X값에 ALPHA를 곱한다.
 
 ## axpy_cpu
 
@@ -103,11 +103,11 @@ void axpy_cpu(int N, float ALPHA, float *X, int INCX, float *Y, int INCY)
 }
 ```
 
-rolling_mean에 평균에 ALPHA를 곱한다.
+X값에 ALPHA를 곱하고 Y에 더해준다.
 
 ## rolling mean,variance 는 무엇일까?
 
-`rolling`의 뜻을 살펴보면 좌우로 흔들리는 일이라고 해석이 된다. 그렇다면 좌우로 흔들리는 일의 평균이 `rolling mean`이라고 할수 있고 단기적인 변동을 완화하고 장기적인 변동을 강조하기 위해 사용 된다고 한다. `rolling variance`또한 움직이는 값의 표본분산이라고 해석할 수 있다.
+`rolling`의 뜻을 살펴보면 좌우로 흔들리는 일이라고 해석이 된다. 그렇다면 좌우로 흔들리는 일의 평균이 `rolling mean`이라고 할수 있고 단기적인 변동을 완화하고 장기적인 변동을 강조하기 위해 사용 된다고 한다. `rolling variance`또한 움직이는 값의 표본분산이라고 해석할 수 있다. 즉, 이동평균,이동표본분산
 
 ## normalize_cpu
 

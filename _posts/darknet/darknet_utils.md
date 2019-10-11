@@ -2,6 +2,9 @@
 
 `/src/utils.c`
 
+---
+# cfg
+
 ## strip
 
 ```
@@ -20,6 +23,26 @@ void strip(char *s)
 ```
 
 cfgfile에서 공백,줄바꿈,tab을 제거한다.
+
+## basecfg
+
+```
+char *basecfg(char *cfgfile)
+{
+    char *c = cfgfile;
+    char *next;
+    while((next = strchr(c, '/')))
+    {
+        c = next+1;
+    }
+    c = copy_string(c);
+    next = strchr(c, '.');
+    if (next) *next = 0;
+    return c;
+}
+```
+
+cfg파일 이름 찾기
 
 ## fgetl
 ```
@@ -59,6 +82,9 @@ char *fgetl(FILE *fp)
     return line;
 }
 ```
+
+---
+# random
 
 ## rand_int
 
@@ -152,3 +178,94 @@ float rand_uniform(float min, float max)
 - `RAND_MAX` - rand 함수로 반환될 수 있는 수의 최대값
 
 - 최소부터 최대까지 중 임의의 부동소수점(float)숫자를 리턴한다.
+
+---
+
+# args
+
+## del_arg
+```
+void del_arg(int argc, char **argv, int index)
+{
+    int i;
+    for(i = index; i < argc-1; ++i) argv[i] = argv[i+1];
+    argv[i] = 0;
+}
+```
+
+인자값 제거
+
+## find_char_arg
+```
+char *find_char_arg(int argc, char **argv, char *arg, char *def)
+{
+    int i;
+    for(i = 0; i < argc-1; ++i){
+        if(!argv[i]) continue;
+        if(0==strcmp(argv[i], arg)){
+            def = argv[i+1];
+            del_arg(argc, argv, i);
+            del_arg(argc, argv, i);
+            break;
+        }
+    }
+    return def;
+}
+```
+
+인자값에서 문자열을 찾는다. (하이퍼 파라미터)
+
+## find_float_arg
+```
+float find_float_arg(int argc, char **argv, char *arg, float def)
+{
+    int i;
+    for(i = 0; i < argc-1; ++i){
+        if(!argv[i]) continue;
+        if(0==strcmp(argv[i], arg)){
+            def = atof(argv[i+1]);
+            del_arg(argc, argv, i);
+            del_arg(argc, argv, i);
+            break;
+        }
+    }
+    return def;
+}
+```
+
+인자값에서 실수값을 찾는다. (하이퍼 파라미터)
+
+## find_int_arg
+```
+int find_int_arg(int argc, char **argv, char *arg, int def)
+{
+    int i;
+    for(i = 0; i < argc-1; ++i){
+        if(!argv[i]) continue;
+        if(0==strcmp(argv[i], arg)){
+            def = atoi(argv[i+1]);
+            del_arg(argc, argv, i);
+            del_arg(argc, argv, i);
+            break;
+        }
+    }
+    return def;
+}
+```
+
+인자값에서 정수값을 찾는다. (하이퍼 파라미터)
+
+---
+
+## copy_string
+
+```
+char *copy_string(char *s) // strncpy using function
+{
+    char *copy = malloc(strlen(s)+1);
+    strncpy(copy, s, strlen(s)+1);
+    return copy;
+}
+```
+
+문자열 복사
