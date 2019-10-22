@@ -42,7 +42,7 @@ char *basecfg(char *cfgfile)
 }
 ```
 
-cfg파일 이름 찾기
+cfg경로에서 cfg파일 이름 찾기
 
 ## fgetl
 ```

@@ -48,7 +48,7 @@ void run_yolo(int argc, char **argv)
 
 ## train_yolo
 
-```c
+```
 void train_yolo(char *cfgfile, char *weightfile)
 {
     char *train_images = "/data/voc/train.txt";
@@ -59,12 +59,11 @@ void train_yolo(char *cfgfile, char *weightfile)
     float avg_loss = -1;
     network *net = load_network(cfgfile, weightfile, 0);
     printf("Learning Rate: %g, Momentum: %g, Decay: %g\n", net->learning_rate, net->momentum, net->decay);
-    int imgs = net->batch*net->subdivisions;
-    int i = *net->seen/imgs; # 반복횟수
+    int imgs = net->batch*net->subdivisions; // 64 * 16 크기로 분할시킨다. (이미지 4장씩)
+    int i = *net->seen/imgs;
     data train, buffer;
 
-
-    layer l = net->layers[net->n - 1];
+    layer l = net->layers[net->n - 1]; // 마지막 layer
 
     int side = l.side;
     int classes = l.classes;
@@ -94,9 +93,10 @@ void train_yolo(char *cfgfile, char *weightfile)
     pthread_t load_thread = load_data_in_thread(args);
     clock_t time;
     //while(i*imgs < N*120){
-    while(get_current_batch(net) < net->max_batches){ // 여기부터
+    while(get_current_batch(net) < net->max_batches){
         i += 1;
         time=clock();
+        // thread의 종료를 기다린다.
         pthread_join(load_thread, 0);
         train = buffer;
         load_thread = load_data_in_thread(args);
@@ -104,6 +104,7 @@ void train_yolo(char *cfgfile, char *weightfile)
         printf("Loaded: %lf seconds\n", sec(clock()-time));
 
         time=clock();
+        // train 시작
         float loss = train_network(net, train);
         if (avg_loss < 0) avg_loss = loss;
         avg_loss = avg_loss*.9 + loss*.1;
@@ -121,3 +122,5 @@ void train_yolo(char *cfgfile, char *weightfile)
     save_weights(net, buff);
 }
 ```
+
+yolo의 학습을 진행하는 과정

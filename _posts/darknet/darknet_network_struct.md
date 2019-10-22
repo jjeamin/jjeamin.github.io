@@ -76,7 +76,7 @@ typedef struct network{
 
 - `t` :
 
-- `seen` : 
+- `seen` : 학습하면서 현재 얼만큼 진행했는지(보았는지)에 대한 정보?
 
 - `time_steps` :
 

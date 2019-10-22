@@ -389,3 +389,111 @@ LAYER_TYPE string_to_layer_type(char * type)
 ```
 
 - type을 LAYER_TYPE 구조체에 매핑시켜준다.
+
+## load_weights
+
+```
+void load_weights(network *net, char *filename) // load_weights() function
+{
+    printf("call load_weights() function\n");
+    load_weights_upto(net, filename, 0, net->n);
+}
+```
+
+weight를 저장하자
+
+## load
+
+```
+void load_weights_upto(network *net, char *filename, int start, int cutoff) // load_weights_upto() function
+{
+    printf("called load_weights_upto() function\n");
+#ifdef GPU
+    if(net->gpu_index >= 0){
+        cuda_set_device(net->gpu_index);
+    }
+#endif
+    fprintf(stderr, "Loading weights from %s...\n", filename);
+    fflush(stdout); # 개행문자(\n)를 처리한다.
+    FILE *fp = fopen(filename, "rb");
+    if(!fp) file_error(filename);
+
+    # weight를 불러와서 저장하는 부분
+    int major;
+    int minor;
+    int revision;
+    fread(&major, sizeof(int), 1, fp);
+    fread(&minor, sizeof(int), 1, fp);
+    fread(&revision, sizeof(int), 1, fp);
+    if ((major*10 + minor) >= 2 && major < 1000 && minor < 1000){
+        fread(net->seen, sizeof(size_t), 1, fp);
+    } else {
+        int iseen = 0;
+        fread(&iseen, sizeof(int), 1, fp);
+        *net->seen = iseen;
+    }
+    int transpose = (major > 1000) || (minor > 1000);
+
+    int i;
+    for(i = start; i < net->n && i < cutoff; ++i){// each layer commit
+        layer l = net->layers[i];
+        if (l.dontload) continue;
+        if(l.type == CONVOLUTIONAL || l.type == DECONVOLUTIONAL){// use
+            load_convolutional_weights(l, fp);
+        }
+        if(l.type == CONNECTED){
+            load_connected_weights(l, fp, transpose);
+        }
+        if(l.type == BATCHNORM){
+            load_batchnorm_weights(l, fp);
+        }
+        if(l.type == CRNN){
+            load_convolutional_weights(*(l.input_layer), fp);
+            load_convolutional_weights(*(l.self_layer), fp);
+            load_convolutional_weights(*(l.output_layer), fp);
+        }
+        if(l.type == RNN){
+            load_connected_weights(*(l.input_layer), fp, transpose);
+            load_connected_weights(*(l.self_layer), fp, transpose);
+            load_connected_weights(*(l.output_layer), fp, transpose);
+        }
+        if (l.type == LSTM) {
+            load_connected_weights(*(l.wi), fp, transpose);
+            load_connected_weights(*(l.wf), fp, transpose);
+            load_connected_weights(*(l.wo), fp, transpose);
+            load_connected_weights(*(l.wg), fp, transpose);
+            load_connected_weights(*(l.ui), fp, transpose);
+            load_connected_weights(*(l.uf), fp, transpose);
+            load_connected_weights(*(l.uo), fp, transpose);
+            load_connected_weights(*(l.ug), fp, transpose);
+        }
+        if (l.type == GRU) {
+            if(1){
+                load_connected_weights(*(l.wz), fp, transpose);
+                load_connected_weights(*(l.wr), fp, transpose);
+                load_connected_weights(*(l.wh), fp, transpose);
+                load_connected_weights(*(l.uz), fp, transpose);
+                load_connected_weights(*(l.ur), fp, transpose);
+                load_connected_weights(*(l.uh), fp, transpose);
+            }else{
+                load_connected_weights(*(l.reset_layer), fp, transpose);
+                load_connected_weights(*(l.update_layer), fp, transpose);
+                load_connected_weights(*(l.state_layer), fp, transpose);
+            }
+        }
+        if(l.type == LOCAL){
+            int locations = l.out_w*l.out_h;
+            int size = l.size*l.size*l.c*l.n*locations;
+            fread(l.biases, sizeof(float), l.outputs, fp);
+            fread(l.weights, sizeof(float), size, fp);
+#ifdef GPU
+            if(gpu_index >= 0){
+                push_local_layer(l);
+            }
+#endif
+        }
+    }
+    fprintf(stderr, "Done!(end load_weights_upto() function)\n");
+    fclose(fp);
+}
+```

@@ -35,6 +35,48 @@ typedef struct{
 }section;
 ```
 
+## matrix 구조체
+
+```
+typedef struct matrix{
+    int rows, cols;
+    float **vals;
+} matrix;
+```
+
+- 행렬
+
+## box 구조체
+
+```
+typedef struct{
+    float x, y, w, h;
+} box;
+```
+
+- box offset
+
+## data 구조체
+
+```
+typedef struct{
+    int w, h;
+    matrix X; // X.cols = total pixel , rows = batch(64) , vals = each pixel's value (we can find information in data.c's load_data_detection)
+    matrix y; // y.cols = 5*boxes( boxes default 90 ) , y.rows = batch(64) ,
+    int shallow;
+    int *num_boxes;
+    box **boxes;
+} data;
+```
+
+X : cols, rows
+- cols : 이미지 한장의 픽셀
+- rows : 이미지의 개수 batch size
+
+Y : cols, rows
+- cols : 이미지 한장에서의 box의 개수
+- rows : 이미지의 개수 batch size
+
 # /src/option_list.h
 
 ## kvp 구조체
