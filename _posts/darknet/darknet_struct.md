@@ -72,6 +72,7 @@ typedef struct{
 X : cols, rows
 - cols : 이미지 한장의 픽셀
 - rows : 이미지의 개수 batch size
+- vals : 각 픽셀의 값
 
 Y : cols, rows
 - cols : 이미지 한장에서의 box의 개수

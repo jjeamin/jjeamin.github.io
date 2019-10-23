@@ -48,7 +48,7 @@ float train_network(network *net, data d)
     float sum = 0;
     for(i = 0; i < n; ++i){ // 여기부터
         get_next_batch(d, batch, i*batch, net->input, net->truth);
-        float err = train_network_datum(net);
+        float err = train_network_datum(net); // 여기부터
         sum += err;
     }
     return (float)sum/(n*batch);
@@ -68,3 +68,24 @@ size_t get_current_batch(network *net)
 ```
 
 현재 batch의 index
+
+## train_network_datum
+
+```
+float train_network_datum(network *net)
+{
+    *net->seen += net->batch;
+    net->train = 1;
+    forward_network(net);
+    backward_network(net);
+    float error = *net->cost;
+    if(((*net->seen)/net->batch)%net->subdivisions == 0) update_network(net);
+    return error;
+}
+```
+
+학습을 실질적으로 진행하는 함수
+
+forward -> backward -> update (backpropagation) //여기부터
+
+##

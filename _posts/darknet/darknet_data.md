@@ -18,3 +18,19 @@ pthread_t load_data_in_thread(load_args args) // third function when you use pth
     return thread;
 }
 ```
+
+# get
+
+## get_next_batch
+
+```
+void get_next_batch(data d, int n, int offset, float *X, float *y)
+{
+    int j;
+    for(j = 0; j < n; ++j){
+        int index = offset + j;
+        memcpy(X+j*d.X.cols, d.X.vals[index], d.X.cols*sizeof(float)); // 학습 이미지 batch 만큼 불러오기
+        if(y) memcpy(y+j*d.y.cols, d.y.vals[index], d.y.cols*sizeof(float)); // 정답 데이터 batch 만큼 불러오기
+    }
+}
+```

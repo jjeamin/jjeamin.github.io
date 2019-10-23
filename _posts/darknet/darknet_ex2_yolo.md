@@ -110,6 +110,7 @@ void train_yolo(char *cfgfile, char *weightfile)
         avg_loss = avg_loss*.9 + loss*.1;
 
         printf("%d: %f, %f avg, %f rate, %lf seconds, %d images\n", i, loss, avg_loss, get_current_rate(net), sec(clock()-time), i*imgs);
+        // 100번 마다 저장하고 1000번이 넘을시에 1000번 마다 저장(backup을 위함)
         if(i%1000==0 || (i < 1000 && i%100 == 0)){
             char buff[256];
             sprintf(buff, "%s/%s_%d.weights", backup_directory, base, i);
@@ -119,7 +120,7 @@ void train_yolo(char *cfgfile, char *weightfile)
     }
     char buff[256];
     sprintf(buff, "%s/%s_final.weights", backup_directory, base);
-    save_weights(net, buff);
+    save_weights(net, buff);             
 }
 ```
 
