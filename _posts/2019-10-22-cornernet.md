@@ -102,7 +102,7 @@ backbone으로 `Hourglass network`를 사용한다. 두 개의 예측 모듈(top
 ## Detecting Corners
 2개의 heatmap sets를 예측하자
 
-각 heatmap에는 C(categories)개의 channel이 있고 크기는 $$H x W$$다. background에는 channel이 존재하지 않는다.
+각 heatmap에는 C(categories)개의 channel이 있고 크기는 $$H * W$$다. background에는 channel이 존재하지 않는다.
 각 channel은 class의 모서리 위치를 나타내는 binary mask다.
 각 모퉁이 마다 하나의 ground-truth에 positive location이 있고 다른 모든 location은 negative로 간주한다. 학습하면서 negative location에 패널티를 가하지만 positive 위치 반경 내에서의 negative location은 그 패널티를 줄인다. 왜냐하면 한쌍의 false corner detection이 각각의 ground-truth 위치에 근접한 경우에도 ground-truth와 겹치는 box를 생성할 수 있기 때문이다. 아래 주황색원의 반지름 내에 한 쌍의 점이 ground-truth에 있는 적어도 t(t=0.3) IOU의 bounding box를 생성하게해서 object의 크기에 따라 반지름을 결정한다. 패널티 감소량은 2D Gaussian : $$e^{-\frac{x^2 y^2}{2 \sigma^2}}$$($$\sigma : \frac{radius}{3}  $$)에 의해서 주어진다.
 
@@ -116,7 +116,7 @@ backbone으로 `Hourglass network`를 사용한다. 두 개의 예측 모듈(top
 
 
 
-![formula](https://github.com/jjeamin/jjeamin.github.io/raw/master/_posts/post_img/cornernet/formula.PNG)
+![formula](https://github.com/jjeamin/jjeamin.github.io/raw/master/_posts/post_img/cornernet/formula.PNG){: width="500" height="100"}
 
 
 
@@ -132,7 +132,7 @@ backbone으로 `Hourglass network`를 사용한다. 두 개의 예측 모듈(top
 
 
 
-![formula2](https://github.com/jjeamin/jjeamin.github.io/raw/master/_posts/post_img/cornernet/formula2.PNG)
+![formula2](https://github.com/jjeamin/jjeamin.github.io/raw/master/_posts/post_img/cornernet/formula2.PNG){: width="500" height="100"}
 
 
 
@@ -144,7 +144,7 @@ backbone으로 `Hourglass network`를 사용한다. 두 개의 예측 모듈(top
 
 
 
-![formula3](https://github.com/jjeamin/jjeamin.github.io/raw/master/_posts/post_img/cornernet/formula3.PNG)
+![formula3](https://github.com/jjeamin/jjeamin.github.io/raw/master/_posts/post_img/cornernet/formula3.PNG){: width="500" height="100"}
 
 
 
@@ -155,7 +155,7 @@ backbone으로 `Hourglass network`를 사용한다. 두 개의 예측 모듈(top
 
 
 
-![formula4](https://github.com/jjeamin/jjeamin.github.io/raw/master/_posts/post_img/cornernet/formula4.PNG)
+![formula4](https://github.com/jjeamin/jjeamin.github.io/raw/master/_posts/post_img/cornernet/formula4.PNG){: width="500" height="200"}
 
 
 
@@ -167,13 +167,52 @@ corner의 존재에 대한 local visual evidence가 없다. 즉, corner를 학�
 
 
 
-![formula5](https://github.com/jjeamin/jjeamin.github.io/raw/master/_posts/post_img/cornernet/formula5.PNG)
+![formula5](https://github.com/jjeamin/jjeamin.github.io/raw/master/_posts/post_img/cornernet/formula5.PNG){: width="500" height="200"}
 
 
 
-위치 $$(i, j)$$의 pixel이 top-left corner인지 확인한다고 가정하자. $$f_t,f_l$$은 top-left corner pooling에 대한 입력 feature map이 되 $$f_{t_{ij}}, f_{l_{ij}}$$는 각각 $$f_t,f_l$$의 위치 $$(i,j)$$에 있는 vector가 되게 한다.
+위치 $$(i, j)$$의 pixel이 top-left corner인지 확인한다고 가정하자. $$f_t,f_l$$은 top-left corner pooling에 대한 입력 feature map이 되고,
+$$f_{t_{ij}}, f_{l_{ij}}$$는 각각 $$f_t,f_l$$의 위치 $$(i,j)$$에 있는 vector가 되게 한다.
 
+$$H * W$$ feature map을 사용하기 때문에
+
+- 첫번째 corner pooling은 $$f_t$$에서 $$(i,j) ~ (i,H)$$ 사이의 모든 feature vector다.
+- 두번째 corner poolint은 $$f_l$$에서 $$(i,j) ~ (W,j)$$ 사이의 모든 feature vector다.
+- 마지막으로 더한다.
+
+
+
+![figure6](https://github.com/jjeamin/jjeamin.github.io/raw/master/_posts/post_img/cornernet/figure6.PNG){: width="1000" height="300"}
+
+
+
+## Hourglass Network
+
+
+
+![hourglass](https://github.com/jjeamin/jjeamin.github.io/raw/master/_posts/post_img/cornernet/hourglass.PNG)
+
+
+
+- CornerNet에서 Hourglass Network를 backbone으로 사용한다. Hourglass Network는 처음에 사람의 자세를 예측하기 위해서 처음 도입되었고, 하나 이상의 Hourglass module로 구성된 fully convolution neural network다. 위와 같은 Hourglass module이 쌓이면 Hourglass Network가 완성된다. upsampling과 downsampling을 반복하고 pooling으로 발생하는 세부 손실을 줄이기 위해서 skip-connection layer가 추가된다.
+
+- 이 논문에서는 원래 Hourglass의 max pooling을 사용하는 대신 convolution에서 stride를 2로 잡아서 downsampling한다. 그렇게 5번을 줄이고 경로를 따라서 채널수를 늘린다(256,384,384,384,512).
+
+- 모든 skip-connection layer는 2개의 residual module로 구성이 되어있다.
+
+- Hourglass module 중간에는 512개의 channel을 가진 4개의 residual module이 있다.
+
+- Hourglass Network를 통과하기 전에 stride 2, 128 channel을 가지는 7x7 convolution과 stride 2, 256 channel을 가지는 residual module을 사용하여 이미지의 해상도를 4배 줄이고 학습을 시작한다.
+
+### Intermediate Supervision
+Hourglass에서는 Intermediate Supervision를 사용하는데 말 그대로 중간 감독을 진행하는 방법이고, 중간중간에 얻어지는 예측값에 대해서 loss function을 적용할 수 있다.
+하지만 성능이 저하되기 때문에 사용하지 않는다고 한다.
+
+첫 번째 Hourglass module의 입력과 출력 모두에 1x1 Conv-BN를 적용한다. 그리고 relu와 256 channel residual block을 병합해서 두 번째 Hourglass module의 입력으로 사용한다. Hourglass-104를 사용하고 다른 SOTA detector와 달리 전체 Network에 마지막 계층의 feature만 사용해서 예측한다.
+
+# Experiments
 
 
 # REFERENCE
 - PR12 : [https://www.youtube.com/watch?v=6OYmOtivQY8](https://www.youtube.com/watch?v=6OYmOtivQY8)
+- Hourglass : [https://curt-park.github.io/2018-07-03/stacked-hourglass-networks-for-human-pose-estimation/](https://curt-park.github.io/2018-07-03/stacked-hourglass-networks-for-human-pose-estimation/)
