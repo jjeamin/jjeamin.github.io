@@ -120,7 +120,7 @@ gaussian kernel
 
 
 
-를 사용하여 히트맵 $$\hat{Y} \in [0, 1]^{(\frac{W}{R} * \frac{H}{R} * C)}$$에 모든 ground truth keypoint를 둔다. 여기서 σ(p)는 object size-adaptive 표준편차이다. 만약 동일한 클래스에 두 gaussian이 겹치면 요소 별 최대값을 취한다. 훈련의 목적은 focal loss가 있는 픽셀 단위의 logistic regression이다.
+를 사용하여 히트맵 $$\hat{Y} \in [0, 1]^{(\frac{W}{R} * \frac{H}{R} * C)}$$에 모든 ground truth keypoint를 둔다. 여기서 σ(p)는 object size-adaptive 표준편차이다. 만약 동일한 클래스에 두 gaussian이 겹치면 요소 별 최대값을 취한다. 
 
 
 
