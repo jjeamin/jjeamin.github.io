@@ -161,6 +161,8 @@ backbone으로 `Hourglass network`를 사용한다. 두 개의 예측 모듈(top
 
 - pull loss : Network를 훈련해 corner를 그룹화
 - push loss : Network를 훈련해 corner를 분리
+- $$e_k$$ : $$e_{t_k}, e_{b_k}$$의 평균
+- $$∆$$ : 1
 
 ## Corner Pooling
 corner의 존재에 대한 local visual evidence가 없다. 즉, corner를 학습한다고 하지만 학습을 하는데 그게 corner라는 증거가없다. top-left corner를 확인하려면 object의 가장 위쪽 경계에 대해서 가로에서 오른쪽으로, 세로에서 아래쪽으로 봐야한다. 그래서 corner를 더 잘 localization 할수 있도록 corner pooling을 제안한다.
@@ -211,6 +213,64 @@ Hourglass에서는 Intermediate Supervision를 사용하는데 말 그대로 중
 첫 번째 Hourglass module의 입력과 출력 모두에 1x1 Conv-BN를 적용한다. 그리고 relu와 256 channel residual block을 병합해서 두 번째 Hourglass module의 입력으로 사용한다. Hourglass-104를 사용하고 다른 SOTA detector와 달리 전체 Network에 마지막 계층의 feature만 사용해서 예측한다.
 
 # Experiments
+
+## Training Details
+- 입력 해상도 : 511 x 511
+- 출력 해상도 : 128 x 128
+- Augmentation : `random horizontal flipping`,`random scaling`,`random cropping`,`random color jittering`
+- Optimizer : `Adam`
+- PCA를 입력이미지에 적용??
+
+아까 해상도를 4배 줄이고 진행한다고 했기 때문에 128 x 128가 맞다.
+
+$$L = L_{det} + \alpha L_{pull} + \beta L_{push} + \gamma L_{off}$$
+
+$$\alpha,\beta = 0.1 , \gamma = 1$$
+
+- Batch Size : 49
+- learning rate : 250k = $$2.5 * 10^{-4}$$, 50k = $$2.5 * 10^{-5}$$
+
+## Testing Details
+- 후처리로 heatmap, embedding, offset으로 bounding box 생성
+- NMS
+- heatmap에서 top-left 100개 bottom-right 100개 선택
+- corner의 위치는 offset으로 조정된다.
+- top-left와 bottom-right의 embedding사이의 거리를 L1 distance으로 계산한다. distance가 0.5보다 크거나 다른 categorie의 corner가 포함된 쌍은 없앤다.
+
+**L1 distance**
+- 멘헤튼 거리라고 불린다.
+- 두 점의 세로축의 차이와 가로축의 차이를 더하는 것
+
+# Benchmark
+
+## CornerNet
+
+
+
+![benchmark](https://github.com/jjeamin/jjeamin.github.io/raw/master/_posts/post_img/cornernet/benchmark.PNG)
+
+
+
+
+
+
+![benchmark3](https://github.com/jjeamin/jjeamin.github.io/raw/master/_posts/post_img/cornernet/benchmark3.PNG)
+
+
+
+
+
+
+![benchmark4](https://github.com/jjeamin/jjeamin.github.io/raw/master/_posts/post_img/cornernet/benchmark4.PNG)
+
+
+
+## Detection Benchmark
+
+
+
+![benchmark2](https://github.com/jjeamin/jjeamin.github.io/raw/master/_posts/post_img/cornernet/benchmark2.PNG)
+
 
 
 # REFERENCE
