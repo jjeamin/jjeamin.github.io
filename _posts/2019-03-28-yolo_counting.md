@@ -6,77 +6,11 @@ date:   2019-03-28 13:00 -0400
 categories: yolo
 ---
 
-# YOLO
-`You Only Look Once: Unified, Real-Time Object Detection`
-
-- [YOLO](https://jjeamin.github.io/paper/2019/03/23/yolo/) <- 논문 번역
-
-YOLO를 이용하여 `people counting`을 해보려고 합니다. 일단 `people counting`하기 전에 yolo를 이용해 car를 counting하는 소스 부터 찾아서 분석해 보겠습니다.
-
----
-
-# YOLO Traffic Counter
-
-[[깃허브](https://github.com/guillelopez/python-traffic-counter-with-yolo-and-sort)]
-
-이미 학습되어있는 YOLO를 이용하고 opencv를 이용해서 차량을 검출하고 counting 해주는 소스입니다.
-
----
-
-# Dependency
-- python 3.7
-
-# requirement
-- opencv
-- numba
-- sklearn
-- filterpy
-- imutils
-
-```
-pip install opencv-python
-pip install opencv-contrib-python
-pip install imutils numba filterpy sklearn
-```
-
-# 실행
-
-- weight 파일을 yolo-coco 폴더에 넣는다.
-
-- git 가져오기
-
-```
-git clone https://github.com/guillelopez/python-traffic-counter-with-yolo-and-sort.git
-```
-
-- 실행
-
-```
-python main.py --input input/highway.mp4 --output output/highway.avi --yolo yolo-coco
-```
-
-시간이 조금 걸린다. output 폴더를 보면 프레임이 전부 사진으로 저장되고 영상이 하나 나오는데 영상을 보면 잘 counting 하는 것을 볼 수 있다. 뒤에 부분에 큰 트럭이 화면밖으로 나가면서 counting을 못했지만 살짝 수정하면 가능할 것 같습니다.
-
----
-
-# 수정
-- 코드 주석 한글화
-- 이미지 저장하는것 해제
-- tqdm 추가로 변환 상태바 추가
-
-[[깃허브](https://github.com/jjeamin/python-traffic-counter-with-yolo-and-sort)]
-
-# 참고해서 직접 코딩할 것
-- 중심점으로 추적선을 만들지 않고 그보다 조금더 앞에 만든다. (중간 쯤에 트럭을 검출 못함)
-- 사람만 카운팅하게 할 것
-- 동영상말고 캠으로 동작하게 할 것
-- 라즈베리파이에서..
-
----
-
 # YOLO People Counting
 
-[[깃허브](https://github.com/jjeamin/People_counting_yolo)]
+GitHub : [https://github.com/jjeamin/People_counting_yolo](https://github.com/jjeamin/People_counting_yolo)
+
+---
 
 # 구성
 - raspberry pi 3 (rasbian)
@@ -84,12 +18,17 @@ python main.py --input input/highway.mp4 --output output/highway.avi --yolo yolo
 - NCS2
 
 # requirement
-- openvino toolkit [[설치방법](https://jjeamin.github.io/pi/2019/03/08/NCS2/)]
-- opencv
-- numba
+- openvino toolkit
+- opencvs
 - sklearn
 - filterpy
 - imutils
+- sort
+
+# 필독!!
+- [라즈베리파이에서 openvino 사용하기](https://jjeamin.github.io/pi/2019/03/08/NCS2/)
+- [IR](https://jjeamin.github.io/pi/2019/03/08/NCS2_IR/)
+- [IR - YOLO](https://jjeamin.github.io/openvino/2019/03/30/yolo-openvino/)
 
 ---
 
@@ -123,64 +62,50 @@ python3 -m pip install sklearn tqdm imutils
 
 ---
 
-# source
-- [깃허브](https://github.com/jjeamin/People_counting_yolo)
+# 사용법
 
-### /test
-- camera test
-- camera thread
+1. 위에 xml_path와 bin_path를 xml,bin 파일 경로로 바꾸어준다.
+2. capture function에서 아래 코드 주석처리
+```
+# cv2.imwrite('test2.jpg',frame)
+```
+3. 스케쥴러를 이용해서 웹캠으로 10초에 한번씩 사람의 수를 counting한다.
 
-### /extension
-- ir에 필요한 json 파일
+```
+python3 main.py
+```
 
-### /pd_convert
-- ir에 필요한 pd파일 변환 소스
-
-- yolov3
-  ```
-  python convert_weights_pb.py
-  --class_names coco.names
-  --data_format NHWC
-  --weights_file yolov3.weights
-  ```
-
-- yolov3-tiny
-
-  ```
-  python convert_weights_pb.py
-  --class_names coco.names
-  --data_format NHWC
-  --weights_file yolov3-tiny.weights
-  --tiny
-  ```
-
-### /Deep_sort
-
-- [https://github.com/nwojke/deep_sort](https://github.com/nwojke/deep_sort)
-
-### SORT
-
-- [https://github.com/abewley/sort](https://github.com/abewley/sort)
-
-### opencv.py
-
-- YOLOv3 + NCS2 + opencv
-
-### vino.py
-
-- YOLOv3 + NCS2 + openvino
-
-### sort_vino.py
-
-- YOLOv3 + NCS2 + SORT
-
-*추가적으로 사람만 판별하는 추론기를 만들어야 하고 그 후에 사람을 카운팅*
-*현재 계속 진행중이다..*
+**logger**
+1. 인터넷이 연결되어있는지 확인 -> 서버로 전송가능
+2. 카메라가 연결되어있는지 확인
 
 ---
 
-# 참조
+# Citation
+
+**YOLO**
+
+    @article{redmon2016yolo9000,
+      title={YOLO9000: Better, Faster, Stronger},
+      author={Redmon, Joseph and Farhadi, Ali},
+      journal={arXiv preprint arXiv:1612.08242},
+      year={2016}
+    }
+
+**SORT**
+
+    @inproceedings{Bewley2016_sort,
+      author={Bewley, Alex and Ge, Zongyuan and Ott, Lionel and Ramos, Fabio and Upcroft, Ben},
+      booktitle={2016 IEEE International Conference on Image Processing (ICIP)},
+      title={Simple online and realtime tracking},
+      year={2016},
+      pages={3464-3468},
+      keywords={Benchmark testing;Complexity theory;Detectors;Kalman filters;Target tracking;Visualization;Computer Vision;Data Association;Detection;Multiple Object Tracking},
+      doi={10.1109/ICIP.2016.7533003}
+    }
+
+
+# Reference
 - [https://github.com/guillelopez/python-traffic-counter-with-yolo-and-sort](https://github.com/guillelopez/python-traffic-counter-with-yolo-and-sort)
 - [https://github.com/jjeamin/OpenVINO-YoloV3](https://github.com/jjeamin/OpenVINO-YoloV3)
 - [https://github.com/abewley/sort](https://github.com/abewley/sort)
-- [https://github.com/nwojke/deep_sort](https://github.com/nwojke/deep_sort)
