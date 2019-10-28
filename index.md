@@ -5,8 +5,8 @@ permalink: /index/
 tags: index
 ---
 # Lab
-- [YOLO - openvino](https://jjeamin.github.io/openvino/2019/03/30/yolo-openvino/)(simple)
-- [YOLO - counting](https://jjeamin.github.io/yolo/2019/03/28/yolo_counting/) (제작미정)
+- [YOLO - openvino](https://jjeamin.github.io/openvino/2019/03/30/yolo-openvino/)
+- [YOLO - counting](https://jjeamin.github.io/yolo/2019/03/28/yolo_counting/)
 
 # Raspberry Pi
 - [Setting](https://jjeamin.github.io/pi/2019/02/08/pi_setting/)
@@ -23,6 +23,8 @@ tags: index
 - [Coral USB](https://jjeamin.github.io/pi/2019/07/05/coralusb/)
 
 # Reinforcement
+- [Reinforcement 정리](https://jjeamin.github.io/reinforcement/2019/10/07/Reinforcement/)
+
 - [모두의 딥러닝 1](https://jjeamin.github.io/reinforcement/2019/02/15/reinforcement1/)
 - [모두의 딥러닝 2](https://jjeamin.github.io/reinforcement/2019/02/26/reinforcement2/)
 - [모두의 딥러닝 3](https://jjeamin.github.io/reinforcement/2019/02/26/reinforcement3/)
@@ -35,13 +37,16 @@ tags: index
 - [MCNN](https://jjeamin.github.io/paper/2019/03/08/MCNN/)/[code](https://github.com/jjeamin/crowd_counting_MCNN)
 - [YOLO](https://jjeamin.github.io/paper/2019/03/23/yolo/)
 - [YOLOv2](https://jjeamin.github.io/paper/2019/04/20/yolo_v2/)
-- [SSD](https://jjeamin.github.io/paper/2019/08/21/SSD/)
 - [SORT](https://jjeamin.github.io/paper/2019/04/25/sort/)
-- [Xception/MobileNet](https://jjeamin.github.io/paper/2019/07/07/mobileNet_Xception/)
 - [CenterNet](https://jjeamin.github.io/paper/2019/05/19/CenterNet/)
+
+- [SSD](https://jjeamin.github.io/paper/2019/08/21/SSD/)
+- [Xception/MobileNet](https://jjeamin.github.io/paper/2019/07/07/mobileNet_Xception/)
 - [MMDetection](https://jjeamin.github.io/paper/2019/08/29/mmdetection/)
 - [FSAF](https://jjeamin.github.io/paper/2019/09/08/FSAF/)
 - [FPN](https://jjeamin.github.io/paper/2019/09/18/FPN/)
+- [AutoAugment](https://jjeamin.github.io/paper/2019/09/28/AutoAugment/)
+- [CornerNet](https://jjeamin.github.io/paper/2019/10/22/cornernet/)
 
 # GAN - tensorflow
 - [GAN](https://github.com/jjeamin/my_gan/tree/master/gan)
