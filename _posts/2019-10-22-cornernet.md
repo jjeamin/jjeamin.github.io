@@ -165,6 +165,13 @@ backbone으로 `Hourglass network`를 사용한다. 두 개의 예측 모듈(top
 - $$∆$$ : 1
 
 ## Corner Pooling
+
+
+
+![figure6](https://github.com/jjeamin/jjeamin.github.io/raw/master/_posts/post_img/cornernet/figure6.PNG){: width="1000" height="300"}
+
+
+
 corner의 존재에 대한 local visual evidence가 없다. 즉, corner를 학습한다고 하지만 학습을 하는데 그게 corner라는 증거가없다. top-left corner를 확인하려면 object의 가장 위쪽 경계에 대해서 가로에서 오른쪽으로, 세로에서 아래쪽으로 봐야한다. 그래서 corner를 더 잘 localization 할수 있도록 corner pooling을 제안한다.
 
 
@@ -184,7 +191,7 @@ $$H * W$$ feature map을 사용하기 때문에
 
 
 
-![figure6](https://github.com/jjeamin/jjeamin.github.io/raw/master/_posts/post_img/cornernet/figure6.PNG){: width="1000" height="300"}
+![figure7](https://github.com/jjeamin/jjeamin.github.io/raw/master/_posts/post_img/cornernet/figure7.PNG){: width="1000" height="300"}
 
 
 
@@ -273,6 +280,6 @@ $$\alpha,\beta = 0.1 , \gamma = 1$$
 
 
 
-# REFERENCE
+# Reference
 - PR12 : [https://www.youtube.com/watch?v=6OYmOtivQY8](https://www.youtube.com/watch?v=6OYmOtivQY8)
 - Hourglass : [https://curt-park.github.io/2018-07-03/stacked-hourglass-networks-for-human-pose-estimation/](https://curt-park.github.io/2018-07-03/stacked-hourglass-networks-for-human-pose-estimation/)
