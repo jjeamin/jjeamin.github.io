@@ -7,9 +7,10 @@ categories: paper
 use_math : true
 ---
 
-이 당시에 초당 142 프레임에 28.1 AP를 가지고 있다고 해서 바로 읽어보았다.
+이 당시에 초당 142 프레임에 28.1 AP
 
 - AP : recall 값들에 대응하는 precision 값들의 average
+
 
 # CenterNet
 
@@ -21,9 +22,9 @@ use_math : true
 ---
 
 # 요약
-- Detection은 이미지의 `axis aligned box`로 object를 식별한다. 대부분의 성공적인 object detetor들은 모든 잠재적 object 위치를 찾고 각각을 분류한다. 이러한 일은 낭비가 많고 비효율적고 추가적인 post-processing이 필요하다. **그래서 이 논문에서는 다른 접근법을 취한다.**
+- 대부분의 모델은 이미지의 `axis aligned box`로 object를 식별한다. 대부분의 성공적인 object detetor들은 모든 잠재적 object 위치를 찾고 각각을 분류한다. 이러한 일은 낭비가 많고 비효율적고 추가적인 post-processing이 필요하다. **그래서 이 논문에서는 다른 접근법을 취한다.**
 
-- 이 논문은 bounding box의 중심점인 **단일 점** 으로 모델링한다. 이 논문의 detector는 keypoint estimation를 사용해서 중심점을 찾고 크기, 3D 위치, 방향, 자세와 같은 모든 다른 object의 속성으로 회귀한다.
+- 이 논문은 bounding box의 중심점인 **단일점** 으로 모델링한다. 이 논문의 detector는 keypoint estimation를 사용해서 중심점을 찾고 크기, 3D 위치, 방향, 자세와 같은 모든 다른 object의 속성으로 회귀한다.
 
 - MS COCO 데이터셋에
   + `Resnet18` : 142FPS에서 28.1 AP
@@ -101,18 +102,17 @@ object detection을 위해서 keypoint 추정방법을 사용하는 것이 처�
     + object detection : C=80 범주를 포함한다.
     + 기본적으로 R=4이다.
 
-$$\hat{Y} \mid x,y,z = 1$$ : keypoint
+- $$\hat{Y} \mid x,y,z = 1$$ : keypoint
 
-$$\hat{Y} \mid x,y,z = 0$$ : background
+- $$\hat{Y} \mid x,y,z = 0$$ : background
 
-이미지 $$I$$로부터 $$\hat{Y}$$를 예측하기 위해 여러개의 fully convolution encoder-decoder network를 사용한다.
+- 이미지 $$I$$로부터 $$\hat{Y}$$를 예측하기 위해 `Hourglass Network`를 사용한다.
 
-ground truth keypoint : $$p \in R^{2}$$
+- ground truth keypoint : $$p \in R^{2}$$
 
-저해상도 : $$\hat{p} = [\frac{p}{R}]$$
+- 저해상도 : $$\hat{p} = [\frac{p}{R}]$$
 
-gaussian kernel
-
+- gaussian kernel
 
 
 
@@ -120,7 +120,7 @@ gaussian kernel
 
 
 
-를 사용하여 히트맵 $$\hat{Y} \in [0, 1]^{(\frac{W}{R} * \frac{H}{R} * C)}$$에 모든 ground truth keypoint를 둔다. 여기서 σ(p)는 object size-adaptive 표준편차이다. 만약 동일한 클래스에 두 gaussian이 겹치면 요소 별 최대값을 취한다. 
+gaussian kernel을 사용하여 히트맵 $$\hat{Y} \in [0, 1]^{(\frac{W}{R} * \frac{H}{R} * C)}$$에 모든 ground truth keypoint를 둔다. 여기서 σ(p)는 object size-adaptive 표준편차이다.
 
 
 
@@ -134,7 +134,7 @@ gaussian kernel
 - Law and Deng을 따라서 $$\alpha$$ = 2, $$\beta$$ = 4 로 정했다.
 - output stride에 의해 발생된 수학적 오류를 복구하기 위해서 local offset을 각 중심점마다 추가로 예측한다. : $$\hat{O} \in R^{(\frac{W}{R} * \frac{H}{R} * 2)}$$
 
-모든 클래스 c는 동일한 offset 예측을 사용한다. offset은 L1 loss로 훈련된다. 감독자는 오직 keypoint 위치 $$\hat{p}$$에서만 작동하고 다른 모든 위치는 무시된다. 다음 섹션에서 keypoint 추정을 범용 object detector로 확장하는 방법을 보여준다.
+모든 클래스 c는 동일한 offset 예측을 사용하는데 offset은 L1 loss로 훈련된다.
 
 
 
@@ -160,7 +160,7 @@ gaussian kernel
 
 
 
-scale을 표준화하지 않고 원본 픽셀 좌표를 직접 사용한다. 대신 loss를 일정한 λsize로 조정한다. 전반적인 교육 목표는
+scale을 표준화하지 않고 원본 픽셀 좌표를 직접 사용한다. 대신 loss를 일정한 λsize로 조정한다.
 
 
 
@@ -170,7 +170,7 @@ scale을 표준화하지 않고 원본 픽셀 좌표를 직접 사용한다. 대
 
 논문에서 달리 명시하지 않는이상 모든 실험에서 $$\lambda size = 0.1$$ 와 $$\lambda off = 1$$로 설정했다.
 
-keypoint $$\hat{Y}$$, offset $$\hat{O}$$, 크기 $$\hat{S}$$를 예측한다. 네트워크는 각 위치에서 총 `C+4`개의 output을 예측한다. 모든 출력은 `commonfully-convolutional backbone network`를 공유한다. 각 형태에 대해서 backbone의 특징은 별도의 3x3 convolution, relu와 다른 1x1 convolution을 통과한다.
+keypoint $$\hat{Y}$$, offset $$\hat{O}$$, 크기 $$\hat{S}$$를 예측한다. 즉, 네트워크는 각 위치에서 총 `C+4`개의 output을 예측한다. 각 형태에 대해서 backbone의 특징은 별도의 3x3 convolution, relu와 다른 1x1 convolution을 통과한다.
 
 ## From points to bounding boxes
 
@@ -184,7 +184,7 @@ keypoint $$\hat{Y}$$, offset $$\hat{O}$$, 크기 $$\hat{S}$$를 예측한다. �
 
 - offset 예측 : $$(\hat{\delta }(xi) , \hat{\delta }(yi)) = \hat{O}(\hat{xi},\hat{yi})$$
 - 크기 예측 : $$(\hat{wi},\hat{hi}) = \hat{S}(\hat{xi},\hat{yi})$$
-- 모든 출력은 IoU기반 NMS(Non Maximum Suppression) 또는 기타 후처리가 필요없는 keypoint 추정에서 직접 생성된다. peak keypoint 추출은 충분한 NMS 대안으로서 역할을 하고 3 x 3 max pooling 연산을 사용하는 장치에서 효율적으로 구현 될수 있다.
+- keypoint 예측의 모든 출력은 IoU기반 NMS(Non Maximum Suppression) 또는 기타 후처리가 필요없다.
 
 # Implementation details
 
@@ -235,7 +235,7 @@ cropping, scaling이 3D 측정값을 변경시키기 때문에 argumentation을 
 - train image : 118K
 - validation image : 5k
 - test image : 20k
-- IOU 임계값 : 0.5
+- IOU thresholds : 0.5
 
 성능이 출력이 적어지고 box의 decoding 방식이 단순해짐으로 인해서 속도가 높다.
 
@@ -246,7 +246,7 @@ cropping, scaling이 3D 측정값을 변경시키기 때문에 argumentation을 
 COCO 훈련 데이터셋에서 stride 4 에 동일한 중심점에 충돌하는 614쌍의 물체가 있다. 총 860001 개의 물체가 있으므로 0.1 % 미만의 물체를 검출할 수 없다. RCNN보다 좋다.
 
 ### NMS
-CenterNet에서는 NMS가 필요하지 않아서 후처리를 이용했다. 성능은 조금더 좋거나 거기서 거기다. 다음으로는 새로운 파라미터를 삭제한다.
+CenterNet에서는 NMS가 필요하지 않아서 후처리를 이용했다. 성능은 조금더 좋거나 거기서 거기다.
 
 ### Train and Testing resolution
 훈련동안 input의 해상도는 512x512로 고정된다. CenterNet을 사용해 원본 이미지의 해상도를 유지하고 네트워크의 최대 stride에 대해서 input에 zero padding을 적용시킨다. ResNet이나 DLA의 경우 최대 32픽셀 Hourglass의 경우 128픽셀을 사용한다. 원래의 해상도를 유지 시키지 않고 저해상도를 사용할 경우 속도는 높아지지만 정확성은 떨어진다.
@@ -261,7 +261,6 @@ vanilla L1 loss를 Smooth L1에 비교한다. L1보다 Smooth L1이 좋다.
 
 
 ### Bounding box size weight
-loss weight λsize에 대한 접근 방식의 민감한 부분을 분석한다.
 
 
 
@@ -294,7 +293,7 @@ bounding box AP와 유사하지만 bounding box IOU를 object의 keypoint 유사
 ---
 
 # 결론
-object에 대한 새로운 표현을 포인트로 제시한다. **object의 center를 찾아내어 크기를 회귀한다.** 이 알고리즘은 NMS 후처리 과정없이 간단하고 빠르고 정확하면서 end-to-end 차별화가 가능하다.
+object에 대한 새로운 표현을 포인트로 제시한다. **object의 center를 찾아내어 box크기를 regression한다.** 이 알고리즘은 NMS 후처리 과정없이 간단하고 빠르고 정확하다.
 
 ---
 
@@ -320,17 +319,13 @@ object에 대한 새로운 표현을 포인트로 제시한다. **object의 cent
 후처리 단계이다. 그것은 object detection 에서 각각의 검출된 object에 대해 하나의 bounding box에 있는 많은 부정확한 물체 window hypotheses를 유발하는 smooth response map을 변환하는데 사용한다. 이상적으로 각 object에 하나의 bounding box가 있어야한다.
 
 ## heatmap
-- 열분포 형태의 지도
+열분포 형태의 지도
 
 ## outstride
 우리가 기본적으로 필터가 얼마만큼 이동할지에 대해서 말할때 stride라고 하는데 그것은 input stride이고 output stride라는 말은 예를 들어 이미지가 224 * 224이고 마지막 특징맵이 7 * 7이면 output stride는 32이다. 즉, downsampling이 얼마나 되었는지에 대한 근사치이다.
 
 ## backbone
 backbone이란 등뼈라는 뜻을 가지고 있다. 등뼈는 뇌와 몸의 각 부위의 신경을 이어주는 역할을 한다. backbone은 입력이 처음 들어와서 출력에 관련된 모듈에 처리된 입력을 보내주는 역할이라고 생각할 수 있다. 결국 object를 검출하거나 영역을 나누던가 신경망 네트워크는 입력 이미지로 부터 다양한 feature를 추출해야하고 그 역할을 backbone이 한다.
-
-## L1 loss
-- `Least Absolute Deviations`
-- L = |실제값 - 예측값|의 1~n까지의 합
 
 ## bin
 히스토그램의 한 cell
