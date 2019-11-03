@@ -34,8 +34,8 @@ use_math: true
 
 이 논문에서는 목표 데이터 세트에 대한 효과적인 data augmentation을 찾는 프로세스를 자동화하는 것이 목표다. 이 논문의 각 보강 정책은 가능한 augmentation 작업(Translation, Rotation, Color normalization 그리고 적용될 확률과 적용되는 크기)의 몇가지의 선택과 순서를 표현한다. 탐색알고리즘으로 **강화학습** 을 사용한다.
 
-- 1. 최상의 data augmentation을 찾을 수 있다.
-- 2. 학습 된 보강 정책을 새로운 데이터 셋에 전송 할 수 있다.
+1. 최상의 data augmentation을 찾을 수 있다.
+2. 학습 된 보강 정책을 새로운 데이터 셋에 전송 할 수 있다.
 
 # Related Work
 image augmentation은 수동으로 설계되었고 데이터 셋 별로 최상의 성능을 가진다.
