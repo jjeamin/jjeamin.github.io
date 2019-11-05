@@ -77,11 +77,6 @@ object의 가장 위쪽 경계를 pixel 위치에서 가로 오른쪽으로 보�
 3. 각 pixel 위치에서 두 번째 feature map에서 아래의 모든 feature 벡터를 max pooling한다.
 4. 두개의 결과를 더한다.
 
-더 나은 이유 2가지를 가정한다.
-
-1. box의 중심은 4면에 모두 의존하기에 localization하기가 어려울 수 있지만, 모서리를 찾는 건 2면에 의존해서 더 쉽다.
-2. anchor box $$O(w^2,h^2)$$를 표현하기 위해 $$O(w,h)$$ corner만 필요하다.
-
 # CornerNet
 
 ## Overview
