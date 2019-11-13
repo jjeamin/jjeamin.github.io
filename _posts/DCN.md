@@ -24,6 +24,8 @@ CNN은 고정적인 기하학적 구조로 인해서 모델의 기하학적 변�
 
 object detection과 semantic segmentation과 같은 vison task에 효과적이다.
 
+기하학적 변환 : 같은 이미지 내의 object는 여러가지 스케일이나 형태를 가질 수 있다. 이러한 같은 공간(이미지) 내의 형태 변환??
+
 # Introduce
 visual recognition의 주요 과제는 object scale, pos, viewpoint, part deformation에서의 geometric transformations, geometric variations를 적응하는 방법이다.
 
@@ -48,3 +50,21 @@ visual recognition의 주요 과제는 object scale, pos, viewpoint, part deform
 
 
 - 매우 복잡한 변화에는 약하다.
+
+자주 사용되는 CNN은 고정 된 위치에서 feature map을 sampling한다. Pooling은 고정 된 비율로 spatial resolution을 감소시키고, ROI Pooling은 고정 된 spatial bins로 분리한다. 기하학적 변환을 처리하기위한 내부 매커니즘이 없다.
+
+고정 된 위치 말고 서로 다른 위치를 가진다면 여러 scale과 변형을 갖는 object에 대응할 수 있기 때문에, scale과 receptive field 크기를 적응적으로 결정하는 것이 좋다.
+
+그래서 deformable convolution과 deformable RoI Pooling을 소개한다.
+
+
+
+![figure1](https://github.com/jjeamin/jjeamin.github.io/raw/master/_posts/post_img/dcn/figure1.jpg)
+
+
+
+먼저 deformable convolution을 살펴보면 offsets은 추가적인 convolution layer를 통해 이전 feature map에서 학습된다. 따라서 deformation은 input feature 에 국부적이고 조밀하며 적응적 방식으로 조절된다.
+
+그다음 deformable Roi Pooling은 이전 Roi Pooling에 bin partition에서 각 bin 위치에 offsets을 추가한다. 아래 그림을 보면 이해하기 쉬울 것이다.
+
+# Deformable Convolution Networks
