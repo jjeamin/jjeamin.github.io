@@ -68,3 +68,63 @@ visual recognition의 주요 과제는 object scale, pos, viewpoint, part deform
 그다음 deformable Roi Pooling은 이전 Roi Pooling에 bin partition에서 각 bin 위치에 offsets을 추가한다. 아래 그림을 보면 이해하기 쉬울 것이다.
 
 # Deformable Convolution Networks
+
+
+
+![figure2](https://github.com/jjeamin/jjeamin.github.io/raw/master/_posts/post_img/dcn/figure2.jpg)
+
+
+
+## Deformable Convolution
+2D convolution은 2단계로 구성된다.
+
+1. 입력 feature map x에 대해 정규 그리드 $$R$$을 사용해서 샘플링
+2. w에 의해 가중된 샘플링 된 값의 합산, 그리드 $$R$$은 수용 가능한 size 및 dilation을 정의한다. 예를 들어
+
+$$R = \left \{ \left ( -1,1 \right ), \left ( -1,1 \right ),...,\left ( -1,1 \right ), \left ( -1,1 \right )  \right \}$$
+
+dilation 1, 3x3 kernel로 정의한다.
+
+### convolution
+
+$$y(p_0) = \sum_{p_n \in R}w(p_n) \cdot x(p_0 + p_n)$$
+
+- $$p_0$$ : output feature map y에서 위치
+- $$p_n$$는 $$R$$의 위치값들
+
+### deformable convolution
+
+$$y(p_0) = \sum_{p_n \in R}w(p_n) \cdot x(p_0 + p_n + \Delta p_n)
+$$
+
+- $$\Delta p_n$$ : offsets 일반적으로 분수다. 위 식은 bilinear interpolation으로 구현된다.
+
+- $$x(p) = \sum_q G(q,p) \cdot x(q)$$
+
+- $$p$$ : $$p_0 + p_n + \Delta p_n$$
+
+- $$q$$ : feature map x에서 모든 필수적인 공간적인 위치를 순회하는 변수
+
+- $$G(·,·)$$ : bilinear interpolation kernel 이다. 2차원이다. 2개의 1차원 kernel로 분리되어있다.
+
+$$G(q,p) = g(q_x,p_x) \cdot g(q_y,p_y)$$
+
+- $$g(a,b) = max(0,1-|a - b|)$$
+
+최종적으로 convolution을 위한 kernel을 유동적으로 변하게 하기위해서 offsetss field를 학습시킨다.
+
+## Deformable Roi Pooling
+임의의 크기의 영역을 고정 크기의 feature map으로 변환하는 작업을 한다.
+
+
+
+![figure3](https://github.com/jjeamin/jjeamin.github.io/raw/master/_posts/post_img/dcn/figure3.jpg)
+
+
+
+### Roi Pooling
+k x k개의 bins으로 나누고 k x k의 feature map y를 출력한다.
+
+$$y(i,j) = \sum_{p \in bin(i,j)} x(p_0 + p) / n_ij$$
+
+- $$n_ij$$ bin안에 있는 pixel의 수
