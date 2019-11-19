@@ -38,6 +38,7 @@ tags: index
 - [YOLO](https://jjeamin.github.io/paper/2019/03/23/yolo/)
 - [YOLOv2](https://jjeamin.github.io/paper/2019/04/20/yolo_v2/)
 - [SORT](https://jjeamin.github.io/paper/2019/04/25/sort/)
+- [DeepSORT](https://jjeamin.github.io/paper/2019/06/01/deepsort/)
 - [CenterNet](https://jjeamin.github.io/paper/2019/05/19/CenterNet/)
 
 - [SSD](https://jjeamin.github.io/paper/2019/08/21/SSD/)
@@ -47,6 +48,9 @@ tags: index
 - [FPN](https://jjeamin.github.io/paper/2019/09/18/FPN/)
 - [AutoAugment](https://jjeamin.github.io/paper/2019/09/28/AutoAugment/)
 - [CornerNet](https://jjeamin.github.io/paper/2019/10/22/cornernet/)
+
+# Info
+- [COCO](https://jjeamin.github.io/paper/2019/06/20/coco_api/)
 
 # GAN - tensorflow
 - [GAN](https://github.com/jjeamin/my_gan/tree/master/gan)
@@ -67,6 +71,8 @@ tags: index
 # Capston
 - [Django](https://jjeamin.github.io/web/2019/03/14/Django/)
 - [Django2](https://jjeamin.github.io/web/2019/03/30/Django2/)
+- [Django3](https://jjeamin.github.io/web/2019/03/30/Django_final/)
+
 - [Docker](https://jjeamin.github.io/capston/2019/03/22/Docker/)
 - [ROS](https://jjeamin.github.io/contest/2019/08/03/ros/)
 
