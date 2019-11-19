@@ -50,7 +50,7 @@ tags: index
 - [CornerNet](https://jjeamin.github.io/paper/2019/10/22/cornernet/)
 
 # Info
-- [COCO](https://jjeamin.github.io/paper/2019/06/20/coco_api/)
+- [COCO](https://jjeamin.github.io/info/2019/06/20/coco_api/)
 
 # GAN - tensorflow
 - [GAN](https://github.com/jjeamin/my_gan/tree/master/gan)
