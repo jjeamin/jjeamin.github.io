@@ -2,7 +2,7 @@
 layout: post
 title:  "EfficientDet-2"
 summary: "EfficientDet 논문 읽어보기"
-date:   2019-11-24 13:00 -0400
+date:   2019-11-23 13:00 -0400
 categories: paper
 use_math: true
 ---
@@ -107,10 +107,10 @@ $$O = \sum_i \frac{w_i}{\epsilon + \sum_j w_j} \cdot I_i$$
 구체적으로 BiFPN에서 예를들면
 
 
-$$P^{td}_6 = \frac{Conv(w_1 \cdot P^{in}_6 + w_2 \cdot Resize(P^{in}_7))}{{w_1 + w_2 + \epsilon}}$$
+$$P^{td}_6 = \frac{Conv(w_1 \cdot P^{in}_6 + w_2 \cdot Resize(P^{in}_7))}{w_1 + w_2 + \epsilon}$$
 
 
-$$P^{out}_6 = \frac{Conv({w_1}' \cdot P^{in}_6 + {w_2}' \cdot P^{td}_6 + {w_3}' \cdot Resize(P^{out}_5))}{{w_1}' + {w_2}' + {w_3}' + \epsilon}$$
+$$P^{out}_6 = \frac{Conv(w_1' \cdot P^{in}_6 + w_2' \cdot P^{td}_6 + w_3' \cdot Resize(P^{out}_5))}{w_1' + w_2' + w_3' + \epsilon}$$
 
 
 효율성을 더욱 더 높이기 위해서 `depthwise seperable convolution`을 사용하고 각 convolution 후에 `batch normalization`과 `activation function`을 추가한다.
