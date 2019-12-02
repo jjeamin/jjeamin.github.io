@@ -48,6 +48,9 @@ tags: index
 - [FPN](https://jjeamin.github.io/paper/2019/09/18/FPN/)
 - [AutoAugment](https://jjeamin.github.io/paper/2019/09/28/AutoAugment/)
 - [CornerNet](https://jjeamin.github.io/paper/2019/10/22/cornernet/)
+- [DCN](https://jjeamin.github.io/paper/2019/11/13/DCN/)
+- [EfficientDet-1](https://jjeamin.github.io/paper/2019/11/23/EfficientDet/)
+- [EfficientDet-2](https://jjeamin.github.io/paper/2019/11/23/EfficientDet2/)
 
 # Info
 - [COCO](https://jjeamin.github.io/info/2019/06/20/coco_api/)
