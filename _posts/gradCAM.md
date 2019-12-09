@@ -16,7 +16,7 @@ use_math: true
 
 
 
-![이름](https://github.com/jjeamin/jjeamin.github.io/raw/master/_posts/post_img/cam/grad_figure1.PNG)
+![figure1](https://github.com/jjeamin/jjeamin.github.io/raw/master/_posts/post_img/cam/grad_figure1.PNG)
 
 
 
@@ -40,11 +40,39 @@ Grad-CAM은 CNN의 각 class마다 마지막 convolutional layer로 가는 gradi
 ```
 Feature Maps(final convolutional layer output)
                     |
+                (weights)
+                    |
           Global Average Pooling
+                    |
+                (weights)
                     |
                  Softmax
 ```
 
-이러한 구조는 일반 모델과 비교해서 정확도가 낮아지거나 다른 작업(image captioning, VQA(visual question answering) 등..)에는 적용할 수 없다. Grad-CAM은 이러한 단점을 보완시키기 위해서 gradient를 이용해서 feature map을 결합하는 새로운 방법이다.
+GAP(global average pooling)이 없다면 weights로 CAM을 구하는 작업을 할 수 없기 때문에 마지막 layer에 GAP이 무조건 있어야한다. 이러한 구조는 일반 모델과 비교해서 정확도가 낮아지거나 다른 작업(image captioning, visual question answering 등..)에는 적용할 수 없다(Softmax가 없는 경우).
+
+Grad-CAM은 이러한 단점을 보완시키기 위해서 **gradient를 이용해서 feature map을 결합** 하는 새로운 방법이다.
+
+### image captioning
+
+이미지가 무엇에 관한 이미지인지 caption(문장)을 달아주는 작업
+
+
+
+![figure2](https://github.com/jjeamin/jjeamin.github.io/raw/master/_posts/post_img/cam/grad_figure2.PNG)
+
+
+
+- 출처 : [https://visualqa.org/](https://visualqa.org/)
+
+### visual question answering
+
+이미지가 무엇인지에 대한 질문이 주어질 때 질문에 대한 정답을 알아내는 작업
+
+
+
+![figure3](https://github.com/jjeamin/jjeamin.github.io/raw/master/_posts/post_img/cam/grad_figure3.PNG)
+
+
 
 # Approach
