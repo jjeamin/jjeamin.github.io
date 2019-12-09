@@ -76,3 +76,22 @@ Grad-CAM은 이러한 단점을 보완시키기 위해서 **gradient를 이용�
 
 
 # Approach
+
+## CAM
+
+- **output**
+
+$$y^c = \sum_k w_k^c \frac{1}{Z} \sum_i \sum_j A_{ij}^k$$
+
+- $$\frac{1}{Z} \sum_i \sum_j$$ : global average pooling
+- $$w_k^c$$ : class feature weights
+- $$A_{ij}^k$$ : feature map
+
+- **CAM**
+
+$$L_{CAM}^c = \sum_k w_k^c A^k$$
+
+- linear combination
+- $$w_k^c$$ : class feature weights
+- $$A^k$$ : feature map
+- 0 ~ 1 사이로 normalization
