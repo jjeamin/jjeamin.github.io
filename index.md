@@ -51,8 +51,13 @@ tags: index
 - [DCN](https://jjeamin.github.io/paper/2019/11/13/DCN/)
 - [EfficientDet-1](https://jjeamin.github.io/paper/2019/11/23/EfficientDet/)
 - [EfficientDet-2](https://jjeamin.github.io/paper/2019/11/23/EfficientDet2/)
+- [CAM](https://jjeamin.github.io/paper/2019/12/02/CAM/)
+- [Grad-CAM](https://jjeamin.github.io/paper/2019/12/09/gradCAM/)
 
-# Info
+# kaggle
+- [medical image](https://jjeamin.github.io/kaggle/2019/12/05/kaggle1/)
+
+# API
 - [COCO](https://jjeamin.github.io/info/2019/06/20/coco_api/)
 
 # GAN - tensorflow
