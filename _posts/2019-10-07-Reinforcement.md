@@ -99,7 +99,7 @@ Q(s,a) = r + (GAMMA)*maxQ(s`,a`)
 $$Q(s,a) = (1-\alpha)Q(s,a) + \alpha[r + \gamma maxQ(s^{\prime},a^{\prime})]$$
 
 # Q-Network
-Q-table은 너무 많은 행동이 있고 환경이 하나의 이미지로 있는 경우에 Q-tabel이 기하급수적으로 커지는 현상이 발생해 아예 접근조차 못하는 경우가 있다.(예를 들어 Atari game) 그래서 이러한 모든 경우의 수를 전부 고려하기 어려운 문제를 Nural Network를 이용해서 표현한다.
+Q-table은 너무 많은 행동이 있고 환경이 하나의 이미지로 있는 경우에 Q-tabel이 기하급수적으로 커지는 현상이 발생해 아예 접근조차 못하는 경우가 있다.(예를 들어 Atari game) 그래서 이러한 모든 경우의 수를 전부 고려하기 어려운 문제를 Neural Network를 이용해서 표현한다.
 
 ```
 state -> model -> Q value

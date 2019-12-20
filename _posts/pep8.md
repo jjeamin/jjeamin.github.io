@@ -1,0 +1,502 @@
+---
+layout: post
+title:  "딥러닝 학습시키는 시간을 활용해서 Python 제대로 알아보기 - 1"
+summary: "Python Coding RULE"
+date:   2019-12-20 16:00 -0400
+categories: python
+---
+
+*파이썬으로 코딩하는 능력을 향상시키기 위해서 이번에 딥러닝 학습시키는 시간을 활용해서?? 공부를 해보려고 한다.*
+
+*대량의 프로젝트 단위의 파이썬 코드들을 보면서 어려운 문법을 볼 때 원리와 사용방법에 대해 궁금했었는데 이번 기회에 한번 제대로 파이썬이란 놈을 알아가보도록 하자*
+
+*딱히 순서는 존재하지 않고 내 기준으로 평소에 궁금한 것들을 알아볼 것이다. c언어를 연동하는거나.. 매직메소드.. 객체 지향..*
+
+# Coding RULE
+- PEP8
+- Google style
+
+python의 창시자 `귀도 반 로섬`이 만든 PEP8로 알아보자
+
+# PEP8
+- [https://www.python.org/dev/peps/pep-0008/](https://www.python.org/dev/peps/pep-0008/) : 공식 홈페이지
+
+공식 홈페이지의 document를 이용해서 간단히 정리해보면서 알아가보자
+
+## PEP8 이란??
+PEP은 python enhance proposal 이라는 뜻인데 python 개선 제안서를 의미한다. 즉, PEP8은 python을 개선하는 제안서 중에서 코딩 규칙에 대한 제안서라는 뜻이다.
+
+초반을 읽어보면 style guide는 일관성이 중요하다는 것을 강조하고 있다.
+
+---
+
+## Coding Lay-out
+
+### 들여쓰기(Indentation)
+
+- 들여쓰기에 4개의 spaces를 사용한다.
+- augmentation 수직 정렬
+- hanging indent를 사용할 때는 첫 번째 줄에 arguments가 없어야 하고 연속적으로 명확하게 구분하기 위해서 추가적으로 들여쓰기를 사용한다.
+
+**YES**
+
+```
+# 수직 정렬
+foo = long_function_name(var_one, var_two,
+                         var_three, var_four)
+
+# arguments와 구분짓기 위해 추가적으로 4개의 spaces를 더 사용한다.
+def long_function_name(
+        var_one, var_two, var_three,
+        var_four):
+    print(var_one)
+
+# Hanging indents
+foo = long_function_name(
+    var_one, var_two,
+    var_three, var_four)
+```
+
+**NO**
+
+```
+# 수직 정렬 안됨
+foo = long_function_name(var_one, var_two,
+    var_three, var_four)
+
+# arguments와 구분이 안됨
+def long_function_name(
+    var_one, var_two, var_three,
+    var_four):
+    print(var_one)
+```
+
+**특별한 경우(YES)**
+
+- 조건문
+
+```
+# 여분의 들여쓰기가 없다.
+if (this_is_one_thing and
+    that_is_another_thing):
+    do_something()
+
+# comment를 추가한다.
+# syntax highlighting을 지원한다.
+if (this_is_one_thing and
+    that_is_another_thing):
+    # Since both conditions are true, we can frobnicate.
+    do_something()
+
+# 여분의 들여쓰기를 추가한다.
+if (this_is_one_thing
+        and that_is_another_thing):
+    do_something()
+```
+
+- 괄호
+
+```
+my_list = [
+    1, 2, 3,
+    4, 5, 6,
+    ]
+result = some_function_that_takes_arguments(
+    'a', 'b', 'c',
+    'd', 'e', 'f',
+    )
+
+or
+
+my_list = [
+    1, 2, 3,
+    4, 5, 6,
+]
+result = some_function_that_takes_arguments(
+    'a', 'b', 'c',
+    'd', 'e', 'f',
+)
+```
+
+---
+
+### Tabs or Spaces?
+
+- python3는 Tabs와 spaces를 혼합해서 사용하면 안된다.
+
+- pthon2는 혼합해도 오류가 안나지만 spaces만 사용하도록 변환해야한다.
+
+- 고치기 위해서 -t 옵션을 사용하면 경고, -tt 옵션을 사용하면 오류가 된다.
+
+---
+
+### 최대 줄 길이
+- 79자가 최대다. 넘어가면 그 다음 줄에 써야한다.
+- docstrings나 comment는 72자로 제한해야한다.
+- 긴 with문이나 assert문은 백 슬래시(`\`)를 사용한다.
+
+```
+with open('/path/to/some/file/you/want/to/read') as file_1, \
+     open('/path/to/some/file/being/written', 'w') as file_2:
+    file_2.write(file_1.read())
+```
+
+---
+
+### 연산자 전/후 줄바꿈
+
+**NO**
+
+```
+income = (gross_wages +
+          taxable_interest +
+          (dividends - qualified_dividends) -
+          ira_deduction -
+          student_loan_interest)
+```
+
+**YES**
+
+```
+income = (gross_wages
+          + taxable_interest
+          + (dividends - qualified_dividends)
+          - ira_deduction
+          - student_loan_interest)
+```
+
+---
+
+### 빈줄
+- 클래스,함수 : 빈줄 2개
+- 클래스 내부 메소드 : 빈줄 1개
+
+---
+
+### 소스 파일 인코딩
+- python3 : UTF-8
+- python2 : ASCII
+
+---
+
+### Import
+
+**YES**
+
+```
+import os
+import sys
+
+from subprocess import Popen, PIPE
+```
+
+**NO**
+
+```
+import sys, os
+```
+
+**그룹화**
+- standard library imports
+- third party imports
+- local application/library specific imports
+
+위 순서로 그룹 지어진다. 사이사이 빈 줄을 넣어야한다.
+
+절대경로를 권장한다.
+
+```
+import mypkg.sibling
+from mypkg import sibling
+from mypkg.sibling import example
+```
+
+불필요하게 자세한 패키지는 상대경로가 허용된다.
+
+```
+from . import sibling
+from .sibling import example
+```
+
+클래스가 포함된 모듈에서 클래스를 가져올 때
+
+```
+from myclass import MyClass
+from foo.bar.yourclass import YourClass
+```
+
+이름이 충돌이 있는 경우
+
+```
+import myclass
+import foo.bar.yourclass
+```
+
+---
+
+### Module Level Dunder Names
+
+`dunders` : 앞뒤에 __ 가 있는 이름
+
+dunders는 `__future__ imports`를 제외한 모든 import문 앞에 배치해야한다.
+
+```
+"""This is the example module.
+
+This module does stuff.
+"""
+
+from __future__ import barry_as_FLUFL
+
+__all__ = ['a', 'b', 'c']
+__version__ = '0.1'
+__author__ = 'Cardinal Biggles'
+
+import os
+import sys
+```
+
+---
+
+## 문자열 따옴표(String Quotes)
+
+작은 따옴표나 큰 따옴표 문자열은 동일하다. 둘 중 하나만 선택해서 사용한다.
+
+삼중 따옴표 : `""" """`(큰 따옴표 사용)
+
+---
+
+## Whitespace in Expressions and Statements
+
+### Pet Peeves
+
+아래와 같은 불필요한 공백을 피해라
+
+```
+YES: spam(ham[1], {eggs: 2})
+NO:  spam( ham[ 1 ], { eggs: 2 } )
+```
+
+```
+YES: foo = (0,)
+NO:  bar = (0, )
+```
+
+```
+YES: if x == 4: print x, y; x, y = y, x
+NO:  if x == 4 : print x , y ; x , y = y , x
+```
+
+```
+YES
+
+ham[1:9], ham[1:9:3], ham[:9:3], ham[1::3], ham[1:9:]
+ham[lower:upper], ham[lower:upper:], ham[lower::step]
+ham[lower+offset : upper+offset]
+ham[: upper_fn(x) : step_fn(x)], ham[:: step_fn(x)]
+ham[lower + offset : upper + offset]
+
+NO
+
+ham[lower + offset:upper + offset]
+ham[1: 9], ham[1 :9], ham[1:9 :3]
+ham[lower : : upper]
+ham[ : upper]
+```
+
+```
+YES: spam(1)
+NO:  spam (1)
+```
+
+```
+YES: dct['key'] = lst[index]
+NO:  dct ['key'] = lst [index]
+```
+
+```
+YES
+
+x = 1
+y = 2
+long_variable = 3
+
+NO
+
+x             = 1
+y             = 2
+long_variable = 3
+```
+
+### Other Recommendations
+
+```
+YES
+
+i = i + 1
+submitted += 1
+x = x*2 - 1
+hypot2 = x*x + y*y
+c = (a+b) * (a-b)
+```
+
+```
+NO
+
+i=i+1
+submitted +=1
+x = x * 2 - 1
+hypot2 = x * x + y * y
+c = (a + b) * (a - b)
+```
+
+```
+YES
+
+def munge(input: AnyStr): ...
+def munge() -> PosInt: ...
+```
+
+```
+NO
+
+def munge(input:AnyStr): ...
+def munge()->PosInt: ...
+```
+
+```
+YES
+
+def complex(real, imag=0.0):
+    return magic(r=real, i=imag)
+```
+
+```
+NO
+
+def complex(real, imag = 0.0):
+    return magic(r = real, i = imag)
+```
+
+```
+YES
+
+def munge(sep: AnyStr = None): ...
+def munge(input: AnyStr, sep: AnyStr = None, limit=1000): ...
+```
+
+```
+NO
+
+def munge(input: AnyStr=None): ...
+def munge(input: AnyStr, limit = 1000): ...
+```
+
+```
+YES
+
+if foo == 'blah':
+    do_blah_thing()
+do_one()
+do_two()
+do_three()
+```
+
+```
+Rather not:
+
+if foo == 'blah': do_blah_thing()
+do_one(); do_two(); do_three()
+
+Rather not:
+
+if foo == 'blah': do_blah_thing()
+for x in lst: total += x
+while t < 10: t = delay()
+
+Definitely not:
+
+if foo == 'blah': do_blah_thing()
+else: do_non_blah_thing()
+
+try: something()
+finally: cleanup()
+
+do_one(); do_two(); do_three(long, argument,
+                             list, like, this)
+
+if foo == 'blah': one(); two(); three()
+```
+
+---
+
+## When to Use Trailing Commas
+
+후행쉼표
+
+```
+YES
+
+FILES = [
+    'setup.cfg',
+    'tox.ini',
+    ]
+initialize(FILES,
+           error=True,
+           )
+```
+
+```
+NO
+
+FILES = ['setup.cfg', 'tox.ini',]
+initialize(FILES, error=True,)
+```
+
+---
+
+## Comments
+- 주석은 최신 상태로 유지해야한다.
+- 주석은 완전한 문장이어야 하고 첫 단어는 대문자로 표기해야한다. 식별자인 경우 그대로 써야한다.
+- 블럭 주석은 완전한 문장으로 구성된 단락이고 각 문장은 마침표로 끝난다.
+- 마침표 뒤에 두 칸의 spaces를 둔다.
+- 영어로 써야한다.
+
+### Block Comments
+- 블록 주석은 뒤에 따라오는 코드에 대한 설명이고 들여쓰기를 맞춰야한다.
+
+- 블록 주석의 단락은 #으로 구분한다.
+
+
+### Inline Comments
+- 자주 사용하면 안된다.
+- 최소한 두개의 spaces로 분리해야한다.
+
+inline comments는 불필요하고 명백한 경우 복잡해진다. 아래와 같이 사용하면 안된다.
+
+```
+x = x + 1                 # Increment x
+```
+
+때로는 유용한다.
+
+```
+x = x + 1                 # Compensate for border
+```
+
+### Documentation Strings
+- public 모듈, 함수, 클래스, 메소드에 대한 docstrings을 작성해야한다.
+- non-public 메소드에는 필요하지 않다.
+- 메소드가 무슨 역할을 하는지 def 바로 아래줄에 위치하도록 하는게 좋다.
+- docstrings 마지막 줄은 `"""`로 끝낸다.
+
+```
+"""Return a foobang
+
+Optional plotz says to frobnicate the bizbaz first.
+"""
+```
+
+---
+
+## 명명 규칙(Naming Conventions)
