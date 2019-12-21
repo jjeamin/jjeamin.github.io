@@ -60,6 +60,9 @@ tags: index
 # API
 - [COCO](https://jjeamin.github.io/info/2019/06/20/coco_api/)
 
+# python
+- [PEP8](https://jjeamin.github.io/python/2019/12/20/pep8/)
+
 # GAN - tensorflow
 - [GAN](https://github.com/jjeamin/my_gan/tree/master/gan)
 - [DCGAN](https://jjeamin.github.io/gan/2019/02/10/dcgan/)/[code](https://github.com/jjeamin/my_gan/tree/master/dcgan)
