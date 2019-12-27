@@ -20,7 +20,7 @@ use_math: true
 
 
 
-# Introduce
+# Introduction
 최근들어 매우 정확한 object detection을 위해서 많은 발전이 있었다. 하지만 그에 따른 많은 비용으로 인해 속도가 느려지는 단점이 있다. 예를 들어 NASFPN 같은 경우는 state of the art 정확도를 달성하기 위해서 167M 매개변수와 3045FLOPS가 필요하다.
 
 이렇게 연산량이 많고 모델의 크기가 크면 실생활에 사용하기 어렵다. 그래서 anchor based network, one stage detector, pruning 등 많은 방법이 나왔다. 하지만 이러한 방법은 속도가 높아짐에 따라서 정확도가 낮아진다. 그래서 정확도와 속도를 둘다 잡기 위한 체계적인 연구를 진행한다.

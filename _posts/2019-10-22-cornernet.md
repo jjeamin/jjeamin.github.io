@@ -24,7 +24,7 @@ corner의 localize하는데 도움이 되는 새로운 유형의 corner pooling�
 
 성능이 MS COCO에서 42.2% AP를 달성하여 기존 one-stage 검출기보다 성능이 뛰어나다.
 
-# Introduce
+# Introduction
 
 SOTA의 기본적인 구성 요소는 다양한 크기와 종횡비를 가지는 anchor box다. one-stage detector는 이미지 위에 anchor box를 밀집시킨뒤 anchor box를 계산하고 box regression을 통해 coordinates를 수정해서 최종 bounding box를 만들어낸다.
 

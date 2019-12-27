@@ -23,7 +23,7 @@ use_math: true
 
 - 검색알고리즘을 사용한다.
 
-# Introduce
+# Introduction
 - data augmentation은 data domain의 불일치에 대하여 모델을 학습시키기 위해 사용한다. 객체 분류는 종종 수평으로 뒤집거나 변환하는 것에 영향을 받지 않는다.
 
 - 현재 머신러닝과 컴퓨터 비전의 커다란 초점은 더 나은 네트워크 구조를 설계하는 것이다. 더 많은 불변량을 포함하는 더 나은 data augmentation을 찾는데는 관심이 별로 없었다.
