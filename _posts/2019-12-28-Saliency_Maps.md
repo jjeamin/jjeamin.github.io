@@ -1,13 +1,13 @@
 ---
 layout: post
-title:  "CNN Saliency Maps"
-summary: "CNN Saliency Maps 논문 읽어보기"
+title:  "Visualising Image Classification Models and Saliency Maps"
+summary: "Visualising Image Classification Models and Saliency Maps 논문 읽어보기"
 date:   2019-12-27 13:00 -0400
 categories: paper
 use_math: true
 ---
 
-# CNN Saliency Maps
+# Visualising Image Classification Models and Saliency Maps
 
 (Deep Inside Convolutional Networks: Visualising Image Classification Models and Saliency Maps)
 
@@ -54,8 +54,6 @@ backpropagation을 이용해서 **locally optimal $$I$$** 를 찾을 수 있다.
 
 차이점은 input image와 관련해서 **최적화가 진행되고 weights는 학습할 때 찾은 weights로 고정한다는 것이다.**
 
-zero image로 optimisation을 초기화하고 train datasets의 평균 image를 결과와 더한다.
-
 **softmax를 사용하지 않고 class score를 사용한다.** 왜냐하면 다른 class의 score를 최소화해서 posterior(뒷부분)를 최대화 시키기 때문이다. 그래서 $$S_c$$만 최적화 한다.
 
 
@@ -72,7 +70,7 @@ $$S_c(I) = w^T_c I + b_c$$
 
 score의 영향을 기준으로 image의 pixel에 대한 순위를 매길 수 있다. image는 1차원으로 표현된다. 이 경우 weights가 image pixel의 중요성을 정의한다는 것을 알 수 있다.
 
-하지만 깊은 CNN 같은 경우 score는 비선형 함수다. 그래서 위의 공식을 바로 적용할 수 없다. 그치만 image가 주어지면 score를 근사할 수 있다.(Taylor expansion)
+하지만 깊은 CNN 같은 경우 score는 비선형 함수다. 그래서 위의 공식을 바로 적용할 수 없다. 그렇지만 image가 주어지면 score를 근사할 수 있다.(Taylor expansion)
 
 $$S_c(I) \approx w^T I + b_c$$
 
