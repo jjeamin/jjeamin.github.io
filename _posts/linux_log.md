@@ -1,0 +1,89 @@
+---
+layout: post
+title:  "Linux Log"
+summary: "리눅스 관련 설정/설치"
+date:   2019-12-31 13:00 -0400
+categories: paper
+use_math: true
+---
+
+`Ubuntu 18.04 version`
+
+# 한글 설정
+
+```
+언어지원
+
+한국어 설치, 키보드 입력기 : iBus
+
+terminal 접속
+
+$ ibus-setup
+
+입력기
+
+한국어-hangle만 추가
+```
+
+---
+
+# SSH 설정
+
+```
+sudo su
+```
+
+## 사용자 추가
+
+```
+$ sudo adduser [new_user]
+$ sudo passwd [new_user]
+```
+
+```
+sudo cp -r /home/user/.ssh/ /home/[new_user]/.ssh/
+
+sudo chown -R [new_user]:[newuser] /home/[new_user]/.ssh
+```
+
+## root 권한 부여
+```
+$ sudo visudo
+
+root ALL=(ALL)ALL
+[new_user] ALL=(ALL)ALL <- 추가
+```
+
+## 설정 파일 수정
+
+```
+$ sudo vi /etc/ssh/sshd_config
+
+Port 22 -> Port [설정 포트]
+AllowUsers [new_user]
+```
+
+## 서비스 재시작
+
+```
+sudo service ssh restart
+```
+
+## ip확인
+
+```
+sudo apt-get install net-tools
+ifconfig
+```
+
+---
+
+# Atom 설치하기
+
+```
+sudo add-apt-repository ppa:webupd8team/atom
+sudo apt-get update
+sudo apt-get install atom
+
+atom
+```
