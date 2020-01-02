@@ -14,10 +14,15 @@ categories: git
 
 ```
 $ git reflog
-
+```
 목록을 보고 찾은 어디로 이동할지 찾은 뒤에
 
+```
 $ git reset --hard HEAD@{23}
+```
 
-되돌리기
+원격 저장소까지 변경시키려면 --force를 추가한다.
+
+```
+$ git push --force
 ```
