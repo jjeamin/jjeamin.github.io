@@ -2,7 +2,7 @@
 layout: post
 title:  "딥러닝 학습시키는 시간을 활용해서 Python 알아보기 - 3"
 summary: "Python Magic Method"
-date:   2019-01-06 16:00 -0400
+date:   2020-01-06 16:00 -0400
 categories: python
 ---
 
