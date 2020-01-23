@@ -291,16 +291,16 @@ $$Ax = \lambda x$$
 - 2차원 벡터를 1차원 벡터로 축소시키는 최적의 방법은 variance를 최대로 만들어주는 eigenvector에 정사영 시키는 것
 
 ## 순서
-1. 값 $$X$$에 대해서 평균이 0인 $$X'$$를 만든다.
-2. 공분산 행렬을 구한다.
-3. 공분산 행렬을 eigendecomposition 한다.
-4. eigenvalue가 큰 순서대로 정렬한다.
-5. 관심이 있는 dimension까지만 사용하고 $$X$$와 eigenvector를 내적한다.
+1. 공분산 행렬을 구한다.
+2. 공분산 행렬을 eigendecomposition 한다.
+3. eigenvalue가 큰 순서대로 정렬한다.
+4. 관심이 있는 dimension까지만 사용하고 $$X$$와 eigenvector를 내적한다.
 
 ---
 
 # 공분산 행렬
 - feature들의 상관관계의 정도(커지면 작아지고, 작아지면 커지고, 커지면 커지고, 작아지면 작아지는 정도)
+
 - 상관관계를 알기 위해서 각 feature를 내적해서 유사성을 찾는다.
 
 **내적의 기하학적 의미**
@@ -310,9 +310,24 @@ $$A \cdot B = \left | A \right | \left | B \right | \cos \theta$$
 - 각도에 따라서 A와 B가 얼마나 유사 한지 알 수 있다. 각도가 90도라면 연관성이 없고 0도라면 방향이 같기 때문에 유사하다는 것을 알 수 있다.
 
 ## 순서
-1. 각 행 별로 평균을 구한 뒤 빼준다. ($$X' = X - m$$)
-2. 내적하고 $$X$$의 수만큼 나누어준다. ($$ \frac{X'^T \cdot X'}{n}$$)
+1. 각 행 별로 평균을 구한 뒤 빼준다.
+
+$$X' = X - m$$
+
+2. 내적하고 $$X$$의 수만큼 나누어준다.
+
+$$ \frac{X'^T \cdot X'}{n}$$
+
 3. 행렬의 대각은 분산식이 되고 나머지는 공분산식이 된다.
+
+$$
+\begin{pmatrix}
+var(x_1) & cov(x_1, x_2)  & cov(x_1, x_3)\\
+cov(x_2, x_1) & var(x_2) & cov(x_2, x_3)\\
+cov(x_3, x_1) & cov(x_3, x_2) & var(x_1)
+\end{pmatrix}
+$$
+
 4. 공분산 행렬 완성
 
 ---
@@ -323,7 +338,6 @@ $$A \cdot B = \left | A \right | \left | B \right | \cos \theta$$
 2. $$det(A - \lambda I) = 0$$를 만족하는 $$\lambda$$를 찾는다.
 3. $$\lambda$$를 대입하여 고유벡터행렬 $$V$$를 찾는다.
 4. $$A = VDV^{-1}$$로 부터 대각화 행렬을 얻어야한다. ($$D = V^{-1}AV$$)
-5. 분해를 끝냈다.
 
 고윳값 분해를 이용하는 것은 A가 정사각 행렬일 경우만 가능한 방법이다. 직사각행렬일때는 어떻게 해야하나?? 그때 나오는게 특이값 분해(SVD)가 있다. 특이값 분해는 생략한다.
 
@@ -347,7 +361,9 @@ $$A \cdot B = \left | A \right | \left | B \right | \cos \theta$$
 Fisher가 제안한 linear discriminant의 목적함수
 
 $$S_i = \sum_{s \in w_i} (X - m_i)(X - m_i)^T$$
+
 $$S_1 + S_2 = S_w$$
+
 $$J(w) = \frac{\left | m_1 - m_2 \right |}{S_1^2 + S_2^2} = \frac{w^T S_b^{LDA}w}{w^T S_w^{LDA}w}$$
 
 분자는 최대화시켜야하고 분모를 최소화 시키는 값을 찾아야한다. 그러기 위해서는 $$w$$에 대해서 미분한 값이 0이 되는(수평)값을 찾아야한다. 아래 식이 $$J(w)$$를 미분해 0이 나오는 식을 풀어낸 것이다.
@@ -358,9 +374,27 @@ $$S^{-1}_w S_b w = \lambda w$$
 
 ## 순서
 1. 전체, 각 클래스의 평균을 계산한다.
+
+$$m_1 = \frac{1}{N_1} \sum_{x \in w_1} x$$
+
+$$m_2 = \frac{1}{N_2} \sum_{x \in w_2} x$$
+
 2. 서로 다른 클래스 사이의 분산을 계산한다.
+
+$$S_1 = \sum_{x \in w_1} (x - m_1)(x - m_1)^T$$
+
+$$S_2 = \sum_{x \in w_2} (x - m_2)(x - m_2)^T$$
+
+$$S_w = S_1 + S_2$$
+
 3. 각 클래스 내부의 분산을 계산한다.
-4. eigendecomposition을 한다.($$S_w^{-1} S_B w = \lambda w$$)
+
+$$S_b = (m_1 - m_2)(m_1 - m_2)^T$$
+
+4. eigendecomposition을 한다.
+
+$$S_w^{-1} S_b w = \lambda w$$
+
 5. 관심이 있는 dimension까지만 사용하고 $$X$$와 eigenvector를 내적한다.
 
 # Reference
