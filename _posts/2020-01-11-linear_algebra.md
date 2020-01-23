@@ -280,7 +280,7 @@ $$Ax = \lambda x$$
 
 
 
-![fig1](https://github.com/jjeamin/jjeamin.github.io/raw/master/_posts/post_img/linear/fig1.PNG)
+![fig1](https://github.com/jjeamin/jjeamin.github.io/raw/master/_posts/post_img/linear/fig1.PNG){: .center}
 
 
 
@@ -336,7 +336,7 @@ $$A \cdot B = \left | A \right | \left | B \right | \cos \theta$$
 
 
 
-![fig2](https://github.com/jjeamin/jjeamin.github.io/raw/master/_posts/post_img/linear/fig2.PNG)
+![fig2](https://github.com/jjeamin/jjeamin.github.io/raw/master/_posts/post_img/linear/fig2.PNG){: .center}
 
 
 
