@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "딥러닝 공부할 때 알면 좋은 Linear Algebra"
-summary: "훑어보기 위해 적어본 선형 대수학 기초"
+summary: "훑어보기 위해 적어본 선형 대수학 기초 + PCA, LDA"
 date:   2020-01-11 16:00 -0400
 categories: math
 ---
@@ -270,6 +270,98 @@ $$Ax = \lambda x$$
 - Orthogonal하다.
 - 길이가 1인 벡터로 이루어져 있다.
 
+---
+
+# PCA(Principal Component Analysis)
+- 주성분 분석
+- 차원 축소(dimensionality reduction), 변수 추출(feature extraction)
+- 공분산 행렬의 eigenvector
+- 데이터의 구조를 잘 살려주면서 dimension reduction하는 방법
+
+
+
+![fig1](https://github.com/jjeamin/jjeamin.github.io/raw/master/_posts/post_img/linear/fig1.PNG)
+
+
+
+- [https://machine-learning-course.readthedocs.io/en/latest/content/unsupervised/pca.html](https://machine-learning-course.readthedocs.io/en/latest/content/unsupervised/pca.html)
+
+데이터의 variance를 최대한 보존하면서 서로 orthgonal하는 새로운 basis를 찾아, high dimension space의 표본들을 선형 연관성이 없는 low dimension으로 변환하는 방법
+
+- 2차원 벡터를 1차원 벡터로 축소시키는 최적의 방법은 variance를 최대로 만들어주는 eigenvector에 정사영 시키는 것
+
+## 순서
+1. 값 $$X$$에 대해서 평균이 0인 $$X'$$를 만든다.
+2. 공분산 행렬을 구한다.
+3. 공분산 행렬을 eigendecomposition 한다.
+4. eigenvalue가 큰 순서대로 정렬한다.
+5. 관심이 있는 dimension까지만 사용하고 $$X$$와 eigenvector를 내적한다.
+
+---
+
+# 공분산 행렬
+- feature들의 상관관계의 정도(커지면 작아지고, 작아지면 커지고, 커지면 커지고, 작아지면 작아지는 정도)
+- 상관관계를 알기 위해서 각 feature를 내적해서 유사성을 찾는다.
+
+**내적의 기하학적 의미**
+
+$$A \cdot B = \left | A \right | \left | B \right | \cos \theta$$
+
+- 각도에 따라서 A와 B가 얼마나 유사 한지 알 수 있다. 각도가 90도라면 연관성이 없고 0도라면 방향이 같기 때문에 유사하다는 것을 알 수 있다.
+
+## 순서
+1. 각 행 별로 평균을 구한 뒤 빼준다. ($$X' = X - m$$)
+2. 내적하고 $$X$$의 수만큼 나누어준다. ($$ \frac{{X'}^{T} \cdot X'}{n}$$)
+3. 행렬의 대각은 분산식이 되고 나머지는 공분산식이 된다.
+4. 공분산 행렬 완성
+
+---
+
+# 고유값 분해(eigendecomposition)
+
+1. 주어진 데이터 $$A$$
+2. $$det(A - \lambda I) = 0$$를 만족하는 $$\lambda$$를 찾는다.
+3. $$\lambda$$를 대입하여 고유벡터행렬 $$V$$를 찾는다.
+4. $$A = VDV^{-1}$$로 부터 대각화 행렬을 얻어야한다. ($$D = V^{-1}AV$$)
+5. 분해를 끝냈다.
+
+고윳값 분해를 이용하는 것은 A가 정사각 행렬일 경우만 가능한 방법이다. 직사각행렬일때는 어떻게 해야하나?? 그때 나오는게 특이값 분해(SVD)가 있다. 특이값 분해는 생략한다.
+
+---
+
+# LDA(Linear Discriminant analysis)
+- dimension 축소가 아닌 dimension 분리의 목적
+- 각 클래스의 집단 내부의 분산은 작다.
+- 서로 다른 클래스 사이의 분산은 커야한다.
+
+
+
+![fig2](https://github.com/jjeamin/jjeamin.github.io/raw/master/_posts/post_img/linear/fig2.PNG)
+
+
+
+- [https://www.youtube.com/watch?v=M4HpyJHPYBY](https://www.youtube.com/watch?v=M4HpyJHPYBY)
+
+## Fisher linear discriminant
+
+Fisher가 제안한 linear discriminant의 목적함수
+
+$$S_i = \sum_{s \in w_i} (X - m_i)(X - m_i)^T$$
+$$S_1 + S_2 = S_w$$
+$$J(w) = \frac{\left | m_1 - m_2 \right |}{S_1^2 + S_2^2} = \frac{w^T S_b^{LDA}w}{w^T S_w^{LDA}w}$$
+
+분자는 최대화시켜야하고 분모를 최소화 시키는 값을 찾아야한다. 그러기 위해서는 $$w$$에 대해서 미분한 값이 0이 되는(수평)값을 찾아야한다. 아래 식이 $$J(w)$$를 미분해 0이 나오는 식을 풀어낸 것이다.
+
+$$S^{-1}_w S_b w = \lambda w$$
+
+식을 풀어내는 방식은 [이 곳](http://www.kwangsiklee.com/2017/12/%EB%A8%B8%EC%8B%A0%EB%9F%AC%EB%8B%9D%EC%97%90-%ED%95%84%EC%9A%94%ED%95%9C-pcalda-%EA%B0%9C%EB%85%90-%EC%9D%B5%ED%9E%88%EA%B8%B0/)을 참조해서 보는 것을 추천한다.
+
+## 순서
+1. 전체, 각 클래스의 평균을 계산한다.
+2. 서로 다른 클래스 사이의 분산을 계산한다.
+3. 각 클래스 내부의 분산을 계산한다.
+4. eigendecomposition을 한다.($$S_w^{-1} S_B w = \lambda w$$)
+5. 관심이 있는 dimension까지만 사용하고 $$X$$와 eigenvector를 내적한다.
 
 # Reference
 - [https://www.edwith.org/linearalgebra4ai/joinLectures/14072](https://www.edwith.org/linearalgebra4ai/joinLectures/14072)
