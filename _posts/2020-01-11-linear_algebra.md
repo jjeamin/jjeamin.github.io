@@ -310,15 +310,15 @@ $$A \cdot B = \left | A \right | \left | B \right | \cos \theta$$
 - 각도에 따라서 A와 B가 얼마나 유사 한지 알 수 있다. 각도가 90도라면 연관성이 없고 0도라면 방향이 같기 때문에 유사하다는 것을 알 수 있다.
 
 ## 순서
-1. 각 행 별로 평균을 구한 뒤 빼준다.
+- 각 행 별로 평균을 구한 뒤 빼준다.
 
 $$X' = X - m$$
 
-2. 내적하고 $$X$$의 수만큼 나누어준다.
+- 내적하고 $$X$$의 수만큼 나누어준다.
 
 $$ \frac{X'^T \cdot X'}{n}$$
 
-3. 행렬의 대각은 분산식이 되고 나머지는 공분산식이 된다.
+- 행렬의 대각은 분산식이 되고 나머지는 공분산식이 된다.
 
 $$
 \begin{pmatrix}
@@ -328,7 +328,7 @@ cov(x_3, x_1) & cov(x_3, x_2) & var(x_1)
 \end{pmatrix}
 $$
 
-4. 공분산 행렬 완성
+- 공분산 행렬 완성
 
 ---
 
@@ -373,13 +373,13 @@ $$S^{-1}_w S_b w = \lambda w$$
 식을 풀어내는 방식은 [이 곳](http://www.kwangsiklee.com/2017/12/%EB%A8%B8%EC%8B%A0%EB%9F%AC%EB%8B%9D%EC%97%90-%ED%95%84%EC%9A%94%ED%95%9C-pcalda-%EA%B0%9C%EB%85%90-%EC%9D%B5%ED%9E%88%EA%B8%B0/)을 참조해서 보는 것을 추천한다.
 
 ## 순서
-1. 전체, 각 클래스의 평균을 계산한다.
+- 전체, 각 클래스의 평균을 계산한다.
 
 $$m_1 = \frac{1}{N_1} \sum_{x \in w_1} x$$
 
 $$m_2 = \frac{1}{N_2} \sum_{x \in w_2} x$$
 
-2. 서로 다른 클래스 사이의 분산을 계산한다.
+- 서로 다른 클래스 사이의 분산을 계산한다.
 
 $$S_1 = \sum_{x \in w_1} (x - m_1)(x - m_1)^T$$
 
@@ -387,15 +387,15 @@ $$S_2 = \sum_{x \in w_2} (x - m_2)(x - m_2)^T$$
 
 $$S_w = S_1 + S_2$$
 
-3. 각 클래스 내부의 분산을 계산한다.
+- 각 클래스 내부의 분산을 계산한다.
 
 $$S_b = (m_1 - m_2)(m_1 - m_2)^T$$
 
-4. eigendecomposition을 한다.
+- eigendecomposition을 한다.
 
 $$S_w^{-1} S_b w = \lambda w$$
 
-5. 관심이 있는 dimension까지만 사용하고 $$X$$와 eigenvector를 내적한다.
+- 관심이 있는 dimension까지만 사용하고 $$X$$와 eigenvector를 내적한다.
 
 # Reference
 - [https://www.edwith.org/linearalgebra4ai/joinLectures/14072](https://www.edwith.org/linearalgebra4ai/joinLectures/14072)
