@@ -7,14 +7,15 @@ categories: paper
 use_math: true
 ---
 
-# Visualising Image Classification Models and Saliency Maps
+## Visualising Image Classification Models and Saliency Maps
 
 (Deep Inside Convolutional Networks: Visualising Image Classification Models and Saliency Maps)
 
 - paper : [https://arxiv.org/abs/1312.6034](https://arxiv.org/abs/1312.6034)
 
 ## Saliency Maps란?
-Saliency Maps은 일종의 이미지를 분할이다. 어떠한 관심 영역을 추출하는 것을 말한다.
+- 돌출맵
+- Saliency Maps은 일종의 이미지를 분할이다. 어떠한 관심 영역을 추출하는 것을 말한다.
 
 # Abstract
 이 논문은 image classification model의 visualization에 대한 내용이다. input image에 대한 class score에 gradient를 계산하는 데 기반한 두 가지 시각화 기술을 기반으로 한다.
