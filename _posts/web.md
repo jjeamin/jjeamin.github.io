@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "WEB"
-summary: "그냥 훑어보기 좋은 웹 지식"
+summary: "내가 찾아본 Web 관련 기록"
 date:   2020-01-11 16:00 -0400
 categories: web
 ---

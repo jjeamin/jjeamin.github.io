@@ -8,6 +8,17 @@ tags: index
 - [YOLO - openvino](https://jjeamin.github.io/openvino/2019/03/30/yolo-openvino/)
 - [YOLO - counting](https://jjeamin.github.io/yolo/2019/03/28/yolo_counting/)
 
+# Log
+- [LaTex](https://jjeamin.github.io/log/2019/12/31/latex/)
+- [GitHub](https://jjeamin.github.io/log/2020/01/18/git_log/)
+- [Linux](https://jjeamin.github.io/log/2020/01/22/linux_log/)
+
+# Python
+- [PEP8](https://jjeamin.github.io/python/2019/12/20/pep8/)
+- [Decorator](https://jjeamin.github.io/python/2020/01/06/decorator/)
+- [Magic Method](https://jjeamin.github.io/python/2020/01/06/magic_method/)
+- [C_to_Python](https://jjeamin.github.io/python/2020/01/10/python_c/)
+
 # Raspberry Pi
 - [Setting](https://jjeamin.github.io/pi/2019/02/08/pi_setting/)
 - [Following Robot](https://jjeamin.github.io/pi/2019/02/07/following_robot/)
@@ -54,14 +65,11 @@ tags: index
 - [CAM](https://jjeamin.github.io/paper/2019/12/02/CAM/)
 - [Grad-CAM](https://jjeamin.github.io/paper/2019/12/09/gradCAM/)
 
-# kaggle
+# Kaggle
 - [medical image](https://jjeamin.github.io/kaggle/2019/12/05/kaggle1/)
 
 # API
 - [COCO](https://jjeamin.github.io/info/2019/06/20/coco_api/)
-
-# python
-- [PEP8](https://jjeamin.github.io/python/2019/12/20/pep8/)
 
 # GAN - tensorflow
 - [GAN](https://github.com/jjeamin/my_gan/tree/master/gan)
@@ -69,7 +77,7 @@ tags: index
 - [Pix2Pix](https://jjeamin.github.io/gan/2019/02/26/pix2pix/)/[code](https://github.com/jjeamin/my_gan/tree/master/pix2pix)
 - [CycleGAN](https://jjeamin.github.io/gan/2019/02/28/cycleGAN/)/[code](https://github.com/jjeamin/my_gan/tree/master/cyclegan)
 
-# concept
+# Concept
 - [Batch Norm](https://jjeamin.github.io/dnn/2019/02/11/batch_norm/)
 - [SVM](https://jjeamin.github.io/dnn/2019/03/07/SVM/)
 - [regression index](https://jjeamin.github.io/dnn/2019/03/15/index/)
