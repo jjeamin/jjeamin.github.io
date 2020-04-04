@@ -135,7 +135,7 @@ python demo.py --config-file ../configs/COCO-Detection/faster_rcnn_R_101_FPN_3x.
 
 
 
-![output](https://github.com/jjeamin/jjeamin.github.io/raw/master/_posts/post_img/detectron/output.PNG)
+![output](https://github.com/jjeamin/jjeamin.github.io/raw/master/_posts/post_img/detectron/output.png)
 
 
 
