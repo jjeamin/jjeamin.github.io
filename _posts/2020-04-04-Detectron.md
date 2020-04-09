@@ -110,6 +110,12 @@ cd demo
 ```
 
 ```
+python demo.py --config-file ../configs/COCO-Detection/faster_rcnn_R_101_FPN_3x.yaml --input ./1.jpg --opts MODEL.WEIGHTS [INPUT MODEL PATH]
+```
+
+- 추가
+
+```
 ROI CUDA 에러가 발생.. (한줄한줄이 에러..)
 ```
 
@@ -127,9 +133,6 @@ python setup.py build install
 
 기본에 충실하자.
 
-```
-python demo.py --config-file ../configs/COCO-Detection/faster_rcnn_R_101_FPN_3x.yaml --input ./1.jpg --opts MODEL.WEIGHTS [INPUT MODEL PATH]
-```
 
 ## 결과
 
@@ -141,4 +144,43 @@ python demo.py --config-file ../configs/COCO-Detection/faster_rcnn_R_101_FPN_3x.
 
 잘나올것이다 ㅎㅎ
 
-*코드에서 분석 글 작성 예정*
+
+## 가벼운 API 사용법
+
+- [Document](https://detectron2.readthedocs.io/)를 참고하면 도움이 될것 같다.
+
+기존에 사용한 모델들을 이용해서 API형식으로 사용해보자
+
+```python
+from detectron2.engine import DefaultPredictor
+from detectron2.config import get_cfg
+from detectron2.utils.visualizer import Visualizer
+from detectron2.data import MetadataCatalog
+import cv2
+
+# load image
+img = cv2.imread('./detectron2/1.jpg')
+
+# set config
+cfg = get_cfg()
+cfg.merge_from_file("./detectron2/configs/COCO-Detection/faster_rcnn_R_101_FPN_3x.yaml")
+cfg.MODEL.ROI_HEADS.SCORE_THRESH_TEST = 0.5
+cfg.MODEL.WEIGHTS = "./detectron2/model_final_f6e8b1.pkl"
+
+# predict
+predictor = DefaultPredictor(cfg)
+outputs = predictor(img)
+
+# visualization
+v = Visualizer(img[:,:,::-1], MetadataCatalog.get(cfg.DATASETS.TRAIN[0]), scale=1.2)
+v = v.draw_instance_predictions(outputs["instances"].to("cpu"))
+
+cv2.imwrite('output.jpg',v.get_image()[:,:,::-1])
+```
+
+위에 Demo와 같게 출력된다.
+
+## 참조
+- [https://detectron2.readthedocs.io/](https://detectron2.readthedocs.io/)
+- [https://gilberttanner.com/blog/detectron-2-object-detection-with-pytorch](https://gilberttanner.com/blog/detectron-2-object-detection-with-pytorch)
+- [https://github.com/facebookresearch/detectron2](https://github.com/facebookresearch/detectron2)
