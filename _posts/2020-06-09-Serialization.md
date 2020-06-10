@@ -1,7 +1,7 @@
 ---
 layout: post
-title:  "git Log"
-summary: "Serialization"
+title:  "Serialization"
+summary: "Serialization JSON, Protobuf"
 date:   2020-06-09 09:10 -0400
 categories: ML
 ---
