@@ -3,7 +3,7 @@ layout: post
 title:  "Serialization"
 summary: "Serialization JSON, Protobuf"
 date:   2020-06-09 09:10 -0400
-categories: ML
+categories: engineer
 ---
 
 # Serialization
@@ -211,7 +211,7 @@ python reading.py person.data
 
 - JavaScript Object Notation
 
-- [키, 속성 | 값] 쌍으로 이루어진 데이터
+- [키, 속성 / 값] 쌍으로 이루어진 데이터
 
 - Object는 중괄호({})로 감싼다.
 
