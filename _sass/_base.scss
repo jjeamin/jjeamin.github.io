@@ -32,3 +32,13 @@ body {
      -moz-box-sizing: border-box;
   -webkit-box-sizing: border-box;
 }
+
+.floating {
+  position: fixed;
+  right: 50%;
+  top: 50%;
+  margin-right: -820px;
+  text-align:center;
+  border-radius: 50%;
+  width: 200px;
+}
