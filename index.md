@@ -1,9 +1,8 @@
 ---
 layout: page
-title: Index
 permalink: /index/
-tags: index
 ---
+
 # Lab
 - [YOLO - openvino](https://jjeamin.github.io/openvino/2019/03/30/yolo-openvino/)
 - [YOLO - counting](https://jjeamin.github.io/yolo/2019/03/28/yolo_counting/)

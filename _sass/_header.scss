@@ -4,9 +4,9 @@
 }
 
 .site-header a {
-  color: #333;
+  color: #00008B;
   font-size: $h3;
-  font-weight: 300;
+  font-weight: bold;
   background-image: none;
 }
 
@@ -19,7 +19,10 @@
 }
 
 .site-header nav a {
-  color: #666;
+  color: #00008B;
+  font-size: $h3;
+  font-weight: bold;
+  background-image: none;
 }
 
 .site-header nav a:hover,

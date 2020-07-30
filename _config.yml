@@ -7,8 +7,7 @@ baseurl:     ""
 url:         "https://jjeamin.github.io"
 date_format: "%b %-d, %Y"
 header_pages:
- - about.md
- - contact.html
+ - index.md
 
 # Google services
 google_verification: nNSjRytHMTiVA2zVKT0vcEwGtKxM5H9X8DPAf3yFLs0
