@@ -1,8 +1,7 @@
-<-- ---
+---
 layout: page
 permalink: /about/
-tags: about
---- -->
+---
 
 <div align=center>
 
