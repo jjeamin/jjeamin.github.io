@@ -3,22 +3,14 @@ layout: page
 permalink: /about/
 ---
 
-<div align=center>
-
 [![Blog](https://img.shields.io/badge/Blog-Here-blue?style=for-the-badge)](https://jjeamin.github.io/)
 [![gmail](https://img.shields.io/badge/Gmail-Here-red?style=for-the-badge)](mailto:woalsdl600@gmail.com)
 [![naver](https://img.shields.io/badge/Naver-Here-green?style=for-the-badge)](mailto:woalsdl500@naver.com)
 [![DarkNet_Book](https://img.shields.io/badge/DarkNet_Book-Here-black?style=for-the-badge)](https://jjeamin.github.io/darknet_book)
 
-</div>
-
 -----
 
-<div align=center>
-
-   ![jjeamin github stats](https://github-readme-stats.vercel.app/api?username=jjeamin&show_icons=true&theme=merko)
-
-</div>
+![jjeamin github stats](https://github-readme-stats.vercel.app/api?username=jjeamin&show_icons=true&theme=merko)
 
 -----
 
