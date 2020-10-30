@@ -26,7 +26,7 @@ permalink: /about/
 
 # *Publications*
 
-## journel
+## journal
 
 - **FCL-Net: Filter Combination Learning Network for on devices.**
   + **Jae-Min Jeong**, we are preparing to submit (Selected ICT Express)
