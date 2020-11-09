@@ -3,6 +3,8 @@ layout: page
 permalink: /about/
 ---
 
+------
+
 ## *Research Interest*
 
 &nbsp;
@@ -79,7 +81,7 @@ permalink: /about/
 
 #### *DarkNet Book*
 
-- [Main Page](https://img.shields.io/badge/DarkNet_Book-Here-black?style=for-the-badge) / [Github](https://github.com/jjeamin/darknet_book_public)
+- [Main Page](https://jjeamin.github.io/darknet_book/) / [Github](https://github.com/jjeamin/darknet_book_public)
 
 Requirements
 - GitBook
