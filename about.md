@@ -9,9 +9,10 @@ permalink: /about/
 
 &nbsp;
 
-- Model Compression
-- Object Detection
-- Visualization
+- Deep Learning
+  - Model Compression
+  - Object Detection
+  - Visualization
 
 ------
 
@@ -37,10 +38,11 @@ permalink: /about/
 **journal**
 
 - FCL-Net: Filter Combination Learning Network for on devices.
-  + **Jae-Min Jeong**, we are preparing to submit (Selected ICT Express)
+  + we are preparing to submit.
 
 - PMW-PrecipNET: U-Net for precipitation retrieval from passive microwave observations
-  + Jeongmyeong Choi1, **Jaemin Jeong**, Yeji choi, Taegyun Jeon, Yuseop Kim (Submitted)
+  + Jeongmyeong Choi, **Jaemin Jeong**, Yeji choi, Taegyun Jeon, Yuseop Kim
+  + MDPI - remote sensing (Rejected)
 
 &nbsp;
 
