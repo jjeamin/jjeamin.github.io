@@ -143,20 +143,20 @@ Requirements
 &nbsp;
 
 - [FrontU](https://frontu2.modoo.at/) (2018-07 ~ 2018-08)
-  + Smart Toy Develope
+  + Developement of Smart Toy
   + Arduino Sensor
 
 &nbsp;
 
 - [FrontU](https://frontu2.modoo.at/) (2019-01 ~ 2019-02)
-  + Smart Toy Develope
+  + Developement of Smart Toy
   + Raspberry Pi
   + Vision
 
 &nbsp;
 
 - [FrontU](https://frontu2.modoo.at/) (2019-07 ~ 2019-08)
-  + Smart Toy Develope
+  + Developement of Smart Toy
   + Raspberry Pi
   + Google Assistant
 
@@ -171,6 +171,7 @@ Requirements
   + **컴퓨터 비전 튜토리얼을 위한 양자화된 전이학습** 번역
   + **Pytorch를 사용하여 뉴럴 변환** 번역
   + 그 외 번역 리뷰 6개
+  + **장려상 수상**
 
   &nbsp;
 
@@ -206,9 +207,9 @@ Requirements
 
 -  [가속화 프로그래밍 겨울학교 3위 수상 (2019-01)](http://www.manycoresoft.co.kr/school/)
 
--  [데이콘 : 위성관측 데이터 활용 강수량 산출 AI 경진대회 2위 수상 (2020-05)](https://dacon.io/competitions/official/235591/leaderboard/)
+-  [Daycon : 위성관측 데이터 활용 강수량 산출 AI 경진대회 2위 수상 (2020-05)](https://dacon.io/competitions/official/235591/leaderboard/)
 
--  [데이콘 : 산업제어시스템 보안위협 탐지 AI 경진대회 상위 10% (2020-09)](https://dacon.io/competitions/official/235624/leaderboard/)
+-  [Daycon : 산업제어시스템 보안위협 탐지 AI 경진대회 상위 10% (2020-09)](https://dacon.io/competitions/official/235624/leaderboard/)
 
 ------
 
