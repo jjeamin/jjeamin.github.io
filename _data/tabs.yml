@@ -31,5 +31,4 @@
 -
   name: "Darknet Book"
   icon: "fas fa-book"
-  path: /
-  url: darknet_book
+  path: darknet_book
