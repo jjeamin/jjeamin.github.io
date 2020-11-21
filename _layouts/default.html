@@ -1,32 +1,63 @@
+---
+layout: compress
+# Default layout
+# v2.0
+# https://github.com/cotes2020/jekyll-theme-chirpy
+# © 2017-2019 Cotes Chung
+# MIT Licensed
+---
+
 <!DOCTYPE html>
-<html>
-{% include head.html %}
-<body class="site{% if site.animated %} animated fade-in-down{% endif %}">
-  {% if site.google_tag_manager %}
-  <noscript><iframe src="https://www.googletagmanager.com/ns.html?id={{ site.google_tag_manager }}"
-height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+
+{% if site.lang %}
+  {% assign lang = site.lang | split: "_" | first %}
+{% else %}
+  {% assign lang = 'en' %}
+{% endif %}
+
+{% capture prefer_mode %}
+  {% if site.theme_mode != "dual" %}
+    mode="{{ site.theme_mode }}"
   {% endif %}
-	{% if site.facebook_comments %}
-		<div id="fb-root"></div>
-		<script>(function(d, s, id) {
-		  var js, fjs = d.getElementsByTagName(s)[0];
-		  if (d.getElementById(id)) return;
-		  js = d.createElement(s); js.id = id;
-		  js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.5&appId={{ site.facebook_appid }}";
-		  fjs.parentNode.insertBefore(js, fjs);
-		}(document, 'script', 'facebook-jssdk'));</script>
-	{% endif %}
+{% endcapture %}
 
-  <div class="site-wrap">
-    {% include header.html %}
+<html lang="{{ lang }}" {{ prefer_mode }} >
 
-    <div class="post p2 p-responsive wrap" role="main">
-      <div class="measure">
-        {{ content }}
-      </div>
+  {% include head.html %}
+
+  <body data-spy="scroll" data-target="#toc">
+
+    <div id="sidebar" class="d-flex flex-column">
+      {% include sidebar.html %}
     </div>
-  </div>
 
-  {% include footer.html %}
-</body>
+    {% include topbar.html %}
+
+    <div id="main-wrapper">
+      <div id="main">
+
+        {% include refactor-content.html content=content %}
+
+        {% include footer.html %}
+
+      </div>
+
+      {% include search-results.html %}
+
+    </div> <!-- #main-wrapper -->
+
+    <div id="mask"></div>
+
+    <a id="back-to-top" href="#" aria-label="back-to-top" class="btn btn-lg btn-box-shadow" role="button">
+      <i class="fas fa-angle-up"></i>
+    </a>
+
+    {% include search-loader.html %}
+
+    {% if site.google_analytics.id and jekyll.environment == 'production' %}
+      {% include google-analytics.html %}
+    {% endif %}
+
+  </body>
+
 </html>

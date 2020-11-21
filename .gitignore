@@ -1,9 +1,17 @@
+# hidden files
+.*
+
+# python compiled files
+*.pyc
+
+# jekyll debug
 _site
-.sass-cache
-.DS_Store
-.jekyll-metadata
 
-# Ignore the config file that's used for gh-pages.
-_config.gh-pages.yml
-
+# Jeykll Gemfile.lock
 Gemfile.lock
+
+# yui-compressor
+*.jar
+
+# bundle cache
+vendor

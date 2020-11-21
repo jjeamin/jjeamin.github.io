@@ -1,67 +1,151 @@
 ---
 layout: default
+# The posts' layout
+# v2.0
+# https://github.com/cotes2020/jekyll-theme-chirpy
+# © 2017-2019 Cotes Chung
+# MIT Licensed
 ---
 
-{% assign minutes = content | strip_html | number_of_words | divided_by: 180 %}
-{% if minutes == 0 %}
-{% assign minutes = 1 %}
-{% endif %}
+<div class="row">
 
-<div class="post-header mb2">
-  <h1>{{ page.title }}</h1>
-  <span class="post-meta">{{ page.date | date: site.date_format }}</span><br>
-  {% if page.update_date %}
-    <span class="post-meta">{{ site.text.post.updated }}: {{ page.update_date | date: site.date_format }}</span><br>
-  {% endif %}
-  <span class="post-meta small">
-  {% if page.minutes %}
-    {{ page.minutes }} {{ site.text.post.minute_read }}
-  {% else %}
-    {{ minutes }} {{ site.text.post.minute_read }}
-  {% endif %}
-  </span>
-</div>
+  <div id="post-wrapper" class="col-12 col-lg-11 col-xl-8">
 
-<article class="post-content">
-  {{ content }}
-</article>
+    <div class="post pl-1 pr-1 pl-sm-2 pr-sm-2 pl-md-4 pr-md-4">
 
-{% if site.show_sharing_icons %}
-  {% include share_buttons.html %}
-{% endif %}
+      <h1 data-toc-skip>{{ page.title }}</h1>
 
-{% if site.show_post_footers %}
-  {% include post_footer.html %}
-{% endif %}
+      <div class="post-meta text-muted d-flex flex-column">
+        <!-- Published date and author -->
+        <div>
+          Posted
+          {% include timeago.html date=page.date tooltip=true %}
+          by
+          <span class="author">
+          {% if page.author %}
+            {{ page.author }}
+          {% else %}
+            {{ site.author }}
+          {% endif %}
+          </span>
+        </div>
 
-{% if site.disqus_shortname %}
-  <div id="disqus_thread"></div>
-  <script type="text/javascript">
-    var disqus_shortname  = '{{ site.disqus_shortname }}';
-    var disqus_identifier = '{{ page.id }}';
-    var disqus_title      = {{ page.title | jsonify }};
+        <!-- lastmod -->
+        {%- capture filename -%}
+          {{ page.url | split: "/" | last }}
+        {%- endcapture -%}
 
-    (function() {
-      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
-      dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
-      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-    })();
-  </script>
-  <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
-{% endif %}
+        {% for item in site.data.updates %}
+          {% assign encode_filename = item.filename | url_encode %}
+          {% if filename == encode_filename %}
+            {% assign lastmod = item.lastmod %}
+            {% break %}
+          {% endif %}
+        {% endfor %}
 
-{% if site.facebook_comments %}
-  <div class="fb-comments" data-href="{{ site.url }}{{ page.url }}" data-width="100%" data-numposts="{{ site.facebook_comments_number }}"></div>
-{% endif %}
+        {% if lastmod %}
+        <div>
+          Updated
+          {% include timeago.html date=lastmod class="lastmod" tooltip=true %}
+        </div>
+        {% endif %}
 
-{% if site.show_related_posts %}
-  <h3 class="related-post-title">{{ site.text.post.related_posts }}</h3>
-  {% for post in site.related_posts %}
-    <div class="post ml2">
-      <a href="{{ post.url | relative_url }}" class="post-link">
-        <h4 class="post-title">{{ post.title }}</h4>
-        <p class="post-summary">{{ post.summary }}</p>
-      </a>
-    </div>
-  {% endfor %}
-{% endif %}
+        <!-- page views -->
+        {% if site.google_analytics.pv.enabled %}
+        <div>
+          <span id="pv" class="pageviews"><i class="fas fa-spinner fa-spin fa-fw"></i></span>
+          views
+        </div>
+        {% endif %}
+
+      </div> <!-- .post-meta -->
+
+      <div class="post-content">
+
+        {%- capture img_placehodler -%}
+          data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7
+        {% endcapture%}
+
+        {% if page.image %}
+          <img src="{{ img_placehodler }}" data-src="{{ page.image }}" class="post-preview-img">
+        {% endif %}
+
+        <!-- Using lozad. See: <https://github.com/ApoorvSaxena/lozad.js#usage> -->
+        {% if content contains '<img src=' %}
+          {% assign replacement = '<img src="' | append: img_placehodler | append: '" data-src=' %}
+          {{ content | replace: '<img src=', replacement }}
+        {% else %}
+          {{ content }}
+        {% endif %}
+      </div>
+
+      <div class="post-tail-wrapper text-muted">
+
+        <!-- categories -->
+        {% if page.categories.size > 0 %}
+        <div class="post-meta mb-3">
+          <i class="far fa-folder-open fa-fw mr-1"></i>
+          {% for category in page.categories %}
+            <a href='{{ site.baseurl }}/categories/{{ category | replace: ' ', '-' | downcase | url_encode }}/'>{{ category }}</a>
+            {%- unless forloop.last -%}, {%- endunless -%}
+          {% endfor %}
+        </div>
+        {% endif %}
+
+        <!-- tags -->
+        {% if page.tags.size > 0 %}
+        <div class="post-tags">
+          <i class="fa fa-tags fa-fw mr-1"></i>
+          {% for tag in page.tags %}
+          <a href="{{ site.baseurl }}/tags/{{ tag | replace: ' ', '-' | downcase | url_encode }}/"
+            class="post-tag no-text-decoration" >
+            {{- tag -}}
+          </a>
+          {% endfor %}
+          </div>
+        {% endif %}
+
+        <div class="post-tail-bottom
+          d-flex justify-content-between align-items-center mt-3 pt-5 pb-2">
+          {% if site.data.rights.license %}
+          <div class="license-wrapper">
+            This post is licensed under
+            <a href="{{ site.data.rights.license.link }}">{{ site.data.rights.license.name }}</a>
+            by the author.
+          </div>
+          {% endif %}
+
+          {% include post-sharing.html %}
+
+        </div><!-- .post-tail-bottom -->
+
+      </div><!-- div.post-tail -->
+
+    </div> <!-- .post -->
+
+
+  </div> <!-- #post-wrapper -->
+
+  {% include panel.html %}
+
+</div> <!-- .row -->
+
+<div class="row">
+  <div class="col-12 col-lg-11 col-xl-8">
+    <div id="post-extend-wrapper" class="pl-1 pr-1 pl-sm-2 pr-sm-2 pl-md-4 pr-md-4">
+
+    {% include related-posts.html %}
+
+    {% include post-nav.html %}
+
+    {% if site.disqus.comments and page.comments %}
+      {% include disqus.html %}
+    {% endif %}
+
+    </div> <!-- #post-extend-wrapper -->
+
+  </div> <!-- .col-* -->
+
+</div> <!-- .row -->
+
+{% include lozad.html %}
