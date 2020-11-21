@@ -14,6 +14,10 @@
   path: tabs
   url: about
 -
+  name: "Darknet Book"
+  icon: "fas fa-book"
+  path: darknet_book
+-
   name: Categories
   icon: "fas fa-stream"
   path: tabs
@@ -28,7 +32,3 @@
   path: tabs
   url: archives
   icon: "fas fa-archive"
--
-  name: "Darknet Book"
-  icon: "fas fa-book"
-  path: darknet_book

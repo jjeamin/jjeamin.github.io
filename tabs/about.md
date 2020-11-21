@@ -8,6 +8,17 @@ title: CV
 # MIT License
 ---
 
+- Name : Jaemin Jeong
+
+| NAME | URL |
+|:----------|:----------:|
+| CV[KR] | [PDF](https://jjeamin.github.io/assets/cv/CV_korean.pdf) |
+| CV[EN] | [PDF](https://jjeamin.github.io/assets/cv/CV-english.pdf) |
+| GitHub | [https://github.com/jjeamin](https://github.com/jjeamin) |
+| Lab    | [https://sites.google.com/site/embeddedsochallymuniv/](https://sites.google.com/site/embeddedsochallymuniv/) |
+
+------
+
 # *Research Interest*
 
 - Deep Learning
