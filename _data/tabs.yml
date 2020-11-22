@@ -9,26 +9,22 @@
   name: Home
   icon: "fas fa-home"
 -
-  name: "About"
-  icon: "fas fa-info"
+  name: CV
+  icon: "far fa-address-card"
   path: tabs
   url: about
--
-  name: "Darknet Book"
-  icon: "fas fa-book"
-  path: darknet_book
 -
   name: Categories
   icon: "fas fa-stream"
   path: tabs
   url: categories
+-
+  name: Archives
+  icon: "fas fa-archive"
+  path: tabs
+  url: archives
 # -
 #   name: "Tags"
 #   icon: "fas fa-tags"
 #   path: tabs
 #   url: tags
--
-  name: "Archives"
-  path: tabs
-  url: archives
-  icon: "fas fa-archive"
