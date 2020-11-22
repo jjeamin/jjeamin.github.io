@@ -50,7 +50,7 @@ title: CV
 
 - PMW-PrecipNET: U-Net for precipitation retrieval from passive microwave observations
   + Jeongmyeong Choi, **Jaemin Jeong**, Yeji choi, Taegyun Jeon, Yuseop Kim
-  + MDPI - remote sensing (Rejected)
+  + we are preparing to submit.
 
 **conference paper**
 
