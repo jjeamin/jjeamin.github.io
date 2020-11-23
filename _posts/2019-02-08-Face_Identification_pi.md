@@ -3,7 +3,7 @@ layout: post
 title:  "Face Identification"
 summary: "Face_recognition을 이용한 얼굴 인식 using Raspberry"
 date:   2019-02-12 09:10 -0400
-categories: pi
+categories: [face, pi]
 ---
 # 얼굴검출 방식
 1. 얼굴을 찾습니다.

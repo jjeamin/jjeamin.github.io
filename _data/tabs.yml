@@ -14,17 +14,7 @@
   path: tabs
   url: about
 -
-  name: Categories
-  icon: "fas fa-stream"
-  path: tabs
-  url: categories
--
   name: Archives
   icon: "fas fa-archive"
   path: tabs
   url: archives
-# -
-#   name: "Tags"
-#   icon: "fas fa-tags"
-#   path: tabs
-#   url: tags
