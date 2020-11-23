@@ -4,7 +4,7 @@ title:  "EfficientDet-2"
 summary: "EfficientDet 논문 읽어보기"
 date:   2019-11-23 13:00 -0400
 categories: paper
-use_math: true
+math: true
 ---
 
 [이전 포스트](https://jjeamin.github.io/paper/2019/11/23/EfficientDet/)에서는 EfficientNet을 간략하게 정리하였다. 이제 속도와 정확성 측면에서 효과적인 object detection network인 EfficientDet을 알아보자.

@@ -4,7 +4,7 @@ title:  "AutoAugment"
 summary: "AutoAugment 논문 읽어보기"
 date:   2019-09-28 13:00 -0400
 categories: paper
-use_math: true
+math: true
 ---
 
 # AutoAugment

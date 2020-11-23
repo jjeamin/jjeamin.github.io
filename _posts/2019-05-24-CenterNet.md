@@ -4,7 +4,7 @@ title:  "CenterNet"
 summary: "CenterNet 논문 읽어보기"
 date:   2019-05-19 13:00 -0400
 categories: paper
-use_math : true
+math: true
 ---
 
 이 당시에 초당 142 프레임에 28.1 AP

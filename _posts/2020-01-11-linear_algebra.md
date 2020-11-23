@@ -4,6 +4,7 @@ title:  "딥러닝 공부할 때 알면 좋은 Linear Algebra"
 summary: "훑어보기 위해 적어본 선형 대수학 기초 + PCA, LDA"
 date:   2020-01-11 16:00 -0400
 categories: math
+math: true
 ---
 
 가끔 기억 안날때 보려고 한줄식으로 매우 간략하게 적었다. 자세한 내용을 알고 싶으시면 [[Here](https://www.edwith.org/linearalgebra4ai/joinLectures/14072)] 이 곳 수업에서 알아보시는 것을 추천한다.

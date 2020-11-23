@@ -4,7 +4,7 @@ title:  "CornerNet"
 summary: "CornerNet 논문 읽어보기"
 date:   2019-10-22 13:00 -0400
 categories: paper
-use_math: true
+math: true
 ---
 
 # CornerNet

@@ -4,6 +4,7 @@ title:  "Reinforcement Learning"
 summary: "Reinforcement Learning(Q-learning 부터 policy gradient 까지)"
 date:   2019-10-07 16:00 -0400
 categories: Reinforcement
+math: true
 ---
 
 # Reinforcement
