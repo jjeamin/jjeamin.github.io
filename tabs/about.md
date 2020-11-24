@@ -13,7 +13,7 @@ title: CV
 | NAME | URL |
 |:----------|:----------:|
 | CV[KR] | [PDF](https://jjeamin.github.io/assets/cv/CV_korean.pdf) |
-| CV[EN] | [PDF](https://jjeamin.github.io/assets/cv/CV-english.pdf) |
+| CV[EN] | [PDF](https://jjeamin.github.io/assets/cv/CV_english.pdf) |
 | GitHub | [https://github.com/jjeamin](https://github.com/jjeamin) |
 | DarkNet Book | [https://jjeamin.github.io/darknet_book](https://jjeamin.github.io/darknet_book) |
 | Lab    | [https://sites.google.com/site/embeddedsochallymuniv/](https://sites.google.com/site/embeddedsochallymuniv/) |
