@@ -45,7 +45,7 @@ title: CV
 
 **journal**
 
-- FCL-Net: Filter Combination Learning Network for on devices.
+- FCL-Net: Filter Combination Learning Network for on-devices
   + we are preparing to submit.
 
 - PMW-PrecipNET: U-Net for precipitation retrieval from passive microwave observations
@@ -54,22 +54,22 @@ title: CV
 
 **conference paper**
 
-- Filter Combination Learning for Convolutional Neural Network.
+- Filter Combination Learning for Convolutional Neural Network
   + [Github](https://github.com/jjeamin/Filter_Generation_Network)
-  + **Jaemin Jeong**, DongYoung Kim, Yunhee Woo and Jeong-Gun Lee.
+  + **Jaemin Jeong**, DongYoung Kim, Yunhee Woo and Jeong-Gun Lee
   + 2020 International Conference on Information and Communication Technology Convergence (ICTC)
   + ==> “Special Issue on Selected Papers from ICTC 2020”
 
-- Deep learning CAM-based interpretation-possible image visualization Development of open source software tools.
-  + **Jaemin Jeong**, Seo-Eun Ham, Joo-Hyun Son, Jeong-Gun Lee.
+- Deep learning CAM-based interpretation-possible image visualization Development of open source software tools
+  + **Jaemin Jeong**, Seo-Eun Ham, Joo-Hyun Son, Jeong-Gun Lee
   + 2020 신호처리합동학술대회, 197-199
 
-- Zero-Keep Filter Pruning for Energy Efficient Deep Neural Network.
+- Zero-Keep Filter Pruning for Energy Efficient Deep Neural Network
   + Yunhee Woo, DongYoung Kim, **Jaemin Jeong**, Young Woong Ko, Jeong-Gun Lee.
   + 2020 International Conference on Information and Communication Technology Convergence (ICTC)
 
-- Parameter Optimization of Deep Neural Network: MNIST Case Study.
-  + Min-Jeong Kim, Byungjoon Lim, Seunghyun Lim, **Jaemin Jeong**, Jong-Hak Lee, JeongGun Lee.
+- Parameter Optimization of Deep Neural Network: MNIST Case Study
+  + Min-Jeong Kim, Byungjoon Lim, Seunghyun Lim, **Jaemin Jeong**, Jong-Hak Lee, JeongGun Lee
   + 2018 대한전자공학회 학술대회, 923-925.
 
 ------
