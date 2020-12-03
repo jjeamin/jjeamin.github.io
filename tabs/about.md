@@ -104,6 +104,15 @@ title: CV
   - Deep Learning(Visualization)
   - PyQt5
 
+### *Face Learner*
+
+- [Client](https://github.com/jjeamin/Learner) / [Server](https://github.com/jjeamin/Learner_server)
+- Requirements
+  - Deep Learning(Face Processing)
+  - Dlib
+  - Android Studio
+  - Flask
+
 ### *외워보카*
 
 - [Github](https://github.com/remindvoca/server)
@@ -177,11 +186,13 @@ title: CV
 
 # Competition
 
--  [가속화 프로그래밍 겨울학교 3위 수상 (2019-01)](http://www.manycoresoft.co.kr/school/)
+- [가속화 프로그래밍 겨울학교 3위 수상 (2019-01)](http://www.manycoresoft.co.kr/school/)
 
--  [Daycon : 위성관측 데이터 활용 강수량 산출 AI 경진대회 2위 수상 (2020-05)](https://dacon.io/competitions/official/235591/leaderboard/)
+- [Daycon : 위성관측 데이터 활용 강수량 산출 AI 경진대회 2위 수상 (2020-05)](https://dacon.io/competitions/official/235591/leaderboard/)
 
--  [Daycon : 산업제어시스템 보안위협 탐지 AI 경진대회 상위 10% (2020-09)](https://dacon.io/competitions/official/235624/leaderboard/)
+- [Daycon : 산업제어시스템 보안위협 탐지 AI 경진대회 상위 10% (2020-09)](https://dacon.io/competitions/official/235624/leaderboard/)
+
+- [NIPA : 2020 인공지능 문제해결 경진대회 (얼굴 합성 사이버범죄 방지를 위한 탐지모델 개발) 1위 수상 (2020-12)](https://ai-korea.kr/main/main.do)
 
 ------
 
