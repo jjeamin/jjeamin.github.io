@@ -14,6 +14,11 @@
   path: tabs
   url: about
 -
+  name: Slide
+  icon: "fas fa-comment-dots"
+  path: tabs
+  url: slide
+-
   name: Archives
   icon: "fas fa-archive"
   path: tabs
