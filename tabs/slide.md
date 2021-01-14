@@ -2,6 +2,21 @@
 title: Slide
 ---
 
+<!--  -->
+
+<details><summary>Linformer </summary>
+
+<p>
+
+<iframe src="//www.slideshare.net/slideshow/embed_code/key/z94hbVkfakfZLN" width="595" height="485" frameborder="0" marginwidth="0" marginheight="0" scrolling="no" style="border:1px solid #CCC; border-width:1px; margin-bottom:5px; width: 100%;" allowfullscreen> </iframe>
+
+<a class="btn btn-light btn-block" href="https://jjeamin.github.io/assets/slide/2021-01-02-Linformer.pptx"> Download </a>
+
+</p>
+
+</details>
+
+<!--  -->
 
 <details><summary>Shake Shake Regularization </summary>
 
@@ -15,6 +30,7 @@ title: Slide
 
 </details>
 
+<!--  -->
 
 <details><summary>ViT </summary>
 
@@ -28,6 +44,7 @@ title: Slide
 
 </details>
 
+<!--  -->
 
 <details><summary>DETR </summary>
 
@@ -41,6 +58,7 @@ title: Slide
 
 </details>
 
+<!--  -->
 
 <details><summary>AdamW</summary>
 <p>
@@ -53,6 +71,7 @@ title: Slide
 
 </details>
 
+<!--  -->
 
 <details><summary>Bag of Tricks</summary>
 <p>
@@ -65,6 +84,7 @@ title: Slide
 
 </details>
 
+<!--  -->
 
 <details><summary>Face Detection</summary>
 <p>
@@ -77,6 +97,7 @@ title: Slide
 
 </details>
 
+<!--  -->
 
 <details><summary>Automated sleep stage scoring of the sleep heart</summary>
 <p>
@@ -89,6 +110,7 @@ title: Slide
 
 </details>
 
+<!--  -->
 
 <details><summary>SleepNet</summary>
 <p>

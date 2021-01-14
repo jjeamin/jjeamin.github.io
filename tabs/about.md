@@ -37,19 +37,18 @@ title: CV
 
 # *Publications*
 
-**journal**
-
-
-- Filter Combination Learning for Convolutional Neural Network
-  + Jaemin Jeong, Jiho Cho and Jeong-Gun Lee
-  + Accepted in the Journal of ICT-Express (SCIE), 2021
-
 - FCL-Net: Filter Combination Learning Network for on-devices
   + we are preparing to submit.
 
 - PMW-PrecipNET: U-Net for precipitation retrieval from passive microwave observations
   + Jeongmyeong Choi, **Jaemin Jeong**, Yeji choi, Taegyun Jeon, Yuseop Kim
   + we are preparing to submit.
+
+**journal**
+
+- Filter Combination Learning for Convolutional Neural Network
+  + Jaemin Jeong, Jiho Cho and Jeong-Gun Lee
+  + Accepted in the Journal of ICT-Express (SCIE), 2021
 
 **conference paper**
 
