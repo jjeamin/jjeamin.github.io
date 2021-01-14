@@ -39,6 +39,11 @@ title: CV
 
 **journal**
 
+
+- Filter Combination Learning for Convolutional Neural Network
+  + Jaemin Jeong, Jiho Cho and Jeong-Gun Lee
+  + Accepted in the Journal of ICT-Express (SCIE), 2021
+
 - FCL-Net: Filter Combination Learning Network for on-devices
   + we are preparing to submit.
 
