@@ -46,7 +46,7 @@ title: CV
 
 **journal**
 
-- Filter Combination Learning for Convolutional Neural Network
+- Filter Combination Learning for CNN model compression
   + Jaemin Jeong, Jiho Cho and Jeong-Gun Lee
   + Accepted in the Journal of ICT-Express (SCIE), 2021
 
