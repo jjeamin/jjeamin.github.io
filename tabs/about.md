@@ -75,7 +75,8 @@ title: CV
 # *Project*
 
 - Medical
-- ...
+  + Sleep Staging
+  + Public data business
 
 ------
 
@@ -126,10 +127,10 @@ title: CV
 
 ### *Stock DayBot*
 
-- [kospi](https://github.com/jjeamin/stock_trader) / [bitmex](https://github.com/jjeamin/bitmex_trader)
+- [bitmex](https://github.com/jjeamin/bitmex_trader)
 - Requirements
   - Deep Learning(Reinforcement Learning)
-  - Socket API, RestFul API
+  - Socket, RestFul API
 
 ------
 
@@ -148,6 +149,9 @@ title: CV
   + Developement of Smart Toy
   + Raspberry Pi
   + Google Assistant
+
+- [Mirrorroid](https://www.mirrorroid.co.kr/) (2021-01 ~ )
+  + Developement of Hair Segmentation Model
 
 ------
 
@@ -191,6 +195,8 @@ title: CV
 - [Dacon : 산업제어시스템 보안위협 탐지 AI 경진대회 상위 10% (2020-09)](https://dacon.io/competitions/official/235624/leaderboard/)
 
 - [NIPA : 2020 인공지능 문제해결 경진대회 (얼굴 합성 사이버범죄 방지를 위한 탐지모델 개발) 1위 수상 (2020-12)](https://ai-korea.kr/main/main.do)
+
+- [Hallym : 2020 AI+X R&D 챌린지 전체 1위 (대상) 수상 (2021-01)](https://aix.hallym.ac.kr/aix/administration/notice.do?mode=view&articleNo=37119)
 
 ------
 
