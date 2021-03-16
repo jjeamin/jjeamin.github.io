@@ -10,17 +10,17 @@ title: CV
 | CV[EN] | [PDF](https://jjeamin.github.io/assets/cv/CV_english.pdf) |
 | GitHub | [https://github.com/jjeamin](https://github.com/jjeamin) |
 | Lab    | [https://sites.google.com/site/embeddedsochallymuniv/](https://sites.google.com/site/embeddedsochallymuniv/) |
-| Google Scholar | [https://scholar.google.com/citations?hl=ko&user=_GXtE-IAAAAJ](https://scholar.google.com/citations?hl=ko&user=_GXtE-IAAAAJ) |
+| Google Scholar | [https://scholar.google.com/citations?user=_GXtE-IAAAAJ&hl=ko](https://scholar.google.com/citations?user=_GXtE-IAAAAJ&hl=ko) |
 | Slide Share | [https://www.slideshare.net/JAEMINJEONG5/presentations](https://www.slideshare.net/JAEMINJEONG5/presentations) |
 
 ------
 
 # *Research Interest*
 
-- Deep Learning
+- Vision Deep Learning
   - Model Compression
-  - Object Detection
   - Visualization
+  - Semantic Segmentation and Object Detection
 
 ------
 
@@ -35,19 +35,20 @@ title: CV
 # *Publications*
 
 - FCL-Net: Filter Combination Learning Network for on-devices
+  + **Jaemin Jeong**, Jiho Cho, Jeong-Gun Lee
   + we are preparing to submit.
 
 - PMW-PrecipNET: U-Net for precipitation retrieval from passive microwave observations
   + Jeongmyeong Choi, **Jaemin Jeong**, Yeji choi, Taegyun Jeon, Yuseop Kim
   + we are preparing to submit.
 
-**journal**
+**Journal**
 
 - Filter Combination Learning for CNN model compression
-  + Jaemin Jeong, Jiho Cho and Jeong-Gun Lee
+  + **Jaemin Jeong**, Jiho Cho, Jeong-Gun Lee
   + Accepted in the Journal of ICT-Express (SCIE), 2021
 
-**conference paper**
+**Conference paper**
 
 - Filter Combination Learning for Convolutional Neural Network
   + [Github](https://github.com/jjeamin/Filter_Generation_Network)
