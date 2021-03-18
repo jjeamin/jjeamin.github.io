@@ -4,6 +4,20 @@ title: Slide
 
 <!--  -->
 
+<details><summary>Distributed Representations of Words and Phrases </summary>
+
+<p>
+
+<iframe src="//www.slideshare.net/slideshow/embed_code/key/2umX0gpUObc0mY" width="595" height="485" frameborder="0" marginwidth="0" marginheight="0" scrolling="no" style="border:1px solid #CCC; border-width:1px; margin-bottom:5px; width: 100%;" allowfullscreen> </iframe>
+
+<a class="btn btn-light btn-block" href="https://jjeamin.github.io/assets/slide/2021-03-02-Distributed_Representations_of_Words_and_Phrases.pptx"> Download </a>
+
+</p>
+
+</details>
+
+<!--  -->
+
 <details><summary>Transformer Interpretability Beyond Attention Visualization </summary>
 
 <p>
