@@ -24,6 +24,14 @@ title: CV
 
 ------
 
+# *What am i doing now?*
+
+- Medical Project
+- SmartMirror Project
+- Paper writing..
+
+------
+
 # *Skill*
 
 - **Pytorch**
@@ -72,9 +80,13 @@ title: CV
 
 # *Project*
 
-- Medical
-  + Sleep Staging
+- Medical / [Web](https://sleepai.kr/)
+  + **Sleep Staging** Classification
+  + Sleep Quality Classification
   + Public data business
+
+- SmartMirror
+  + Hair Segmentation / Remover / Generation
 
 ------
 
@@ -149,7 +161,7 @@ title: CV
   + Google Assistant
 
 - [Mirrorroid](https://www.mirrorroid.co.kr/) (2021-01 ~ )
-  + Developement of Hair Segmentation Model
+  + Developement of Hair Segmentation / Generation Model
 
 ------
 
