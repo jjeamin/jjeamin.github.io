@@ -2,6 +2,18 @@
 title: Slide
 ---
 
+<details><summary>U^2 Net </summary>
+
+<p>
+
+<iframe src="//www.slideshare.net/slideshow/embed_code/key/tEtjgtkeqt0dGV" width="595" height="485" frameborder="0" marginwidth="0" marginheight="0" scrolling="no" style="border:1px solid #CCC; border-width:1px; margin-bottom:5px; width: 100%;" allowfullscreen> </iframe>
+
+<a class="btn btn-light btn-block" href="https://jjeamin.github.io/assets/slide/2021-05-04-U2-Net.pptx"> Download </a>
+
+</p>
+
+</details>
+
 <!--  -->
 
 <details><summary>Google NMT </summary>
@@ -16,6 +28,19 @@ title: Slide
 
 </details>
 
+<!--  -->
+
+<details><summary>Google NMT </summary>
+
+<p>
+
+<iframe src="//www.slideshare.net/slideshow/embed_code/key/1ToBfRGxbKP9XN" width="595" height="485" frameborder="0" marginwidth="0" marginheight="0" scrolling="no" style="border:1px solid #CCC; border-width:1px; margin-bottom:5px; width: 100%;" allowfullscreen> </iframe>
+
+<a class="btn btn-light btn-block" href="https://jjeamin.github.io/assets/slide/2021-04-04-GoogleNMT.pptx"> Download </a>
+
+</p>
+
+</details>
 
 <!--  -->
 
