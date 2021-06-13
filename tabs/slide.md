@@ -1,6 +1,17 @@
 ---
 title: Slide
 ---
+<details><summary>Semantic Image Synthesis & Image Inpainting </summary>
+
+<p>
+
+<a class="btn btn-light btn-block" href="https://jjeamin.github.io/assets/slide/semantic_image_synthesis.pdf"> Download </a>
+
+</p>
+
+</details>
+
+<!--  -->
 
 <details><summary>TabNet </summary>
 
