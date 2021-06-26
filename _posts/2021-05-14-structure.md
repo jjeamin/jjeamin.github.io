@@ -94,6 +94,17 @@ Documents는 실제로 사용해본적이 거의 없지만 큰 프로젝트들�
 - test scripts
 - run scripts
 
+## /test
+
+For unittest
+
+- dataset
+- dataloader
+- model
+- train
+- valid
+- test
+
 ## /src
 
 - `/data`
@@ -118,3 +129,26 @@ Documents는 실제로 사용해본적이 거의 없지만 큰 프로젝트들�
 
 - `transforms.py` and `/transforms`
     + define custom data augmentation
+
+## setup.py
+
+```
+import setuptools
+# python setup.py develop
+setuptools.setup(
+    name            = "[NAME]", # Replace with your own username
+    version         = "0.0.1",
+    author          = "Jaemin Jeong",
+    author_email    = "woalsdl600@gmail.com",
+    description     = "[description]",
+    url             = "[Github repository url]",
+    project_urls    = {"Bug Tracker": "[Github repository url]/issues",
+    },
+    classifiers     = [
+        "Programming Language :: Python :: 3",
+        "License :: OSI Approved :: MIT License",
+        "Operating System :: OS Independent",
+    ],
+    python_requires = ">=3.6",
+)
+```
