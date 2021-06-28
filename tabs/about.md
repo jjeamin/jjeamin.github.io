@@ -13,14 +13,22 @@ title: CV
 | Google Scholar | [https://scholar.google.com/citations?user=_GXtE-IAAAAJ&hl=ko](https://scholar.google.com/citations?user=_GXtE-IAAAAJ&hl=ko) |
 | Slide Share | [https://www.slideshare.net/JAEMINJEONG5/presentations](https://www.slideshare.net/JAEMINJEONG5/presentations) |
 
+- jjaemin이 아니라 jjeamin을 고집하는 이유: Unbalance함에서 나오는 느낌..?
+
+> JUST DO IT
+> 자만하지 말자
+> 안하고 후회 하지 말자
+
 ------
 
 # *Research Interest*
 
-- Vision Deep Learning
-  - Model Compression
-  - Visualization
-  - Semantic Segmentation and Object Detection
+I LOVE DEEP LEARNING
+
+Especially...
+- Model Compression
+- Vision(GAN, Segmentation, Object Detection ...)
+- Medical
 
 ------
 
@@ -32,7 +40,7 @@ title: CV
 
 ------
 
-# *Skill*
+# *Skills*
 
 - **Pytorch**
 
@@ -78,7 +86,7 @@ title: CV
 
 ------
 
-# *Project*
+# *Projects*
 
 - Medical / [Web](https://sleepai.kr/)
   + **Sleep Staging** Classification
@@ -90,7 +98,7 @@ title: CV
 
 ------
 
-# *Toy Project*
+# *Toy Projects*
 
 ### *DarkNet Book*
 
@@ -144,7 +152,7 @@ title: CV
 
 ------
 
-# Work Experience
+# Work Experiences
 
 - [FrontU](https://frontu2.modoo.at/) (2018-07 ~ 2018-08)
   + Developement of Smart Toy
@@ -165,7 +173,7 @@ title: CV
 
 ------
 
-# Open source contribution
+# Open source contributions
 
 - [파이토치 한글 문서 번역](https://github.com/9bow/PyTorch-tutorials-kr)
   + **Captum을 사용하여 모델 해석하기** 번역
@@ -181,7 +189,7 @@ title: CV
 
 ------
 
-# Paper Code Implementation
+# Paper Code Implementations
 
 ### MCCNN
 
@@ -195,7 +203,7 @@ title: CV
 
 ------
 
-# Competition
+# Competitions
 
 - [가속화 프로그래밍 겨울학교 3위 수상 (2019-01)](http://www.manycoresoft.co.kr/school/)
 
