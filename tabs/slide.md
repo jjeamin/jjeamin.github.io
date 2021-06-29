@@ -1,6 +1,23 @@
 ---
 title: Slide
 ---
+
+<!--  -->
+
+<details><summary>Swin Transformer </summary>
+
+<p>
+
+<iframe src="//www.slideshare.net/slideshow/embed_code/key/kOypABCY8PhjCP" width="595" height="485" frameborder="0" marginwidth="0" marginheight="0" scrolling="no" style="border:1px solid #CCC; border-width:1px; margin-bottom:5px; width: 100%;" allowfullscreen> </iframe>
+
+<a class="btn btn-light btn-block" href="https://jjeamin.github.io/assets/slide/2021-06-03-SwinTransformer.pptx"> Download </a>
+
+</p>
+
+</details>
+
+<!--  -->
+
 <details><summary>Semantic Image Synthesis & Image Inpainting </summary>
 
 <p>
