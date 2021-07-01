@@ -6,18 +6,23 @@ title: CV
 
 | NAME | URL |
 |:----------|:----------:|
-| CV[KR] | [PDF](https://jjeamin.github.io/assets/cv/CV_korean.pdf) |
-| CV[EN] | [PDF](https://jjeamin.github.io/assets/cv/CV_english.pdf) |
+| E-mail | woalsdl600@gmail.com |
+| CV[KR] | [PDF](https://jjeamin.github.io/assets/cv/CV_korean.pdf) *no-update* |
+| CV[EN] | [PDF](https://jjeamin.github.io/assets/cv/CV_english.pdf) *no-update* |
 | GitHub | [https://github.com/jjeamin](https://github.com/jjeamin) |
 | Lab    | [https://sites.google.com/site/embeddedsochallymuniv/](https://sites.google.com/site/embeddedsochallymuniv/) |
 | Google Scholar | [https://scholar.google.com/citations?user=_GXtE-IAAAAJ&hl=ko](https://scholar.google.com/citations?user=_GXtE-IAAAAJ&hl=ko) |
 | Slide Share | [https://www.slideshare.net/JAEMINJEONG5/presentations](https://www.slideshare.net/JAEMINJEONG5/presentations) |
 
-- jjaemin이 아니라 jjeamin을 고집하는 이유: Unbalance함에서 나오는 느낌..?
+>  jjaemin이 아니라 jjeamin을 고집하는 이유? : Unbalance함에서 나오는 느낌..?
 
 > JUST DO IT
+
 > 자만하지 말자
+
 > 안하고 후회 하지 말자
+
+> NOTE. 언제나 멋진 일을 하고 싶습니다 Contact ME !!
 
 ------
 
@@ -89,7 +94,7 @@ Especially...
 # *Projects*
 
 - Medical / [Web](https://sleepai.kr/)
-  + **Sleep Staging** Classification
+  + **Sleep Staging**
   + Sleep Quality Classification
   + Public data business
 
