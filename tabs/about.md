@@ -225,3 +225,12 @@ Especially...
 # Certificate
 
 - 정보처리기사
+
+------
+
+# Hobby
+
+- Art
+  + [Redbubble](https://www.redbubble.com/people/JM-CM/explore?asc=u&page=1&sortOrder=recent)
+
+- 
