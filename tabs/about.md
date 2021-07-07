@@ -2,6 +2,8 @@
 title: CV
 ---
 
+> 보통 제가 읽으려고 글을 쓰는데 혹시 부족한게 있다면 댓글이나 메일을 부탁드립니다. 개선하겠습니다.
+
 - Name : Jaemin Jeong
 
 | NAME | URL |
@@ -233,4 +235,4 @@ Especially...
 - Art
   + [Redbubble](https://www.redbubble.com/people/JM-CM/explore?asc=u&page=1&sortOrder=recent)
 
-- 
+-
