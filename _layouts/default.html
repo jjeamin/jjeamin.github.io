@@ -54,9 +54,6 @@ layout: compress
 
     {% include search-loader.html %}
 
-    <!-- Google Adsense -->
-    {% if site.google_ad_client %}{% include google_adsense.html %}{% endif %}
-
     {% if site.google_analytics.id and jekyll.environment == 'production' %}
       {% include google-analytics.html %}
     {% endif %}
